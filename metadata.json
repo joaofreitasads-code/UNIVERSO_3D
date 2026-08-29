@@ -1,0 +1,6 @@
+{
+  "name": "Portal 3D",
+  "description": "Portal 3D - Catálogo Premium de Impressão 3D e biblioteca de arquivos STL para colecionáveis com divisão inteligente.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

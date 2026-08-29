@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --accent-1: #FFEF5C;
+    --accent-2: #FFC700;
+    --accent-3: #E5A100;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #000000;
+    overflow-x: hidden;
+  }
+}
+
+.font-display {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.grad-text {
+  background: linear-gradient(90deg, #FFEF5C, #FFC700, #F59E0B);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-stars {
+  background-image: radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.5) 100%, transparent),
+                    radial-gradient(1px 1px at 90px 120px, rgba(255, 255, 255, 0.4) 100%, transparent),
+                    radial-gradient(1.5px 1.5px at 160px 60px, rgba(255, 255, 255, 0.5) 100%, transparent),
+                    radial-gradient(1px 1px at 210px 180px, rgba(255, 255, 255, 0.3) 100%, transparent);
+  background-repeat: repeat;
+  background-size: 240px 220px;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.glass-card {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+@keyframes marqueeAnimation {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marqueeReverseAnimation {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation: marqueeAnimation 18s linear infinite;
+}
+
+.marquee-cards {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation: marqueeAnimation 16s linear infinite;
+}
+
+.marquee-cards-reverse {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation: marqueeReverseAnimation 16s linear infinite;
+}
+
+.marquee:hover, .marquee-cards:hover, .marquee-cards-reverse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes livePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.live-dot {
+  animation: livePulse 1.4s ease-in-out infinite;
+}
+
