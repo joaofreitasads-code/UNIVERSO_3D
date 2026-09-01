@@ -9,7 +9,8 @@ import {
   Mail,
   Building2,
   ChevronDown,
-  Gift
+  Gift,
+  ShoppingCart
 } from 'lucide-react';
 
 interface ModelItem {
@@ -497,34 +498,58 @@ export default function App() {
               <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">chega até você.</span>
             </span>
           </h1>
-          <p className="mt-6 text-zinc-300 text-base md:text-lg max-w-2xl font-light">
-            Catálogo com centenas de arquivos STL de colecionáveis autorais, já divididos em peças para encaixe perfeito — sem estimar suporte, sem desperdiçar filamento.
-          </p>
-        </div>
 
-        {/* Live indicator badge */}
-        <div className="w-full relative z-20 flex flex-col items-center mt-8 mb-4 px-4">
-          <div className="flex flex-col items-center text-center">
-            <span className="text-sm sm:text-lg md:text-xl font-black uppercase tracking-wide flex items-center gap-2">
+          {/* Live indicator badge */}
+          <div className="w-full flex flex-col items-center mt-6 mb-3">
+            <span className="text-sm sm:text-base md:text-lg font-black uppercase tracking-wide flex items-center gap-2">
               <span className="live-dot inline-block w-3 h-3 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444]" />
               Veja como funciona
             </span>
           </div>
-        </div>
 
-        {/* Video Presentation Placeholder */}
-        <div className="w-full relative z-10 flex justify-center mt-1 mb-12 md:mb-16 px-4">
-          <div className="relative w-full max-w-sm">
-            <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#FFC700] via-[#F59E0B] to-[#D97706] opacity-70 blur-xl pointer-events-none" />
-            <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border-2 border-[#FFC700] shadow-[0_0_30px_rgba(255,199,0,0.6)] bg-zinc-900 flex flex-col items-center justify-center gap-3 group cursor-pointer hover:border-white/50 transition-colors">
-              <div className="w-20 h-20 rounded-full bg-black/60 border border-[#FFC700]/50 flex items-center justify-center shadow-[0_0_25px_rgba(255,199,0,0.4)] group-hover:scale-110 transition-transform">
-                <Play className="w-10 h-10 text-yellow-400 fill-yellow-400 ml-1" />
+          {/* Video Presentation */}
+          <div className="w-full relative z-10 flex flex-col items-center mt-1 mb-8">
+            <div className="relative w-full max-w-sm">
+              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#FFC700] via-[#F59E0B] to-[#D97706] opacity-70 blur-xl pointer-events-none" />
+              <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border-2 border-[#FFC700] shadow-[0_0_30px_rgba(255,199,0,0.6)] bg-black flex items-center justify-center">
+                <video
+                  src="https://i.imgur.com/W7vGfri.mp4"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-cover rounded-2xl"
+                >
+                  Seu navegador não suporta a reprodução de vídeo.
+                </video>
               </div>
-              <span className="text-zinc-400 text-sm px-6 text-center font-medium">
-                Espaço reservado para seu vídeo de apresentação
-              </span>
+            </div>
+
+            {/* Botão de Compra Direto para a Oferta de 42,90 */}
+            <div className="mt-6 w-full max-w-sm px-2 flex flex-col items-center">
+              <a
+                href="#oferta-pro"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const target = document.getElementById('oferta-pro');
+                  if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }
+                }}
+                className="group w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#FFC700] via-[#FFD700] to-[#E5B300] hover:from-[#FFE033] hover:to-[#FFC700] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(255,199,0,0.7)] hover:shadow-[0_0_50px_rgba(255,199,0,1)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-yellow-200 cursor-pointer"
+              >
+                <ShoppingCart className="w-6 h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+                <span>QUERO O CATÁLOGO COMPLETO</span>
+              </a>
+              <p className="mt-2.5 text-xs text-yellow-300 font-bold uppercase tracking-wider flex items-center gap-1.5 opacity-90 text-center">
+                <span>⚡</span>
+                <span>Por Apenas R$ 42,90 — Acesso Vitalício + 9 Bônus</span>
+              </p>
             </div>
           </div>
+
+          <p className="mt-2 mb-8 text-zinc-300 text-base md:text-lg max-w-2xl font-light">
+            Catálogo com centenas de arquivos STL de colecionáveis autorais, já divididos em peças para encaixe perfeito — sem estimar suporte, sem desperdiçar filamento.
+          </p>
         </div>
 
         {/* 6. Marcas Marquee */}
@@ -1009,11 +1034,6 @@ export default function App() {
               <h3 className="font-display font-bold text-sm uppercase tracking-widest mb-4 text-center">
                 Coleção Base
               </h3>
-              <div className="w-full h-40 rounded-xl bg-white/5 flex items-center justify-center mb-4">
-                <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300/70">
-                  <rect x="14" y="14" width="36" height="36" rx="8" fill="currentColor" opacity="0.5" />
-                </svg>
-              </div>
               <div className="border-b border-white/10 pb-4 mb-4 text-center">
                 <div className="flex justify-center items-baseline gap-1 mb-1">
                   <span className="text-lg text-zinc-400">R$</span>
@@ -1026,11 +1046,11 @@ export default function App() {
               <ul className="space-y-2.5 mb-6 text-[13px] text-zinc-300 font-medium">
                 <li className="flex items-center gap-3">
                   <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
-                  <span>150 Modelos Colecionáveis 3D STL</span>
+                  <span>500 Modelos Funkos STL</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
-                  <span>Acesso Vitalício</span>
+                  <span>Acesso por 3 Meses</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
@@ -1061,66 +1081,55 @@ export default function App() {
             </div>
 
             {/* Card 2 - Pro / Seu Catálogo (Featured) */}
-            <div className="w-full max-w-md bg-[#0F0F0F] border-[2px] border-[#FFC700] rounded-3xl overflow-hidden relative shadow-[0_0_60px_rgba(255,199,0,0.6),inset_0_0_15px_rgba(255,199,0,0.3)] transform lg:-translate-y-4 flex flex-col">
-              <div className="py-6 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F]">
-                <h3 className="font-display font-black text-2xl md:text-3xl uppercase tracking-tighter grad-text">
-                  SEU CATÁLOGO
-                </h3>
-              </div>
-              <div className="bg-gradient-to-r from-[#D97706] via-[#FBBF24] to-[#B45309] py-3 px-4 shadow-[0_0_20px_rgba(245,158,11,0.5)] border-y border-[#FBBF24]/60">
-                <p className="font-black text-black text-center">
-                  <span className="block text-[11px] md:text-[13px] uppercase tracking-[0.2em] opacity-90 mb-0.5">
-                    O PACOTE MAIS COMPLETO E VANTAJOSO
-                  </span>
-                  <span className="block text-[13px] md:text-[15px] uppercase tracking-tight">
-                    + 500 MODELOS FUNKOS STL + TODOS OS 9 BÔNUS
-                  </span>
-                </p>
-              </div>
-              <div className="p-6 sm:p-8 h-full flex flex-col items-center">
-                <div className="w-full h-40 sm:h-44 rounded-xl bg-white/5 flex items-center justify-center mb-6 sm:mb-8">
-                  <svg viewBox="0 0 64 64" className="w-20 h-20 text-yellow-300">
-                    <circle cx="32" cy="32" r="24" fill="none" stroke="currentColor" strokeWidth="5" />
-                  </svg>
+            <div id="oferta-pro" className="w-full max-w-[380px] sm:max-w-[400px] bg-[#0F0F0F] border-[2px] border-[#FFC700] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5),inset_0_0_15px_rgba(255,199,0,0.25)] transform lg:-translate-y-2 flex flex-col scroll-mt-24">
+              <div className="p-5 sm:p-6 h-full flex flex-col items-center">
+                <div className="w-full flex items-center justify-center mb-4 sm:mb-5 relative group">
+                  <div className="absolute inset-0 bg-yellow-500/15 blur-xl rounded-full scale-90 pointer-events-none opacity-70" />
+                  <img
+                    src="https://i.imgur.com/7ShOh79.png"
+                    alt="Pacote +500 Modelos Funkos STL"
+                    referrerPolicy="no-referrer"
+                    className="relative z-10 w-auto h-auto max-h-44 sm:max-h-52 object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] hover:scale-105 transition-transform duration-300 select-none"
+                  />
                 </div>
-                <div className="text-center w-full mb-6 sm:mb-8">
-                  <p className="text-xl md:text-2xl text-red-400 font-black mb-2 italic">
+                <div className="text-center w-full mb-4 sm:mb-5">
+                  <p className="text-lg md:text-xl text-red-400 font-black mb-1.5 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
-                  <p className="text-[#FFEF5C] font-bold text-lg mb-1 leading-none uppercase">Por Apenas</p>
-                  <div className="flex justify-center items-start text-[#FFC700] mb-2 drop-shadow-md">
-                    <span className="text-2xl font-black mt-2 mr-1">R$</span>
-                    <span className="text-7xl font-display font-black tracking-tighter leading-none">42,90</span>
+                  <p className="text-[#FFEF5C] font-bold text-base mb-1 leading-none uppercase">Por Apenas</p>
+                  <div className="flex justify-center items-start text-[#FFC700] mb-1.5 drop-shadow-md">
+                    <span className="text-xl font-black mt-1.5 mr-1">R$</span>
+                    <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none">42,90</span>
                   </div>
-                  <p className="text-zinc-400 font-bold text-sm uppercase tracking-widest">Pagamento Único</p>
+                  <p className="text-zinc-400 font-bold text-xs uppercase tracking-widest">Pagamento Único</p>
                 </div>
-                <div className="w-full bg-[#1A1A1A] rounded-2xl p-5 mb-8 border border-white/5">
-                  <ul className="w-full space-y-2.5 text-sm md:text-[13px] text-white/90 font-medium">
-                    <li className="flex items-start gap-3 bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-2 text-yellow-300">
-                      <span className="text-[#FFC700] text-lg font-black leading-none">✓</span>
-                      <strong className="text-sm md:text-[14px] font-black uppercase tracking-tight text-[#FFEF5C]">
+                <div className="w-full bg-[#1A1A1A] rounded-2xl p-4 mb-5 border border-white/5">
+                  <ul className="w-full space-y-2 text-[13px] text-white/90 font-medium">
+                    <li className="flex items-start gap-2.5 bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-2 text-yellow-300">
+                      <span className="text-[#FFC700] text-base font-black leading-none">✓</span>
+                      <strong className="text-xs sm:text-[13px] font-black uppercase tracking-tight text-[#FFEF5C]">
                         + 500 MODELOS FUNKOS STL
                       </strong>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-[#FFC700] text-lg font-bold leading-none">✓</span>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                       <strong>Licença Comercial Inclusa</strong>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-[#FFC700] text-lg font-bold leading-none">✓</span>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                       <span>Acesso Vitalício + Atualizações</span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-[#FFC700] text-lg font-bold leading-none">✓</span>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                       <span>Garantia Blindada de 7 Dias</span>
                     </li>
-                    <li className="w-full h-px bg-white/10 my-2" />
+                    <li className="w-full h-px bg-white/10 my-1.5" />
                     <li className="text-[11px] uppercase tracking-wider text-yellow-400 font-bold flex items-center gap-1.5 pt-0.5">
                       <span>🎁</span>
                       <span>TODOS OS 9 BÔNUS EXCLUSIVOS INCLUSOS:</span>
                     </li>
                     {bonuses.map((b) => (
-                      <li key={`offer-bonus-${b.id}`} className="flex items-start gap-2 text-xs sm:text-[13px]">
+                      <li key={`offer-bonus-${b.id}`} className="flex items-start gap-1.5 text-xs">
                         <span className="text-yellow-400 font-bold shrink-0">Bônus 0{b.id}:</span>
                         <span className="text-[#FFEF5C] leading-snug font-medium">{b.title}</span>
                       </li>
@@ -1130,7 +1139,7 @@ export default function App() {
                 <div className="text-center w-full mt-auto">
                   <a
                     href="#checkout-pro"
-                    className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-xl py-5 rounded-xl text-center tracking-widest transition-transform hover:scale-105 shadow-[0_0_25px_rgba(255,199,0,0.4)]"
+                    className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-lg sm:text-xl py-4 rounded-xl text-center tracking-wider transition-transform hover:scale-105 shadow-[0_0_25px_rgba(255,199,0,0.4)]"
                   >
                     Garantir Acesso
                   </a>
@@ -1203,7 +1212,7 @@ export default function App() {
       <footer id="main-footer" className="bg-[#0A0A0A] pt-12 pb-10 border-t border-white/10 text-zinc-400 font-light text-[11px] sm:text-xs text-center">
         <div className="container mx-auto px-4 max-w-5xl">
           <p className="font-display font-black text-white text-lg sm:text-xl tracking-wider mb-3">
-            PORTAL 3D™
+            UNIVERSO 3D™
           </p>
           <p className="mb-10 max-w-xl mx-auto text-zinc-400 leading-relaxed text-[13px]">
             A maior e mais premium biblioteca de arquivos STL para impressão 3D de colecionáveis do mercado.
@@ -1222,7 +1231,7 @@ export default function App() {
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Suporte Especializado
               </span>
-              <span className="text-[10px] text-zinc-300">suporte@portal3d.com.br</span>
+              <span className="text-[10px] text-zinc-300">suporte@universo3d.com.br</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
               <Building2 className="w-6 h-6 text-[#FFEF5C] mb-1" />
@@ -1234,7 +1243,7 @@ export default function App() {
           </div>
 
           <p className="mb-8 max-w-4xl mx-auto text-zinc-400 leading-relaxed text-[10px] sm:text-[11px] text-justify md:text-center">
-            Todo o conteúdo, arquivos digitais e modelos STL fornecidos através do Portal 3D são protegidos por leis de direitos autorais e propriedade intelectual. A redistribuição, revenda ou compartilhamento não autorizado dos arquivos digitais não é permitida.
+            Todo o conteúdo, arquivos digitais e modelos STL fornecidos através do Universo 3D são protegidos por leis de direitos autorais e propriedade intelectual. A redistribuição, revenda ou compartilhamento não autorizado dos arquivos digitais não é permitida.
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 uppercase tracking-widest mb-6 font-bold text-[10px] text-zinc-400">
@@ -1247,7 +1256,7 @@ export default function App() {
           </div>
 
           <p className="text-zinc-400 tracking-widest text-[10px] uppercase">
-            © 2026 PORTAL 3D. TODOS OS DIREITOS RESERVADOS.
+            © 2026 UNIVERSO 3D. TODOS OS DIREITOS RESERVADOS.
           </p>
         </div>
       </footer>
@@ -1293,10 +1302,14 @@ export default function App() {
               </div>
 
               <div className="p-4 sm:p-6 flex flex-col items-center">
-                <div className="w-full h-32 sm:h-44 rounded-xl bg-white/5 flex items-center justify-center mb-3">
-                  <svg viewBox="0 0 64 64" className="w-14 h-14 text-yellow-300">
-                    <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" strokeWidth="5" />
-                  </svg>
+                <div className="w-full flex items-center justify-center mb-3 relative group">
+                  <div className="absolute inset-0 bg-yellow-500/15 blur-xl rounded-full scale-90 pointer-events-none opacity-60" />
+                  <img
+                    src="https://i.imgur.com/7ShOh79.png"
+                    alt="Pacote +500 Modelos Funkos STL"
+                    referrerPolicy="no-referrer"
+                    className="relative z-10 w-auto h-auto max-h-36 sm:max-h-44 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] select-none"
+                  />
                 </div>
                 <div className="text-center w-full mb-3">
                   <p className="text-xs sm:text-base text-red-400 font-black mb-0.5 italic">
