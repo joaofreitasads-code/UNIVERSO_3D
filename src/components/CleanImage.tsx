@@ -16,8 +16,8 @@ export const CleanImage: React.FC<CleanImageProps> = memo(({
   className = '',
   loading = 'lazy',
   priority = false,
-  width,
-  height,
+  width = 300,
+  height = 300,
 }) => {
   return (
     <img

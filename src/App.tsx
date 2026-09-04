@@ -1,5 +1,27 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import notebookPoster from './assets/poster-catalogo.jpg';
+import notebookPoster from './assets/poster-catalogo.webp';
+import heroPoster from './assets/poster-apresentacao.webp';
+import cardBg from './assets/card-bg.webp';
+import bonus1Image from './assets/optimized/bonus-1.webp';
+import depoimento1 from './assets/optimized/depoimento-1.webp';
+import depoimento2 from './assets/optimized/depoimento-2.webp';
+import depoimento3 from './assets/optimized/depoimento-3.webp';
+import depoimento4 from './assets/optimized/depoimento-4.webp';
+import step1Img from './assets/optimized/step-1.webp';
+import step2Img from './assets/optimized/step-2.webp';
+import step3Img from './assets/optimized/step-3.webp';
+import bonus2Image from './assets/optimized/bonus-2.webp';
+import bonus3Image from './assets/optimized/bonus-3.webp';
+import bonus4Image from './assets/optimized/bonus-4.webp';
+import bonus5Image from './assets/optimized/bonus-5.webp';
+import bonus6Image from './assets/optimized/bonus-6.webp';
+import bonus7Image from './assets/optimized/bonus-7.webp';
+import bonus8Image from './assets/optimized/bonus-8.webp';
+import bonus9Image from './assets/optimized/bonus-9.webp';
+import lucro1Image from './assets/optimized/lucro-1.webp';
+import lucro2Image from './assets/optimized/lucro-2.webp';
+import lucro3Image from './assets/optimized/lucro-3.webp';
+import funkoBonusImage from './assets/optimized/funko-bonus.webp';
 import { CleanImage } from './components/CleanImage';
 import {
   Play,
@@ -299,7 +321,7 @@ const bonuses: BonusItem[] = [
     id: 1,
     title: 'Pack de Veículos 3D Profissionais',
     priceOriginal: 'R$ 39,00',
-    image: 'https://i.imgur.com/Bf5JxqM.png',
+    image: bonus1Image,
     imageClassName: 'h-[65px] sm:h-[100px] md:h-[140px] w-auto max-w-[90%] object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none',
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
@@ -320,7 +342,7 @@ const bonuses: BonusItem[] = [
     id: 2,
     title: 'Coleção Heróis da Marvel',
     priceOriginal: 'R$ 49,00',
-    image: 'https://i.imgur.com/pdCj1DW.png',
+    image: bonus2Image,
     imageClassName: 'h-[92px] sm:h-[150px] md:h-[205px] scale-115 sm:scale-120 md:scale-125 w-auto max-w-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.95)] group-hover:scale-135 transition-transform duration-300 select-none',
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
@@ -335,7 +357,7 @@ const bonuses: BonusItem[] = [
     id: 3,
     title: 'Pack de Chaveiros Personalizados',
     priceOriginal: 'R$ 29,00',
-    image: 'https://i.imgur.com/vxHNjbj.png',
+    image: bonus3Image,
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <circle cx="22" cy="22" r="12" fill="none" stroke="currentColor" strokeWidth="3.5" />
@@ -348,7 +370,7 @@ const bonuses: BonusItem[] = [
     id: 4,
     title: 'Modelos Flexíveis e Articulados',
     priceOriginal: 'R$ 37,00',
-    image: 'https://i.imgur.com/Q4lf6Zv.png',
+    image: bonus4Image,
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <path d="M10 32 C10 20 22 20 22 32 C22 44 34 44 34 32 C34 20 46 20 46 32 C46 44 58 44 58 32" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
@@ -363,7 +385,7 @@ const bonuses: BonusItem[] = [
     id: 5,
     title: 'Coleção Clássicos dos Desenhos',
     priceOriginal: 'R$ 35,00',
-    image: 'https://i.imgur.com/YvReDXB.png',
+    image: bonus5Image,
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <circle cx="32" cy="36" r="18" fill="currentColor" opacity="0.4" stroke="currentColor" strokeWidth="2.5" />
@@ -379,7 +401,7 @@ const bonuses: BonusItem[] = [
     id: 6,
     title: 'Coleção Máscaras 3D',
     priceOriginal: 'R$ 39,00',
-    image: 'https://i.imgur.com/aHsgqES.png',
+    image: bonus6Image,
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <path d="M14 20 C14 12 50 12 50 20 C52 36 44 52 32 56 C20 52 12 36 14 20 Z" fill="none" stroke="currentColor" strokeWidth="3" />
@@ -393,7 +415,7 @@ const bonuses: BonusItem[] = [
     id: 7,
     title: 'Coleção Pokémon 3D',
     priceOriginal: 'R$ 47,00',
-    image: 'https://i.imgur.com/4Ywvfe9.png',
+    image: bonus7Image,
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" strokeWidth="3.5" />
@@ -409,7 +431,7 @@ const bonuses: BonusItem[] = [
     id: 8,
     title: 'Mascotes de Futebol 3D',
     priceOriginal: 'R$ 39,00',
-    image: 'https://i.imgur.com/3vvYA6X.png',
+    image: bonus8Image,
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <path d="M32 6 L52 14 V32 C52 46 32 58 32 58 C32 58 12 46 12 32 V14 Z" fill="none" stroke="currentColor" strokeWidth="2.5" opacity="0.6" />
@@ -422,7 +444,7 @@ const bonuses: BonusItem[] = [
     id: 9,
     title: 'Helicópteros 3D',
     priceOriginal: 'R$ 39,00',
-    image: 'https://i.imgur.com/G6L87Iy.png',
+    image: bonus9Image,
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <line x1="12" y1="16" x2="52" y2="16" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
@@ -468,22 +490,22 @@ interface DepoimentoItem {
 const depoimentosList: DepoimentoItem[] = [
   {
     id: 1,
-    image: 'https://i.imgur.com/acyobFA.png',
+    image: depoimento1,
     alt: 'Depoimento 1 - Universo 3D',
   },
   {
     id: 2,
-    image: 'https://i.imgur.com/9b3x2ii.png',
+    image: depoimento2,
     alt: 'Depoimento 2 - Universo 3D',
   },
   {
     id: 3,
-    image: 'https://i.imgur.com/eMJ3jpC.png',
+    image: depoimento3,
     alt: 'Depoimento 3 - Universo 3D',
   },
   {
     id: 4,
-    image: 'https://i.imgur.com/IlSJNhC.png',
+    image: depoimento4,
     alt: 'Depoimento 4 - Universo 3D',
   },
 ];
@@ -492,16 +514,34 @@ export default function App() {
   const [isUpsellOpen, setIsUpsellOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [depoimentoIndex, setDepoimentoIndex] = useState(0);
-  const [isNotebookVideoPlaying, setIsNotebookVideoPlaying] = useState(false);
+  const [isHeroVideoActive, setIsHeroVideoActive] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [isNotebookVideoActive, setIsNotebookVideoActive] = useState(false);
   const notebookVideoRef = useRef<HTMLVideoElement>(null);
   const touchStartXRef = useRef<number | null>(null);
 
-  // Pré-carrega todas as imagens de depoimento para trocar instantaneamente sem piscar a tela
-  useEffect(() => {
-    depoimentosList.forEach((dep) => {
-      const img = new Image();
-      img.src = dep.image;
-    });
+  const handlePlayHeroVideo = useCallback(() => {
+    setIsHeroVideoActive(true);
+    if (heroVideoRef.current) {
+      const playPromise = heroVideoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn('Hero video play error:', err);
+        });
+      }
+    }
+  }, []);
+
+  const handlePlayNotebookVideo = useCallback(() => {
+    setIsNotebookVideoActive(true);
+    if (notebookVideoRef.current) {
+      const playPromise = notebookVideoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn('Notebook video play error:', err);
+        });
+      }
+    }
   }, []);
 
   const prevDepoimento = useCallback(() => {
@@ -563,16 +603,56 @@ export default function App() {
           <div className="w-full relative z-10 flex flex-col items-center mt-1 mb-8">
             <div className="relative w-full max-w-sm">
               <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#FFC700] via-[#F59E0B] to-[#D97706] opacity-70 blur-xl pointer-events-none" />
-              <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border-2 border-[#FFC700] shadow-[0_0_30px_rgba(255,199,0,0.6)] bg-black flex items-center justify-center">
+              <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border-2 border-[#FFC700] shadow-[0_0_30px_rgba(255,199,0,0.6)] bg-black flex items-center justify-center group">
                 <video
+                  ref={heroVideoRef}
+                  id="video-apresentacao"
                   src="https://i.imgur.com/W7vGfri.mp4"
-                  controls
+                  poster={heroPoster}
+                  controls={isHeroVideoActive}
                   playsInline
-                  preload="metadata"
+                  preload="none"
+                  width={480}
+                  height={854}
                   className="w-full h-full object-cover rounded-2xl"
                 >
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
+
+                {/* Capa com o poster de apresentação e Botão Vermelho Estilo YouTube */}
+                {!isHeroVideoActive && (
+                  <div
+                    onClick={handlePlayHeroVideo}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        handlePlayHeroVideo();
+                      }
+                    }}
+                    aria-label="Assistir ao vídeo de apresentação"
+                    className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none"
+                  >
+                    {/* Imagem do Poster de Alta Nitidez */}
+                    <img
+                      src={heroPoster}
+                      alt="Capa do Vídeo de Apresentação Universo 3D"
+                      width={480}
+                      height={854}
+                      fetchPriority="high"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover select-none"
+                    />
+
+                    {/* Película escura translúcida para realismo e contraste */}
+                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
+
+                    {/* Botão Oficial Vermelho Estilo YouTube */}
+                    <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:scale-110 group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                      <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -628,7 +708,7 @@ export default function App() {
       </section>
 
       {/* 7. Carrossel de Modelos */}
-      <section id="modelos-carrossel" className="pt-0 pb-16 relative">
+      <section id="modelos-carrossel" className="pt-0 pb-16 relative content-auto">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
             <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight mb-4">
@@ -650,18 +730,18 @@ export default function App() {
                 <div
                   key={`card-l1-${idx}`}
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                  style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
                     className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                    style={{ backgroundImage: `url('${cardBg}')` }}
                   >
                     {item.image ? (
                       <CleanImage
                         src={item.image}
                         alt={item.title}
-                        priority={idx < 4}
-                        loading={idx < 4 ? 'eager' : 'lazy'}
+                        priority={false}
+                        loading="lazy"
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
@@ -678,11 +758,11 @@ export default function App() {
                 <div
                   key={`card-l1-dup-${idx}`}
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                  style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
                     className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                    style={{ backgroundImage: `url('${cardBg}')` }}
                   >
                     {item.image ? (
                       <CleanImage
@@ -713,11 +793,11 @@ export default function App() {
                 <div
                   key={`card-l2-${idx}`}
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                  style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
                     className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                    style={{ backgroundImage: `url('${cardBg}')` }}
                   >
                     {item.image ? (
                       <CleanImage
@@ -739,11 +819,11 @@ export default function App() {
                 <div
                   key={`card-l2-dup-${idx}`}
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                  style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
                     className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                    style={{ backgroundImage: `url('${cardBg}')` }}
                   >
                     {item.image ? (
                       <CleanImage
@@ -773,11 +853,11 @@ export default function App() {
                 <div
                   key={`card-l3-${idx}`}
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                  style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
                     className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                    style={{ backgroundImage: `url('${cardBg}')` }}
                   >
                     {item.image ? (
                       <CleanImage
@@ -799,11 +879,11 @@ export default function App() {
                 <div
                   key={`card-l3-dup-${idx}`}
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                  style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
                     className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: "url('https://i.imgur.com/nQa7wxr.png')" }}
+                    style={{ backgroundImage: `url('${cardBg}')` }}
                   >
                     {item.image ? (
                       <CleanImage
@@ -825,7 +905,7 @@ export default function App() {
       </section>
 
       {/* 8. Mockup Notebook */}
-      <section id="mockup-notebook" className="py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10">
+      <section id="mockup-notebook" className="py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10 content-auto">
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16">
             <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight">
@@ -854,32 +934,25 @@ export default function App() {
                     id="video-catalogo-notebook"
                     src="https://i.imgur.com/GHHhHgT.mp4"
                     poster={notebookPoster}
-                    controls={isNotebookVideoPlaying}
+                    controls={isNotebookVideoActive}
                     playsInline
-                    preload="metadata"
-                    onPlay={() => setIsNotebookVideoPlaying(true)}
-                    onPause={() => setIsNotebookVideoPlaying(false)}
-                    onEnded={() => setIsNotebookVideoPlaying(false)}
+                    preload="none"
+                    width={854}
+                    height={480}
                     className="w-full h-full object-cover"
                   >
                     Seu navegador não suporta a reprodução de vídeo.
                   </video>
 
                   {/* Capa com a imagem da Área de Membros aparente e Botão Estilo YouTube */}
-                  {!isNotebookVideoPlaying && (
+                  {!isNotebookVideoActive && (
                     <div
-                      onClick={() => {
-                        if (notebookVideoRef.current) {
-                          notebookVideoRef.current.play();
-                          setIsNotebookVideoPlaying(true);
-                        }
-                      }}
+                      onClick={handlePlayNotebookVideo}
                       role="button"
                       tabIndex={0}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
-                          notebookVideoRef.current?.play();
-                          setIsNotebookVideoPlaying(true);
+                          handlePlayNotebookVideo();
                         }
                       }}
                       aria-label="Assistir tour pela Área de Membros no YouTube"
@@ -889,6 +962,8 @@ export default function App() {
                       <img
                         src={notebookPoster}
                         alt="Área de Membros Universo 3D"
+                        width={854}
+                        height={480}
                         loading="lazy"
                         decoding="async"
                         className="absolute inset-0 w-full h-full object-cover select-none"
@@ -919,7 +994,7 @@ export default function App() {
       </section>
 
       {/* 10. Validação de Mercado */}
-      <section id="validacao-mercado" className="pt-4 pb-16 relative bg-black">
+      <section id="validacao-mercado" className="pt-4 pb-16 relative bg-black content-auto">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <h2 className="font-display font-black text-3xl md:text-4xl tracking-tight mb-4">
@@ -932,22 +1007,28 @@ export default function App() {
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-6">
             <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_50px_rgba(245,158,11,0.35)] relative group w-full p-2 sm:p-4">
               <CleanImage
-                src="https://i.imgur.com/91smpGk.png"
+                src={step1Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (1)"
+                width={768}
+                height={480}
                 className="w-full h-auto object-contain rounded-2xl select-none group-hover:scale-[1.01] transition-transform duration-300"
               />
             </div>
             <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_50px_rgba(245,158,11,0.35)] relative group w-full p-2 sm:p-4">
               <CleanImage
-                src="https://i.imgur.com/JyP4Cx4.png"
+                src={step2Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (2)"
+                width={768}
+                height={480}
                 className="w-full h-auto object-contain rounded-2xl select-none group-hover:scale-[1.01] transition-transform duration-300"
               />
             </div>
             <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_50px_rgba(245,158,11,0.35)] relative group w-full p-2 sm:p-4">
               <CleanImage
-                src="https://i.imgur.com/Sq2a956.png"
+                src={step3Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (3)"
+                width={768}
+                height={480}
                 className="w-full h-auto object-contain rounded-2xl select-none group-hover:scale-[1.01] transition-transform duration-300"
               />
             </div>
@@ -956,7 +1037,7 @@ export default function App() {
       </section>
 
       {/* 11. Matemática Lucrativa */}
-      <section id="matematica-lucrativa" className="pt-8 pb-16 relative overflow-hidden">
+      <section id="matematica-lucrativa" className="pt-8 pb-16 relative overflow-hidden content-auto">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl">
           <div className="text-center mb-12">
@@ -991,7 +1072,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
                     <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
                       <CleanImage
-                        src="https://i.imgur.com/sLGiXZU.png"
+                        src={lucro1Image}
                         alt="Modelo 3D STL - Peça 1"
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
@@ -1009,7 +1090,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
                     <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
                       <CleanImage
-                        src="https://i.imgur.com/tReZWy7.png"
+                        src={lucro2Image}
                         alt="Modelo 3D STL - Peça 2"
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
@@ -1027,7 +1108,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
                     <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
                       <CleanImage
-                        src="https://i.imgur.com/hpg6LLt.png"
+                        src={lucro3Image}
                         alt="Modelo 3D STL - Peça 3"
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
@@ -1047,7 +1128,7 @@ export default function App() {
       </section>
 
       {/* 12. 9 Bônus Exclusivos */}
-      <section id="bonus" className="bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24">
+      <section id="bonus" className="bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24 content-auto">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#FFC700]/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
           <p className="text-lg md:text-2xl font-bold uppercase tracking-widest mb-2 opacity-90">
@@ -1067,7 +1148,7 @@ export default function App() {
             {bonuses.map((bonus) => (
               <div
                 key={`bonus-${bonus.id}`}
-                className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3.5 md:p-5 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-square"
+                className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3.5 md:p-5 pb-3 sm:pb-4.5 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-[1/1.18]"
               >
                 <div className="w-full flex flex-col items-center">
                   <span className="grad-text font-black font-display text-[10px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
@@ -1083,6 +1164,8 @@ export default function App() {
                     <img
                       src={bonus.image}
                       alt={bonus.title}
+                      width={300}
+                      height={300}
                       loading="lazy"
                       decoding="async"
                       className="max-h-full max-w-full w-auto h-auto object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.95)] group-hover:scale-105 transition-transform duration-300 select-none"
@@ -1095,6 +1178,15 @@ export default function App() {
                     </div>
                   )}
                 </div>
+
+                <div className="w-full flex items-center justify-center mt-auto pt-1 sm:pt-1.5 shrink-0">
+                  <span
+                    id={`bonus-gratis-${bonus.id}`}
+                    className="text-[#FFC700] font-display font-black text-xs xs:text-sm sm:text-lg md:text-2xl lg:text-3xl uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_12px_rgba(255,199,0,0.7)]"
+                  >
+                    GRÁTIS
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -1102,7 +1194,7 @@ export default function App() {
       </section>
 
       {/* Depoimento Real em Layout de Celular */}
-      <section id="depoimento" className="bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
+      <section id="depoimento" className="bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden content-auto">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#FFC700]/5 rounded-full blur-[140px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
@@ -1175,11 +1267,13 @@ export default function App() {
                       id={`celular-depoimento-img-${dep.id}`}
                       src={dep.image}
                       alt={dep.alt}
+                      width={400}
+                      height={710}
                       className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-200 ease-in-out ${
                         depoimentoIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                       }`}
-                      loading="eager"
-                      decoding="sync"
+                      loading="lazy"
+                      decoding="async"
                     />
                   ))}
                 </div>
@@ -1228,7 +1322,7 @@ export default function App() {
       </section>
 
       {/* 13-14. Seção de Oferta & Preços */}
-      <section id="oferta" className="bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
+      <section id="oferta" className="bg-zinc-950 relative border-b border-white/5 py-20 md:py-24 content-auto">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center mb-10 md:mb-12 w-full flex flex-col items-center justify-center relative">
@@ -1316,15 +1410,17 @@ export default function App() {
             >
               <div className="bg-[#FFC700] text-black text-center py-2 px-3">
                 <p className="text-xs font-black uppercase tracking-wider">
-                  ������ MAIS VENDIDO — PACOTE COMPLETO VIP
+                  🔥 MAIS VENDIDO — PACOTE COMPLETO VIP
                 </p>
               </div>
               <div className="p-6 sm:p-7 h-full flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-4 relative group">
                   <div className="absolute inset-0 bg-yellow-500/15 blur-xl rounded-full scale-90 pointer-events-none opacity-70" />
                   <img
-                    src="https://i.imgur.com/7ShOh79.png"
+                    src={funkoBonusImage}
                     alt="Pacote +500 Modelos Funkos STL"
+                    width={320}
+                    height={208}
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"
@@ -1390,7 +1486,7 @@ export default function App() {
       </section>
 
       {/* 15. Garantia & FAQ */}
-      <section id="garantia-faq" className="py-16 relative">
+      <section id="garantia-faq" className="py-16 relative content-auto">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="glass-card border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col gap-12 bg-black/50">
             {/* Guarantee Box */}
@@ -1544,8 +1640,10 @@ export default function App() {
                 <div className="w-full flex items-center justify-center mb-1.5 relative group">
                   <div className="absolute inset-0 bg-yellow-500/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60" />
                   <img
-                    src="https://i.imgur.com/7ShOh79.png"
+                    src={funkoBonusImage}
                     alt="Pacote +500 Modelos Funkos STL"
+                    width={240}
+                    height={128}
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"

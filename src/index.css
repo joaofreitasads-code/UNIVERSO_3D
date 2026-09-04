@@ -146,3 +146,9 @@
   animation: livePulse 1.4s ease-in-out infinite;
 }
 
+/* Otimização de renderização e fluidez móvel */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+

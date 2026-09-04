@@ -12,10 +12,12 @@ export default defineConfig(() => {
       },
     },
     build: {
-      target: 'es2020',
+      target: 'es2022',
       cssMinify: true,
       minify: 'esbuild' as const,
+      modulePreload: { polyfill: false },
       rollupOptions: {
+        treeshake: true,
         output: {
           manualChunks: {
             'vendor-react': ['react', 'react-dom'],
