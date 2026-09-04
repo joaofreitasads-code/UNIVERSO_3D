@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo } from 'react';
 
 interface CleanImageProps {
   src: string;
@@ -6,36 +6,36 @@ interface CleanImageProps {
   className?: string;
   loading?: 'lazy' | 'eager';
   priority?: boolean;
+  width?: number | string;
+  height?: number | string;
 }
 
-export const CleanImage: React.FC<CleanImageProps> = ({
+export const CleanImage: React.FC<CleanImageProps> = memo(({
   src,
   alt,
   className = '',
   loading = 'lazy',
   priority = false,
+  width,
+  height,
 }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-
   return (
     <img
       src={src}
       alt={alt}
+      width={width}
+      height={height}
       referrerPolicy="no-referrer"
       decoding="async"
       loading={priority ? 'eager' : loading}
-      fetchPriority={priority ? 'high' : 'auto'}
-      onLoad={() => setLoaded(true)}
-      onError={() => {
-        setError(true);
-        setLoaded(true);
-      }}
-      className={`${className} ${loaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200 ${error ? 'grayscale' : ''}`}
+      fetchPriority={priority ? 'high' : 'low'}
+      className={className}
       style={{
         contentVisibility: 'auto',
       }}
     />
   );
-};
+});
+CleanImage.displayName = 'CleanImage';
+
 

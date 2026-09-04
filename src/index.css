@@ -72,7 +72,10 @@
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  animation: marqueeAnimation 18s linear infinite;
+  -webkit-backface-visibility: hidden;
+  animation: marqueeAnimation 18s linear infinite !important;
+  animation-play-state: running !important;
+  touch-action: pan-y;
 }
 
 .marquee-cards {
@@ -81,7 +84,10 @@
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  animation: marqueeAnimation 16s linear infinite;
+  -webkit-backface-visibility: hidden;
+  animation: marqueeAnimation 16s linear infinite !important;
+  animation-play-state: running !important;
+  touch-action: pan-y;
 }
 
 .marquee-cards-reverse {
@@ -90,11 +96,41 @@
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  animation: marqueeReverseAnimation 16s linear infinite;
+  -webkit-backface-visibility: hidden;
+  animation: marqueeReverseAnimation 16s linear infinite !important;
+  animation-play-state: running !important;
+  touch-action: pan-y;
 }
 
-.marquee:hover, .marquee-cards:hover, .marquee-cards-reverse:hover {
-  animation-play-state: paused;
+/* O carrossel deve continuar andando continuamente sem pausar por clique, toque, hover ou foco */
+.marquee,
+.marquee:hover,
+.marquee:active,
+.marquee:focus,
+.marquee:focus-within,
+.marquee-cards,
+.marquee-cards:hover,
+.marquee-cards:active,
+.marquee-cards:focus,
+.marquee-cards:focus-within,
+.marquee-cards-reverse,
+.marquee-cards-reverse:hover,
+.marquee-cards-reverse:active,
+.marquee-cards-reverse:focus,
+.marquee-cards-reverse:focus-within,
+.marquee *,
+.marquee *:hover,
+.marquee *:active,
+.marquee *:focus,
+.marquee-cards *,
+.marquee-cards *:hover,
+.marquee-cards *:active,
+.marquee-cards *:focus,
+.marquee-cards-reverse *,
+.marquee-cards-reverse *:hover,
+.marquee-cards-reverse *:active,
+.marquee-cards-reverse *:focus {
+  animation-play-state: running !important;
 }
 
 @keyframes livePulse {

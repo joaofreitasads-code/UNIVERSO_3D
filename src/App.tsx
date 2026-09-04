@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import notebookPoster from './assets/poster-catalogo.jpg';
 import { CleanImage } from './components/CleanImage';
 import {
   Play,
@@ -9,6 +10,8 @@ import {
   Mail,
   Building2,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Gift,
   ShoppingCart
 } from 'lucide-react';
@@ -456,18 +459,67 @@ const faqs = [
   },
 ];
 
+interface DepoimentoItem {
+  id: number;
+  image: string;
+  alt: string;
+}
+
+const depoimentosList: DepoimentoItem[] = [
+  {
+    id: 1,
+    image: 'https://i.imgur.com/acyobFA.png',
+    alt: 'Depoimento 1 - Universo 3D',
+  },
+  {
+    id: 2,
+    image: 'https://i.imgur.com/9b3x2ii.png',
+    alt: 'Depoimento 2 - Universo 3D',
+  },
+  {
+    id: 3,
+    image: 'https://i.imgur.com/eMJ3jpC.png',
+    alt: 'Depoimento 3 - Universo 3D',
+  },
+  {
+    id: 4,
+    image: 'https://i.imgur.com/IlSJNhC.png',
+    alt: 'Depoimento 4 - Universo 3D',
+  },
+];
+
 export default function App() {
   const [isUpsellOpen, setIsUpsellOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [depoimentoIndex, setDepoimentoIndex] = useState(0);
+  const [isNotebookVideoPlaying, setIsNotebookVideoPlaying] = useState(false);
+  const notebookVideoRef = useRef<HTMLVideoElement>(null);
+  const touchStartXRef = useRef<number | null>(null);
 
-  const toggleFaq = (index: number) => {
-    setOpenFaqIndex(openFaqIndex === index ? null : index);
-  };
+  // Pré-carrega todas as imagens de depoimento para trocar instantaneamente sem piscar a tela
+  useEffect(() => {
+    depoimentosList.forEach((dep) => {
+      const img = new Image();
+      img.src = dep.image;
+    });
+  }, []);
 
-  const handleBaseClick = (e: React.MouseEvent) => {
+  const prevDepoimento = useCallback(() => {
+    setDepoimentoIndex((prev) => (prev === 0 ? depoimentosList.length - 1 : prev - 1));
+  }, []);
+
+  const nextDepoimento = useCallback(() => {
+    setDepoimentoIndex((prev) => (prev === depoimentosList.length - 1 ? 0 : prev + 1));
+  }, []);
+
+  const toggleFaq = useCallback((index: number) => {
+    setOpenFaqIndex((prev) => (prev === index ? null : index));
+  }, []);
+
+  const handleBaseClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     setIsUpsellOpen(true);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white relative antialiased selection:bg-yellow-400 selection:text-black">
@@ -793,13 +845,64 @@ export default function App() {
                   </div>
                 </div>
                 {/* Screen Display area */}
-                <div className="relative rounded-md sm:rounded-lg md:rounded-xl overflow-hidden bg-[#000000] aspect-[16/9] border border-white/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.9)] flex flex-col items-center justify-center gap-2 group cursor-pointer">
-                  <div className="w-14 h-14 rounded-full bg-black/70 border border-[#FFC700]/60 flex items-center justify-center shadow-[0_0_25px_rgba(255,199,0,0.4)] group-hover:scale-110 transition-transform z-10">
-                    <Play className="w-7 h-7 text-yellow-400 fill-yellow-400 ml-0.5" />
-                  </div>
-                  <span className="text-zinc-500 text-xs z-10 font-medium">Vídeo demonstrativo da área de membros</span>
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.07] pointer-events-none" />
-                  <div className="absolute inset-0 border border-white/5 rounded-md sm:rounded-lg md:rounded-xl pointer-events-none" />
+                <div
+                  id="notebook-screen-area"
+                  className="relative rounded-md sm:rounded-lg md:rounded-xl overflow-hidden bg-[#000000] aspect-[16/9] border border-white/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.9)] flex items-center justify-center group"
+                >
+                  <video
+                    ref={notebookVideoRef}
+                    id="video-catalogo-notebook"
+                    src="https://i.imgur.com/GHHhHgT.mp4"
+                    poster={notebookPoster}
+                    controls={isNotebookVideoPlaying}
+                    playsInline
+                    preload="metadata"
+                    onPlay={() => setIsNotebookVideoPlaying(true)}
+                    onPause={() => setIsNotebookVideoPlaying(false)}
+                    onEnded={() => setIsNotebookVideoPlaying(false)}
+                    className="w-full h-full object-cover"
+                  >
+                    Seu navegador não suporta a reprodução de vídeo.
+                  </video>
+
+                  {/* Capa com a imagem da Área de Membros aparente e Botão Estilo YouTube */}
+                  {!isNotebookVideoPlaying && (
+                    <div
+                      onClick={() => {
+                        if (notebookVideoRef.current) {
+                          notebookVideoRef.current.play();
+                          setIsNotebookVideoPlaying(true);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          notebookVideoRef.current?.play();
+                          setIsNotebookVideoPlaying(true);
+                        }
+                      }}
+                      aria-label="Assistir tour pela Área de Membros no YouTube"
+                      className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none"
+                    >
+                      {/* Imagem da Área de Membros visível */}
+                      <img
+                        src={notebookPoster}
+                        alt="Área de Membros Universo 3D"
+                        loading="lazy"
+                        decoding="async"
+                        className="absolute inset-0 w-full h-full object-cover select-none"
+                      />
+
+                      {/* Leve película escura translúcida para contraste e realismo */}
+                      <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
+
+                      {/* Botão Oficial Vermelho Estilo YouTube */}
+                      <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:scale-110 group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                        <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -964,46 +1067,162 @@ export default function App() {
             {bonuses.map((bonus) => (
               <div
                 key={`bonus-${bonus.id}`}
-                className="bg-black/50 border border-white/10 rounded-xl sm:rounded-2xl p-2 sm:p-4 md:p-8 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group"
+                className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3.5 md:p-5 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-square"
               >
                 <div className="w-full flex flex-col items-center">
-                  <span className="grad-text font-black font-display text-[11px] sm:text-lg md:text-3xl mb-1 sm:mb-2 md:mb-3 tracking-wider sm:tracking-widest">
+                  <span className="grad-text font-black font-display text-[10px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
                     BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
                   </span>
-                  <h4 className="text-[10px] sm:text-sm md:text-xl font-bold uppercase tracking-tight sm:tracking-wide mb-1 sm:mb-3 md:mb-6 min-h-[28px] sm:min-h-[44px] md:min-h-[56px] flex items-center justify-center line-clamp-2 md:line-clamp-none">
+                  <h4 className="text-[9px] xs:text-[11px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] sm:min-h-[28px] md:min-h-[40px] flex items-center justify-center">
                     {bonus.title}
                   </h4>
-                  <div className="w-full h-[95px] sm:h-[150px] md:h-[205px] flex items-center justify-center relative my-1 sm:my-2">
-                    {bonus.image ? (
-                      <img
-                        src={bonus.image}
-                        alt={bonus.title}
-                        loading="lazy"
-                        decoding="async"
-                        className={
-                          bonus.imageClassName ||
-                          "h-[80px] sm:h-[135px] md:h-[185px] w-auto max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.95)] group-hover:scale-110 transition-transform duration-300 select-none"
-                        }
-                      />
-                    ) : (
-                      <div className="w-14 h-14 sm:w-20 sm:h-20 md:w-28 md:h-28 rounded-xl sm:rounded-2xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3 md:p-4">
-                        <div className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
-                          {bonus.icon}
-                        </div>
-                      </div>
-                    )}
-                  </div>
                 </div>
-                <div className="mt-2 sm:mt-4 md:mt-6 flex flex-col items-center w-full pt-1.5 sm:pt-3 md:pt-4 border-t border-white/5">
-                  <span className="text-[9px] sm:text-xs text-zinc-400 line-through mb-0.5">
-                    {bonus.priceOriginal}
-                  </span>
-                  <p className="text-[#FFC700] font-black font-display text-xs sm:text-xl md:text-4xl uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_15px_rgba(255,199,0,0.3)]">
-                    GRÁTIS
-                  </p>
+
+                <div className="w-full flex-1 min-h-0 flex items-center justify-center relative my-0.5 sm:my-1.5 p-0.5 sm:p-1">
+                  {bonus.image ? (
+                    <img
+                      src={bonus.image}
+                      alt={bonus.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="max-h-full max-w-full w-auto h-auto object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.95)] group-hover:scale-105 transition-transform duration-300 select-none"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3">
+                      <div className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+                        {bonus.icon}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Depoimento Real em Layout de Celular */}
+      <section id="depoimento" className="bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#FFC700]/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+            <div id="depoimento-badge" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-4 shadow-[0_0_20px_rgba(255,199,0,0.15)]">
+              <span className="text-yellow-400">★ ★ ★ ★ ★</span>
+              <span>Depoimento Real de Membro</span>
+            </div>
+            <h2 id="depoimento-titulo" className="font-display font-black text-2xl sm:text-3xl md:text-5xl uppercase tracking-tight mb-3">
+              QUEM ACESSOU JÁ COMEÇOU A <span className="grad-text">TESTAR PRODUTOS</span>
+            </h2>
+            <p className="text-zinc-400 text-sm sm:text-base font-light max-w-xl mx-auto leading-relaxed">
+              Veja feedbacks de pessoas que entraram para parar de perder tempo procurando STL e começar a organizar seus produtos.
+            </p>
+          </div>
+
+          {/* Smartphone Mockup & Carrossel com Setas de Navegação */}
+          <div id="celular-depoimento-slider" className="relative w-full max-w-4xl mx-auto flex items-center justify-center gap-1.5 xs:gap-3 sm:gap-6 md:gap-8 px-1 sm:px-4">
+            {/* Seta Esquerda */}
+            <button
+              id="btn-depoimento-anterior"
+              type="button"
+              onClick={prevDepoimento}
+              aria-label="Ver depoimento anterior"
+              className="group w-9 h-9 xs:w-11 xs:h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
+            >
+              <ChevronLeft className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:-translate-x-0.5 transition-transform" />
+            </button>
+
+            {/* Smartphone Mockup Alongado / Vertical com Borda Branca */}
+            <div
+              id="celular-depoimento-wrapper"
+              className="relative flex justify-center items-center select-none"
+              onTouchStart={(e) => {
+                touchStartXRef.current = e.touches[0].clientX;
+              }}
+              onTouchEnd={(e) => {
+                if (touchStartXRef.current !== null) {
+                  const diff = touchStartXRef.current - e.changedTouches[0].clientX;
+                  if (diff > 45) nextDepoimento();
+                  else if (diff < -45) prevDepoimento();
+                  touchStartXRef.current = null;
+                }
+              }}
+            >
+              {/* Ambient phone back glow */}
+              <div className="absolute inset-0 bg-[#FFC700]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none" />
+
+              {/* Realistic Phone Frame: Alongado para cima, com laterais contidas para não cobrir as setas */}
+              <div
+                id="celular-depoimento-frame"
+                className="relative w-[210px] xs:w-[240px] sm:w-[320px] md:w-[390px] lg:w-[430px] max-w-[58vw] xs:max-w-[62vw] sm:max-w-[70vw] rounded-[38px] sm:rounded-[48px] pt-3 pb-3.5 px-2 sm:pt-4 sm:pb-4 sm:px-3 bg-gradient-to-b from-[#333333] via-[#1a1a1a] to-[#0a0a0a] shadow-[0_0_35px_rgba(255,255,255,0.45),0_30px_90px_rgba(0,0,0,0.95)] border-[3px] sm:border-4 border-white ring-2 ring-white/30 flex flex-col"
+              >
+                {/* Phone side buttons (exterior realism) */}
+                <div className="absolute -left-[3.5px] top-20 sm:top-24 w-[3.5px] h-6 sm:h-8 bg-zinc-400 rounded-l-sm" />
+                <div className="absolute -left-[3.5px] top-30 sm:top-36 w-[3.5px] h-10 sm:h-12 bg-zinc-400 rounded-l-sm" />
+                <div className="absolute -left-[3.5px] top-44 sm:top-52 w-[3.5px] h-10 sm:h-12 bg-zinc-400 rounded-l-sm" />
+                <div className="absolute -right-[3.5px] top-24 sm:top-28 w-[3.5px] h-14 sm:h-16 bg-zinc-400 rounded-r-sm" />
+
+                {/* Top Bezel: Alto-falante e sensor externo (não cobre a tela nem o nome) */}
+                <div className="flex items-center justify-center gap-2 mb-2 sm:mb-2.5">
+                  <div className="w-12 sm:w-16 h-1 sm:h-1.5 bg-zinc-600 rounded-full opacity-80" />
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-zinc-700/90 border border-zinc-600" />
+                </div>
+
+                {/* Inner Screen Bezel - 100% livre de sobreposições, com proporção fixa e transição suave sem piscar */}
+                <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-black border border-white/40 shadow-inner aspect-[941/1672] w-full">
+                  {depoimentosList.map((dep, idx) => (
+                    <img
+                      key={dep.id}
+                      id={`celular-depoimento-img-${dep.id}`}
+                      src={dep.image}
+                      alt={dep.alt}
+                      className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-200 ease-in-out ${
+                        depoimentoIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                      }`}
+                      loading="eager"
+                      decoding="sync"
+                    />
+                  ))}
+                </div>
+
+                {/* Bottom Bezel: Barra inferior de navegação na moldura externa */}
+                <div className="mt-2 sm:mt-2.5 flex justify-center">
+                  <div className="w-16 sm:w-24 h-1 bg-white/40 rounded-full" />
+                </div>
+              </div>
+            </div>
+
+            {/* Seta Direita */}
+            <button
+              id="btn-depoimento-proximo"
+              type="button"
+              onClick={nextDepoimento}
+              aria-label="Ver próximo depoimento"
+              className="group w-9 h-9 xs:w-11 xs:h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
+            >
+              <ChevronRight className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:translate-x-0.5 transition-transform" />
+            </button>
+          </div>
+
+          {/* Indicadores / Paginação dos Depoimentos */}
+          <div id="depoimento-indicadores" className="mt-8 flex flex-col items-center gap-2.5 z-20">
+            <div className="flex items-center gap-2">
+              {depoimentosList.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setDepoimentoIndex(idx)}
+                  aria-label={`Ir para depoimento ${idx + 1}`}
+                  className={`transition-all duration-300 rounded-full h-2.5 cursor-pointer ${
+                    depoimentoIndex === idx
+                      ? 'w-8 bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)]'
+                      : 'w-2.5 bg-zinc-600 hover:bg-zinc-400'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-zinc-400 font-mono tracking-widest uppercase">
+              {depoimentoIndex + 1} de {depoimentosList.length} {depoimentosList.length === 1 ? 'Depoimento' : 'Depoimentos'}
+            </span>
           </div>
         </div>
       </section>
@@ -1028,77 +1247,97 @@ export default function App() {
             </p>
           </div>
 
-          <div className="w-full max-w-5xl flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
-            {/* Card 1 - Coleção Base */}
-            <div className="w-full max-w-sm glass-card border border-white/10 rounded-3xl py-6 px-8 opacity-90 hover:opacity-100 transition-opacity flex flex-col bg-black/40">
-              <h3 className="font-display font-bold text-sm uppercase tracking-widest mb-4 text-center">
-                Coleção Base
-              </h3>
-              <div className="border-b border-white/10 pb-4 mb-4 text-center">
+          <div className="w-full max-w-5xl flex flex-col lg:flex-row items-stretch justify-center gap-8 lg:gap-10">
+            {/* Card 1 - Coleção Base (R$ 16,90 - Ao clicar abre o Pop-up de R$ 24,90) */}
+            <div className="w-full lg:max-w-[420px] glass-card border border-white/10 rounded-3xl py-7 px-6 sm:px-8 opacity-95 hover:opacity-100 transition-opacity flex flex-col bg-black/40">
+              <div className="text-center mb-4">
+                <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-zinc-400 bg-white/5 border border-white/10 px-3 py-1 rounded-full mb-3">
+                  Entrada
+                </span>
+                <h3 className="font-display font-black text-lg uppercase tracking-wider text-white">
+                  Coleção Base
+                </h3>
+              </div>
+              <div className="border-b border-white/10 pb-4 mb-5 text-center">
+                <p className="text-xs text-zinc-500 line-through mb-0.5">De R$ 47,00</p>
                 <div className="flex justify-center items-baseline gap-1 mb-1">
-                  <span className="text-lg text-zinc-400">R$</span>
-                  <span className="text-3xl font-display font-bold">16,90</span>
+                  <span className="text-lg text-zinc-400 font-bold">R$</span>
+                  <span className="text-4xl sm:text-5xl font-display font-black text-white">16,90</span>
                 </div>
                 <p className="text-zinc-400/80 text-[11px] uppercase tracking-widest font-bold">
                   Pagamento Único
                 </p>
               </div>
-              <ul className="space-y-2.5 mb-6 text-[13px] text-zinc-300 font-medium">
-                <li className="flex items-center gap-3">
+              <ul className="space-y-3 mb-6 text-[13px] text-zinc-300 font-medium">
+                <li className="flex items-center gap-2.5">
                   <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                   <span>500 Modelos Funkos STL</span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-2.5">
                   <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                   <span>Acesso por 3 Meses</span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-2.5">
                   <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                   <span>Garantia de 7 Dias</span>
                 </li>
-                <li className="flex items-center gap-3 font-semibold text-[#ef4444]">
+                <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
                   <span className="text-base font-bold leading-none">✕</span>
                   <span>Sem os 9 Bônus Inclusos</span>
                 </li>
-                <li className="flex items-center gap-3 font-semibold text-[#ef4444]">
+                <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
                   <span className="text-base font-bold leading-none">✕</span>
                   <span>Sem Atualizações Futuras</span>
+                </li>
+                <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
+                  <span className="text-base font-bold leading-none">✕</span>
+                  <span>Sem Licença Comercial</span>
                 </li>
               </ul>
               <button
                 type="button"
                 onClick={handleBaseClick}
-                className="block w-full text-center py-3 rounded-xl border border-white/20 text-white/90 text-[13px] uppercase tracking-wide hover:bg-white/10 transition-colors mt-auto font-black cursor-pointer"
+                className="block w-full text-center py-4 rounded-xl border-2 border-white/20 text-white hover:text-black hover:bg-[#FFC700] hover:border-[#FFC700] text-sm uppercase tracking-wider transition-all mt-auto font-black cursor-pointer shadow-sm"
               >
-                QUERO O BASE
+                QUERO O BASE (R$ 16,90)
               </button>
               <div className="mt-4 text-center">
-                <p className="font-bold text-[15px] md:text-base leading-snug px-2 text-[#ef4444]">
+                <p className="font-bold text-[13px] sm:text-[14px] leading-snug px-2 text-[#ef4444]">
                   Atenção: temos uma oferta ainda mais vantajosa! <span className="lg:hidden">Veja logo abaixo</span>
                   <span className="hidden lg:inline">Veja ao lado</span>
                 </p>
               </div>
             </div>
 
-            {/* Card 2 - Pro / Seu Catálogo (Featured) */}
-            <div id="oferta-pro" className="w-full max-w-[380px] sm:max-w-[400px] bg-[#0F0F0F] border-[2px] border-[#FFC700] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5),inset_0_0_15px_rgba(255,199,0,0.25)] transform lg:-translate-y-2 flex flex-col scroll-mt-24">
-              <div className="p-5 sm:p-6 h-full flex flex-col items-center">
-                <div className="w-full flex items-center justify-center mb-4 sm:mb-5 relative group">
+            {/* Card 2 - Coleção Completa VIP (R$ 42,90 - Destaque) */}
+            <div
+              id="oferta-pro"
+              className="w-full lg:max-w-[440px] bg-[#0F0F0F] border-[2px] border-[#FFC700] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5),inset_0_0_15px_rgba(255,199,0,0.25)] flex flex-col scroll-mt-24"
+            >
+              <div className="bg-[#FFC700] text-black text-center py-2 px-3">
+                <p className="text-xs font-black uppercase tracking-wider">
+                  ������ MAIS VENDIDO — PACOTE COMPLETO VIP
+                </p>
+              </div>
+              <div className="p-6 sm:p-7 h-full flex flex-col items-center">
+                <div className="w-full flex items-center justify-center mb-4 relative group">
                   <div className="absolute inset-0 bg-yellow-500/15 blur-xl rounded-full scale-90 pointer-events-none opacity-70" />
                   <img
                     src="https://i.imgur.com/7ShOh79.png"
                     alt="Pacote +500 Modelos Funkos STL"
+                    loading="lazy"
+                    decoding="async"
                     referrerPolicy="no-referrer"
                     className="relative z-10 w-auto h-auto max-h-44 sm:max-h-52 object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] hover:scale-105 transition-transform duration-300 select-none"
                   />
                 </div>
-                <div className="text-center w-full mb-4 sm:mb-5">
-                  <p className="text-lg md:text-xl text-red-400 font-black mb-1.5 italic">
+                <div className="text-center w-full mb-4">
+                  <p className="text-base sm:text-lg text-red-400 font-black mb-1 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
-                  <p className="text-[#FFEF5C] font-bold text-base mb-1 leading-none uppercase">Por Apenas</p>
-                  <div className="flex justify-center items-start text-[#FFC700] mb-1.5 drop-shadow-md">
-                    <span className="text-xl font-black mt-1.5 mr-1">R$</span>
+                  <p className="text-[#FFEF5C] font-bold text-sm sm:text-base mb-1 leading-none uppercase">Por Apenas</p>
+                  <div className="flex justify-center items-start text-[#FFC700] mb-1 drop-shadow-md">
+                    <span className="text-xl font-black mt-1 mr-1">R$</span>
                     <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none">42,90</span>
                   </div>
                   <p className="text-zinc-400 font-bold text-xs uppercase tracking-widest">Pagamento Único</p>
@@ -1113,24 +1352,24 @@ export default function App() {
                     </li>
                     <li className="flex items-start gap-2.5">
                       <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
-                      <strong>Licença Comercial Inclusa</strong>
+                      <strong className="text-yellow-300">Licença Comercial Inclusa</strong>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
-                      <span>Acesso Vitalício + Atualizações</span>
+                      <span>Acesso Vitalício + Atualizações Semanais</span>
                     </li>
                     <li className="flex items-start gap-2.5">
                       <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                       <span>Garantia Blindada de 7 Dias</span>
                     </li>
-                    <li className="w-full h-px bg-white/10 my-1.5" />
+                    <li className="w-full h-px bg-white/10 my-2" />
                     <li className="text-[11px] uppercase tracking-wider text-yellow-400 font-bold flex items-center gap-1.5 pt-0.5">
                       <span>🎁</span>
                       <span>TODOS OS 9 BÔNUS EXCLUSIVOS INCLUSOS:</span>
                     </li>
                     {bonuses.map((b) => (
                       <li key={`offer-bonus-${b.id}`} className="flex items-start gap-1.5 text-xs">
-                        <span className="text-yellow-400 font-bold shrink-0">Bônus 0{b.id}:</span>
+                        <span className="text-yellow-400 font-bold shrink-0">B0{b.id}:</span>
                         <span className="text-[#FFEF5C] leading-snug font-medium">{b.title}</span>
                       </li>
                     ))}
@@ -1138,10 +1377,10 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="#checkout-pro"
-                    className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-lg sm:text-xl py-4 rounded-xl text-center tracking-wider transition-transform hover:scale-105 shadow-[0_0_25px_rgba(255,199,0,0.4)]"
+                    href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
+                    className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-transform hover:scale-105 shadow-[0_0_25px_rgba(255,199,0,0.4)] cursor-pointer"
                   >
-                    Garantir Acesso
+                    GARANTIR ACESSO VIP (R$ 42,90)
                   </a>
                 </div>
               </div>
@@ -1271,98 +1510,105 @@ export default function App() {
           <div
             id="upsellModalContent"
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[390px] sm:max-w-md my-auto transform transition-all duration-300"
+            className="relative w-full max-w-[350px] sm:max-w-[370px] my-auto transform transition-all duration-300"
           >
-            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#FFC700] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_60px_rgba(255,199,0,0.6),inset_0_0_15px_rgba(255,199,0,0.3)] flex flex-col mx-auto my-2">
+            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#FFC700] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5),inset_0_0_12px_rgba(255,199,0,0.25)] flex flex-col mx-auto my-1">
               <button
                 type="button"
                 onClick={() => setIsUpsellOpen(false)}
                 aria-label="Fechar modal"
-                className="absolute top-2.5 right-3 sm:top-3.5 sm:right-4 text-white/60 hover:text-white transition-colors z-30 p-1 rounded-full hover:bg-white/10 cursor-pointer"
+                className="absolute top-2 right-2.5 sm:top-2.5 sm:right-3 text-white/60 hover:text-white transition-colors z-30 p-1 rounded-full hover:bg-white/10 cursor-pointer"
               >
-                <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
-              <div className="py-2.5 sm:py-3.5 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F] pr-9 pl-2">
-                <h3 className="font-display font-black text-xs sm:text-base md:text-lg uppercase tracking-tighter px-1 whitespace-nowrap">
-                  <span className="grad-text font-extrabold">ESPERE! LEVE TUDO ISSO POR </span>
+              <div className="py-2 sm:py-2.5 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F] pr-8 pl-2">
+                <h3 className="font-display font-black text-xs sm:text-sm md:text-base uppercase tracking-tight px-1 whitespace-nowrap">
+                  <span className="grad-text font-extrabold">ESPERE! LEVE TUDO POR </span>
                   <span className="text-[#FFC700]">R$ 24,90</span>
                 </h3>
               </div>
 
-              <div className="bg-gradient-to-r from-[#D97706] via-[#FBBF24] to-[#B45309] py-1.5 sm:py-2 px-3 shadow-[0_0_20px_rgba(245,158,11,0.5)] border-y border-[#FBBF24]/60">
-                <p className="font-black text-black text-center">
-                  <span className="block text-[9px] sm:text-[11px] uppercase tracking-[0.2em] opacity-90 mb-0.5">
+              <div className="bg-gradient-to-r from-[#D97706] via-[#FBBF24] to-[#B45309] py-1 px-2.5 shadow-[0_0_15px_rgba(245,158,11,0.4)] border-y border-[#FBBF24]/60">
+                <p className="font-black text-black text-center leading-tight">
+                  <span className="block text-[8px] sm:text-[9px] uppercase tracking-[0.15em] opacity-90">
                     O PACOTE MAIS COMPLETO E VANTAJOSO
                   </span>
-                  <span className="block text-[11px] sm:text-[13px] uppercase tracking-tight">
+                  <span className="block text-[10px] sm:text-[11px] uppercase tracking-tight">
                     + 500 MODELOS FUNKOS STL + TODOS OS 9 BÔNUS
                   </span>
                 </p>
               </div>
 
-              <div className="p-4 sm:p-6 flex flex-col items-center">
-                <div className="w-full flex items-center justify-center mb-3 relative group">
-                  <div className="absolute inset-0 bg-yellow-500/15 blur-xl rounded-full scale-90 pointer-events-none opacity-60" />
+              <div className="p-3.5 sm:p-4 flex flex-col items-center">
+                <div className="w-full flex items-center justify-center mb-1.5 relative group">
+                  <div className="absolute inset-0 bg-yellow-500/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60" />
                   <img
                     src="https://i.imgur.com/7ShOh79.png"
                     alt="Pacote +500 Modelos Funkos STL"
+                    loading="lazy"
+                    decoding="async"
                     referrerPolicy="no-referrer"
-                    className="relative z-10 w-auto h-auto max-h-36 sm:max-h-44 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] select-none"
+                    className="relative z-10 w-auto h-auto max-h-28 sm:max-h-32 object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)] select-none"
                   />
                 </div>
-                <div className="text-center w-full mb-3">
-                  <p className="text-xs sm:text-base text-red-400 font-black mb-0.5 italic">
+                <div className="text-center w-full mb-2">
+                  <p className="text-[11px] sm:text-xs text-red-400 font-black mb-0.5 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
-                  <p className="text-[#FFEF5C] font-bold text-xs sm:text-sm mb-0.5 leading-none uppercase">
+                  <p className="text-[#FFEF5C] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
                     Por Apenas
                   </p>
                   <div className="flex justify-center items-start text-[#FFC700] mb-0.5 drop-shadow-md">
-                    <span className="text-lg sm:text-xl font-black mt-0.5 mr-1">R$</span>
-                    <span className="text-5xl sm:text-6xl font-display font-black tracking-tighter leading-none">
+                    <span className="text-base sm:text-lg font-black mt-0.5 mr-0.5">R$</span>
+                    <span className="text-4xl sm:text-5xl font-display font-black tracking-tighter leading-none">
                       24,90
                     </span>
                   </div>
-                  <p className="text-zinc-400 font-bold text-[10px] sm:text-xs uppercase tracking-widest">
+                  <p className="text-zinc-400 font-bold text-[9px] sm:text-[10px] uppercase tracking-widest">
                     Pagamento Único
                   </p>
                 </div>
-                <div className="w-full bg-[#1A1A1A] rounded-xl p-3 sm:p-4 mb-3 border border-white/5 max-h-56 overflow-y-auto">
-                  <ul className="w-full space-y-1.5 text-xs sm:text-[12px] text-white/90 font-medium">
-                    <li className="flex items-center gap-2 bg-yellow-500/10 border border-yellow-400/30 rounded p-1.5 text-yellow-300">
-                      <span className="text-[#FFC700] text-sm sm:text-base font-black leading-none">✓</span>
-                      <strong className="text-xs sm:text-[13px] font-black uppercase text-[#FFEF5C]">
+                <div className="w-full bg-[#1A1A1A] rounded-xl p-2.5 sm:p-3 mb-2.5 border border-white/5 max-h-36 sm:max-h-40 overflow-y-auto">
+                  <ul className="w-full space-y-1 text-[11px] text-white/90 font-medium">
+                    <li className="flex items-center gap-1.5 bg-yellow-500/10 border border-yellow-400/30 rounded p-1 text-yellow-300">
+                      <span className="text-[#FFC700] text-xs font-black leading-none">✓</span>
+                      <strong className="text-[11px] font-black uppercase text-[#FFEF5C]">
                         + 500 MODELOS FUNKOS STL
                       </strong>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#FFC700] text-sm sm:text-base font-bold leading-none">✓</span>
+                    <li className="flex items-center gap-1.5">
+                      <span className="text-[#FFC700] text-xs font-bold leading-none">✓</span>
                       <strong>Licença Comercial Inclusa</strong>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#FFC700] text-sm sm:text-base font-bold leading-none">✓</span>
+                    <li className="flex items-center gap-1.5">
+                      <span className="text-[#FFC700] text-xs font-bold leading-none">✓</span>
                       <span>Acesso Vitalício + Atualizações</span>
                     </li>
-                    <li className="w-full h-px bg-white/10 my-1" />
-                    <li className="text-[10px] uppercase tracking-wider text-yellow-400 font-bold flex items-center gap-1">
+                    <li className="w-full h-px bg-white/10 my-0.5" />
+                    <li className="text-[9px] uppercase tracking-wider text-yellow-400 font-bold flex items-center gap-1">
                       <span>🎁</span>
                       <span>TODOS OS 9 BÔNUS INCLUSOS:</span>
                     </li>
                     {bonuses.map((b) => (
-                      <li key={`upsell-bonus-${b.id}`} className="flex items-center gap-2">
-                        <span className="text-yellow-400 font-bold text-[11px] shrink-0">Bônus 0{b.id}:</span>
-                        <span className="text-[#FFEF5C] leading-tight text-[11px] sm:text-xs">{b.title}</span>
+                      <li key={`upsell-bonus-${b.id}`} className="flex items-center gap-1.5">
+                        <span className="text-yellow-400 font-bold text-[10px] shrink-0">B0{b.id}:</span>
+                        <span className="text-[#FFEF5C] leading-tight text-[10px] sm:text-[11px]">{b.title}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <a
-                  href="#checkout-upsell"
-                  onClick={() => setIsUpsellOpen(false)}
-                  className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-base sm:text-lg py-3.5 sm:py-4 rounded-xl text-center tracking-widest transition-transform hover:scale-105 shadow-[0_0_25px_rgba(255,199,0,0.4)]"
+                  href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
+                  className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer"
                 >
-                  Garantir Acesso
+                  GARANTIR ACESSO (R$ 24,90)
+                </a>
+                <a
+                  href="https://checkout.wiven.com.br/checkout/cmtkws58g09hz01pypy1crecf?offer=32HECNZ"
+                  className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
+                >
+                  Não quero os bônus, continuar com o Plano Base por R$ 16,90 »
                 </a>
               </div>
             </div>
