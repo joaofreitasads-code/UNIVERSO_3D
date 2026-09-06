@@ -39,8 +39,7 @@
                     radial-gradient(1px 1px at 210px 180px, rgba(255, 255, 255, 0.3) 100%, transparent);
   background-repeat: repeat;
   background-size: 240px 220px;
-  transform: translateZ(0);
-  will-change: transform;
+  pointer-events: none;
 }
 
 .glass-card {
@@ -146,9 +145,23 @@
   animation: livePulse 1.4s ease-in-out infinite;
 }
 
-/* Otimização de renderização e fluidez móvel */
+/* Otimização de estabilidade e fluidez móvel */
 .content-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
+  contain: none;
+}
+
+/* Animação de rotação contínua (devagar para médio) */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg) translateZ(0);
+  }
+  to {
+    transform: rotate(360deg) translateZ(0);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 13s linear infinite;
+  will-change: transform;
 }
 

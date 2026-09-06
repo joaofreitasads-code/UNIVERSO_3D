@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 
 interface CleanImageProps {
   src: string;
+  fallbackSrc?: string;
   alt: string;
   className?: string;
   loading?: 'lazy' | 'eager';
@@ -12,6 +13,7 @@ interface CleanImageProps {
 
 export const CleanImage: React.FC<CleanImageProps> = memo(({
   src,
+  fallbackSrc,
   alt,
   className = '',
   loading = 'lazy',
@@ -30,8 +32,10 @@ export const CleanImage: React.FC<CleanImageProps> = memo(({
       loading={priority ? 'eager' : loading}
       fetchPriority={priority ? 'high' : 'low'}
       className={className}
-      style={{
-        contentVisibility: 'auto',
+      onError={(e) => {
+        if (fallbackSrc && e.currentTarget.src !== fallbackSrc) {
+          e.currentTarget.src = fallbackSrc;
+        }
       }}
     />
   );

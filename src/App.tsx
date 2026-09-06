@@ -18,10 +18,29 @@ import bonus6Image from './assets/optimized/bonus-6.webp';
 import bonus7Image from './assets/optimized/bonus-7.webp';
 import bonus8Image from './assets/optimized/bonus-8.webp';
 import bonus9Image from './assets/optimized/bonus-9.webp';
+import bonus10Image from './assets/optimized/bonus-10.webp';
+import bonus11Image from './assets/optimized/bonus-11.webp';
 import lucro1Image from './assets/optimized/lucro-1.webp';
 import lucro2Image from './assets/optimized/lucro-2.webp';
 import lucro3Image from './assets/optimized/lucro-3.webp';
 import funkoBonusImage from './assets/optimized/funko-bonus.webp';
+import rotatingModelImg from './assets/optimized/rotating-model.webp';
+import carousel1 from './assets/optimized/carousel-1.webp';
+import carousel2 from './assets/optimized/carousel-2.webp';
+import carousel3 from './assets/optimized/carousel-3.webp';
+import carousel4 from './assets/optimized/carousel-4.webp';
+import carousel5 from './assets/optimized/carousel-5.webp';
+import carousel6 from './assets/optimized/carousel-6.webp';
+import carouselExtra1 from './assets/optimized/carousel-new/carousel-extra-1.webp';
+import carouselExtra2 from './assets/optimized/carousel-new/carousel-extra-2.webp';
+import carouselExtra3 from './assets/optimized/carousel-new/carousel-extra-3.webp';
+import carouselExtra4 from './assets/optimized/carousel-new/carousel-extra-4.webp';
+import carouselExtra5 from './assets/optimized/carousel-new/carousel-extra-5.webp';
+import carouselExtra6 from './assets/optimized/carousel-new/carousel-extra-6.webp';
+import carouselExtra7 from './assets/optimized/carousel-new/carousel-extra-7.webp';
+import carouselExtra8 from './assets/optimized/carousel-new/carousel-extra-8.webp';
+import carouselExtra9 from './assets/optimized/carousel-new/carousel-extra-9.webp';
+import carouselExtra10 from './assets/optimized/carousel-new/carousel-extra-10.webp';
 import { CleanImage } from './components/CleanImage';
 import {
   Play,
@@ -35,19 +54,149 @@ import {
   ChevronLeft,
   ChevronRight,
   Gift,
-  ShoppingCart
+  ShoppingCart,
+  Sparkles
 } from 'lucide-react';
 
 interface ModelItem {
   id: string | number;
   image?: string;
+  fallbackImage?: string;
   icon?: React.ReactNode;
   color?: string;
   title: string;
   imageClassName?: string;
 }
 
+const newModels: ModelItem[] = [
+  {
+    id: 'c-1',
+    image: carousel1,
+    fallbackImage: 'https://i.imgur.com/OW0TvSS.png',
+    title: 'Minecraft 3D STL',
+  },
+  {
+    id: 'c-2',
+    image: carousel2,
+    fallbackImage: 'https://i.imgur.com/YSY10He.png',
+    title: 'Colecionável STL',
+  },
+  {
+    id: 'c-3',
+    image: carousel3,
+    fallbackImage: 'https://i.imgur.com/4ffriGz.png',
+    title: 'Action Figure STL',
+  },
+  {
+    id: 'c-4',
+    image: carousel4,
+    fallbackImage: 'https://i.imgur.com/N8g8Jkb.png',
+    title: 'Miniatura STL',
+  },
+  {
+    id: 'c-5',
+    image: carousel5,
+    fallbackImage: 'https://i.imgur.com/IQfJhqF.png',
+    title: 'Guerreiro 3D STL',
+  },
+  {
+    id: 'c-6',
+    image: carousel6,
+    fallbackImage: 'https://i.imgur.com/ApsYGdc.png',
+    title: 'Escultura Detalhada STL',
+  },
+];
+
+const normalizedExistingImages = import.meta.glob<{ default: string }>('./assets/optimized/carousel-existing/*.webp', { eager: true });
+
+function getNormalizedImage(url: string): string {
+  const match = url.match(/\/([a-zA-Z0-9_-]+)\.png$/);
+  if (match) {
+    const key = `./assets/optimized/carousel-existing/${match[1]}.webp`;
+    if (normalizedExistingImages[key]) {
+      return normalizedExistingImages[key].default;
+    }
+  }
+  return url;
+}
+
+const extraCarouselModels: ModelItem[] = [
+  {
+    id: 'extra-1',
+    image: carouselExtra1,
+    fallbackImage: 'https://i.imgur.com/0JBWYlv.png',
+    title: 'Modelo 3D STL',
+  },
+  {
+    id: 'extra-2',
+    image: carouselExtra2,
+    fallbackImage: 'https://i.imgur.com/wzoh3dn.png',
+    title: 'Colecionável STL',
+  },
+  {
+    id: 'extra-3',
+    image: carouselExtra3,
+    fallbackImage: 'https://i.imgur.com/Dbo3JOo.png',
+    title: 'Action Figure STL',
+  },
+  {
+    id: 'extra-4',
+    image: carouselExtra4,
+    fallbackImage: 'https://i.imgur.com/ND72KlP.png',
+    title: 'Miniatura 3D STL',
+  },
+  {
+    id: 'extra-5',
+    image: carouselExtra5,
+    fallbackImage: 'https://i.imgur.com/CHQtbUe.png',
+    title: 'Guerreiro 3D STL',
+  },
+  {
+    id: 'extra-6',
+    image: carouselExtra6,
+    fallbackImage: 'https://i.imgur.com/mkEOXIs.png',
+    title: 'Escultura Detalhada STL',
+  },
+  {
+    id: 'extra-7',
+    image: carouselExtra7,
+    fallbackImage: 'https://i.imgur.com/gXpWfT3.png',
+    title: 'Personagem Épico STL',
+  },
+  {
+    id: 'extra-8',
+    image: carouselExtra8,
+    fallbackImage: 'https://i.imgur.com/EefCNIq.png',
+    title: 'Figura de Ação STL',
+  },
+  {
+    id: 'extra-9',
+    image: carouselExtra9,
+    fallbackImage: 'https://i.imgur.com/euq5sBC.png',
+    title: 'Colecionável Premium STL',
+  },
+  {
+    id: 'extra-10',
+    image: carouselExtra10,
+    fallbackImage: 'https://i.imgur.com/OceZmpV.png',
+    title: 'Busto Colecionável STL',
+  },
+];
+
+function normalizeModelItem(item: ModelItem): ModelItem {
+  if (typeof item.image === 'string' && item.image.startsWith('http')) {
+    return {
+      ...item,
+      image: getNormalizedImage(item.image),
+      fallbackImage: item.fallbackImage || item.image,
+    };
+  }
+  return item;
+}
+
 const line1Models: ModelItem[] = [
+  newModels[0], // Minecraft 3D STL
+  extraCarouselModels[0],
   {
     id: 'l1-img-1',
     image: 'https://i.imgur.com/6cCq8Rf.png',
@@ -63,6 +212,8 @@ const line1Models: ModelItem[] = [
     image: 'https://i.imgur.com/iiQWumG.png',
     title: 'Escultura Colecionável STL',
   },
+  newModels[1], // Colecionável STL
+  extraCarouselModels[1],
   {
     id: 'l1-img-4',
     image: 'https://i.imgur.com/RvI8Tgc.png',
@@ -78,6 +229,8 @@ const line1Models: ModelItem[] = [
     image: 'https://i.imgur.com/fqqiyqt.png',
     title: 'Busto Colecionável STL',
   },
+  newModels[2], // Action Figure STL
+  extraCarouselModels[2],
   {
     id: 'l1-img-7',
     image: 'https://i.imgur.com/RbxY5oY.png',
@@ -93,6 +246,8 @@ const line1Models: ModelItem[] = [
     image: 'https://i.imgur.com/eCDBAvz.png',
     title: 'Criatura Lendária STL',
   },
+  newModels[3], // Miniatura STL
+  extraCarouselModels[3],
   {
     id: 'l1-img-10',
     image: 'https://i.imgur.com/fdpcefu.png',
@@ -108,6 +263,7 @@ const line1Models: ModelItem[] = [
     image: 'https://i.imgur.com/NUjg7qK.png',
     title: 'Personagem Anime STL',
   },
+  newModels[4], // Guerreiro 3D STL
   {
     id: 'l1-img-13',
     image: 'https://i.imgur.com/XJqt9ir.png',
@@ -118,6 +274,7 @@ const line1Models: ModelItem[] = [
     image: 'https://i.imgur.com/9UwfIza.png',
     title: 'Modelo Premium STL',
   },
+  newModels[5], // Escultura Detalhada STL
   {
     id: 'l1-img-15',
     image: 'https://i.imgur.com/lO3J8Wb.png',
@@ -128,9 +285,11 @@ const line1Models: ModelItem[] = [
     image: 'https://i.imgur.com/3YWeqjV.png',
     title: 'Estátua Decorativa STL',
   },
-];
+].map(normalizeModelItem);
 
 const line2Models: ModelItem[] = [
+  newModels[3], // Miniatura STL
+  extraCarouselModels[4],
   {
     id: 'l2-img-1',
     image: 'https://i.imgur.com/vxV9uGs.png',
@@ -146,6 +305,8 @@ const line2Models: ModelItem[] = [
     image: 'https://i.imgur.com/NxLXZKR.png',
     title: 'Action Figure Lendária STL',
   },
+  newModels[4], // Guerreiro 3D STL
+  extraCarouselModels[5],
   {
     id: 'l2-img-4',
     image: 'https://i.imgur.com/dtGZy9j.png',
@@ -161,6 +322,8 @@ const line2Models: ModelItem[] = [
     image: 'https://i.imgur.com/Nzv1cDH.png',
     title: 'Personagem Mítico STL',
   },
+  newModels[5], // Escultura Detalhada STL
+  extraCarouselModels[6],
   {
     id: 'l2-img-7',
     image: 'https://i.imgur.com/BLI3Ocr.png',
@@ -176,6 +339,7 @@ const line2Models: ModelItem[] = [
     image: 'https://i.imgur.com/CldKhUH.png',
     title: 'Escultura Fantástica STL',
   },
+  newModels[0], // Minecraft 3D STL
   {
     id: 'l2-img-10',
     image: 'https://i.imgur.com/x9zamns.png',
@@ -191,6 +355,7 @@ const line2Models: ModelItem[] = [
     image: 'https://i.imgur.com/XColugb.png',
     title: 'Personagem Lendário STL',
   },
+  newModels[1], // Colecionável STL
   {
     id: 'l2-img-13',
     image: 'https://i.imgur.com/IcKX7kO.png',
@@ -201,6 +366,7 @@ const line2Models: ModelItem[] = [
     image: 'https://i.imgur.com/AWA8wvx.png',
     title: 'Colecionável Premium STL',
   },
+  newModels[2], // Action Figure STL
   {
     id: 'l2-img-15',
     image: 'https://i.imgur.com/1s9hRPB.png',
@@ -211,9 +377,11 @@ const line2Models: ModelItem[] = [
     image: 'https://i.imgur.com/PZGhNQL.png',
     title: 'Guerreiro 3D STL',
   },
-];
+].map(normalizeModelItem);
 
 const line3Models: ModelItem[] = [
+  newModels[1], // Colecionável STL
+  extraCarouselModels[7],
   {
     id: 'l3-img-1',
     image: 'https://i.imgur.com/Iexyj0f.png',
@@ -229,6 +397,8 @@ const line3Models: ModelItem[] = [
     image: 'https://i.imgur.com/NucoHxQ.png',
     title: 'Modelo Articulado STL',
   },
+  newModels[5], // Escultura Detalhada STL
+  extraCarouselModels[8],
   {
     id: 'l3-img-4',
     image: 'https://i.imgur.com/4jWcKxZ.png',
@@ -244,6 +414,8 @@ const line3Models: ModelItem[] = [
     image: 'https://i.imgur.com/MiJs0Ha.png',
     title: 'Artefato Decorativo STL',
   },
+  newModels[0], // Minecraft 3D STL
+  extraCarouselModels[9],
   {
     id: 'l3-img-7',
     image: 'https://i.imgur.com/KWdI0NJ.png',
@@ -259,6 +431,7 @@ const line3Models: ModelItem[] = [
     image: 'https://i.imgur.com/agiTngK.png',
     title: 'Modelo Exclusivo Limitado STL',
   },
+  newModels[4], // Guerreiro 3D STL
   {
     id: 'l3-img-10',
     image: 'https://i.imgur.com/cT3ZstC.png',
@@ -274,6 +447,7 @@ const line3Models: ModelItem[] = [
     image: 'https://i.imgur.com/quzXTcN.png',
     title: 'Personagem Anime STL',
   },
+  newModels[2], // Action Figure STL
   {
     id: 'l3-img-13',
     image: 'https://i.imgur.com/BrFGpUf.png',
@@ -284,6 +458,7 @@ const line3Models: ModelItem[] = [
     image: 'https://i.imgur.com/ys8ZIIc.png',
     title: 'Guerreiro Épico STL',
   },
+  newModels[3], // Miniatura STL
   {
     id: 'l3-img-15',
     image: 'https://i.imgur.com/tT3WbfJ.png',
@@ -294,7 +469,7 @@ const line3Models: ModelItem[] = [
     image: 'https://i.imgur.com/OwSvkry.png',
     title: 'Colecionável Especial 3D STL',
   },
-];
+].map(normalizeModelItem);
 
 const brands = [
   'CREALITY',
@@ -322,7 +497,6 @@ const bonuses: BonusItem[] = [
     title: 'Pack de Veículos 3D Profissionais',
     priceOriginal: 'R$ 39,00',
     image: bonus1Image,
-    imageClassName: 'h-[65px] sm:h-[100px] md:h-[140px] w-auto max-w-[90%] object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none',
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <path
@@ -343,7 +517,6 @@ const bonuses: BonusItem[] = [
     title: 'Coleção Heróis da Marvel',
     priceOriginal: 'R$ 49,00',
     image: bonus2Image,
-    imageClassName: 'h-[92px] sm:h-[150px] md:h-[205px] scale-115 sm:scale-120 md:scale-125 w-auto max-w-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.95)] group-hover:scale-135 transition-transform duration-300 select-none',
     icon: (
       <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.9" />
@@ -460,6 +633,37 @@ const bonuses: BonusItem[] = [
       </svg>
     ),
   },
+  {
+    id: 10,
+    title: 'Coleção Lego 3D',
+    priceOriginal: 'R$ 39,00',
+    image: bonus10Image,
+    icon: (
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+        <rect x="12" y="24" width="40" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="2.5" />
+        <rect x="18" y="16" width="10" height="8" rx="2" fill="currentColor" opacity="0.9" />
+        <rect x="36" y="16" width="10" height="8" rx="2" fill="currentColor" opacity="0.9" />
+        <circle cx="23" cy="38" r="4.5" fill="currentColor" opacity="0.4" />
+        <circle cx="41" cy="38" r="4.5" fill="currentColor" opacity="0.4" />
+      </svg>
+    ),
+  },
+  {
+    id: 11,
+    title: 'Coleção Minecraft 3D',
+    priceOriginal: 'R$ 47,00',
+    image: bonus11Image,
+    icon: (
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+        <rect x="14" y="14" width="36" height="36" rx="3" fill="none" stroke="currentColor" strokeWidth="3" />
+        <rect x="22" y="24" width="6" height="6" fill="currentColor" opacity="0.9" />
+        <rect x="36" y="24" width="6" height="6" fill="currentColor" opacity="0.9" />
+        <rect x="28" y="30" width="8" height="10" fill="currentColor" opacity="0.9" />
+        <rect x="24" y="40" width="4" height="6" fill="currentColor" opacity="0.9" />
+        <rect x="36" y="40" width="4" height="6" fill="currentColor" opacity="0.9" />
+      </svg>
+    ),
+  },
 ];
 
 const faqs = [
@@ -491,22 +695,22 @@ const depoimentosList: DepoimentoItem[] = [
   {
     id: 1,
     image: depoimento1,
-    alt: 'Depoimento 1 - Universo 3D',
+    alt: 'Depoimento da aluna Mariana - Universo 3D',
   },
   {
     id: 2,
     image: depoimento2,
-    alt: 'Depoimento 2 - Universo 3D',
+    alt: 'Depoimento do aluno Lucas - Universo 3D',
   },
   {
     id: 3,
     image: depoimento3,
-    alt: 'Depoimento 3 - Universo 3D',
+    alt: 'Depoimento do aluno Gabriel - Universo 3D',
   },
   {
     id: 4,
     image: depoimento4,
-    alt: 'Depoimento 4 - Universo 3D',
+    alt: 'Depoimento do aluno Rodrigo - Universo 3D',
   },
 ];
 
@@ -674,7 +878,7 @@ export default function App() {
               </a>
               <p className="mt-2.5 text-xs text-yellow-300 font-bold uppercase tracking-wider flex items-center gap-1.5 opacity-90 text-center">
                 <span>⚡</span>
-                <span>Por Apenas R$ 42,90 — Acesso Vitalício + 9 Bônus</span>
+                <span>Por Apenas R$ 42,90 — Acesso Vitalício + 11 Bônus</span>
               </p>
             </div>
           </div>
@@ -708,7 +912,7 @@ export default function App() {
       </section>
 
       {/* 7. Carrossel de Modelos */}
-      <section id="modelos-carrossel" className="pt-0 pb-16 relative content-auto">
+      <section id="modelos-carrossel" className="pt-0 pb-16 relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
             <h2 className="font-display font-black text-4xl md:text-5xl tracking-tight mb-4">
@@ -739,6 +943,7 @@ export default function App() {
                     {item.image ? (
                       <CleanImage
                         src={item.image}
+                        fallbackSrc={item.fallbackImage}
                         alt={item.title}
                         priority={false}
                         loading="lazy"
@@ -767,6 +972,7 @@ export default function App() {
                     {item.image ? (
                       <CleanImage
                         src={item.image}
+                        fallbackSrc={item.fallbackImage}
                         alt={item.title}
                         loading="lazy"
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
@@ -802,6 +1008,7 @@ export default function App() {
                     {item.image ? (
                       <CleanImage
                         src={item.image}
+                        fallbackSrc={item.fallbackImage}
                         alt={item.title}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
@@ -828,6 +1035,7 @@ export default function App() {
                     {item.image ? (
                       <CleanImage
                         src={item.image}
+                        fallbackSrc={item.fallbackImage}
                         alt={item.title}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
@@ -862,6 +1070,7 @@ export default function App() {
                     {item.image ? (
                       <CleanImage
                         src={item.image}
+                        fallbackSrc={item.fallbackImage}
                         alt={item.title}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
@@ -888,6 +1097,7 @@ export default function App() {
                     {item.image ? (
                       <CleanImage
                         src={item.image}
+                        fallbackSrc={item.fallbackImage}
                         alt={item.title}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
@@ -905,12 +1115,18 @@ export default function App() {
       </section>
 
       {/* 8. Mockup Notebook */}
-      <section id="mockup-notebook" className="py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10 content-auto">
+      <section id="mockup-notebook" className="py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10">
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-12 md:mb-16">
+          <div className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFC700]/10 border border-[#FFC700]/30 text-[#FFC700] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(255,199,0,0.15)]">
+              <Sparkles className="w-3.5 h-3.5 text-[#FFC700]" /> Plataforma Exclusiva e Intuitiva
+            </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight">
               Conheça o <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.6)]">catálogo</span> por dentro
             </h2>
+            <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3.5 font-normal leading-relaxed">
+              Veja exatamente a experiência da <strong className="text-white font-semibold">Área de Membros VIP</strong> que você vai receber: um ambiente moderno, rápido e 100% organizado para você encontrar e baixar qualquer arquivo em segundos.
+            </p>
           </div>
           <div className="max-w-4xl md:max-w-5xl mx-auto relative px-2 sm:px-4 md:px-6">
             <div className="absolute -inset-4 sm:-inset-8 bg-gradient-to-r from-[#FFC700]/30 via-[#F59E0B]/40 to-[#FFEF5C]/30 rounded-[50px] blur-2xl md:blur-3xl opacity-90 pointer-events-none" />
@@ -932,7 +1148,7 @@ export default function App() {
                   <video
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
-                    src="https://i.imgur.com/GHHhHgT.mp4"
+                    src="https://i.imgur.com/XMHWIse.mp4"
                     poster={notebookPoster}
                     controls={isNotebookVideoActive}
                     playsInline
@@ -988,13 +1204,77 @@ export default function App() {
               </div>
               <div className="w-[85%] h-4 bg-gradient-to-r from-transparent via-[#FFC700]/30 to-transparent blur-xl mx-auto -mt-1.5 pointer-events-none" />
               <div className="w-[75%] h-3 bg-gradient-to-r from-transparent via-black/90 to-transparent blur-md mx-auto -mt-2.5 pointer-events-none" />
+
+              <div className="mt-4 text-center">
+                <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-400">
+                  <Play className="w-3.5 h-3.5 text-[#FFC700]" /> Clique no vídeo acima para assistir ao tour completo pela plataforma
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card Vertical em Destaque com Modelo 3D Girando */}
+          <div className="mt-14 sm:mt-18 md:mt-24 flex flex-col items-center justify-center relative z-10 px-4 text-center">
+            {/* Copy em Destaque */}
+            <div className="max-w-xl mx-auto mb-6 sm:mb-8">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFC700]/10 border border-[#FFC700]/30 text-[#FFC700] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2.5 shadow-[0_0_15px_rgba(255,199,0,0.15)]">
+                <span>🎮</span> Coleção Muito Procurada
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white leading-tight">
+                Você vai ter também <span className="grad-text drop-shadow-[0_0_20px_rgba(255,199,0,0.5)]">Minecraft 3D</span>
+              </h3>
+              <p className="text-zinc-400 text-xs sm:text-sm md:text-base mt-2 max-w-md mx-auto">
+                Personagens, espadas e blocos icônicos em arquivos STL de alta resolução, prontos para imprimir e vender!
+              </p>
+            </div>
+
+            <div className="relative group w-[260px] xs:w-[290px] sm:w-[330px] md:w-[360px]">
+              {/* Brilho Dourado de Fundo */}
+              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-b from-[#FFC700]/25 via-transparent to-[#FFC700]/15 blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity" />
+
+              {/* Card Vertical (Mais Grandinho Retangular de Cima para Baixo) */}
+              <div className="relative aspect-[3/4.2] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col items-center justify-between overflow-hidden border border-[#FFC700]/35 border-t-2 border-t-[#FFC700] bg-gradient-to-b from-[#18181D]/90 via-[#0F0F13]/95 to-[#08080A] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(255,199,0,0.18)]">
+                {/* Iluminação de fundo atrás do modelo */}
+                <div className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full bg-[#FFC700]/10 blur-2xl pointer-events-none" />
+
+                {/* Badge Superior */}
+                <div className="relative z-10 w-full flex items-center justify-center">
+                  <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#FFC700] px-3 py-1 rounded-full bg-black/60 border border-[#FFC700]/30 shadow-inner">
+                    Arquivos STL Inclusos
+                  </span>
+                </div>
+
+                {/* Imagem Girando Devagar para Médio */}
+                <div className="relative z-10 w-full flex-1 flex items-center justify-center my-2">
+                  <img
+                    src={rotatingModelImg}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://i.imgur.com/OW0TvSS.png';
+                    }}
+                    alt="Coleção Minecraft 3D STL"
+                    width={235}
+                    height={231}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.95)] animate-spin-slow select-none"
+                  />
+                </div>
+
+                {/* Rodapé Interno */}
+                <div className="relative z-10 w-full text-center">
+                  <span className="text-zinc-400 font-display font-bold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFC700] animate-pulse" />
+                    Giro 360° do Modelo
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* 10. Validação de Mercado */}
-      <section id="validacao-mercado" className="pt-4 pb-16 relative bg-black content-auto">
+      <section id="validacao-mercado" className="pt-4 pb-16 relative bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <h2 className="font-display font-black text-3xl md:text-4xl tracking-tight mb-4">
@@ -1005,31 +1285,31 @@ export default function App() {
             </p>
           </div>
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-6">
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_50px_rgba(245,158,11,0.35)] relative group w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step1Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (1)"
-                width={768}
-                height={480}
-                className="w-full h-auto object-contain rounded-2xl select-none group-hover:scale-[1.01] transition-transform duration-300"
+                width={1774}
+                height={887}
+                className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_50px_rgba(245,158,11,0.35)] relative group w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step2Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (2)"
-                width={768}
-                height={480}
-                className="w-full h-auto object-contain rounded-2xl select-none group-hover:scale-[1.01] transition-transform duration-300"
+                width={1774}
+                height={887}
+                className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_50px_rgba(245,158,11,0.35)] relative group w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step3Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (3)"
-                width={768}
-                height={480}
-                className="w-full h-auto object-contain rounded-2xl select-none group-hover:scale-[1.01] transition-transform duration-300"
+                width={1774}
+                height={887}
+                className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
               />
             </div>
           </div>
@@ -1037,7 +1317,7 @@ export default function App() {
       </section>
 
       {/* 11. Matemática Lucrativa */}
-      <section id="matematica-lucrativa" className="pt-8 pb-16 relative overflow-hidden content-auto">
+      <section id="matematica-lucrativa" className="pt-8 pb-16 relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl">
           <div className="text-center mb-12">
@@ -1127,8 +1407,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* 12. 9 Bônus Exclusivos */}
-      <section id="bonus" className="bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24 content-auto">
+      {/* 12. 11 Bônus Exclusivos */}
+      <section id="bonus" className="bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#FFC700]/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
           <p className="text-lg md:text-2xl font-bold uppercase tracking-widest mb-2 opacity-90">
@@ -1141,25 +1421,25 @@ export default function App() {
             Você também vai receber...
           </p>
           <div className="inline-block px-10 py-5 bg-[#FFC700] text-black font-black font-display text-2xl md:text-4xl uppercase tracking-tight mb-16 shadow-[0_0_40px_rgba(255,199,0,0.25)]">
-            9 Bônus Exclusivos
+            11 Bônus Exclusivos
           </div>
 
           <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-6xl mx-auto text-left">
-            {bonuses.map((bonus) => (
+            {bonuses.slice(0, 9).map((bonus) => (
               <div
                 key={`bonus-${bonus.id}`}
-                className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3.5 md:p-5 pb-3 sm:pb-4.5 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-[1/1.18]"
+                className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3.5 md:p-5 pb-2 xs:pb-2.5 sm:pb-4 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-[1/1.45] xs:aspect-[1/1.4] sm:aspect-[1/1.3] md:aspect-[1/1.22] min-h-[180px] xs:min-h-[200px] sm:min-h-[235px] md:min-h-[290px] w-full"
               >
-                <div className="w-full flex flex-col items-center">
-                  <span className="grad-text font-black font-display text-[10px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
+                <div className="w-full flex flex-col items-center shrink-0 mb-0.5 sm:mb-1">
+                  <span className="grad-text font-black font-display text-[9.5px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
                     BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
                   </span>
-                  <h4 className="text-[9px] xs:text-[11px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] sm:min-h-[28px] md:min-h-[40px] flex items-center justify-center">
+                  <h4 className="text-[9px] xs:text-[10.5px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] xs:min-h-[25px] sm:min-h-[28px] md:min-h-[40px] flex items-center justify-center">
                     {bonus.title}
                   </h4>
                 </div>
 
-                <div className="w-full flex-1 min-h-0 flex items-center justify-center relative my-0.5 sm:my-1.5 p-0.5 sm:p-1">
+                <div className="w-full flex-1 min-h-[64px] xs:min-h-[76px] sm:min-h-[120px] md:min-h-[155px] flex items-center justify-center relative my-1 sm:my-2 px-1">
                   {bonus.image ? (
                     <img
                       src={bonus.image}
@@ -1168,10 +1448,10 @@ export default function App() {
                       height={300}
                       loading="lazy"
                       decoding="async"
-                      className="max-h-full max-w-full w-auto h-auto object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.95)] group-hover:scale-105 transition-transform duration-300 select-none"
+                      className="max-h-[62px] xs:max-h-[72px] sm:max-h-[125px] md:max-h-[160px] max-w-[92%] sm:max-w-[96%] w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
                     />
                   ) : (
-                    <div className="w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3">
+                    <div className="w-11 h-11 xs:w-13 xs:h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3">
                       <div className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
                         {bonus.icon}
                       </div>
@@ -1179,7 +1459,7 @@ export default function App() {
                   )}
                 </div>
 
-                <div className="w-full flex items-center justify-center mt-auto pt-1 sm:pt-1.5 shrink-0">
+                <div className="w-full flex items-center justify-center mt-auto pt-0.5 sm:pt-1.5 shrink-0">
                   <span
                     id={`bonus-gratis-${bonus.id}`}
                     className="text-[#FFC700] font-display font-black text-xs xs:text-sm sm:text-lg md:text-2xl lg:text-3xl uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_12px_rgba(255,199,0,0.7)]"
@@ -1189,12 +1469,63 @@ export default function App() {
                 </div>
               </div>
             ))}
+            <div className="col-span-3 flex justify-center gap-2 sm:gap-4 md:gap-6">
+              {bonuses.slice(9).map((bonus) => (
+                <div
+                  key={`bonus-wrap-${bonus.id}`}
+                  className="w-[calc((100%-1rem)/3)] sm:w-[calc((100%-2rem)/3)] md:w-[calc((100%-3rem)/3)] flex"
+                >
+                  <div
+                    key={`bonus-${bonus.id}`}
+                    className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3.5 md:p-5 pb-2 xs:pb-2.5 sm:pb-4 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-[1/1.45] xs:aspect-[1/1.4] sm:aspect-[1/1.3] md:aspect-[1/1.22] min-h-[180px] xs:min-h-[200px] sm:min-h-[235px] md:min-h-[290px] w-full"
+                  >
+                    <div className="w-full flex flex-col items-center shrink-0 mb-0.5 sm:mb-1">
+                      <span className="grad-text font-black font-display text-[9.5px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
+                        BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
+                      </span>
+                      <h4 className="text-[9px] xs:text-[10.5px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] xs:min-h-[25px] sm:min-h-[28px] md:min-h-[40px] flex items-center justify-center">
+                        {bonus.title}
+                      </h4>
+                    </div>
+
+                    <div className="w-full flex-1 min-h-[64px] xs:min-h-[76px] sm:min-h-[120px] md:min-h-[155px] flex items-center justify-center relative my-1 sm:my-2 px-1">
+                      {bonus.image ? (
+                        <img
+                          src={bonus.image}
+                          alt={bonus.title}
+                          width={300}
+                          height={300}
+                          loading="lazy"
+                          decoding="async"
+                          className="max-h-[62px] xs:max-h-[72px] sm:max-h-[125px] md:max-h-[160px] max-w-[92%] sm:max-w-[96%] w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
+                        />
+                      ) : (
+                        <div className="w-11 h-11 xs:w-13 xs:h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3">
+                          <div className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+                            {bonus.icon}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="w-full flex items-center justify-center mt-auto pt-0.5 sm:pt-1.5 shrink-0">
+                      <span
+                        id={`bonus-gratis-${bonus.id}`}
+                        className="text-[#FFC700] font-display font-black text-xs xs:text-sm sm:text-lg md:text-2xl lg:text-3xl uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_12px_rgba(255,199,0,0.7)]"
+                      >
+                        GRÁTIS
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Depoimento Real em Layout de Celular */}
-      <section id="depoimento" className="bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden content-auto">
+      <section id="depoimento" className="bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#FFC700]/5 rounded-full blur-[140px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
@@ -1269,11 +1600,12 @@ export default function App() {
                       alt={dep.alt}
                       width={400}
                       height={710}
-                      className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-200 ease-in-out ${
+                      className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-300 ease-in-out ${
                         depoimentoIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                       }`}
-                      loading="lazy"
+                      loading="eager"
                       decoding="async"
+                      fetchPriority={depoimentoIndex === idx ? 'high' : 'auto'}
                     />
                   ))}
                 </div>
@@ -1322,7 +1654,7 @@ export default function App() {
       </section>
 
       {/* 13-14. Seção de Oferta & Preços */}
-      <section id="oferta" className="bg-zinc-950 relative border-b border-white/5 py-20 md:py-24 content-auto">
+      <section id="oferta" className="bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center mb-10 md:mb-12 w-full flex flex-col items-center justify-center relative">
@@ -1377,7 +1709,7 @@ export default function App() {
                 </li>
                 <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
                   <span className="text-base font-bold leading-none">✕</span>
-                  <span>Sem os 9 Bônus Inclusos</span>
+                  <span>Sem os 11 Bônus Inclusos</span>
                 </li>
                 <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
                   <span className="text-base font-bold leading-none">✕</span>
@@ -1428,7 +1760,7 @@ export default function App() {
                   />
                 </div>
                 <div className="text-center w-full mb-4">
-                  <p className="text-base sm:text-lg text-red-400 font-black mb-1 italic">
+                  <p className="text-base sm:text-lg text-yellow-400 font-black mb-1 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
                   <p className="text-[#FFEF5C] font-bold text-sm sm:text-base mb-1 leading-none uppercase">Por Apenas</p>
@@ -1461,11 +1793,11 @@ export default function App() {
                     <li className="w-full h-px bg-white/10 my-2" />
                     <li className="text-[11px] uppercase tracking-wider text-yellow-400 font-bold flex items-center gap-1.5 pt-0.5">
                       <span>🎁</span>
-                      <span>TODOS OS 9 BÔNUS EXCLUSIVOS INCLUSOS:</span>
+                      <span>TODOS OS 11 BÔNUS EXCLUSIVOS INCLUSOS:</span>
                     </li>
                     {bonuses.map((b) => (
                       <li key={`offer-bonus-${b.id}`} className="flex items-start gap-1.5 text-xs">
-                        <span className="text-yellow-400 font-bold shrink-0">B0{b.id}:</span>
+                        <span className="text-yellow-400 font-bold shrink-0">B{b.id < 10 ? `0${b.id}` : b.id}:</span>
                         <span className="text-[#FFEF5C] leading-snug font-medium">{b.title}</span>
                       </li>
                     ))}
@@ -1473,7 +1805,7 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
+                    href="https://www.globalcheckout.co/4ef02366-592e-4bf8-bce4-9126c7520cd8"
                     className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-transform hover:scale-105 shadow-[0_0_25px_rgba(255,199,0,0.4)] cursor-pointer"
                   >
                     GARANTIR ACESSO VIP (R$ 42,90)
@@ -1486,7 +1818,7 @@ export default function App() {
       </section>
 
       {/* 15. Garantia & FAQ */}
-      <section id="garantia-faq" className="py-16 relative content-auto">
+      <section id="garantia-faq" className="py-16 relative">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="glass-card border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col gap-12 bg-black/50">
             {/* Guarantee Box */}
@@ -1631,7 +1963,7 @@ export default function App() {
                     O PACOTE MAIS COMPLETO E VANTAJOSO
                   </span>
                   <span className="block text-[10px] sm:text-[11px] uppercase tracking-tight">
-                    + 500 MODELOS FUNKOS STL + TODOS OS 9 BÔNUS
+                    + 500 MODELOS FUNKOS STL + TODOS OS 11 BÔNUS
                   </span>
                 </p>
               </div>
@@ -1651,7 +1983,7 @@ export default function App() {
                   />
                 </div>
                 <div className="text-center w-full mb-2">
-                  <p className="text-[11px] sm:text-xs text-red-400 font-black mb-0.5 italic">
+                  <p className="text-[11px] sm:text-xs text-yellow-400 font-black mb-0.5 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
                   <p className="text-[#FFEF5C] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
@@ -1677,7 +2009,7 @@ export default function App() {
                     </li>
                     <li className="flex items-center gap-1.5">
                       <span className="text-[#FFC700] text-xs font-bold leading-none">✓</span>
-                      <strong>Licença Comercial Inclusa</strong>
+                      <strong className="text-yellow-300">Licença Comercial Inclusa</strong>
                     </li>
                     <li className="flex items-center gap-1.5">
                       <span className="text-[#FFC700] text-xs font-bold leading-none">✓</span>
@@ -1686,11 +2018,11 @@ export default function App() {
                     <li className="w-full h-px bg-white/10 my-0.5" />
                     <li className="text-[9px] uppercase tracking-wider text-yellow-400 font-bold flex items-center gap-1">
                       <span>🎁</span>
-                      <span>TODOS OS 9 BÔNUS INCLUSOS:</span>
+                      <span>TODOS OS 11 BÔNUS INCLUSOS:</span>
                     </li>
                     {bonuses.map((b) => (
                       <li key={`upsell-bonus-${b.id}`} className="flex items-center gap-1.5">
-                        <span className="text-yellow-400 font-bold text-[10px] shrink-0">B0{b.id}:</span>
+                        <span className="text-yellow-400 font-bold text-[10px] shrink-0">B{b.id < 10 ? `0${b.id}` : b.id}:</span>
                         <span className="text-[#FFEF5C] leading-tight text-[10px] sm:text-[11px]">{b.title}</span>
                       </li>
                     ))}
