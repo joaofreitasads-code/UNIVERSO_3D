@@ -1805,10 +1805,10 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://www.globalcheckout.co/4ef02366-592e-4bf8-bce4-9126c7520cd8"
-                    className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-transform hover:scale-105 shadow-[0_0_25px_rgba(255,199,0,0.4)] cursor-pointer"
+                    href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
+                    className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
                   >
-                    GARANTIR ACESSO VIP (R$ 42,90)
+                    QUERO A CENTRAL COMPLETA
                   </a>
                 </div>
               </div>
