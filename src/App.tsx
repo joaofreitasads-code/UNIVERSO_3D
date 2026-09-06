@@ -784,14 +784,12 @@ export default function App() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="w-full relative z-20 flex flex-col items-center pt-10 md:pt-16 pb-2 px-4 text-center max-w-4xl mx-auto">
-          <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] tracking-tight leading-[1.2] drop-shadow-2xl">
-            <span className="block">Suas impressões 3D podem</span>
-            <span className="block">
-              <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">vender muito mais</span>
-            </span>
-            <span className="block">quando o modelo certo</span>
-            <span className="block">
-              <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">chega até você.</span>
+          <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] tracking-tight leading-[1.2] drop-shadow-2xl uppercase">
+            <span className="block">Transforme sua impressora 3D em uma</span>
+            <span className="block mt-1">
+              <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">
+                máquina de produtos lucrativos
+              </span>
             </span>
           </h1>
 
@@ -871,15 +869,11 @@ export default function App() {
                     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                   }
                 }}
-                className="group w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#FFC700] via-[#FFD700] to-[#E5B300] hover:from-[#FFE033] hover:to-[#FFC700] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(255,199,0,0.7)] hover:shadow-[0_0_50px_rgba(255,199,0,1)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-yellow-200 cursor-pointer"
+                className="group w-full inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(0,230,118,0.6)] hover:shadow-[0_0_50px_rgba(0,230,118,0.9)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
               >
                 <ShoppingCart className="w-6 h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
-                <span>QUERO O CATÁLOGO COMPLETO</span>
+                <span>QUERO MEU ACESSO AGORA</span>
               </a>
-              <p className="mt-2.5 text-xs text-yellow-300 font-bold uppercase tracking-wider flex items-center gap-1.5 opacity-90 text-center">
-                <span>⚡</span>
-                <span>Por Apenas R$ 42,90 — Acesso Vitalício + 11 Bônus</span>
-              </p>
             </div>
           </div>
 
@@ -1111,6 +1105,24 @@ export default function App() {
               ))}
             </div>
           </div>
+
+          {/* Botão de Compra - Seção Modelos */}
+          <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
+            <a
+              href="#oferta-pro"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById('oferta-pro');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>LIBERAR TODOS OS MODELOS 3D</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -1270,6 +1282,24 @@ export default function App() {
               </div>
             </div>
           </div>
+
+          {/* Botão de Compra - Seção Plataforma */}
+          <div className="mt-10 sm:mt-12 flex justify-center w-full px-4 relative z-20">
+            <a
+              href="#oferta-pro"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById('oferta-pro');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>ACESSAR ÁREA DE MEMBROS VIP</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -1312,6 +1342,24 @@ export default function App() {
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
               />
             </div>
+          </div>
+
+          {/* Botão de Compra - Seção Validação de Mercado */}
+          <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
+            <a
+              href="#oferta-pro"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById('oferta-pro');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>QUERO VENDER ESSAS PEÇAS</span>
+            </a>
           </div>
         </div>
       </section>
@@ -1403,6 +1451,24 @@ export default function App() {
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Botão de Compra - Seção Matemática Lucrativa */}
+          <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
+            <a
+              href="#oferta-pro"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById('oferta-pro');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>QUERO MULTIPLICAR MEUS LUCROS</span>
+            </a>
           </div>
         </div>
       </section>
@@ -1521,6 +1587,24 @@ export default function App() {
               ))}
             </div>
           </div>
+
+          {/* Botão de Compra - Seção Bônus */}
+          <div className="mt-12 sm:mt-14 flex justify-center w-full px-4">
+            <a
+              href="#oferta-pro"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById('oferta-pro');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>GARANTIR ACESSO + 11 BÔNUS GRÁTIS</span>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -1549,9 +1633,9 @@ export default function App() {
               type="button"
               onClick={prevDepoimento}
               aria-label="Ver depoimento anterior"
-              className="group w-9 h-9 xs:w-11 xs:h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
+              className="group w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
             >
-              <ChevronLeft className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:-translate-x-0.5 transition-transform" />
+              <ChevronLeft className="w-4 h-4 xs:w-5 xs:h-5 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:-translate-x-0.5 transition-transform" />
             </button>
 
             {/* Smartphone Mockup Alongado / Vertical com Borda Branca */}
@@ -1573,10 +1657,10 @@ export default function App() {
               {/* Ambient phone back glow */}
               <div className="absolute inset-0 bg-[#FFC700]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none" />
 
-              {/* Realistic Phone Frame: Alongado para cima, com laterais contidas para não cobrir as setas */}
+              {/* Realistic Phone Frame: Ampliado em altura para visualização destacada */}
               <div
                 id="celular-depoimento-frame"
-                className="relative w-[210px] xs:w-[240px] sm:w-[320px] md:w-[390px] lg:w-[430px] max-w-[58vw] xs:max-w-[62vw] sm:max-w-[70vw] rounded-[38px] sm:rounded-[48px] pt-3 pb-3.5 px-2 sm:pt-4 sm:pb-4 sm:px-3 bg-gradient-to-b from-[#333333] via-[#1a1a1a] to-[#0a0a0a] shadow-[0_0_35px_rgba(255,255,255,0.45),0_30px_90px_rgba(0,0,0,0.95)] border-[3px] sm:border-4 border-white ring-2 ring-white/30 flex flex-col"
+                className="relative w-[295px] xs:w-[330px] sm:w-[380px] md:w-[430px] lg:w-[460px] max-w-[80vw] xs:max-w-[82vw] sm:max-w-[84vw] rounded-[36px] sm:rounded-[48px] pt-2.5 pb-3 px-1.5 xs:pt-3 xs:pb-3.5 xs:px-2 sm:pt-4 sm:pb-4 sm:px-3 bg-gradient-to-b from-[#333333] via-[#1a1a1a] to-[#0a0a0a] shadow-[0_0_35px_rgba(255,255,255,0.45),0_30px_90px_rgba(0,0,0,0.95)] border-[3px] sm:border-4 border-white ring-2 ring-white/30 flex flex-col"
               >
                 {/* Phone side buttons (exterior realism) */}
                 <div className="absolute -left-[3.5px] top-20 sm:top-24 w-[3.5px] h-6 sm:h-8 bg-zinc-400 rounded-l-sm" />
@@ -1584,14 +1668,14 @@ export default function App() {
                 <div className="absolute -left-[3.5px] top-44 sm:top-52 w-[3.5px] h-10 sm:h-12 bg-zinc-400 rounded-l-sm" />
                 <div className="absolute -right-[3.5px] top-24 sm:top-28 w-[3.5px] h-14 sm:h-16 bg-zinc-400 rounded-r-sm" />
 
-                {/* Top Bezel: Alto-falante e sensor externo (não cobre a tela nem o nome) */}
+                {/* Top Bezel: Alto-falante e sensor externo */}
                 <div className="flex items-center justify-center gap-2 mb-2 sm:mb-2.5">
                   <div className="w-12 sm:w-16 h-1 sm:h-1.5 bg-zinc-600 rounded-full opacity-80" />
                   <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-zinc-700/90 border border-zinc-600" />
                 </div>
 
-                {/* Inner Screen Bezel - 100% livre de sobreposições, com proporção fixa e transição suave sem piscar */}
-                <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-black border border-white/40 shadow-inner aspect-[941/1672] w-full">
+                {/* Inner Screen Bezel - Altura ampliada para melhor leitura dos depoimentos */}
+                <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-black border border-white/40 shadow-inner aspect-[925/1720] w-full">
                   {depoimentosList.map((dep, idx) => (
                     <img
                       key={dep.id}
@@ -1611,7 +1695,7 @@ export default function App() {
                 </div>
 
                 {/* Bottom Bezel: Barra inferior de navegação na moldura externa */}
-                <div className="mt-2 sm:mt-2.5 flex justify-center">
+                <div className="mt-1.5 sm:mt-2.5 flex justify-center">
                   <div className="w-16 sm:w-24 h-1 bg-white/40 rounded-full" />
                 </div>
               </div>
@@ -1623,9 +1707,9 @@ export default function App() {
               type="button"
               onClick={nextDepoimento}
               aria-label="Ver próximo depoimento"
-              className="group w-9 h-9 xs:w-11 xs:h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
+              className="group w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
             >
-              <ChevronRight className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:translate-x-0.5 transition-transform" />
+              <ChevronRight className="w-4 h-4 xs:w-5 xs:h-5 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
 
@@ -1649,6 +1733,24 @@ export default function App() {
             <span className="text-xs text-zinc-400 font-mono tracking-widest uppercase">
               {depoimentoIndex + 1} de {depoimentosList.length} {depoimentosList.length === 1 ? 'Depoimento' : 'Depoimentos'}
             </span>
+          </div>
+
+          {/* Botão de Compra - Seção Depoimentos */}
+          <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
+            <a
+              href="#oferta-pro"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById('oferta-pro');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>QUERO TER ESSES RESULTADOS</span>
+            </a>
           </div>
         </div>
       </section>
@@ -1723,7 +1825,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={handleBaseClick}
-                className="block w-full text-center py-4 rounded-xl border-2 border-white/20 text-white hover:text-black hover:bg-[#FFC700] hover:border-[#FFC700] text-sm uppercase tracking-wider transition-all mt-auto font-black cursor-pointer shadow-sm"
+                className="block w-full text-center py-4 rounded-xl border-2 border-[#00E676] text-[#00E676] hover:text-black hover:bg-[#00E676] text-sm uppercase tracking-wider transition-all mt-auto font-black cursor-pointer shadow-[0_0_15px_rgba(0,230,118,0.2)]"
               >
                 QUERO O BASE (R$ 16,90)
               </button>
@@ -1871,6 +1973,24 @@ export default function App() {
                 })}
               </div>
             </div>
+          </div>
+
+          {/* Botão de Compra - Seção Garantia & FAQ */}
+          <div className="mt-12 flex justify-center w-full px-4">
+            <a
+              href="#oferta-pro"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.getElementById('oferta-pro');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>EXPERIMENTAR SEM RISCO AGORA</span>
+            </a>
           </div>
         </div>
       </section>
@@ -2030,7 +2150,7 @@ export default function App() {
                 </div>
                 <a
                   href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
-                  className="block w-full bg-[#FFC700] hover:bg-[#E5B300] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-transform hover:scale-[1.02] shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer"
+                  className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
                 >
                   GARANTIR ACESSO (R$ 24,90)
                 </a>
