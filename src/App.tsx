@@ -4,7 +4,7 @@ import heroPoster from './assets/poster-apresentacao.webp';
 import cardBg from './assets/card-bg.webp';
 import bonus1Image from './assets/optimized/bonus-1.webp';
 import depoimentoBruna from './assets/optimized/depoimento-bruna.webp';
-import depoimentoLucas from './assets/depoimento-lucas.webp';
+import depoimentoLucas from './assets/optimized/depoimento-lucas.webp';
 import depoimentoRodrigo from './assets/optimized/depoimento-rodrigo.webp';
 import depoimento4 from './assets/optimized/depoimento-4.webp';
 import step1Img from './assets/optimized/step-1.webp';
@@ -115,7 +115,6 @@ function getNormalizedImage(url: string): string {
     if (normalizedExistingImages[key]) {
       return normalizedExistingImages[key].default;
     }
-    return `/images/carousel-existing/${match[1]}.webp`;
   }
   return url;
 }
@@ -708,7 +707,6 @@ const faqs = [
 interface DepoimentoItem {
   id: number;
   image: string;
-  fallback?: string;
   alt: string;
 }
 
@@ -716,25 +714,21 @@ const depoimentosList: DepoimentoItem[] = [
   {
     id: 1,
     image: depoimentoBruna,
-    fallback: '/images/depoimento-bruna.webp',
     alt: 'Depoimento da aluna Bruna - Fechou encomendas no teste com peças 3D',
   },
   {
     id: 2,
     image: depoimentoLucas,
-    fallback: '/images/depoimento-lucas.webp',
     alt: 'Depoimento do aluno Lucas - Experiência e produção com o acervo 3D',
   },
   {
     id: 3,
     image: depoimentoRodrigo,
-    fallback: '/images/depoimento-rodrigo.webp',
     alt: 'Depoimento do aluno Rodrigo - Resultados e feedback de impressão 3D',
   },
   {
     id: 4,
     image: depoimento4,
-    fallback: '/images/depoimento-4.webp',
     alt: 'Depoimento de aluno - Resultados e satisfação com os modelos 3D',
   },
 ];
@@ -744,12 +738,36 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [depoimentoIndex, setDepoimentoIndex] = useState(0);
   const [isHeroVideoActive, setIsHeroVideoActive] = useState(false);
-  const [isHeroVideoPlaying, setIsHeroVideoPlaying] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [isNotebookVideoActive, setIsNotebookVideoActive] = useState(false);
-  const [isNotebookVideoPlaying, setIsNotebookVideoPlaying] = useState(false);
   const notebookVideoRef = useRef<HTMLVideoElement>(null);
   const touchStartXRef = useRef<number | null>(null);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const carouselTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const pauseCarousel = useCallback(() => {
+    if (carouselTimerRef.current) {
+      clearTimeout(carouselTimerRef.current);
+    }
+    setIsCarouselPaused(true);
+  }, []);
+
+  const resumeCarouselWithDelay = useCallback(() => {
+    if (carouselTimerRef.current) {
+      clearTimeout(carouselTimerRef.current);
+    }
+    carouselTimerRef.current = setTimeout(() => {
+      setIsCarouselPaused(false);
+    }, 2400);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (carouselTimerRef.current) {
+        clearTimeout(carouselTimerRef.current);
+      }
+    };
+  }, []);
 
   const handlePlayHeroVideo = useCallback(() => {
     setIsHeroVideoActive(true);
@@ -759,13 +777,9 @@ export default function App() {
       }
       const playPromise = heroVideoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsHeroVideoPlaying(true);
-          })
-          .catch((err) => {
-            console.warn('Hero video play error:', err);
-          });
+        playPromise.catch((err) => {
+          console.warn('Hero video play error:', err);
+        });
       }
     }
   }, []);
@@ -778,13 +792,9 @@ export default function App() {
       }
       const playPromise = notebookVideoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsNotebookVideoPlaying(true);
-          })
-          .catch((err) => {
-            console.warn('Notebook video play error:', err);
-          });
+        playPromise.catch((err) => {
+          console.warn('Notebook video play error:', err);
+        });
       }
     }
   }, []);
@@ -858,18 +868,16 @@ export default function App() {
                   poster={heroPoster}
                   controls={isHeroVideoActive}
                   playsInline
-                  preload={isHeroVideoActive ? "auto" : "metadata"}
+                  preload="none"
                   width={854}
                   height={480}
-                  onPlaying={() => setIsHeroVideoPlaying(true)}
-                  onPlay={() => setIsHeroVideoPlaying(true)}
                   className="w-full h-full object-cover rounded-2xl"
                 >
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
 
-                {/* Capa com o poster do homem e Botão de Play */}
-                {!isHeroVideoPlaying && (
+                {/* Capa com o poster de apresentação e Botão de Play */}
+                {!isHeroVideoActive && (
                   <div
                     onClick={handlePlayHeroVideo}
                     role="button"
@@ -882,26 +890,20 @@ export default function App() {
                     aria-label="Assistir ao vídeo de apresentação"
                     className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none"
                   >
-                    {/* Imagem do Poster de Alta Nitidez mostrando o homem */}
+                    {/* Imagem do Poster de Alta Nitidez */}
                     <img
                       src={heroPoster}
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        if (target.src !== '/poster-apresentacao.jpg') {
-                          target.src = '/poster-apresentacao.jpg';
-                        }
-                      }}
                       alt="Capa do Vídeo de Apresentação Universo 3D"
                       width={854}
                       height={480}
                       loading="eager"
                       fetchPriority="high"
-                      decoding="sync"
-                      className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover select-none"
                     />
 
                     {/* Película escura translúcida para realismo e contraste */}
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none" />
+                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
 
                     {/* Botão de Play */}
                     <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#39FF14] hover:bg-[#50FF22] flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
@@ -940,10 +942,13 @@ export default function App() {
         <div
           id="brands-marquee"
           className="w-full overflow-hidden relative mb-4"
+          onTouchStart={pauseCarousel}
+          onTouchEnd={resumeCarouselWithDelay}
+          onTouchCancel={resumeCarouselWithDelay}
         >
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className="marquee">
+          <div className={`marquee ${isCarouselPaused ? 'is-paused' : ''}`}>
             <div className="flex items-center gap-16 px-8 shrink-0">
               {brands.map((brand, i) => (
                 <span key={`brand-1-${i}`} className="text-zinc-500 font-display font-bold text-xl tracking-widest hover:text-zinc-300 transition-colors">
@@ -979,10 +984,15 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 1 - Direção Normal */}
-        <div className="w-full overflow-hidden relative mb-4">
+        <div
+          className="w-full overflow-hidden relative mb-4"
+          onTouchStart={pauseCarousel}
+          onTouchEnd={resumeCarouselWithDelay}
+          onTouchCancel={resumeCarouselWithDelay}
+        >
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className="marquee-cards">
+          <div className={`marquee-cards ${isCarouselPaused ? 'is-paused' : ''}`}>
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line1Models.map((item, idx) => (
                 <div
@@ -1044,10 +1054,15 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 2 - Sentido Contrário (Reverse) */}
-        <div className="w-full overflow-hidden relative mb-4">
+        <div
+          className="w-full overflow-hidden relative mb-4"
+          onTouchStart={pauseCarousel}
+          onTouchEnd={resumeCarouselWithDelay}
+          onTouchCancel={resumeCarouselWithDelay}
+        >
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className="marquee-cards-reverse">
+          <div className={`marquee-cards-reverse ${isCarouselPaused ? 'is-paused' : ''}`}>
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line2Models.map((item, idx) => (
                 <div
@@ -1106,10 +1121,15 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 3 - Sentido Normal (Igual à Linha 1) */}
-        <div className="w-full overflow-hidden relative">
+        <div
+          className="w-full overflow-hidden relative"
+          onTouchStart={pauseCarousel}
+          onTouchEnd={resumeCarouselWithDelay}
+          onTouchCancel={resumeCarouselWithDelay}
+        >
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className="marquee-cards">
+          <div className={`marquee-cards ${isCarouselPaused ? 'is-paused' : ''}`}>
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line3Models.map((item, idx) => (
                 <div
@@ -1223,18 +1243,16 @@ export default function App() {
                     poster={notebookPoster}
                     controls={isNotebookVideoActive}
                     playsInline
-                    preload={isNotebookVideoActive ? "auto" : "metadata"}
+                    preload="none"
                     width={854}
                     height={480}
-                    onPlaying={() => setIsNotebookVideoPlaying(true)}
-                    onPlay={() => setIsNotebookVideoPlaying(true)}
                     className="w-full h-full object-cover"
                   >
                     Seu navegador não suporta a reprodução de vídeo.
                   </video>
 
                   {/* Capa com a imagem da Área de Membros aparente e Botão Estilo YouTube */}
-                  {!isNotebookVideoPlaying && (
+                  {!isNotebookVideoActive && (
                     <div
                       onClick={handlePlayNotebookVideo}
                       role="button"
@@ -1250,23 +1268,16 @@ export default function App() {
                       {/* Imagem da Área de Membros visível */}
                       <img
                         src={notebookPoster}
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (target.src !== '/poster-catalogo.jpg') {
-                            target.src = '/poster-catalogo.jpg';
-                          }
-                        }}
                         alt="Área de Membros Universo 3D"
                         width={854}
                         height={480}
-                        loading="eager"
-                        fetchPriority="high"
-                        decoding="sync"
-                        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+                        loading="lazy"
+                        decoding="async"
+                        className="absolute inset-0 w-full h-full object-cover select-none"
                       />
 
                       {/* Leve película escura translúcida para contraste e realismo */}
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none" />
+                      <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
 
                       {/* Botão de Play */}
                       <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#39FF14] hover:bg-[#50FF22] flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
@@ -1745,11 +1756,6 @@ export default function App() {
                       key={dep.id}
                       id={`celular-depoimento-img-${dep.id}`}
                       src={dep.image}
-                      onError={(e) => {
-                        if (dep.fallback && e.currentTarget.src !== dep.fallback) {
-                          e.currentTarget.src = dep.fallback;
-                        }
-                      }}
                       alt={dep.alt}
                       width={400}
                       height={710}
@@ -2034,8 +2040,6 @@ export default function App() {
                   alt="Garantia Incondicional de 14 Dias"
                   width={240}
                   height={240}
-                  loading="lazy"
-                  decoding="async"
                   className="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 object-contain drop-shadow-[0_10px_30px_rgba(57,255,20,0.25)] select-none"
                 />
               </div>

@@ -101,13 +101,26 @@
   touch-action: pan-y;
 }
 
-/* Carrossel contínuo ininterrupto: não para ao clicar, tocar ou passar o mouse */
-.marquee,
-.marquee-cards,
-.marquee-cards-reverse {
-  animation-play-state: running !important;
-  user-select: none;
-  -webkit-user-select: none;
+/* Ao interagir manualmente com o carrossel (hover, clique, foco, toque), o movimento automático pausa naturalmente */
+.marquee:hover,
+.marquee:active,
+.marquee:focus-within,
+.marquee-cards:hover,
+.marquee-cards:active,
+.marquee-cards:focus-within,
+.marquee-cards-reverse:hover,
+.marquee-cards-reverse:active,
+.marquee-cards-reverse:focus-within,
+.marquee.is-paused,
+.marquee-cards.is-paused,
+.marquee-cards-reverse.is-paused,
+.marquee-container:hover .marquee,
+.marquee-container:hover .marquee-cards,
+.marquee-container:hover .marquee-cards-reverse,
+.marquee-container:active .marquee,
+.marquee-container:active .marquee-cards,
+.marquee-container:active .marquee-cards-reverse {
+  animation-play-state: paused !important;
 }
 
 @keyframes livePulse {
