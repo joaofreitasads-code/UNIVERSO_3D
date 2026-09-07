@@ -4,7 +4,7 @@ import heroPoster from './assets/poster-apresentacao.webp';
 import cardBg from './assets/card-bg.webp';
 import bonus1Image from './assets/optimized/bonus-1.webp';
 import depoimentoBruna from './assets/optimized/depoimento-bruna.webp';
-import depoimentoLucas from './assets/optimized/depoimento-lucas.webp';
+import depoimentoLucas from './assets/depoimento-lucas.webp';
 import depoimentoRodrigo from './assets/optimized/depoimento-rodrigo.webp';
 import depoimento4 from './assets/optimized/depoimento-4.webp';
 import step1Img from './assets/optimized/step-1.webp';
