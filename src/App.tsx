@@ -1,48 +1,47 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-// Imagens estáticas locais incluídas em public/images/
-const notebookPoster = '/images/poster-catalogo.webp';
-const heroPoster = '/images/poster-apresentacao.webp';
-const cardBg = '/images/card-bg.webp';
-const bonus1Image = '/images/bonus-1.webp';
-const depoimentoBruna = '/images/depoimento-bruna.webp';
-const depoimentoLucas = '/images/depoimento-lucas.webp';
-const depoimentoRodrigo = '/images/depoimento-rodrigo.webp';
-const depoimento4 = '/images/depoimento-4.webp';
-const step1Img = '/images/step-1.webp';
-const step2Img = '/images/step-2.webp';
-const step3Img = '/images/step-3.webp';
-const bonus2Image = '/images/bonus-2.webp';
-const bonus3Image = '/images/bonus-3.webp';
-const bonus4Image = '/images/bonus-4.webp';
-const bonus5Image = '/images/bonus-5.webp';
-const bonus6Image = '/images/bonus-6.webp';
-const bonus7Image = '/images/bonus-7.webp';
-const bonus8Image = '/images/bonus-8.webp';
-const bonus9Image = '/images/bonus-9.webp';
-const bonus10Image = '/images/bonus-10.webp';
-const bonus11Image = '/images/bonus-11.webp';
-const lucro1Image = '/images/lucro-1.webp';
-const lucro2Image = '/images/lucro-2.webp';
-const lucro3Image = '/images/lucro-3.webp';
-const funkoBonusImage = '/images/funko-bonus.webp';
-const rotatingModelImg = '/images/rotating-model.webp';
-const carousel1 = '/images/carousel-1.webp';
-const carousel2 = '/images/carousel-2.webp';
-const carousel3 = '/images/carousel-3.webp';
-const carousel4 = '/images/carousel-4.webp';
-const carousel5 = '/images/carousel-5.webp';
-const carousel6 = '/images/carousel-6.webp';
-const carouselExtra1 = '/images/carousel-new/carousel-extra-1.webp';
-const carouselExtra2 = '/images/carousel-new/carousel-extra-2.webp';
-const carouselExtra3 = '/images/carousel-new/carousel-extra-3.webp';
-const carouselExtra4 = '/images/carousel-new/carousel-extra-4.webp';
-const carouselExtra5 = '/images/carousel-new/carousel-extra-5.webp';
-const carouselExtra6 = '/images/carousel-new/carousel-extra-6.webp';
-const carouselExtra7 = '/images/carousel-new/carousel-extra-7.webp';
-const carouselExtra8 = '/images/carousel-new/carousel-extra-8.webp';
-const carouselExtra9 = '/images/carousel-new/carousel-extra-9.webp';
-const carouselExtra10 = '/images/carousel-new/carousel-extra-10.webp';
-const seloGarantia = '/images/selo-garantia-14-dias.webp';
+import notebookPoster from './assets/poster-catalogo.webp';
+import heroPoster from './assets/poster-apresentacao.webp';
+import cardBg from './assets/card-bg.webp';
+import bonus1Image from './assets/optimized/bonus-1.webp';
+import depoimentoBruna from './assets/optimized/depoimento-bruna.webp';
+import depoimentoLucas from './assets/optimized/depoimento-lucas.webp';
+import depoimentoRodrigo from './assets/optimized/depoimento-rodrigo.webp';
+import depoimento4 from './assets/optimized/depoimento-4.webp';
+import step1Img from './assets/optimized/step-1.webp';
+import step2Img from './assets/optimized/step-2.webp';
+import step3Img from './assets/optimized/step-3.webp';
+import bonus2Image from './assets/optimized/bonus-2.webp';
+import bonus3Image from './assets/optimized/bonus-3.webp';
+import bonus4Image from './assets/optimized/bonus-4.webp';
+import bonus5Image from './assets/optimized/bonus-5.webp';
+import bonus6Image from './assets/optimized/bonus-6.webp';
+import bonus7Image from './assets/optimized/bonus-7.webp';
+import bonus8Image from './assets/optimized/bonus-8.webp';
+import bonus9Image from './assets/optimized/bonus-9.webp';
+import bonus10Image from './assets/optimized/bonus-10.webp';
+import bonus11Image from './assets/optimized/bonus-11.webp';
+import lucro1Image from './assets/optimized/lucro-1.webp';
+import lucro2Image from './assets/optimized/lucro-2.webp';
+import lucro3Image from './assets/optimized/lucro-3.webp';
+import funkoBonusImage from './assets/optimized/funko-bonus.webp';
+import rotatingModelImg from './assets/optimized/rotating-model.webp';
+import carousel1 from './assets/optimized/carousel-1.webp';
+import carousel2 from './assets/optimized/carousel-2.webp';
+import carousel3 from './assets/optimized/carousel-3.webp';
+import carousel4 from './assets/optimized/carousel-4.webp';
+import carousel5 from './assets/optimized/carousel-5.webp';
+import carousel6 from './assets/optimized/carousel-6.webp';
+import carouselExtra1 from './assets/optimized/carousel-new/carousel-extra-1.webp';
+import carouselExtra2 from './assets/optimized/carousel-new/carousel-extra-2.webp';
+import carouselExtra3 from './assets/optimized/carousel-new/carousel-extra-3.webp';
+import carouselExtra4 from './assets/optimized/carousel-new/carousel-extra-4.webp';
+import carouselExtra5 from './assets/optimized/carousel-new/carousel-extra-5.webp';
+import carouselExtra6 from './assets/optimized/carousel-new/carousel-extra-6.webp';
+import carouselExtra7 from './assets/optimized/carousel-new/carousel-extra-7.webp';
+import carouselExtra8 from './assets/optimized/carousel-new/carousel-extra-8.webp';
+import carouselExtra9 from './assets/optimized/carousel-new/carousel-extra-9.webp';
+import carouselExtra10 from './assets/optimized/carousel-new/carousel-extra-10.webp';
+import seloGarantia from './assets/optimized/selo-garantia-14-dias.webp';
 import { CleanImage } from './components/CleanImage';
 import {
   Play,
@@ -107,9 +106,15 @@ const newModels: ModelItem[] = [
   },
 ];
 
+const normalizedExistingImages = import.meta.glob<{ default: string }>('./assets/optimized/carousel-existing/*.webp', { eager: true });
+
 function getNormalizedImage(url: string): string {
   const match = url.match(/\/([a-zA-Z0-9_-]+)\.png$/);
   if (match) {
+    const key = `./assets/optimized/carousel-existing/${match[1]}.webp`;
+    if (normalizedExistingImages[key]) {
+      return normalizedExistingImages[key].default;
+    }
     return `/images/carousel-existing/${match[1]}.webp`;
   }
   return url;
@@ -703,6 +708,7 @@ const faqs = [
 interface DepoimentoItem {
   id: number;
   image: string;
+  fallback?: string;
   alt: string;
 }
 
@@ -710,21 +716,25 @@ const depoimentosList: DepoimentoItem[] = [
   {
     id: 1,
     image: depoimentoBruna,
+    fallback: '/images/depoimento-bruna.webp',
     alt: 'Depoimento da aluna Bruna - Fechou encomendas no teste com peças 3D',
   },
   {
     id: 2,
     image: depoimentoLucas,
+    fallback: '/images/depoimento-lucas.webp',
     alt: 'Depoimento do aluno Lucas - Experiência e produção com o acervo 3D',
   },
   {
     id: 3,
     image: depoimentoRodrigo,
+    fallback: '/images/depoimento-rodrigo.webp',
     alt: 'Depoimento do aluno Rodrigo - Resultados e feedback de impressão 3D',
   },
   {
     id: 4,
     image: depoimento4,
+    fallback: '/images/depoimento-4.webp',
     alt: 'Depoimento de aluno - Resultados e satisfação com os modelos 3D',
   },
 ];
@@ -734,36 +744,12 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [depoimentoIndex, setDepoimentoIndex] = useState(0);
   const [isHeroVideoActive, setIsHeroVideoActive] = useState(false);
+  const [isHeroVideoPlaying, setIsHeroVideoPlaying] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [isNotebookVideoActive, setIsNotebookVideoActive] = useState(false);
+  const [isNotebookVideoPlaying, setIsNotebookVideoPlaying] = useState(false);
   const notebookVideoRef = useRef<HTMLVideoElement>(null);
   const touchStartXRef = useRef<number | null>(null);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
-  const carouselTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const pauseCarousel = useCallback(() => {
-    if (carouselTimerRef.current) {
-      clearTimeout(carouselTimerRef.current);
-    }
-    setIsCarouselPaused(true);
-  }, []);
-
-  const resumeCarouselWithDelay = useCallback(() => {
-    if (carouselTimerRef.current) {
-      clearTimeout(carouselTimerRef.current);
-    }
-    carouselTimerRef.current = setTimeout(() => {
-      setIsCarouselPaused(false);
-    }, 2400);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (carouselTimerRef.current) {
-        clearTimeout(carouselTimerRef.current);
-      }
-    };
-  }, []);
 
   const handlePlayHeroVideo = useCallback(() => {
     setIsHeroVideoActive(true);
@@ -773,9 +759,13 @@ export default function App() {
       }
       const playPromise = heroVideoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn('Hero video play error:', err);
-        });
+        playPromise
+          .then(() => {
+            setIsHeroVideoPlaying(true);
+          })
+          .catch((err) => {
+            console.warn('Hero video play error:', err);
+          });
       }
     }
   }, []);
@@ -788,9 +778,13 @@ export default function App() {
       }
       const playPromise = notebookVideoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn('Notebook video play error:', err);
-        });
+        playPromise
+          .then(() => {
+            setIsNotebookVideoPlaying(true);
+          })
+          .catch((err) => {
+            console.warn('Notebook video play error:', err);
+          });
       }
     }
   }, []);
@@ -864,16 +858,18 @@ export default function App() {
                   poster={heroPoster}
                   controls={isHeroVideoActive}
                   playsInline
-                  preload="none"
+                  preload={isHeroVideoActive ? "auto" : "metadata"}
                   width={854}
                   height={480}
+                  onPlaying={() => setIsHeroVideoPlaying(true)}
+                  onPlay={() => setIsHeroVideoPlaying(true)}
                   className="w-full h-full object-cover rounded-2xl"
                 >
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
 
-                {/* Capa com o poster de apresentação e Botão de Play */}
-                {!isHeroVideoActive && (
+                {/* Capa com o poster do homem e Botão de Play */}
+                {!isHeroVideoPlaying && (
                   <div
                     onClick={handlePlayHeroVideo}
                     role="button"
@@ -886,20 +882,26 @@ export default function App() {
                     aria-label="Assistir ao vídeo de apresentação"
                     className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none"
                   >
-                    {/* Imagem do Poster de Alta Nitidez */}
+                    {/* Imagem do Poster de Alta Nitidez mostrando o homem */}
                     <img
                       src={heroPoster}
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (target.src !== '/poster-apresentacao.jpg') {
+                          target.src = '/poster-apresentacao.jpg';
+                        }
+                      }}
                       alt="Capa do Vídeo de Apresentação Universo 3D"
                       width={854}
                       height={480}
                       loading="eager"
                       fetchPriority="high"
-                      decoding="async"
-                      className="absolute inset-0 w-full h-full object-cover select-none"
+                      decoding="sync"
+                      className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
                     />
 
                     {/* Película escura translúcida para realismo e contraste */}
-                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none" />
 
                     {/* Botão de Play */}
                     <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#39FF14] hover:bg-[#50FF22] flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
@@ -938,13 +940,10 @@ export default function App() {
         <div
           id="brands-marquee"
           className="w-full overflow-hidden relative mb-4"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarouselWithDelay}
-          onTouchCancel={resumeCarouselWithDelay}
         >
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className={`marquee ${isCarouselPaused ? 'is-paused' : ''}`}>
+          <div className="marquee">
             <div className="flex items-center gap-16 px-8 shrink-0">
               {brands.map((brand, i) => (
                 <span key={`brand-1-${i}`} className="text-zinc-500 font-display font-bold text-xl tracking-widest hover:text-zinc-300 transition-colors">
@@ -980,15 +979,10 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 1 - Direção Normal */}
-        <div
-          className="w-full overflow-hidden relative mb-4"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarouselWithDelay}
-          onTouchCancel={resumeCarouselWithDelay}
-        >
+        <div className="w-full overflow-hidden relative mb-4">
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className={`marquee-cards ${isCarouselPaused ? 'is-paused' : ''}`}>
+          <div className="marquee-cards">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line1Models.map((item, idx) => (
                 <div
@@ -1050,15 +1044,10 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 2 - Sentido Contrário (Reverse) */}
-        <div
-          className="w-full overflow-hidden relative mb-4"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarouselWithDelay}
-          onTouchCancel={resumeCarouselWithDelay}
-        >
+        <div className="w-full overflow-hidden relative mb-4">
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className={`marquee-cards-reverse ${isCarouselPaused ? 'is-paused' : ''}`}>
+          <div className="marquee-cards-reverse">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line2Models.map((item, idx) => (
                 <div
@@ -1117,15 +1106,10 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 3 - Sentido Normal (Igual à Linha 1) */}
-        <div
-          className="w-full overflow-hidden relative"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarouselWithDelay}
-          onTouchCancel={resumeCarouselWithDelay}
-        >
+        <div className="w-full overflow-hidden relative">
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className={`marquee-cards ${isCarouselPaused ? 'is-paused' : ''}`}>
+          <div className="marquee-cards">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line3Models.map((item, idx) => (
                 <div
@@ -1239,16 +1223,18 @@ export default function App() {
                     poster={notebookPoster}
                     controls={isNotebookVideoActive}
                     playsInline
-                    preload="none"
+                    preload={isNotebookVideoActive ? "auto" : "metadata"}
                     width={854}
                     height={480}
+                    onPlaying={() => setIsNotebookVideoPlaying(true)}
+                    onPlay={() => setIsNotebookVideoPlaying(true)}
                     className="w-full h-full object-cover"
                   >
                     Seu navegador não suporta a reprodução de vídeo.
                   </video>
 
                   {/* Capa com a imagem da Área de Membros aparente e Botão Estilo YouTube */}
-                  {!isNotebookVideoActive && (
+                  {!isNotebookVideoPlaying && (
                     <div
                       onClick={handlePlayNotebookVideo}
                       role="button"
@@ -1264,16 +1250,23 @@ export default function App() {
                       {/* Imagem da Área de Membros visível */}
                       <img
                         src={notebookPoster}
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== '/poster-catalogo.jpg') {
+                            target.src = '/poster-catalogo.jpg';
+                          }
+                        }}
                         alt="Área de Membros Universo 3D"
                         width={854}
                         height={480}
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover select-none"
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="sync"
+                        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
                       />
 
                       {/* Leve película escura translúcida para contraste e realismo */}
-                      <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none" />
 
                       {/* Botão de Play */}
                       <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#39FF14] hover:bg-[#50FF22] flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
@@ -1752,6 +1745,11 @@ export default function App() {
                       key={dep.id}
                       id={`celular-depoimento-img-${dep.id}`}
                       src={dep.image}
+                      onError={(e) => {
+                        if (dep.fallback && e.currentTarget.src !== dep.fallback) {
+                          e.currentTarget.src = dep.fallback;
+                        }
+                      }}
                       alt={dep.alt}
                       width={400}
                       height={710}
@@ -2036,6 +2034,8 @@ export default function App() {
                   alt="Garantia Incondicional de 14 Dias"
                   width={240}
                   height={240}
+                  loading="lazy"
+                  decoding="async"
                   className="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 object-contain drop-shadow-[0_10px_30px_rgba(57,255,20,0.25)] select-none"
                 />
               </div>
