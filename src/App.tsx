@@ -1,47 +1,48 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import notebookPoster from './assets/poster-catalogo.webp';
-import heroPoster from './assets/poster-apresentacao.webp';
-import cardBg from './assets/card-bg.webp';
-import bonus1Image from './assets/optimized/bonus-1.webp';
-import depoimentoBruna from './assets/optimized/depoimento-bruna.webp';
-import depoimentoLucas from './assets/optimized/depoimento-lucas.webp';
-import depoimentoRodrigo from './assets/optimized/depoimento-rodrigo.webp';
-import depoimento4 from './assets/optimized/depoimento-4.webp';
-import step1Img from './assets/optimized/step-1.webp';
-import step2Img from './assets/optimized/step-2.webp';
-import step3Img from './assets/optimized/step-3.webp';
-import bonus2Image from './assets/optimized/bonus-2.webp';
-import bonus3Image from './assets/optimized/bonus-3.webp';
-import bonus4Image from './assets/optimized/bonus-4.webp';
-import bonus5Image from './assets/optimized/bonus-5.webp';
-import bonus6Image from './assets/optimized/bonus-6.webp';
-import bonus7Image from './assets/optimized/bonus-7.webp';
-import bonus8Image from './assets/optimized/bonus-8.webp';
-import bonus9Image from './assets/optimized/bonus-9.webp';
-import bonus10Image from './assets/optimized/bonus-10.webp';
-import bonus11Image from './assets/optimized/bonus-11.webp';
-import lucro1Image from './assets/optimized/lucro-1.webp';
-import lucro2Image from './assets/optimized/lucro-2.webp';
-import lucro3Image from './assets/optimized/lucro-3.webp';
-import funkoBonusImage from './assets/optimized/funko-bonus.webp';
-import rotatingModelImg from './assets/optimized/rotating-model.webp';
-import carousel1 from './assets/optimized/carousel-1.webp';
-import carousel2 from './assets/optimized/carousel-2.webp';
-import carousel3 from './assets/optimized/carousel-3.webp';
-import carousel4 from './assets/optimized/carousel-4.webp';
-import carousel5 from './assets/optimized/carousel-5.webp';
-import carousel6 from './assets/optimized/carousel-6.webp';
-import carouselExtra1 from './assets/optimized/carousel-new/carousel-extra-1.webp';
-import carouselExtra2 from './assets/optimized/carousel-new/carousel-extra-2.webp';
-import carouselExtra3 from './assets/optimized/carousel-new/carousel-extra-3.webp';
-import carouselExtra4 from './assets/optimized/carousel-new/carousel-extra-4.webp';
-import carouselExtra5 from './assets/optimized/carousel-new/carousel-extra-5.webp';
-import carouselExtra6 from './assets/optimized/carousel-new/carousel-extra-6.webp';
-import carouselExtra7 from './assets/optimized/carousel-new/carousel-extra-7.webp';
-import carouselExtra8 from './assets/optimized/carousel-new/carousel-extra-8.webp';
-import carouselExtra9 from './assets/optimized/carousel-new/carousel-extra-9.webp';
-import carouselExtra10 from './assets/optimized/carousel-new/carousel-extra-10.webp';
-import seloGarantia from './assets/optimized/selo-garantia-14-dias.webp';
+// Imagens estáticas locais incluídas em public/images/
+const notebookPoster = '/images/poster-catalogo.webp';
+const heroPoster = '/images/poster-apresentacao.webp';
+const cardBg = '/images/card-bg.webp';
+const bonus1Image = '/images/bonus-1.webp';
+const depoimentoBruna = '/images/depoimento-bruna.webp';
+const depoimentoLucas = '/images/depoimento-lucas.webp';
+const depoimentoRodrigo = '/images/depoimento-rodrigo.webp';
+const depoimento4 = '/images/depoimento-4.webp';
+const step1Img = '/images/step-1.webp';
+const step2Img = '/images/step-2.webp';
+const step3Img = '/images/step-3.webp';
+const bonus2Image = '/images/bonus-2.webp';
+const bonus3Image = '/images/bonus-3.webp';
+const bonus4Image = '/images/bonus-4.webp';
+const bonus5Image = '/images/bonus-5.webp';
+const bonus6Image = '/images/bonus-6.webp';
+const bonus7Image = '/images/bonus-7.webp';
+const bonus8Image = '/images/bonus-8.webp';
+const bonus9Image = '/images/bonus-9.webp';
+const bonus10Image = '/images/bonus-10.webp';
+const bonus11Image = '/images/bonus-11.webp';
+const lucro1Image = '/images/lucro-1.webp';
+const lucro2Image = '/images/lucro-2.webp';
+const lucro3Image = '/images/lucro-3.webp';
+const funkoBonusImage = '/images/funko-bonus.webp';
+const rotatingModelImg = '/images/rotating-model.webp';
+const carousel1 = '/images/carousel-1.webp';
+const carousel2 = '/images/carousel-2.webp';
+const carousel3 = '/images/carousel-3.webp';
+const carousel4 = '/images/carousel-4.webp';
+const carousel5 = '/images/carousel-5.webp';
+const carousel6 = '/images/carousel-6.webp';
+const carouselExtra1 = '/images/carousel-new/carousel-extra-1.webp';
+const carouselExtra2 = '/images/carousel-new/carousel-extra-2.webp';
+const carouselExtra3 = '/images/carousel-new/carousel-extra-3.webp';
+const carouselExtra4 = '/images/carousel-new/carousel-extra-4.webp';
+const carouselExtra5 = '/images/carousel-new/carousel-extra-5.webp';
+const carouselExtra6 = '/images/carousel-new/carousel-extra-6.webp';
+const carouselExtra7 = '/images/carousel-new/carousel-extra-7.webp';
+const carouselExtra8 = '/images/carousel-new/carousel-extra-8.webp';
+const carouselExtra9 = '/images/carousel-new/carousel-extra-9.webp';
+const carouselExtra10 = '/images/carousel-new/carousel-extra-10.webp';
+const seloGarantia = '/images/selo-garantia-14-dias.webp';
 import { CleanImage } from './components/CleanImage';
 import {
   Play,
@@ -106,15 +107,10 @@ const newModels: ModelItem[] = [
   },
 ];
 
-const normalizedExistingImages = import.meta.glob<{ default: string }>('./assets/optimized/carousel-existing/*.webp', { eager: true });
-
 function getNormalizedImage(url: string): string {
   const match = url.match(/\/([a-zA-Z0-9_-]+)\.png$/);
   if (match) {
-    const key = `./assets/optimized/carousel-existing/${match[1]}.webp`;
-    if (normalizedExistingImages[key]) {
-      return normalizedExistingImages[key].default;
-    }
+    return `/images/carousel-existing/${match[1]}.webp`;
   }
   return url;
 }
