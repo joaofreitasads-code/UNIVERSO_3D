@@ -2,9 +2,9 @@
 
 @layer base {
   :root {
-    --accent-1: #6EFF38;
-    --accent-2: #39FF14;
-    --accent-3: #50FF22;
+    --accent-1: #FFEF5C;
+    --accent-2: #FFC700;
+    --accent-3: #E5A100;
   }
 
   html {
@@ -26,7 +26,7 @@
 }
 
 .grad-text {
-  background: linear-gradient(90deg, #6EFF38, #39FF14, #50FF22);
+  background: linear-gradient(90deg, #FFEF5C, #FFC700, #F59E0B);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -72,8 +72,11 @@
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  animation: marqueeAnimation 35s linear infinite !important;
+  animation: marqueeAnimation 36s linear infinite !important;
   animation-play-state: running !important;
+  pointer-events: none !important;
+  user-select: none;
+  -webkit-user-select: none;
   touch-action: pan-y;
 }
 
@@ -86,6 +89,9 @@
   -webkit-backface-visibility: hidden;
   animation: marqueeAnimation 48s linear infinite !important;
   animation-play-state: running !important;
+  pointer-events: none !important;
+  user-select: none;
+  -webkit-user-select: none;
   touch-action: pan-y;
 }
 
@@ -98,29 +104,44 @@
   -webkit-backface-visibility: hidden;
   animation: marqueeReverseAnimation 48s linear infinite !important;
   animation-play-state: running !important;
+  pointer-events: none !important;
+  user-select: none;
+  -webkit-user-select: none;
   touch-action: pan-y;
 }
 
-/* Ao interagir manualmente com o carrossel (hover, clique, foco, toque), o movimento automático pausa naturalmente */
+/* O carrossel deve continuar andando continuamente sem pausar por clique, toque, hover ou foco */
+.marquee,
 .marquee:hover,
 .marquee:active,
+.marquee:focus,
 .marquee:focus-within,
+.marquee-cards,
 .marquee-cards:hover,
 .marquee-cards:active,
+.marquee-cards:focus,
 .marquee-cards:focus-within,
+.marquee-cards-reverse,
 .marquee-cards-reverse:hover,
 .marquee-cards-reverse:active,
+.marquee-cards-reverse:focus,
 .marquee-cards-reverse:focus-within,
-.marquee.is-paused,
-.marquee-cards.is-paused,
-.marquee-cards-reverse.is-paused,
-.marquee-container:hover .marquee,
-.marquee-container:hover .marquee-cards,
-.marquee-container:hover .marquee-cards-reverse,
-.marquee-container:active .marquee,
-.marquee-container:active .marquee-cards,
-.marquee-container:active .marquee-cards-reverse {
-  animation-play-state: paused !important;
+.marquee *,
+.marquee *:hover,
+.marquee *:active,
+.marquee *:focus,
+.marquee-cards *,
+.marquee-cards *:hover,
+.marquee-cards *:active,
+.marquee-cards *:focus,
+.marquee-cards-reverse *,
+.marquee-cards-reverse *:hover,
+.marquee-cards-reverse *:active,
+.marquee-cards-reverse *:focus {
+  animation-play-state: running !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
 }
 
 @keyframes livePulse {

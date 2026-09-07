@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import notebookPoster from './assets/poster-catalogo.webp';
 import heroPoster from './assets/poster-apresentacao.webp';
+import seloGarantia from './assets/selo-garantia-14-dias.webp';
 import cardBg from './assets/card-bg.webp';
 import bonus1Image from './assets/optimized/bonus-1.webp';
-import depoimentoBruna from './assets/optimized/depoimento-bruna.webp';
-import depoimentoLucas from './assets/optimized/depoimento-lucas.webp';
-import depoimentoRodrigo from './assets/optimized/depoimento-rodrigo.webp';
+import depoimento1 from './assets/optimized/depoimento-1.webp';
+import depoimento2 from './assets/optimized/depoimento-2.webp';
+import depoimento3 from './assets/optimized/depoimento-3.webp';
 import depoimento4 from './assets/optimized/depoimento-4.webp';
 import step1Img from './assets/optimized/step-1.webp';
 import step2Img from './assets/optimized/step-2.webp';
@@ -41,7 +42,6 @@ import carouselExtra7 from './assets/optimized/carousel-new/carousel-extra-7.web
 import carouselExtra8 from './assets/optimized/carousel-new/carousel-extra-8.webp';
 import carouselExtra9 from './assets/optimized/carousel-new/carousel-extra-9.webp';
 import carouselExtra10 from './assets/optimized/carousel-new/carousel-extra-10.webp';
-import seloGarantia from './assets/optimized/selo-garantia-14-dias.webp';
 import { CleanImage } from './components/CleanImage';
 import {
   Play,
@@ -53,8 +53,8 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  Gift,
   ShoppingCart,
-  Sparkles
 } from 'lucide-react';
 
 interface ModelItem {
@@ -484,7 +484,6 @@ const brands = [
 interface BonusItem {
   id: number;
   title: string;
-  description: string;
   priceOriginal: string;
   image?: string;
   imageClassName?: string;
@@ -495,11 +494,10 @@ const bonuses: BonusItem[] = [
   {
     id: 1,
     title: 'Pack de Veículos 3D Profissionais',
-    description: 'Modelos detalhados para fãs de carros, motos e máquinas.',
     priceOriginal: 'R$ 39,00',
     image: bonus1Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <path
           d="M10 38 L16 28 C18 24 22 22 28 22 L40 22 C46 22 50 25 54 30 L58 35 C60 37 60 40 58 43 L56 45 C55 46 53 46 52 46 L12 46 C10 46 8 44 8 42 Z"
           fill="currentColor"
@@ -516,11 +514,10 @@ const bonuses: BonusItem[] = [
   {
     id: 2,
     title: 'Coleção Heróis da Marvel',
-    description: 'Personagens icônicos com forte impacto visual e colecionável.',
     priceOriginal: 'R$ 49,00',
     image: bonus2Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.9" />
         <circle cx="32" cy="32" r="21" fill="none" stroke="currentColor" strokeWidth="2.5" opacity="0.6" />
         <circle cx="32" cy="32" r="14" fill="currentColor" opacity="0.3" />
@@ -531,11 +528,10 @@ const bonuses: BonusItem[] = [
   {
     id: 3,
     title: 'Pack de Chaveiros Personalizados',
-    description: 'Peças práticas para presentes, lembranças e personalizações.',
     priceOriginal: 'R$ 29,00',
     image: bonus3Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <circle cx="22" cy="22" r="12" fill="none" stroke="currentColor" strokeWidth="3.5" />
         <circle cx="22" cy="22" r="6" fill="currentColor" opacity="0.3" />
         <path d="M31 31 L52 52 M44 44 L49 39 M49 49 L54 44" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
@@ -545,11 +541,10 @@ const bonuses: BonusItem[] = [
   {
     id: 4,
     title: 'Modelos Flexíveis e Articulados',
-    description: 'Impressões divertidas, articuladas e que chamam atenção.',
     priceOriginal: 'R$ 37,00',
     image: bonus4Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <path d="M10 32 C10 20 22 20 22 32 C22 44 34 44 34 32 C34 20 46 20 46 32 C46 44 58 44 58 32" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
         <circle cx="16" cy="32" r="4" fill="currentColor" />
         <circle cx="28" cy="32" r="4" fill="currentColor" />
@@ -561,11 +556,10 @@ const bonuses: BonusItem[] = [
   {
     id: 5,
     title: 'Coleção Clássicos dos Desenhos',
-    description: 'Personagens nostálgicos que despertam identificação imediata.',
     priceOriginal: 'R$ 35,00',
     image: bonus5Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <circle cx="32" cy="36" r="18" fill="currentColor" opacity="0.4" stroke="currentColor" strokeWidth="2.5" />
         <circle cx="18" cy="18" r="10" fill="currentColor" opacity="0.8" />
         <circle cx="46" cy="18" r="10" fill="currentColor" opacity="0.8" />
@@ -578,11 +572,10 @@ const bonuses: BonusItem[] = [
   {
     id: 6,
     title: 'Coleção Máscaras 3D',
-    description: 'Modelos marcantes para decoração, coleção e cosplay.',
     priceOriginal: 'R$ 39,00',
     image: bonus6Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <path d="M14 20 C14 12 50 12 50 20 C52 36 44 52 32 56 C20 52 12 36 14 20 Z" fill="none" stroke="currentColor" strokeWidth="3" />
         <path d="M19 28 Q26 24 30 30 M45 28 Q38 24 34 30" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none" />
         <line x1="32" y1="32" x2="32" y2="42" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
@@ -593,11 +586,10 @@ const bonuses: BonusItem[] = [
   {
     id: 7,
     title: 'Coleção Pokémon 3D',
-    description: 'Criaturas e personagens perfeitos para fãs e colecionadores.',
     priceOriginal: 'R$ 47,00',
     image: bonus7Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" strokeWidth="3.5" />
         <line x1="6" y1="32" x2="24" y2="32" stroke="currentColor" strokeWidth="3.5" />
         <line x1="40" y1="32" x2="58" y2="32" stroke="currentColor" strokeWidth="3.5" />
@@ -610,11 +602,10 @@ const bonuses: BonusItem[] = [
   {
     id: 8,
     title: 'Mascotes de Futebol 3D',
-    description: 'Modelos para quem gosta de futebol e peças temáticas.',
     priceOriginal: 'R$ 39,00',
     image: bonus8Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <path d="M32 6 L52 14 V32 C52 46 32 58 32 58 C32 58 12 46 12 32 V14 Z" fill="none" stroke="currentColor" strokeWidth="2.5" opacity="0.6" />
         <circle cx="32" cy="30" r="15" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2" />
         <polygon points="32,23 37,27 35,33 29,33 27,27" fill="currentColor" opacity="0.9" />
@@ -624,11 +615,10 @@ const bonuses: BonusItem[] = [
   {
     id: 9,
     title: 'Helicópteros 3D',
-    description: 'Modelos diferenciados para ampliar ainda mais seu acervo.',
     priceOriginal: 'R$ 39,00',
     image: bonus9Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <line x1="12" y1="16" x2="52" y2="16" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
         <line x1="32" y1="16" x2="32" y2="24" stroke="currentColor" strokeWidth="3" />
         <path d="M22 24 C14 24 10 30 10 38 C10 44 16 46 26 46 H40 C44 46 48 42 48 36 C48 30 42 24 34 24 Z" fill="currentColor" opacity="0.85" />
@@ -644,12 +634,11 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 10,
-    title: 'Coleção LEGO 3D',
-    description: 'Personagens em estilo blocos com forte apelo visual.',
+    title: 'Coleção Lego 3D',
     priceOriginal: 'R$ 39,00',
     image: bonus10Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <rect x="12" y="24" width="40" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="2.5" />
         <rect x="18" y="16" width="10" height="8" rx="2" fill="currentColor" opacity="0.9" />
         <rect x="36" y="16" width="10" height="8" rx="2" fill="currentColor" opacity="0.9" />
@@ -661,11 +650,10 @@ const bonuses: BonusItem[] = [
   {
     id: 11,
     title: 'Coleção Minecraft 3D',
-    description: 'Modelos inspirados no universo dos games e cultura geek.',
     priceOriginal: 'R$ 47,00',
     image: bonus11Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#39FF14]">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
         <rect x="14" y="14" width="36" height="36" rx="3" fill="none" stroke="currentColor" strokeWidth="3" />
         <rect x="22" y="24" width="6" height="6" fill="currentColor" opacity="0.9" />
         <rect x="36" y="24" width="6" height="6" fill="currentColor" opacity="0.9" />
@@ -687,7 +675,7 @@ const faqs = [
     a: 'Com certeza! Nos planos que acompanham a Licença Comercial, você tem autorização total para imprimir fisicamente os modelos e vender as peças prontas em marketplaces, feiras, lojas ou sob encomenda. O que não é permitido é redistribuir ou revender os arquivos digitais STL.',
   },
   {
-    q: 'Como e quando recebo o acesso ao acervo?',
+    q: 'Como e quando recebo o acesso ao catálogo?',
     a: 'O acesso é imediato. Assim que o pagamento for confirmado (no Pix ou Cartão de Crédito é instantâneo), você recebe no seu e-mail o link de acesso direto à Área de Membros VIP com login e senha para começar a baixar imediatamente.',
   },
   {
@@ -700,36 +688,41 @@ const faqs = [
   },
   {
     q: 'Como funciona a Garantia de 14 Dias?',
-    a: 'Você tem 14 dias inteiros de garantia incondicional. Entre na plataforma, explore as coleções e confira os arquivos. Se por qualquer motivo achar que o acervo não agregou para você, basta solicitar o reembolso que devolvemos 100% do seu dinheiro.',
+    a: 'Você tem 14 dias inteiros de garantia incondicional. Entre na plataforma, explore as coleções e confira os arquivos. Se por qualquer motivo achar que o catálogo não agregou para você, basta solicitar o reembolso que devolvemos 100% do seu dinheiro.',
   },
 ];
 
 interface DepoimentoItem {
   id: number;
   image: string;
+  fallback?: string;
   alt: string;
 }
 
 const depoimentosList: DepoimentoItem[] = [
   {
     id: 1,
-    image: depoimentoBruna,
-    alt: 'Depoimento da aluna Bruna - Fechou encomendas no teste com peças 3D',
+    image: depoimento1,
+    fallback: 'https://i.imgur.com/6m6ZBlW.png',
+    alt: 'Depoimento real de aluno - Universo 3D',
   },
   {
     id: 2,
-    image: depoimentoLucas,
-    alt: 'Depoimento do aluno Lucas - Experiência e produção com o acervo 3D',
+    image: depoimento2,
+    fallback: 'https://i.imgur.com/9oC2Dxw.png',
+    alt: 'Depoimento real de aluno - Universo 3D',
   },
   {
     id: 3,
-    image: depoimentoRodrigo,
-    alt: 'Depoimento do aluno Rodrigo - Resultados e feedback de impressão 3D',
+    image: depoimento3,
+    fallback: 'https://i.imgur.com/u6Ni9cj.png',
+    alt: 'Depoimento real de aluno - Universo 3D',
   },
   {
     id: 4,
     image: depoimento4,
-    alt: 'Depoimento de aluno - Resultados e satisfação com os modelos 3D',
+    fallback: 'https://i.imgur.com/ClBxb0D.png',
+    alt: 'Depoimento real de aluno - Universo 3D',
   },
 ];
 
@@ -742,39 +735,10 @@ export default function App() {
   const [isNotebookVideoActive, setIsNotebookVideoActive] = useState(false);
   const notebookVideoRef = useRef<HTMLVideoElement>(null);
   const touchStartXRef = useRef<number | null>(null);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
-  const carouselTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const pauseCarousel = useCallback(() => {
-    if (carouselTimerRef.current) {
-      clearTimeout(carouselTimerRef.current);
-    }
-    setIsCarouselPaused(true);
-  }, []);
-
-  const resumeCarouselWithDelay = useCallback(() => {
-    if (carouselTimerRef.current) {
-      clearTimeout(carouselTimerRef.current);
-    }
-    carouselTimerRef.current = setTimeout(() => {
-      setIsCarouselPaused(false);
-    }, 2400);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (carouselTimerRef.current) {
-        clearTimeout(carouselTimerRef.current);
-      }
-    };
-  }, []);
 
   const handlePlayHeroVideo = useCallback(() => {
     setIsHeroVideoActive(true);
     if (heroVideoRef.current) {
-      if (!heroVideoRef.current.src || !heroVideoRef.current.src.includes('EAMTTmS')) {
-        heroVideoRef.current.src = 'https://i.imgur.com/EAMTTmS.mp4';
-      }
       const playPromise = heroVideoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
@@ -787,9 +751,6 @@ export default function App() {
   const handlePlayNotebookVideo = useCallback(() => {
     setIsNotebookVideoActive(true);
     if (notebookVideoRef.current) {
-      if (!notebookVideoRef.current.src || !notebookVideoRef.current.src.includes('XMHWIse')) {
-        notebookVideoRef.current.src = 'https://i.imgur.com/XMHWIse.mp4';
-      }
       const playPromise = notebookVideoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
@@ -817,33 +778,20 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white relative antialiased selection:bg-[#39FF14] selection:text-black">
+    <div className="min-h-screen bg-black text-white relative antialiased selection:bg-yellow-400 selection:text-black">
       {/* Background Starfield */}
       <div className="fixed inset-0 z-[-1] pointer-events-none bg-stars opacity-60" />
 
-      {/* 1. Header Alert Bar */}
-      <header id="header-bar" className="w-full bg-gradient-to-r from-[#50FF22] via-[#39FF14] to-[#50FF22] py-2.5 sm:py-3 relative z-50 shadow-md text-black font-black">
-        <div className="container mx-auto px-4 flex flex-col justify-center items-center text-center select-none">
-          <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] leading-none opacity-90">
-            CENTRAL
-          </span>
-          <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl tracking-tight uppercase leading-tight my-0.5 drop-shadow-sm">
-            UNIVERSO 3D™
-          </h2>
-          <span className="text-[10px] sm:text-xs md:text-sm font-black uppercase tracking-wider opacity-90 leading-tight">
-            MODELOS • IDEIAS • LUCRO REAL
-          </span>
-        </div>
-      </header>
 
       {/* 2-5. Hero Section */}
       <section id="hero-section" className="relative pb-16 overflow-hidden">
-        
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
+
         <div className="w-full relative z-20 flex flex-col items-center pt-10 md:pt-16 pb-2 px-4 text-center max-w-4xl mx-auto">
-          <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] tracking-tight leading-[1.2] drop-shadow-2xl uppercase">
+          <h1 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight leading-snug drop-shadow-2xl uppercase max-w-3xl mx-auto">
             <span className="block">Transforme sua impressora 3D em uma</span>
             <span className="block mt-1">
-              <span className="grad-text ">
+              <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">
                 fonte de renda com modelos que as pessoas realmente querem comprar
               </span>
             </span>
@@ -852,31 +800,32 @@ export default function App() {
           {/* Live indicator badge */}
           <div className="w-full flex flex-col items-center mt-6 mb-3">
             <span className="text-sm sm:text-base md:text-lg font-black uppercase tracking-wide flex items-center gap-2">
-              <span className="live-dot inline-block w-3 h-3 rounded-full bg-[#39FF14] " />
+              <span className="live-dot inline-block w-3 h-3 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444]" />
               Veja como funciona na prática
             </span>
           </div>
 
           {/* Video Presentation */}
           <div className="w-full relative z-10 flex flex-col items-center mt-1 mb-8">
-            <div className="relative w-full max-w-xl sm:max-w-2xl md:max-w-3xl px-2 sm:px-4">
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border-2 border-[#39FF14] shadow-2xl bg-black flex items-center justify-center group">
+            <div className="relative w-full max-w-3xl">
+              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#FFC700] via-[#F59E0B] to-[#D97706] opacity-70 blur-xl pointer-events-none" />
+              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border-2 border-[#FFC700] shadow-[0_0_30px_rgba(255,199,0,0.6)] bg-black flex items-center justify-center group">
                 <video
                   ref={heroVideoRef}
                   id="video-apresentacao"
-                  src={isHeroVideoActive ? "https://i.imgur.com/EAMTTmS.mp4" : undefined}
+                  src="https://i.imgur.com/J2wZsui.mp4"
                   poster={heroPoster}
                   controls={isHeroVideoActive}
                   playsInline
                   preload="none"
-                  width={854}
-                  height={480}
+                  width={1920}
+                  height={1080}
                   className="w-full h-full object-cover rounded-2xl"
                 >
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
 
-                {/* Capa com o poster de apresentação e Botão de Play */}
+                {/* Capa com o poster de apresentação e Botão Vermelho Estilo YouTube */}
                 {!isHeroVideoActive && (
                   <div
                     onClick={handlePlayHeroVideo}
@@ -894,20 +843,19 @@ export default function App() {
                     <img
                       src={heroPoster}
                       alt="Capa do Vídeo de Apresentação Universo 3D"
-                      width={854}
-                      height={480}
-                      loading="eager"
+                      width={1920}
+                      height={1080}
                       fetchPriority="high"
                       decoding="async"
                       className="absolute inset-0 w-full h-full object-cover select-none"
                     />
 
-                    {/* Película escura translúcida para realismo e contraste */}
-                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
+                    {/* Película sutil para dar profundidade sem escurecer nem embaçar */}
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors pointer-events-none" />
 
-                    {/* Botão de Play */}
-                    <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#39FF14] hover:bg-[#50FF22] flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                      <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-black fill-black ml-1 drop-shadow" />
+                    {/* Botão Oficial Vermelho Estilo YouTube */}
+                    <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:scale-110 group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                      <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
                     </div>
                   </div>
                 )}
@@ -915,7 +863,7 @@ export default function App() {
             </div>
 
             {/* Botão de Compra Direto para a Oferta de 42,90 */}
-            <div className="mt-6 w-full max-w-sm px-2 flex flex-col items-center">
+            <div className="mt-8 w-full max-w-md px-2 flex flex-col items-center">
               <a
                 href="#oferta-pro"
                 onClick={(e) => {
@@ -925,7 +873,7 @@ export default function App() {
                     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                   }
                 }}
-                className="group w-full inline-flex items-center justify-center gap-3 bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-[#6EFF38] cursor-pointer"
+                className="group w-full inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(0,230,118,0.6)] hover:shadow-[0_0_50px_rgba(0,230,118,0.9)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
               >
                 <ShoppingCart className="w-6 h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
                 <span>QUERO MEU ACESSO AGORA</span>
@@ -934,21 +882,15 @@ export default function App() {
           </div>
 
           <p className="mt-2 mb-8 text-zinc-300 text-base md:text-lg max-w-2xl font-light leading-relaxed">
-            Tenha acesso a um acervo completo de modelos 3D prontos para imprimir, sem perder horas garimpando arquivos na internet e tentando descobrir sozinho o que colocar na sua máquina para ter resultados reais.
+            Tenha acesso a um catálogo completo de modelos 3D prontos para imprimir, sem perder horas garimpando arquivos na internet e tentando descobrir sozinho o que colocar na sua máquina para ter resultados reais.
           </p>
         </div>
 
         {/* 6. Marcas Marquee */}
-        <div
-          id="brands-marquee"
-          className="w-full overflow-hidden relative mb-4"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarouselWithDelay}
-          onTouchCancel={resumeCarouselWithDelay}
-        >
+        <div id="brands-marquee" className="w-full overflow-hidden relative mb-4 pointer-events-none select-none">
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className={`marquee ${isCarouselPaused ? 'is-paused' : ''}`}>
+          <div className="marquee pointer-events-none select-none">
             <div className="flex items-center gap-16 px-8 shrink-0">
               {brands.map((brand, i) => (
                 <span key={`brand-1-${i}`} className="text-zinc-500 font-display font-bold text-xl tracking-widest hover:text-zinc-300 transition-colors">
@@ -971,7 +913,7 @@ export default function App() {
       <section id="modelos-carrossel" className="pt-0 pb-16 relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#39FF14]/10 border border-[#39FF14]/30 text-[#39FF14] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-sm">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFC700]/10 border border-[#FFC700]/30 text-[#FFC700] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(255,199,0,0.15)]">
               Ter uma impressora 3D é só o início. Saber o que imprimir muda tudo.
             </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4 leading-tight">
@@ -984,20 +926,15 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 1 - Direção Normal */}
-        <div
-          className="w-full overflow-hidden relative mb-4"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarouselWithDelay}
-          onTouchCancel={resumeCarouselWithDelay}
-        >
+        <div className="w-full overflow-hidden relative mb-4 pointer-events-none select-none">
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className={`marquee-cards ${isCarouselPaused ? 'is-paused' : ''}`}>
+          <div className="marquee-cards pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line1Models.map((item, idx) => (
                 <div
                   key={`card-l1-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#39FF14]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
@@ -1014,7 +951,7 @@ export default function App() {
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-[#39FF14]'} group-hover:scale-110 transition-transform`}>
+                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
                         {item.icon}
                       </div>
                     )}
@@ -1026,7 +963,7 @@ export default function App() {
               {line1Models.map((item, idx) => (
                 <div
                   key={`card-l1-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#39FF14]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
@@ -1042,7 +979,7 @@ export default function App() {
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-[#39FF14]'} group-hover:scale-110 transition-transform`}>
+                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
                         {item.icon}
                       </div>
                     )}
@@ -1054,20 +991,15 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 2 - Sentido Contrário (Reverse) */}
-        <div
-          className="w-full overflow-hidden relative mb-4"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarouselWithDelay}
-          onTouchCancel={resumeCarouselWithDelay}
-        >
+        <div className="w-full overflow-hidden relative mb-4 pointer-events-none select-none">
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className={`marquee-cards-reverse ${isCarouselPaused ? 'is-paused' : ''}`}>
+          <div className="marquee-cards-reverse pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line2Models.map((item, idx) => (
                 <div
                   key={`card-l2-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#39FF14]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
@@ -1082,7 +1014,7 @@ export default function App() {
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-[#39FF14]'} group-hover:scale-110 transition-transform`}>
+                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
                         {item.icon}
                       </div>
                     )}
@@ -1094,7 +1026,7 @@ export default function App() {
               {line2Models.map((item, idx) => (
                 <div
                   key={`card-l2-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#39FF14]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
@@ -1109,7 +1041,7 @@ export default function App() {
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-[#39FF14]'} group-hover:scale-110 transition-transform`}>
+                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
                         {item.icon}
                       </div>
                     )}
@@ -1121,20 +1053,15 @@ export default function App() {
         </div>
 
         {/* Carrossel Linha 3 - Sentido Normal (Igual à Linha 1) */}
-        <div
-          className="w-full overflow-hidden relative"
-          onTouchStart={pauseCarousel}
-          onTouchEnd={resumeCarouselWithDelay}
-          onTouchCancel={resumeCarouselWithDelay}
-        >
+        <div className="w-full overflow-hidden relative pointer-events-none select-none">
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className={`marquee-cards ${isCarouselPaused ? 'is-paused' : ''}`}>
+          <div className="marquee-cards pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {line3Models.map((item, idx) => (
                 <div
                   key={`card-l3-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#39FF14]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
@@ -1149,7 +1076,7 @@ export default function App() {
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-[#39FF14]'} group-hover:scale-110 transition-transform`}>
+                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
                         {item.icon}
                       </div>
                     )}
@@ -1161,7 +1088,7 @@ export default function App() {
               {line3Models.map((item, idx) => (
                 <div
                   key={`card-l3-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#39FF14]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div
@@ -1176,7 +1103,7 @@ export default function App() {
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-[#39FF14]'} group-hover:scale-110 transition-transform`}>
+                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
                         {item.icon}
                       </div>
                     )}
@@ -1197,7 +1124,7 @@ export default function App() {
                   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
               }}
-              className="group inline-flex items-center justify-center gap-3 bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#6EFF38] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>LIBERAR TODOS OS MODELOS 3D</span>
@@ -1210,25 +1137,23 @@ export default function App() {
       <section id="mockup-notebook" className="py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10">
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#39FF14]/10 border border-[#39FF14]/30 text-[#39FF14] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-[#39FF14]" /> Plataforma Exclusiva e Intuitiva
-            </span>
-            <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight">
-              Conheça o <span className="grad-text ">acervo</span> por dentro
+            <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
+              Conheça o <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.6)]">catálogo</span> por dentro
             </h2>
             <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3.5 font-normal leading-relaxed">
-              Veja exatamente como funciona a <strong className="text-white font-semibold">Área de Membros VIP</strong>: um ambiente 100% organizado por categorias para você encontrar em segundos o que deseja, baixar o arquivo pronto e colocar sua impressora para trabalhar.
+              Você não vai precisar perder tempo procurando pasta por pasta. A <strong className="text-white font-semibold">Área de Membros VIP</strong> é 100% organizada por categorias para você encontrar o modelo desejado em segundos, baixar o arquivo pronto e colocar sua impressora para trabalhar.
             </p>
           </div>
           <div className="max-w-4xl md:max-w-5xl mx-auto relative px-2 sm:px-4 md:px-6">
-                        <div className="relative z-10">
+            <div className="absolute -inset-4 sm:-inset-8 bg-gradient-to-r from-[#FFC700]/30 via-[#F59E0B]/40 to-[#FFEF5C]/30 rounded-[50px] blur-2xl md:blur-3xl opacity-90 pointer-events-none" />
+            <div className="relative z-10">
               {/* Laptop Screen Top */}
-              <div className="relative bg-[#18181C] rounded-t-[20px] sm:rounded-t-[26px] md:rounded-t-[32px] p-2 sm:p-2.5 md:p-3.5 border-t-[2px] border-x-[2px] border-[#383842] shadow-[0_25px_70px_rgba(0,0,0,0.95)]">
+              <div className="relative bg-[#18181C] rounded-t-[20px] sm:rounded-t-[26px] md:rounded-t-[32px] p-2 sm:p-2.5 md:p-3.5 border-t-[2px] border-x-[2px] border-[#383842] shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_40px_rgba(255,199,0,0.3)]">
                 {/* Camera notch */}
                 <div className="flex items-center justify-center relative -mb-1 z-20">
                   <div className="w-10 sm:w-14 h-2 sm:h-2.5 bg-[#0A0A0C] rounded-b-md flex items-center justify-center gap-1.5 shadow-inner">
                     <div className="w-1 h-1 rounded-full bg-[#1A1A22] border border-white/20" />
-                    <div className="w-0.5 h-0.5 rounded-full bg-[#39FF14] opacity-75" />
+                    <div className="w-0.5 h-0.5 rounded-full bg-[#FACC15] opacity-75" />
                   </div>
                 </div>
                 {/* Screen Display area */}
@@ -1239,7 +1164,7 @@ export default function App() {
                   <video
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
-                    src={isNotebookVideoActive ? "https://i.imgur.com/XMHWIse.mp4" : undefined}
+                    src="https://i.imgur.com/XMHWIse.mp4"
                     poster={notebookPoster}
                     controls={isNotebookVideoActive}
                     playsInline
@@ -1279,9 +1204,9 @@ export default function App() {
                       {/* Leve película escura translúcida para contraste e realismo */}
                       <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
 
-                      {/* Botão de Play */}
-                      <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#39FF14] hover:bg-[#50FF22] flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                        <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-black fill-black ml-1 drop-shadow" />
+                      {/* Botão Oficial Vermelho Estilo YouTube */}
+                      <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:scale-110 group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                        <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
                       </div>
                     </div>
                   )}
@@ -1293,11 +1218,12 @@ export default function App() {
               <div className="relative -mt-1 w-[104%] -ml-[2%] h-3.5 sm:h-4.5 md:h-5.5 bg-gradient-to-b from-[#2E2E36] via-[#1A1A20] to-[#0D0D10] rounded-b-[16px] sm:rounded-b-[22px] md:rounded-b-[26px] shadow-[0_30px_70px_rgba(0,0,0,0.95)] border-t border-white/25 flex justify-center items-start">
                 <div className="w-20 sm:w-28 md:w-36 h-1 sm:h-1.5 bg-[#08080A] rounded-b-md border-x border-b border-[#3A3A44]/80 shadow-inner" />
               </div>
-                            <div className="w-[75%] h-3 bg-gradient-to-r from-transparent via-black/90 to-transparent blur-md mx-auto -mt-2.5 pointer-events-none" />
+              <div className="w-[85%] h-4 bg-gradient-to-r from-transparent via-[#FFC700]/30 to-transparent blur-xl mx-auto -mt-1.5 pointer-events-none" />
+              <div className="w-[75%] h-3 bg-gradient-to-r from-transparent via-black/90 to-transparent blur-md mx-auto -mt-2.5 pointer-events-none" />
 
               <div className="mt-4 text-center">
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-400">
-                  <Play className="w-3.5 h-3.5 text-[#39FF14]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
+                  <Play className="w-3.5 h-3.5 text-[#FFC700]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
                 </span>
               </div>
             </div>
@@ -1307,11 +1233,8 @@ export default function App() {
           <div className="mt-14 sm:mt-18 md:mt-24 flex flex-col items-center justify-center relative z-10 px-4 text-center">
             {/* Copy em Destaque */}
             <div className="max-w-xl mx-auto mb-6 sm:mb-8">
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#39FF14]/10 border border-[#39FF14]/30 text-[#39FF14] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2.5 shadow-sm">
-                <span>🎮</span> Coleção em Alta Procura
-              </span>
               <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white leading-tight">
-                Você recebe também a <span className="grad-text ">Coleção Minecraft 3D</span>
+                Você recebe também a <span className="grad-text drop-shadow-[0_0_20px_rgba(255,199,0,0.5)]">Coleção Minecraft 3D</span>
               </h3>
               <p className="text-zinc-400 text-xs sm:text-sm md:text-base mt-2 max-w-md mx-auto leading-relaxed">
                 Peças de forte apelo com fãs e colecionadores: arquivos STL de alta resolução, prontos para fatiar, imprimir e transformar em produtos físicos altamente procurados.
@@ -1320,14 +1243,16 @@ export default function App() {
 
             <div className="relative group w-[260px] xs:w-[290px] sm:w-[330px] md:w-[360px]">
               {/* Brilho Dourado de Fundo */}
-              
+              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-b from-[#FFC700]/25 via-transparent to-[#FFC700]/15 blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity" />
+
               {/* Card Vertical (Mais Grandinho Retangular de Cima para Baixo) */}
-              <div className="relative aspect-[3/4.2] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col items-center justify-between overflow-hidden border border-[#39FF14]/40 border-t-2 border-t-[#39FF14] bg-gradient-to-b from-[#18181D]/90 via-[#0F0F13]/95 to-[#08080A] shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+              <div className="relative aspect-[3/4.2] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col items-center justify-between overflow-hidden border border-[#FFC700]/35 border-t-2 border-t-[#FFC700] bg-gradient-to-b from-[#18181D]/90 via-[#0F0F13]/95 to-[#08080A] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(255,199,0,0.18)]">
                 {/* Iluminação de fundo atrás do modelo */}
-                
+                <div className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full bg-[#FFC700]/10 blur-2xl pointer-events-none" />
+
                 {/* Badge Superior */}
                 <div className="relative z-10 w-full flex items-center justify-center">
-                  <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#39FF14] px-3 py-1 rounded-full bg-black/60 border border-[#39FF14]/40 shadow-inner">
+                  <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#FFC700] px-3 py-1 rounded-full bg-black/60 border border-[#FFC700]/30 shadow-inner">
                     Arquivos STL Inclusos
                   </span>
                 </div>
@@ -1351,7 +1276,7 @@ export default function App() {
                 {/* Rodapé Interno */}
                 <div className="relative z-10 w-full text-center">
                   <span className="text-zinc-400 font-display font-bold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#39FF14] animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFC700] animate-pulse" />
                     Giro 360° do Modelo
                   </span>
                 </div>
@@ -1370,7 +1295,7 @@ export default function App() {
                   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
               }}
-              className="group inline-flex items-center justify-center gap-3 bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#6EFF38] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>ACESSAR ÁREA DE MEMBROS VIP</span>
@@ -1391,7 +1316,7 @@ export default function App() {
             </p>
           </div>
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-6">
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#39FF14]/60 shadow-xl relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step1Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (1)"
@@ -1400,7 +1325,7 @@ export default function App() {
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#39FF14]/60 shadow-xl relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step2Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (2)"
@@ -1409,7 +1334,7 @@ export default function App() {
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#39FF14]/60 shadow-xl relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step3Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (3)"
@@ -1431,7 +1356,7 @@ export default function App() {
                   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
               }}
-              className="group inline-flex items-center justify-center gap-3 bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#6EFF38] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>QUERO VENDER ESSAS PEÇAS</span>
@@ -1442,10 +1367,11 @@ export default function App() {
 
       {/* 11. Matemática Lucrativa */}
       <section id="matematica-lucrativa" className="pt-8 pb-16 relative overflow-hidden">
-                <div className="container mx-auto px-4 relative z-10 max-w-6xl">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10 max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="font-display font-black text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight mt-0">
-              Entenda o <span className="grad-text ">potencial</span> por trás de uma única impressão
+            <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mt-0">
+              Entenda o <span className="grad-text drop-shadow-[0_0_12px_rgba(255,199,0,0.4)]">potencial</span> por trás de uma única impressão
             </h2>
             <p className="text-base md:text-lg mt-4 max-w-3xl mx-auto font-normal text-zinc-300 leading-relaxed">
               Compare a estimativa de consumo de filamento com faixas de valores praticadas no mercado para peças similares:
@@ -1465,7 +1391,7 @@ export default function App() {
                   <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-gray-200 uppercase tracking-wider border border-white/10 w-1/3 text-center align-middle">
                     Consumo est. de filamento
                   </th>
-                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-[#6EFF38] uppercase tracking-wider border border-[#39FF14]/40 bg-[#39FF14]/10 w-1/3 text-center align-middle">
+                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-[#FFEF5C] uppercase tracking-wider border border-[#FFC700]/30 bg-[#FFC700]/5 w-1/3 text-center align-middle">
                     Anúncios encontrados
                   </th>
                 </tr>
@@ -1477,8 +1403,6 @@ export default function App() {
                       <CleanImage
                         src={lucro1Image}
                         alt="Modelo 3D STL - Peça 1"
-                        width={128}
-                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -1486,7 +1410,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
                     R$ 11,14
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#39FF14]/30 text-[#39FF14] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#39FF14]/10 text-center align-middle drop-shadow-md">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#FFC700]/30 text-yellow-400 font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FFC700]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,199,0,0.3)]">
                     R$ 147–165
                   </td>
                 </tr>
@@ -1497,8 +1421,6 @@ export default function App() {
                       <CleanImage
                         src={lucro2Image}
                         alt="Modelo 3D STL - Peça 2"
-                        width={128}
-                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -1506,7 +1428,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
                     R$ 9,74
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#39FF14]/30 text-[#39FF14] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#39FF14]/10 text-center align-middle drop-shadow-md">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#FFC700]/30 text-yellow-400 font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FFC700]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,199,0,0.3)]">
                     R$ 123–147
                   </td>
                 </tr>
@@ -1517,8 +1439,6 @@ export default function App() {
                       <CleanImage
                         src={lucro3Image}
                         alt="Modelo 3D STL - Peça 3"
-                        width={128}
-                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -1526,7 +1446,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
                     R$ 8,37
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#39FF14]/30 text-[#39FF14] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#39FF14]/10 text-center align-middle drop-shadow-md">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#FFC700]/30 text-yellow-400 font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FFC700]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,199,0,0.3)]">
                     R$ 75–107
                   </td>
                 </tr>
@@ -1550,7 +1470,7 @@ export default function App() {
                   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
               }}
-              className="group inline-flex items-center justify-center gap-3 bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#6EFF38] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>QUERO MULTIPLICAR MEUS LUCROS</span>
@@ -1560,18 +1480,19 @@ export default function App() {
       </section>
 
       {/* 12. 11 Bônus Exclusivos */}
-      <section id="bonus" className="bg-black relative border-y border-[#39FF14]/20 overflow-hidden py-16 md:py-24">
-                <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <p className="text-lg md:text-2xl font-bold uppercase tracking-widest mb-2 text-[#39FF14] opacity-95">
+      <section id="bonus" className="bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#FFC700]/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
+          <p className="text-lg md:text-2xl font-bold uppercase tracking-widest mb-2 text-[#FFC700] opacity-95">
             E não para por aí...
           </p>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-display font-black uppercase tracking-tight mb-4 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-            Além do Acervo Principal
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black uppercase tracking-tight mb-4 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            Além do Catálogo Principal
           </h2>
           <p className="text-zinc-300 text-base sm:text-xl md:text-2xl font-light max-w-3xl mx-auto mb-10 leading-relaxed">
             Você ainda recebe <strong className="text-white font-semibold">11 coleções temáticas extras</strong> incluídas na sua oferta para ampliar ainda mais suas opções de impressão.
           </p>
-          <div className="inline-block px-8 py-3.5 sm:px-10 sm:py-4 bg-[#39FF14] text-black font-black font-display text-xl sm:text-2xl md:text-3xl uppercase tracking-tight mb-14 shadow-lg rounded-xl">
+          <div className="inline-block px-8 py-3.5 sm:px-10 sm:py-4 bg-[#FFC700] text-black font-black font-display text-xl sm:text-2xl md:text-3xl uppercase tracking-tight mb-14 shadow-[0_0_40px_rgba(255,199,0,0.25)] rounded-xl">
             11 Coleções Bônus Inclusas
           </div>
 
@@ -1579,13 +1500,13 @@ export default function App() {
             {bonuses.slice(0, 9).map((bonus) => (
               <div
                 key={`bonus-${bonus.id}`}
-                className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3.5 md:p-5 pb-2.5 xs:pb-3 sm:pb-4 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#39FF14]/50 relative group min-h-[200px] xs:min-h-[225px] sm:min-h-[270px] md:min-h-[325px] w-full"
+                className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3.5 md:p-5 pb-2 xs:pb-2.5 sm:pb-4 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-[1/1.45] xs:aspect-[1/1.4] sm:aspect-[1/1.3] md:aspect-[1/1.22] min-h-[180px] xs:min-h-[200px] sm:min-h-[235px] md:min-h-[290px] w-full"
               >
-                <div className="w-full flex flex-col items-center shrink-0 mb-1 sm:mb-2">
+                <div className="w-full flex flex-col items-center shrink-0 mb-0.5 sm:mb-1">
                   <span className="grad-text font-black font-display text-[9.5px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
                     BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
                   </span>
-                  <h4 className="text-[9px] xs:text-[10.5px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] xs:min-h-[25px] sm:min-h-[28px] md:min-h-[38px] flex items-center justify-center">
+                  <h4 className="text-[9px] xs:text-[10.5px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] xs:min-h-[25px] sm:min-h-[28px] md:min-h-[40px] flex items-center justify-center">
                     {bonus.title}
                   </h4>
                 </div>
@@ -1599,10 +1520,10 @@ export default function App() {
                       height={300}
                       loading="lazy"
                       decoding="async"
-                      className="max-h-[64px] xs:max-h-[76px] sm:max-h-[120px] md:max-h-[155px] max-w-[92%] sm:max-w-[96%] w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
+                      className="max-h-[62px] xs:max-h-[72px] sm:max-h-[125px] md:max-h-[160px] max-w-[92%] sm:max-w-[96%] w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
                     />
                   ) : (
-                    <div className="w-11 h-11 xs:w-13 xs:h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-[#39FF14]/10 border border-[#39FF14]/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-sm p-2 sm:p-3">
+                    <div className="w-11 h-11 xs:w-13 xs:h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3">
                       <div className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
                         {bonus.icon}
                       </div>
@@ -1610,10 +1531,13 @@ export default function App() {
                   )}
                 </div>
 
-                <div className="w-full flex items-center justify-center mt-auto pt-1 sm:pt-2 shrink-0">
-                  <p className="text-[8px] xs:text-[9.5px] sm:text-xs md:text-sm text-zinc-300 font-medium leading-tight sm:leading-snug max-w-[98%] text-center">
-                    {bonus.description}
-                  </p>
+                <div className="w-full flex items-center justify-center mt-auto pt-0.5 sm:pt-1.5 shrink-0">
+                  <span
+                    id={`bonus-gratis-${bonus.id}`}
+                    className="text-[#FFC700] font-display font-black text-xs xs:text-sm sm:text-lg md:text-2xl lg:text-3xl uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_12px_rgba(255,199,0,0.7)]"
+                  >
+                    GRÁTIS
+                  </span>
                 </div>
               </div>
             ))}
@@ -1625,13 +1549,13 @@ export default function App() {
                 >
                   <div
                     key={`bonus-${bonus.id}`}
-                    className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3.5 md:p-5 pb-2.5 xs:pb-3 sm:pb-4 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#39FF14]/50 relative group min-h-[200px] xs:min-h-[225px] sm:min-h-[270px] md:min-h-[325px] w-full"
+                    className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3.5 md:p-5 pb-2 xs:pb-2.5 sm:pb-4 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-[1/1.45] xs:aspect-[1/1.4] sm:aspect-[1/1.3] md:aspect-[1/1.22] min-h-[180px] xs:min-h-[200px] sm:min-h-[235px] md:min-h-[290px] w-full"
                   >
-                    <div className="w-full flex flex-col items-center shrink-0 mb-1 sm:mb-2">
+                    <div className="w-full flex flex-col items-center shrink-0 mb-0.5 sm:mb-1">
                       <span className="grad-text font-black font-display text-[9.5px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
                         BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
                       </span>
-                      <h4 className="text-[9px] xs:text-[10.5px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] xs:min-h-[25px] sm:min-h-[28px] md:min-h-[38px] flex items-center justify-center">
+                      <h4 className="text-[9px] xs:text-[10.5px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] xs:min-h-[25px] sm:min-h-[28px] md:min-h-[40px] flex items-center justify-center">
                         {bonus.title}
                       </h4>
                     </div>
@@ -1645,10 +1569,10 @@ export default function App() {
                           height={300}
                           loading="lazy"
                           decoding="async"
-                          className="max-h-[64px] xs:max-h-[76px] sm:max-h-[120px] md:max-h-[155px] max-w-[92%] sm:max-w-[96%] w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
+                          className="max-h-[62px] xs:max-h-[72px] sm:max-h-[125px] md:max-h-[160px] max-w-[92%] sm:max-w-[96%] w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
                         />
                       ) : (
-                        <div className="w-11 h-11 xs:w-13 xs:h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-[#39FF14]/10 border border-[#39FF14]/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-sm p-2 sm:p-3">
+                        <div className="w-11 h-11 xs:w-13 xs:h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3">
                           <div className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
                             {bonus.icon}
                           </div>
@@ -1656,10 +1580,13 @@ export default function App() {
                       )}
                     </div>
 
-                    <div className="w-full flex items-center justify-center mt-auto pt-1 sm:pt-2 shrink-0">
-                      <p className="text-[8px] xs:text-[9.5px] sm:text-xs md:text-sm text-zinc-300 font-medium leading-tight sm:leading-snug max-w-[98%] text-center">
-                        {bonus.description}
-                      </p>
+                    <div className="w-full flex items-center justify-center mt-auto pt-0.5 sm:pt-1.5 shrink-0">
+                      <span
+                        id={`bonus-gratis-${bonus.id}`}
+                        className="text-[#FFC700] font-display font-black text-xs xs:text-sm sm:text-lg md:text-2xl lg:text-3xl uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_12px_rgba(255,199,0,0.7)]"
+                      >
+                        GRÁTIS
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -1678,7 +1605,7 @@ export default function App() {
                   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
               }}
-              className="group inline-flex items-center justify-center gap-3 bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#6EFF38] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>GARANTIR ACESSO + 11 BÔNUS GRÁTIS</span>
@@ -1689,9 +1616,10 @@ export default function App() {
 
       {/* Depoimento Real em Layout de Celular */}
       <section id="depoimento" className="bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
-                <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#FFC700]/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-            <h2 id="depoimento-titulo" className="font-display font-black text-2xl sm:text-3xl md:text-5xl uppercase tracking-tight mb-3">
+            <h2 id="depoimento-titulo" className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mb-3">
               QUEM ACESSOU JÁ ESTÁ <span className="grad-text">IMPRIMINDO E PRODUZINDO</span>
             </h2>
             <p className="text-zinc-400 text-sm sm:text-base font-light max-w-xl mx-auto leading-relaxed">
@@ -1702,17 +1630,15 @@ export default function App() {
           {/* Smartphone Mockup & Carrossel com Setas de Navegação */}
           <div id="celular-depoimento-slider" className="relative w-full max-w-4xl mx-auto flex items-center justify-center gap-1.5 xs:gap-3 sm:gap-6 md:gap-8 px-1 sm:px-4">
             {/* Seta Esquerda */}
-            {depoimentosList.length > 1 && (
-              <button
-                id="btn-depoimento-anterior"
-                type="button"
-                onClick={prevDepoimento}
-                aria-label="Ver depoimento anterior"
-                className="group w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
-              >
-                <ChevronLeft className="w-4 h-4 xs:w-5 xs:h-5 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:-translate-x-0.5 transition-transform" />
-              </button>
-            )}
+            <button
+              id="btn-depoimento-anterior"
+              type="button"
+              onClick={prevDepoimento}
+              aria-label="Ver depoimento anterior"
+              className="group w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
+            >
+              <ChevronLeft className="w-4 h-4 xs:w-5 xs:h-5 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:-translate-x-0.5 transition-transform" />
+            </button>
 
             {/* Smartphone Mockup Alongado / Vertical com Borda Branca */}
             <div
@@ -1731,7 +1657,8 @@ export default function App() {
               }}
             >
               {/* Ambient phone back glow */}
-              
+              <div className="absolute inset-0 bg-[#FFC700]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none" />
+
               {/* Realistic Phone Frame: Ampliado em altura para visualização destacada */}
               <div
                 id="celular-depoimento-frame"
@@ -1750,21 +1677,26 @@ export default function App() {
                 </div>
 
                 {/* Inner Screen Bezel - Altura ampliada para melhor leitura dos depoimentos */}
-                <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-black border border-white/40 shadow-inner aspect-[925/1720] w-full">
+                <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#efeae2] border border-white/40 shadow-inner aspect-[9/16] w-full">
                   {depoimentosList.map((dep, idx) => (
                     <img
                       key={dep.id}
                       id={`celular-depoimento-img-${dep.id}`}
                       src={dep.image}
                       alt={dep.alt}
-                      width={400}
-                      height={710}
+                      width={450}
+                      height={800}
+                      onError={(e) => {
+                        if (dep.fallback && e.currentTarget.src !== dep.fallback) {
+                          e.currentTarget.src = dep.fallback;
+                        }
+                      }}
                       className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-300 ease-in-out ${
                         depoimentoIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                       }`}
-                      loading="lazy"
+                      loading="eager"
                       decoding="async"
-                      fetchPriority={depoimentoIndex === idx ? 'high' : 'low'}
+                      fetchPriority={depoimentoIndex === idx ? 'high' : 'auto'}
                     />
                   ))}
                 </div>
@@ -1777,42 +1709,35 @@ export default function App() {
             </div>
 
             {/* Seta Direita */}
-            {depoimentosList.length > 1 && (
-              <button
-                id="btn-depoimento-proximo"
-                type="button"
-                onClick={nextDepoimento}
-                aria-label="Ver próximo depoimento"
-                className="group w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
-              >
-                <ChevronRight className="w-4 h-4 xs:w-5 xs:h-5 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:translate-x-0.5 transition-transform" />
-              </button>
-            )}
+            <button
+              id="btn-depoimento-proximo"
+              type="button"
+              onClick={nextDepoimento}
+              aria-label="Ver próximo depoimento"
+              className="group w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
+            >
+              <ChevronRight className="w-4 h-4 xs:w-5 xs:h-5 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:translate-x-0.5 transition-transform" />
+            </button>
           </div>
 
           {/* Indicadores / Paginação dos Depoimentos */}
-          {depoimentosList.length > 1 && (
-            <div id="depoimento-indicadores" className="mt-8 flex flex-col items-center gap-2.5 z-20">
-              <div className="flex items-center gap-2">
-                {depoimentosList.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setDepoimentoIndex(idx)}
-                    aria-label={`Ir para depoimento ${idx + 1}`}
-                    className={`transition-all duration-300 rounded-full h-2.5 cursor-pointer ${
-                      depoimentoIndex === idx
-                        ? 'w-8 bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)]'
-                        : 'w-2.5 bg-zinc-600 hover:bg-zinc-400'
-                    }`}
-                  />
-                ))}
-              </div>
-              <span className="text-xs text-zinc-400 font-mono tracking-widest uppercase">
-                {depoimentoIndex + 1} de {depoimentosList.length} Depoimentos
-              </span>
+          <div id="depoimento-indicadores" className="mt-8 flex flex-col items-center gap-2.5 z-20">
+            <div className="flex items-center gap-2">
+              {depoimentosList.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setDepoimentoIndex(idx)}
+                  aria-label={`Ir para depoimento ${idx + 1}`}
+                  className={`transition-all duration-300 rounded-full h-2.5 cursor-pointer ${
+                    depoimentoIndex === idx
+                      ? 'w-8 bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)]'
+                      : 'w-2.5 bg-zinc-600 hover:bg-zinc-400'
+                  }`}
+                />
+              ))}
             </div>
-          )}
+          </div>
 
           {/* Botão de Compra - Seção Depoimentos */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
@@ -1825,7 +1750,7 @@ export default function App() {
                   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
               }}
-              className="group inline-flex items-center justify-center gap-3 bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#6EFF38] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>QUERO TER ESSES RESULTADOS</span>
@@ -1836,12 +1761,14 @@ export default function App() {
 
       {/* 13-14. Seção de Oferta & Preços */}
       <section id="oferta" className="bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
-                <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center mb-10 md:mb-12 w-full flex flex-col items-center justify-center relative">
-                        <h2
-              className="relative z-10 font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight mb-4 text-center leading-tight"
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-40 bg-[#FFC700]/25 blur-[60px] rounded-full pointer-events-none" />
+            <h2
+              className="relative z-10 font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight mb-4 text-center leading-tight"
               style={{
-                textShadow: '0 0 20px rgba(255,255,255,0.4)',
+                textShadow: '0 0 25px rgba(255,255,255,0.6), 0 0 50px rgba(255,199,0,0.5)',
               }}
             >
               ESCOLHA O PLANO IDEAL<br />
@@ -1875,51 +1802,39 @@ export default function App() {
               </div>
               <ul className="space-y-3 mb-6 text-[13px] text-zinc-300 font-medium">
                 <li className="flex items-center gap-2.5">
-                  <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_8px_rgba(57,255,20,0.5)]">
-                    <Check className="w-2.5 h-2.5 stroke-[3.5]" />
-                  </span>
+                  <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                   <span>500 Modelos Funkos STL</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_8px_rgba(57,255,20,0.5)]">
-                    <Check className="w-2.5 h-2.5 stroke-[3.5]" />
-                  </span>
+                  <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                   <span>Acesso por 3 Meses</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_8px_rgba(57,255,20,0.5)]">
-                    <Check className="w-2.5 h-2.5 stroke-[3.5]" />
-                  </span>
+                  <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
                   <span>Garantia de 14 Dias</span>
                 </li>
                 <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
-                  <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-red-500/20 text-red-400 shrink-0">
-                    <X className="w-2.5 h-2.5 stroke-[3.5]" />
-                  </span>
+                  <span className="text-base font-bold leading-none">✕</span>
                   <span>Sem os 11 Bônus Inclusos</span>
                 </li>
                 <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
-                  <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-red-500/20 text-red-400 shrink-0">
-                    <X className="w-2.5 h-2.5 stroke-[3.5]" />
-                  </span>
+                  <span className="text-base font-bold leading-none">✕</span>
                   <span>Sem Atualizações Futuras</span>
                 </li>
                 <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
-                  <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-red-500/20 text-red-400 shrink-0">
-                    <X className="w-2.5 h-2.5 stroke-[3.5]" />
-                  </span>
+                  <span className="text-base font-bold leading-none">✕</span>
                   <span>Sem Licença Comercial</span>
                 </li>
               </ul>
               <button
                 type="button"
                 onClick={handleBaseClick}
-                className="block w-full text-center py-4 rounded-xl border-2 border-[#39FF14] text-[#39FF14] hover:text-black hover:bg-[#39FF14] text-sm uppercase tracking-wider transition-all mt-auto font-black cursor-pointer shadow-sm"
+                className="block w-full text-center py-4 rounded-xl border-2 border-[#00E676] text-[#00E676] hover:text-black hover:bg-[#00E676] text-sm uppercase tracking-wider transition-all mt-auto font-black cursor-pointer shadow-[0_0_15px_rgba(0,230,118,0.2)]"
               >
                 QUERO O BASE (R$ 10,90)
               </button>
               <div className="mt-4 text-center">
-                <p className="font-bold text-[13px] sm:text-[14px] leading-snug px-2 text-emerald-400">
+                <p className="font-bold text-[13px] sm:text-[14px] leading-snug px-2 text-[#ef4444]">
                   💡 Recomendação: o Pacote Completo <span className="lg:hidden">logo abaixo</span><span className="hidden lg:inline">ao lado</span> é muito mais vantajoso!
                 </p>
               </div>
@@ -1928,16 +1843,17 @@ export default function App() {
             {/* Card 2 - Coleção Completa VIP (R$ 39,90 - Destaque) */}
             <div
               id="oferta-pro"
-              className="w-full lg:max-w-[440px] bg-white text-black border-[2.5px] border-[#39FF14] rounded-3xl overflow-hidden relative shadow-2xl flex flex-col scroll-mt-24"
+              className="w-full lg:max-w-[440px] bg-white text-black border-[2px] border-[#FFC700] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5)] flex flex-col scroll-mt-24"
             >
-              <div className="bg-[#39FF14] text-black text-center py-2 px-3 font-black shadow-sm">
+              <div className="bg-[#FFC700] text-black text-center py-2 px-3">
                 <p className="text-xs font-black uppercase tracking-wider">
                   🔥 MAIS RECOMENDADO — PACOTE COMPLETO VIP
                 </p>
               </div>
               <div className="p-6 sm:p-7 h-full flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-4 relative group">
-                                    <img
+                  <div className="absolute inset-0 bg-yellow-500/20 blur-xl rounded-full scale-90 pointer-events-none opacity-80" />
+                  <img
                     src={funkoBonusImage}
                     alt="Pacote +500 Modelos Funkos STL"
                     width={320}
@@ -1959,56 +1875,37 @@ export default function App() {
                   </div>
                   <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">Pagamento Único</p>
                 </div>
-                <div className="w-full bg-zinc-100 rounded-2xl p-4 mb-5 border border-zinc-200">
-                  <ul className="w-full space-y-2 text-black">
-                    <li className="flex items-center gap-2.5 text-black">
-                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_10px_rgba(57,255,20,0.6)]">
-                        <Check className="w-3.5 h-3.5 stroke-[3.5]" />
-                      </span>
-                      <span className="font-bold text-black text-xs sm:text-[13px] leading-tight">
-                        +150.000 Modelos 3D Organizados
-                      </span>
+                <div className="w-full bg-zinc-100 rounded-2xl p-4 sm:p-5 mb-5 border border-zinc-200">
+                  <ul className="w-full space-y-2.5 text-[13px] text-zinc-900 font-medium">
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-xs sm:text-[13px] font-black uppercase tracking-tight text-black">
+                        + 150 MIL MODELOS STL
+                      </strong>
                     </li>
-                    <li className="flex items-center gap-2.5 text-black">
-                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_10px_rgba(57,255,20,0.6)]">
-                        <Check className="w-3.5 h-3.5 stroke-[3.5]" />
-                      </span>
-                      <span className="font-bold text-black text-xs sm:text-[13px] leading-tight">
-                        +500 Modelos Funkos STL Inclusos
-                      </span>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-xs sm:text-[13px] font-black uppercase tracking-tight text-black">
+                        + 500 MODELOS FUNKOS STL
+                      </strong>
                     </li>
-                    <li className="flex items-center gap-2.5 text-black">
-                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_10px_rgba(57,255,20,0.6)]">
-                        <Check className="w-3.5 h-3.5 stroke-[3.5]" />
-                      </span>
-                      <span className="font-bold text-black text-xs sm:text-[13px] leading-tight">
-                        Licença Comercial para Venda de Peças Físicas
-                      </span>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-black font-bold">Licença Comercial para Venda de Peças Físicas</strong>
                     </li>
-                    <li className="flex items-center gap-2.5 text-black">
-                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_10px_rgba(57,255,20,0.6)]">
-                        <Check className="w-3.5 h-3.5 stroke-[3.5]" />
-                      </span>
-                      <span className="font-bold text-black text-xs sm:text-[13px] leading-tight">
-                        Acesso Vitalício + Todas as Atualizações
-                      </span>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-zinc-800 font-semibold">Acesso Vitalício + Todas as Atualizações</span>
                     </li>
-                    <li className="flex items-center gap-2.5 text-black">
-                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_10px_rgba(57,255,20,0.6)]">
-                        <Check className="w-3.5 h-3.5 stroke-[3.5]" />
-                      </span>
-                      <span className="font-bold text-black text-xs sm:text-[13px] leading-tight">
-                        Garantia Incondicional de 14 Dias
-                      </span>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-zinc-800 font-semibold">Garantia Incondicional de 14 Dias</span>
                     </li>
                     {bonuses.map((b) => (
-                      <li key={`offer-bonus-${b.id}`} className="flex items-start gap-2.5 text-black">
-                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#39FF14] text-black shrink-0 mt-0.5 shadow-[0_0_10px_rgba(57,255,20,0.6)]">
-                          <Check className="w-3.5 h-3.5 stroke-[3.5]" />
-                        </span>
-                        <span className="text-black text-xs sm:text-[13px] leading-tight font-medium">
-                          <strong className="font-bold text-black mr-1">Bônus {b.id}:</strong>
-                          {b.title}
+                      <li key={`offer-bonus-${b.id}`} className="flex items-start gap-2.5 text-zinc-800">
+                        <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                        <span className="text-zinc-800 leading-snug">
+                          <strong className="text-black font-bold">Bônus {b.id}:</strong> {b.title}
                         </span>
                       </li>
                     ))}
@@ -2017,9 +1914,9 @@ export default function App() {
                 <div className="text-center w-full mt-auto">
                   <a
                     href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
-                    className="block w-full bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer"
+                    className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
                   >
-                    QUERO O PACOTE COMPLETO VIP
+                    QUERO A CENTRAL COMPLETA
                   </a>
                 </div>
               </div>
@@ -2033,25 +1930,30 @@ export default function App() {
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="glass-card border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col gap-12 bg-black/50">
             {/* Guarantee Box */}
-            <div className="flex flex-col md:flex-row items-center gap-8 lg:gap-12 text-center md:text-left">
-              <div className="shrink-0 flex items-center justify-center">
+            <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-10 lg:gap-12">
+              <div className="relative shrink-0 flex items-center justify-center group">
+                <div className="absolute inset-0 bg-[#FFC700]/20 blur-2xl rounded-full scale-90 pointer-events-none" />
                 <img
                   src={seloGarantia}
-                  alt="Garantia Incondicional de 14 Dias"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = 'https://i.imgur.com/xfMM1xb.png';
+                  }}
+                  alt="Selo de Garantia Incondicional de 14 Dias"
                   width={240}
                   height={240}
-                  className="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 object-contain drop-shadow-[0_10px_30px_rgba(57,255,20,0.25)] select-none"
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  className="relative z-10 w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 object-contain drop-shadow-[0_10px_35px_rgba(255,199,0,0.35)] select-none transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <div className="flex-1">
-                <div className="inline-block px-3.5 py-1 rounded-full bg-[#39FF14]/10 border border-[#39FF14]/40 text-[#39FF14] font-display font-black text-xs uppercase tracking-wider mb-2.5">
-                  100% SEGURO • RISCO ZERO
-                </div>
-                <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl mb-3 text-white">
+              <div className="text-center md:text-left flex-1">
+                <h3 className="font-display font-black text-2xl md:text-3xl mb-2.5">
                   Garantia Incondicional de 14 Dias
                 </h3>
-                <p className="text-zinc-300 font-light leading-relaxed text-sm sm:text-base max-w-xl">
-                  Se você acessar o acervo, olhar os modelos e achar que não valeu a pena, basta pedir o reembolso em até 14 dias. Devolvemos 100% do seu investimento, sem burocracia e sem perguntas.
+                <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">
+                  Se você acessar o catálogo, olhar os modelos e achar que não valeu a pena, basta pedir o reembolso em até 14 dias. Devolvemos 100% do seu investimento, sem burocracia e sem perguntas.
                 </p>
               </div>
             </div>
@@ -2076,7 +1978,7 @@ export default function App() {
                       >
                         <span className="text-sm md:text-base text-zinc-100">{faq.q}</span>
                         <ChevronDown
-                          className={`w-5 h-5 text-[#39FF14] shrink-0 transition-transform duration-200 ${
+                          className={`w-5 h-5 text-yellow-400 shrink-0 transition-transform duration-200 ${
                             isOpen ? 'transform rotate-180' : ''
                           }`}
                         />
@@ -2104,7 +2006,7 @@ export default function App() {
                   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
               }}
-              className="group inline-flex items-center justify-center gap-3 bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#6EFF38] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>EXPERIMENTAR SEM RISCO AGORA</span>
@@ -2125,21 +2027,21 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 border-y border-white/5 py-8 text-zinc-300">
             <div className="flex flex-col items-center justify-center gap-2">
-              <Lock className="w-6 h-6 text-[#39FF14] mb-1" />
+              <Lock className="w-6 h-6 text-[#FFC700] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Ambiente 100% Seguro
               </span>
               <span className="text-[10px] text-zinc-400">Dados criptografados de ponta a ponta</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <Mail className="w-6 h-6 text-[#39FF14] mb-1" />
+              <Mail className="w-6 h-6 text-[#FFEF5C] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Suporte Especializado
               </span>
               <span className="text-[10px] text-zinc-300">suporte@universo3d.com.br</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <Building2 className="w-6 h-6 text-[#39FF14] mb-1" />
+              <Building2 className="w-6 h-6 text-[#FFEF5C] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Empresa Verificada
               </span>
@@ -2152,10 +2054,10 @@ export default function App() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 uppercase tracking-widest mb-6 font-bold text-[10px] text-zinc-400">
-            <a href="#termos" className="hover:text-[#39FF14] transition-colors">
+            <a href="#termos" className="hover:text-[#FFEF5C] transition-colors">
               Termos de Uso
             </a>
-            <a href="#privacidade" className="hover:text-[#39FF14] transition-colors">
+            <a href="#privacidade" className="hover:text-[#FFEF5C] transition-colors">
               Política de Privacidade
             </a>
           </div>
@@ -2178,7 +2080,7 @@ export default function App() {
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-[350px] sm:max-w-[370px] my-auto transform transition-all duration-300"
           >
-            <div className="w-full bg-[#0F0F0F] border-[2.5px] border-[#39FF14] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-2xl flex flex-col mx-auto my-1">
+            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#FFC700] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5),inset_0_0_12px_rgba(255,199,0,0.25)] flex flex-col mx-auto my-1">
               <button
                 type="button"
                 onClick={() => setIsUpsellOpen(false)}
@@ -2191,24 +2093,25 @@ export default function App() {
               <div className="py-2 sm:py-2.5 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F] pr-8 pl-2">
                 <h3 className="font-display font-black text-xs sm:text-sm md:text-base uppercase tracking-tight px-1 whitespace-nowrap">
                   <span className="grad-text font-extrabold">ESPERE! LEVE TUDO POR </span>
-                  <span className="text-[#39FF14]">R$ 21,90</span>
+                  <span className="text-[#FFC700]">R$ 21,90</span>
                 </h3>
               </div>
 
-              <div className="bg-gradient-to-r from-[#50FF22] via-[#39FF14] to-[#50FF22] py-1 px-2.5 shadow-md border-y border-[#6EFF38]">
+              <div className="bg-gradient-to-r from-[#D97706] via-[#FBBF24] to-[#B45309] py-1 px-2.5 shadow-[0_0_15px_rgba(245,158,11,0.4)] border-y border-[#FBBF24]/60">
                 <p className="font-black text-black text-center leading-tight">
-                  <span className="block text-[8px] sm:text-[9px] uppercase tracking-[0.15em] font-bold">
+                  <span className="block text-[8px] sm:text-[9px] uppercase tracking-[0.15em] opacity-90">
                     O PACOTE MAIS COMPLETO E VANTAJOSO
                   </span>
-                  <span className="block text-[10px] sm:text-[11px] uppercase tracking-tight font-black">
-                    + 500 MODELOS FUNKOS STL + TODOS OS 11 BÔNUS
+                  <span className="block text-[10px] sm:text-[11px] uppercase tracking-tight">
+                    + 150 MIL MODELOS STL + 500 FUNKOS + TODOS OS 11 BÔNUS
                   </span>
                 </p>
               </div>
 
               <div className="p-3.5 sm:p-4 flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-1.5 relative group">
-                                    <img
+                  <div className="absolute inset-0 bg-yellow-500/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60" />
+                  <img
                     src={funkoBonusImage}
                     alt="Pacote +500 Modelos Funkos STL"
                     width={240}
@@ -2220,13 +2123,13 @@ export default function App() {
                   />
                 </div>
                 <div className="text-center w-full mb-2">
-                  <p className="text-[11px] sm:text-xs text-zinc-400 font-bold mb-0.5 italic">
+                  <p className="text-[11px] sm:text-xs text-yellow-400 font-black mb-0.5 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
-                  <p className="text-zinc-300 font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
+                  <p className="text-[#FFEF5C] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
                     Por Apenas
                   </p>
-                  <div className="flex justify-center items-start text-[#39FF14] mb-0.5 drop-shadow-md">
+                  <div className="flex justify-center items-start text-[#FFC700] mb-0.5 drop-shadow-md">
                     <span className="text-base sm:text-lg font-black mt-0.5 mr-0.5">R$</span>
                     <span className="text-4xl sm:text-5xl font-display font-black tracking-tighter leading-none">
                       21,90
@@ -2237,49 +2140,44 @@ export default function App() {
                   </p>
                 </div>
                 <div className="w-full bg-[#1A1A1A] rounded-xl p-2.5 sm:p-3 mb-2.5 border border-white/5 max-h-36 sm:max-h-40 overflow-y-auto">
-                  <ul className="w-full space-y-1 text-[11px] text-white/90 font-medium">
-                    <li className="flex items-center gap-1.5 bg-[#39FF14]/15 border border-[#39FF14]/40 rounded p-1 text-white">
-                      <span className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-[#39FF14] text-black shrink-0 shadow-[0_0_6px_rgba(57,255,20,0.6)]">
-                        <Check className="w-2.5 h-2.5 stroke-[3.5]" />
-                      </span>
-                      <strong className="text-[11px] font-black uppercase text-[#39FF14]">
-                        + 150.000 MODELOS 3D ORGANIZADOS
+                  <ul className="w-full space-y-1.5 text-[11px] text-white/90 font-medium">
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-[#00E676] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-[11px] font-black uppercase text-[#00E676]">
+                        + 150 MIL MODELOS STL
                       </strong>
                     </li>
-                    <li className="flex items-center gap-1.5">
-                      <span className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-[#39FF14] text-black shrink-0">
-                        <Check className="w-2.5 h-2.5 stroke-[3.5]" />
-                      </span>
-                      <strong className="text-white">+ 500 Modelos Funkos STL Inclusos</strong>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-[#00E676] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-[11px] font-black uppercase text-[#FFEF5C]">
+                        + 500 MODELOS FUNKOS STL
+                      </strong>
                     </li>
-                    <li className="flex items-center gap-1.5">
-                      <span className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-[#39FF14] text-black shrink-0">
-                        <Check className="w-2.5 h-2.5 stroke-[3.5]" />
-                      </span>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-[#00E676] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-white">Licença Comercial para Venda de Peças Físicas</strong>
                     </li>
-                    <li className="flex items-center gap-1.5">
-                      <span className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-[#39FF14] text-black shrink-0">
-                        <Check className="w-2.5 h-2.5 stroke-[3.5]" />
-                      </span>
-                      <span>Acesso Vitalício + Atualizações</span>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-[#00E676] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span>Acesso Vitalício + Todas as Atualizações</span>
                     </li>
-                    <li className="w-full h-px bg-white/10 my-0.5" />
-                    <li className="text-[9px] uppercase tracking-wider text-[#39FF14] font-bold flex items-center gap-1">
-                      <span>🎁</span>
-                      <span>TODOS OS 11 BÔNUS INCLUSOS:</span>
+                    <li className="flex items-start gap-1.5">
+                      <span className="text-[#00E676] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span>Garantia Incondicional de 14 Dias</span>
                     </li>
                     {bonuses.map((b) => (
-                      <li key={`upsell-bonus-${b.id}`} className="flex items-center gap-1.5">
-                        <span className="text-zinc-300 font-bold text-[10px] shrink-0">Bônus {b.id}:</span>
-                        <span className="text-zinc-200 leading-tight text-[10px] sm:text-[11px]">{b.title}</span>
+                      <li key={`upsell-bonus-${b.id}`} className="flex items-start gap-1.5 text-zinc-300">
+                        <span className="text-[#00E676] text-[11px] font-black leading-none shrink-0 mt-0.5">✓</span>
+                        <span className="text-zinc-200 leading-tight text-[10px] sm:text-[11px]">
+                          <strong className="text-[#FFEF5C]">Bônus {b.id}:</strong> {b.title}
+                        </span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <a
                   href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
-                  className="block w-full bg-[#39FF14] hover:bg-[#50FF22] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(57,255,20,0.5)] cursor-pointer"
+                  className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
                 >
                   SIM! LEVAR TUDO POR R$ 21,90
                 </a>
