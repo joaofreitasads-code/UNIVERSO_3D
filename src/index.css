@@ -58,19 +58,19 @@
 }
 
 @keyframes marqueeAnimation {
-  from {
+  0% {
     transform: translate3d(0, 0, 0);
   }
-  to {
+  100% {
     transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes marqueeReverseAnimation {
-  from {
+  0% {
     transform: translate3d(-50%, 0, 0);
   }
-  to {
+  100% {
     transform: translate3d(0, 0, 0);
   }
 }
@@ -78,49 +78,55 @@
 .marquee {
   display: flex;
   width: max-content;
-  contain: layout paint;
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  animation: marqueeAnimation 36s linear infinite !important;
+  animation: marqueeAnimation 24s linear infinite !important;
   animation-play-state: running !important;
   pointer-events: none !important;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: pan-y;
 }
 
 .marquee-cards {
   display: flex;
   width: max-content;
-  contain: layout paint;
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  animation: marqueeAnimation 48s linear infinite !important;
+  animation: marqueeAnimation 24s linear infinite !important;
   animation-play-state: running !important;
   pointer-events: none !important;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: pan-y;
 }
 
 .marquee-cards-reverse {
   display: flex;
   width: max-content;
-  contain: layout paint;
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  animation: marqueeReverseAnimation 48s linear infinite !important;
+  animation: marqueeReverseAnimation 24s linear infinite !important;
   animation-play-state: running !important;
   pointer-events: none !important;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: pan-y;
+}
+
+@media (min-width: 768px) {
+  .marquee {
+    animation-duration: 36s !important;
+  }
+  .marquee-cards {
+    animation-duration: 44s !important;
+  }
+  .marquee-cards-reverse {
+    animation-duration: 44s !important;
+  }
 }
 
 /* O carrossel deve continuar andando continuamente sem pausar por clique, toque, hover ou foco */

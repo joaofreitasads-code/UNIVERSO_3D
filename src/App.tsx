@@ -726,7 +726,60 @@ const depoimentosList: DepoimentoItem[] = [
   },
 ];
 
+const CarouselCard = React.memo(({ item }: { item: ModelItem }) => {
+  return (
+    <div
+      className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
+      style={{ backgroundImage: `url('${cardBg}')` }}
+    >
+      <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
+        {item.image ? (
+          <img
+            src={item.image}
+            alt={item.title}
+            width={256}
+            height={256}
+            loading="eager"
+            decoding="async"
+            className={`w-full h-full object-contain object-bottom p-2 pb-1 md:group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
+            onError={(e) => {
+              if (item.fallbackImage && e.currentTarget.src !== item.fallbackImage) {
+                e.currentTarget.src = item.fallbackImage;
+              }
+            }}
+          />
+        ) : (
+          <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'}`}>
+            {item.icon}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
+CarouselCard.displayName = 'CarouselCard';
+
 export default function App() {
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile((prev) => (prev !== mobile ? mobile : prev));
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const activeLine1 = isMobile ? line1Models.slice(0, 8) : line1Models.slice(0, 16);
+  const activeLine2 = isMobile ? line2Models.slice(0, 8) : line2Models.slice(0, 16);
+  const activeLine3 = isMobile ? line3Models.slice(0, 8) : line3Models.slice(0, 16);
+
   const [isUpsellOpen, setIsUpsellOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [depoimentoIndex, setDepoimentoIndex] = useState(0);
@@ -785,7 +838,7 @@ export default function App() {
 
       {/* 2-5. Hero Section */}
       <section id="hero-section" className="relative pb-16 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-yellow-500/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
 
         <div className="w-full relative z-20 flex flex-col items-center pt-10 md:pt-16 pb-2 px-4 text-center max-w-4xl mx-auto">
           <h1 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight leading-snug drop-shadow-2xl uppercase max-w-3xl mx-auto">
@@ -910,7 +963,7 @@ export default function App() {
       </section>
 
       {/* 7. Carrossel de Modelos */}
-      <section id="modelos-carrossel" className="section-lazy pt-0 pb-16 relative">
+      <section id="modelos-carrossel" className="pt-0 pb-16 relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFC700]/10 border border-[#FFC700]/30 text-[#FFC700] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(255,199,0,0.15)]">
@@ -931,58 +984,13 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
           <div className="marquee-cards pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
-              {line1Models.map((item, idx) => (
-                <div
-                  key={`card-l1-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: `url('${cardBg}')` }}
-                >
-                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
-                    {item.image ? (
-                      <CleanImage
-                        src={item.image}
-                        fallbackSrc={item.fallbackImage}
-                        alt={item.title}
-                        priority={false}
-                        loading="lazy"
-                        width={256}
-                        height={256}
-                        className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
-                      />
-                    ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
-                        {item.icon}
-                      </div>
-                    )}
-                  </div>
-                </div>
+              {activeLine1.map((item, idx) => (
+                <CarouselCard key={`card-l1-${item.id || idx}`} item={item} />
               ))}
             </div>
             <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
-              {line1Models.map((item, idx) => (
-                <div
-                  key={`card-l1-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: `url('${cardBg}')` }}
-                >
-                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
-                    {item.image ? (
-                      <CleanImage
-                        src={item.image}
-                        fallbackSrc={item.fallbackImage}
-                        alt={item.title}
-                        loading="lazy"
-                        width={256}
-                        height={256}
-                        className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
-                      />
-                    ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
-                        {item.icon}
-                      </div>
-                    )}
-                  </div>
-                </div>
+              {activeLine1.map((item, idx) => (
+                <CarouselCard key={`card-l1-dup-${item.id || idx}`} item={item} />
               ))}
             </div>
           </div>
@@ -994,55 +1002,13 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
           <div className="marquee-cards-reverse pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
-              {line2Models.map((item, idx) => (
-                <div
-                  key={`card-l2-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: `url('${cardBg}')` }}
-                >
-                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
-                    {item.image ? (
-                      <CleanImage
-                        src={item.image}
-                        fallbackSrc={item.fallbackImage}
-                        alt={item.title}
-                        width={256}
-                        height={256}
-                        className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
-                      />
-                    ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
-                        {item.icon}
-                      </div>
-                    )}
-                  </div>
-                </div>
+              {activeLine2.map((item, idx) => (
+                <CarouselCard key={`card-l2-${item.id || idx}`} item={item} />
               ))}
             </div>
             <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
-              {line2Models.map((item, idx) => (
-                <div
-                  key={`card-l2-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: `url('${cardBg}')` }}
-                >
-                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
-                    {item.image ? (
-                      <CleanImage
-                        src={item.image}
-                        fallbackSrc={item.fallbackImage}
-                        alt={item.title}
-                        width={256}
-                        height={256}
-                        className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
-                      />
-                    ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
-                        {item.icon}
-                      </div>
-                    )}
-                  </div>
-                </div>
+              {activeLine2.map((item, idx) => (
+                <CarouselCard key={`card-l2-dup-${item.id || idx}`} item={item} />
               ))}
             </div>
           </div>
@@ -1054,76 +1020,34 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
           <div className="marquee-cards pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
-              {line3Models.map((item, idx) => (
-                <div
-                  key={`card-l3-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: `url('${cardBg}')` }}
-                >
-                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
-                    {item.image ? (
-                      <CleanImage
-                        src={item.image}
-                        fallbackSrc={item.fallbackImage}
-                        alt={item.title}
-                        width={256}
-                        height={256}
-                        className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
-                      />
-                    ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
-                        {item.icon}
-                      </div>
-                    )}
-                  </div>
-                </div>
+              {activeLine3.map((item, idx) => (
+                <CarouselCard key={`card-l3-${item.id || idx}`} item={item} />
               ))}
             </div>
             <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
-              {line3Models.map((item, idx) => (
-                <div
-                  key={`card-l3-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
-                  style={{ backgroundImage: `url('${cardBg}')` }}
-                >
-                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
-                    {item.image ? (
-                      <CleanImage
-                        src={item.image}
-                        fallbackSrc={item.fallbackImage}
-                        alt={item.title}
-                        width={256}
-                        height={256}
-                        className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
-                      />
-                    ) : (
-                      <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'} group-hover:scale-110 transition-transform`}>
-                        {item.icon}
-                      </div>
-                    )}
-                  </div>
-                </div>
+              {activeLine3.map((item, idx) => (
+                <CarouselCard key={`card-l3-dup-${item.id || idx}`} item={item} />
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Botão de Compra - Seção Modelos */}
-          <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
-            <a
-              href="#oferta-pro"
-              onClick={(e) => {
-                e.preventDefault();
-                const target = document.getElementById('oferta-pro');
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-              }}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
-            >
-              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
-              <span>LIBERAR TODOS OS MODELOS 3D</span>
-            </a>
-          </div>
+        {/* Botão de Compra - Seção Modelos */}
+        <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
+          <a
+            href="#oferta-pro"
+            onClick={(e) => {
+              e.preventDefault();
+              const target = document.getElementById('oferta-pro');
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
+            className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+          >
+            <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+            <span>LIBERAR TODOS OS MODELOS 3D</span>
+          </a>
         </div>
       </section>
 
@@ -1475,7 +1399,7 @@ export default function App() {
 
       {/* 12. 11 Bônus Exclusivos */}
       <section id="bonus" className="section-lazy bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#FFC700]/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-44 md:w-[800px] md:h-[400px] bg-[#FFC700]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
           <p className="text-lg md:text-2xl font-bold uppercase tracking-widest mb-2 text-[#FFC700] opacity-95">
             E não para por aí...
@@ -1610,7 +1534,7 @@ export default function App() {
 
       {/* Depoimento Real em Layout de Celular */}
       <section id="depoimento" className="section-lazy bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#FFC700]/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[650px] md:h-[650px] bg-[#FFC700]/5 rounded-full blur-2xl md:blur-[140px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
             <h2 id="depoimento-titulo" className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mb-3">
@@ -1755,10 +1679,10 @@ export default function App() {
 
       {/* 13-14. Seção de Oferta & Preços */}
       <section id="oferta" className="section-lazy bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-yellow-500/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center mb-10 md:mb-12 w-full flex flex-col items-center justify-center relative">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-40 bg-[#FFC700]/25 blur-[60px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-24 md:w-96 md:h-40 bg-[#FFC700]/20 blur-xl md:blur-[60px] rounded-full pointer-events-none" />
             <h2
               className="relative z-10 font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight mb-4 text-center leading-tight"
               style={{
