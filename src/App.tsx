@@ -937,10 +937,7 @@ export default function App() {
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
-                  <div
-                    className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: `url('${cardBg}')` }}
-                  >
+                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
                     {item.image ? (
                       <CleanImage
                         src={item.image}
@@ -948,6 +945,8 @@ export default function App() {
                         alt={item.title}
                         priority={false}
                         loading="lazy"
+                        width={256}
+                        height={256}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
@@ -966,16 +965,15 @@ export default function App() {
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
-                  <div
-                    className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: `url('${cardBg}')` }}
-                  >
+                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
                     {item.image ? (
                       <CleanImage
                         src={item.image}
                         fallbackSrc={item.fallbackImage}
                         alt={item.title}
                         loading="lazy"
+                        width={256}
+                        height={256}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
@@ -1002,15 +1000,14 @@ export default function App() {
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
-                  <div
-                    className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: `url('${cardBg}')` }}
-                  >
+                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
                     {item.image ? (
                       <CleanImage
                         src={item.image}
                         fallbackSrc={item.fallbackImage}
                         alt={item.title}
+                        width={256}
+                        height={256}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
@@ -1029,15 +1026,14 @@ export default function App() {
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
-                  <div
-                    className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: `url('${cardBg}')` }}
-                  >
+                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
                     {item.image ? (
                       <CleanImage
                         src={item.image}
                         fallbackSrc={item.fallbackImage}
                         alt={item.title}
+                        width={256}
+                        height={256}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
@@ -1064,15 +1060,14 @@ export default function App() {
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
-                  <div
-                    className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: `url('${cardBg}')` }}
-                  >
+                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
                     {item.image ? (
                       <CleanImage
                         src={item.image}
                         fallbackSrc={item.fallbackImage}
                         alt={item.title}
+                        width={256}
+                        height={256}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
@@ -1091,15 +1086,14 @@ export default function App() {
                   className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
-                  <div
-                    className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-cover bg-center relative"
-                    style={{ backgroundImage: `url('${cardBg}')` }}
-                  >
+                  <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
                     {item.image ? (
                       <CleanImage
                         src={item.image}
                         fallbackSrc={item.fallbackImage}
                         alt={item.title}
+                        width={256}
+                        height={256}
                         className={`w-full h-full object-contain object-bottom p-2 pb-1 group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
                       />
                     ) : (
@@ -1134,7 +1128,7 @@ export default function App() {
       </section>
 
       {/* 8. Mockup Notebook */}
-      <section id="mockup-notebook" className="py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10">
+      <section id="mockup-notebook" className="section-lazy py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10">
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
             <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
@@ -1305,7 +1299,7 @@ export default function App() {
       </section>
 
       {/* 10. Validação de Mercado */}
-      <section id="validacao-mercado" className="pt-4 pb-16 relative bg-black">
+      <section id="validacao-mercado" className="section-lazy pt-4 pb-16 relative bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <h2 className="font-display font-black text-3xl md:text-4xl tracking-tight mb-4">
@@ -1366,7 +1360,7 @@ export default function App() {
       </section>
 
       {/* 11. Matemática Lucrativa */}
-      <section id="matematica-lucrativa" className="pt-8 pb-16 relative overflow-hidden">
+      <section id="matematica-lucrativa" className="section-lazy pt-8 pb-16 relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl">
           <div className="text-center mb-12">
@@ -1480,7 +1474,7 @@ export default function App() {
       </section>
 
       {/* 12. 11 Bônus Exclusivos */}
-      <section id="bonus" className="bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24">
+      <section id="bonus" className="section-lazy bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#FFC700]/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
           <p className="text-lg md:text-2xl font-bold uppercase tracking-widest mb-2 text-[#FFC700] opacity-95">
@@ -1615,7 +1609,7 @@ export default function App() {
       </section>
 
       {/* Depoimento Real em Layout de Celular */}
-      <section id="depoimento" className="bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
+      <section id="depoimento" className="section-lazy bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#FFC700]/5 rounded-full blur-[140px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
@@ -1694,9 +1688,9 @@ export default function App() {
                       className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-300 ease-in-out ${
                         depoimentoIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                       }`}
-                      loading="eager"
+                      loading="lazy"
                       decoding="async"
-                      fetchPriority={depoimentoIndex === idx ? 'high' : 'auto'}
+                      fetchPriority={depoimentoIndex === idx ? 'high' : 'low'}
                     />
                   ))}
                 </div>
@@ -1760,7 +1754,7 @@ export default function App() {
       </section>
 
       {/* 13-14. Seção de Oferta & Preços */}
-      <section id="oferta" className="bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
+      <section id="oferta" className="section-lazy bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center mb-10 md:mb-12 w-full flex flex-col items-center justify-center relative">
@@ -1913,7 +1907,7 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
+                    href="https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N"
                     className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
                   >
                     QUERO A CENTRAL COMPLETA
@@ -1926,7 +1920,7 @@ export default function App() {
       </section>
 
       {/* 15. Garantia & FAQ */}
-      <section id="garantia-faq" className="py-16 relative">
+      <section id="garantia-faq" className="section-lazy py-16 relative">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="glass-card border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col gap-12 bg-black/50">
             {/* Guarantee Box */}
@@ -2176,13 +2170,13 @@ export default function App() {
                   </ul>
                 </div>
                 <a
-                  href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
+                  href="https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY"
                   className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
                 >
                   SIM! LEVAR TUDO POR R$ 21,90
                 </a>
                 <a
-                  href="https://checkout.wiven.com.br/checkout/cmtkws58g09hz01pypy1crecf?offer=32HECNZ"
+                  href="https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x"
                   className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
                   Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »
