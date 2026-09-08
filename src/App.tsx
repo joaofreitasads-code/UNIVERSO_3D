@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import notebookPoster from './assets/poster-catalogo.webp';
-import heroPoster from './assets/poster-apresentacao.webp';
+const heroPoster = '/poster-apresentacao.webp';
 import seloGarantia from './assets/selo-garantia-14-dias.webp';
 import cardBg from './assets/card-bg.webp';
 import bonus1Image from './assets/optimized/bonus-1.webp';
@@ -910,7 +910,7 @@ export default function App() {
       </section>
 
       {/* 7. Carrossel de Modelos */}
-      <section id="modelos-carrossel" className="pt-0 pb-16 relative">
+      <section id="modelos-carrossel" className="section-lazy pt-0 pb-16 relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFC700]/10 border border-[#FFC700]/30 text-[#FFC700] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(255,199,0,0.15)]">
@@ -934,7 +934,7 @@ export default function App() {
               {line1Models.map((item, idx) => (
                 <div
                   key={`card-l1-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
@@ -962,7 +962,7 @@ export default function App() {
               {line1Models.map((item, idx) => (
                 <div
                   key={`card-l1-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
@@ -997,7 +997,7 @@ export default function App() {
               {line2Models.map((item, idx) => (
                 <div
                   key={`card-l2-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
@@ -1023,7 +1023,7 @@ export default function App() {
               {line2Models.map((item, idx) => (
                 <div
                   key={`card-l2-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
@@ -1057,7 +1057,7 @@ export default function App() {
               {line3Models.map((item, idx) => (
                 <div
                   key={`card-l3-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
@@ -1083,7 +1083,7 @@ export default function App() {
               {line3Models.map((item, idx) => (
                 <div
                   key={`card-l3-dup-${idx}`}
-                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
+                  className="rounded-2xl overflow-hidden shrink-0 w-40 md:w-64 p-2.5 border border-zinc-700/60 shadow-md md:shadow-xl hover:border-[#FFC700]/60 hover:scale-105 transition-all group bg-cover bg-center"
                   style={{ backgroundImage: `url('${cardBg}')` }}
                 >
                   <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
@@ -1907,7 +1907,7 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N"
+                    href="https://www.globalcheckout.co/4ef02366-592e-4bf8-bce4-9126c7520cd8"
                     className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
                   >
                     QUERO A CENTRAL COMPLETA
@@ -2170,13 +2170,13 @@ export default function App() {
                   </ul>
                 </div>
                 <a
-                  href="https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY"
+                  href="https://www.globalcheckout.co/ef8c33b2-2d72-40f3-a74a-30c295f5a26c"
                   className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
                 >
                   SIM! LEVAR TUDO POR R$ 21,90
                 </a>
                 <a
-                  href="https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x"
+                  href="https://www.globalcheckout.co/aaccb2ac-2ba3-4666-8522-04e57188e29d"
                   className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
                   Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »
