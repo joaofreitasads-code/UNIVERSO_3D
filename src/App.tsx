@@ -26,7 +26,6 @@ import lucro2Image from './assets/optimized/lucro-2.webp';
 import lucro3Image from './assets/optimized/lucro-3.webp';
 import funkoBonusImage from './assets/optimized/funko-bonus.webp';
 import ofertaVipImage from './assets/optimized/oferta-vip.webp';
-import rotatingModelImg from './assets/optimized/rotating-model.webp';
 import carousel1 from './assets/optimized/carousel-1.webp';
 import carousel2 from './assets/optimized/carousel-2.webp';
 import carousel3 from './assets/optimized/carousel-3.webp';
@@ -687,7 +686,7 @@ const faqs = [
     a: 'Com certeza! Nos planos que acompanham a Licença Comercial, você tem autorização total para imprimir fisicamente os modelos e vender as peças prontas em marketplaces, feiras, lojas ou sob encomenda. O que não é permitido é redistribuir ou revender os arquivos digitais STL.',
   },
   {
-    q: 'Como e quando recebo o acesso ao catálogo?',
+    q: 'Como e quando recebo o acesso ao acervo?',
     a: 'O acesso é imediato. Assim que o pagamento for confirmado (no Pix ou Cartão de Crédito é instantâneo), você recebe no seu e-mail o link de acesso direto à Área de Membros VIP com login e senha para começar a baixar imediatamente.',
   },
   {
@@ -700,7 +699,7 @@ const faqs = [
   },
   {
     q: 'Como funciona a Garantia de 14 Dias?',
-    a: 'Você tem 14 dias inteiros de garantia incondicional. Entre na plataforma, explore as coleções e confira os arquivos. Se por qualquer motivo achar que o catálogo não agregou para você, basta solicitar o reembolso que devolvemos 100% do seu dinheiro.',
+    a: 'Você tem 14 dias inteiros de garantia incondicional. Entre na plataforma, explore as coleções e confira os arquivos. Se por qualquer motivo achar que o acervo não agregou para você, basta solicitar o reembolso que devolvemos 100% do seu dinheiro.',
   },
 ];
 
@@ -979,7 +978,7 @@ export default function App() {
           </div>
 
           <p className="mt-2 mb-8 text-zinc-300 text-base md:text-lg max-w-2xl font-light leading-relaxed">
-            Tenha acesso a um catálogo completo de modelos 3D prontos para imprimir, sem perder horas garimpando arquivos na internet e tentando descobrir sozinho o que colocar na sua máquina para ter resultados reais.
+            Tenha acesso a um acervo completo de modelos 3D prontos para imprimir, sem perder horas garimpando arquivos na internet e tentando descobrir sozinho o que colocar na sua máquina para ter resultados reais.
           </p>
         </div>
 
@@ -1089,7 +1088,7 @@ export default function App() {
             }}
             className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
           >
-            <span>LIBERAR TODOS OS MODELOS DO CATÁLOGO</span>
+            <span>LIBERAR TODOS OS MODELOS DO ACERVO</span>
           </a>
         </div>
       </section>
@@ -1099,7 +1098,7 @@ export default function App() {
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
             <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
-              Conheça o <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.6)]">catálogo</span> por dentro
+              Conheça o <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.6)]">acervo</span> por dentro
             </h2>
             <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3.5 font-normal leading-relaxed">
               Você não vai precisar perder tempo procurando pasta por pasta. A <strong className="text-white font-semibold">Área de Membros VIP</strong> é 100% organizada por categorias para você encontrar o modelo desejado em segundos, baixar o arquivo pronto e colocar sua impressora para trabalhar.
@@ -1188,61 +1187,6 @@ export default function App() {
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-400">
                   <Play className="w-3.5 h-3.5 text-[#FFC700]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
                 </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card Vertical em Destaque com Modelo 3D Girando */}
-          <div className="mt-14 sm:mt-18 md:mt-24 flex flex-col items-center justify-center relative z-10 px-4 text-center">
-            {/* Copy em Destaque */}
-            <div className="max-w-xl mx-auto mb-6 sm:mb-8">
-              <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white leading-tight">
-                Você recebe também a <span className="grad-text drop-shadow-[0_0_20px_rgba(255,199,0,0.5)]">Coleção Minecraft 3D</span>
-              </h3>
-              <p className="text-zinc-400 text-xs sm:text-sm md:text-base mt-2 max-w-md mx-auto leading-relaxed">
-                Peças de forte apelo com fãs e colecionadores: arquivos STL de alta resolução, prontos para fatiar, imprimir e transformar em produtos físicos altamente procurados.
-              </p>
-            </div>
-
-            <div className="relative group w-[260px] xs:w-[290px] sm:w-[330px] md:w-[360px]">
-              {/* Brilho Dourado de Fundo */}
-              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-b from-[#FFC700]/25 via-transparent to-[#FFC700]/15 blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity" />
-
-              {/* Card Vertical (Mais Grandinho Retangular de Cima para Baixo) */}
-              <div className="relative aspect-[3/4.2] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col items-center justify-between overflow-hidden border border-[#FFC700]/35 border-t-2 border-t-[#FFC700] bg-gradient-to-b from-[#18181D]/90 via-[#0F0F13]/95 to-[#08080A] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(255,199,0,0.18)]">
-                {/* Iluminação de fundo atrás do modelo */}
-                <div className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full bg-[#FFC700]/10 blur-2xl pointer-events-none" />
-
-                {/* Badge Superior */}
-                <div className="relative z-10 w-full flex items-center justify-center">
-                  <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#FFC700] px-3 py-1 rounded-full bg-black/60 border border-[#FFC700]/30 shadow-inner">
-                    Arquivos STL Inclusos
-                  </span>
-                </div>
-
-                {/* Imagem Girando Devagar para Médio */}
-                <div className="relative z-10 w-full flex-1 flex items-center justify-center my-2">
-                  <img
-                    src={rotatingModelImg}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://i.imgur.com/OW0TvSS.png';
-                    }}
-                    alt="Coleção Minecraft 3D STL"
-                    width={235}
-                    height={231}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.95)] animate-spin-slow select-none"
-                  />
-                </div>
-
-                {/* Rodapé Interno */}
-                <div className="relative z-10 w-full text-center">
-                  <span className="text-zinc-400 font-display font-bold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFC700] animate-pulse" />
-                    Giro 360° do Modelo
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -1859,7 +1803,7 @@ export default function App() {
                   Garantia Incondicional de 14 Dias
                 </h3>
                 <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">
-                  Se você acessar o catálogo, olhar os modelos e achar que não valeu a pena, basta pedir o reembolso em até 14 dias. Devolvemos 100% do seu investimento, sem burocracia e sem perguntas.
+                  Se você acessar o acervo, olhar os modelos e achar que não valeu a pena, basta pedir o reembolso em até 14 dias. Devolvemos 100% do seu investimento, sem burocracia e sem perguntas.
                 </p>
               </div>
             </div>
