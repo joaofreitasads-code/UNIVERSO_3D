@@ -1831,7 +1831,7 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://www.globalcheckout.co/4ef02366-592e-4bf8-bce4-9126c7520cd8"
+                    href="https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N"
                     className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
                   >
                     QUERO A CENTRAL COMPLETA
@@ -2094,13 +2094,13 @@ export default function App() {
                   </ul>
                 </div>
                 <a
-                  href="https://www.globalcheckout.co/ef8c33b2-2d72-40f3-a74a-30c295f5a26c"
+                  href="https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY"
                   className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
                 >
                   SIM! LEVAR TUDO POR R$ 21,90
                 </a>
                 <a
-                  href="https://www.globalcheckout.co/aaccb2ac-2ba3-4666-8522-04e57188e29d"
+                  href="https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x"
                   className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
                   Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »
