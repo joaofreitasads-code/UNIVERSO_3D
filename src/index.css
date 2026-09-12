@@ -21,6 +21,10 @@
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
+
+  a, button, [role="button"], input, select, textarea {
+    touch-action: manipulation;
+  }
 }
 
 .font-display {
@@ -79,6 +83,7 @@
   display: flex;
   width: max-content;
   will-change: transform;
+  contain: layout paint;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -93,6 +98,7 @@
   display: flex;
   width: max-content;
   will-change: transform;
+  contain: layout paint;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -107,6 +113,7 @@
   display: flex;
   width: max-content;
   will-change: transform;
+  contain: layout paint;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;

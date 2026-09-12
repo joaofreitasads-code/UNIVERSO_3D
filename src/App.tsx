@@ -912,7 +912,7 @@ export default function App() {
                   poster={heroPoster}
                   controls={isHeroVideoActive}
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   width={1920}
                   height={1080}
                   className="w-full h-full object-cover rounded-2xl"
@@ -1006,7 +1006,7 @@ export default function App() {
       </section>
 
       {/* 7. Carrossel de Modelos */}
-      <section id="modelos-carrossel" className="pt-0 pb-16 relative">
+      <section id="modelos-carrossel" className="section-lazy pt-0 pb-16 relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFC700]/10 border border-[#FFC700]/30 text-[#FFC700] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(255,199,0,0.15)]">
@@ -1128,7 +1128,7 @@ export default function App() {
                     poster={notebookPoster}
                     controls={isNotebookVideoActive}
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     width={854}
                     height={480}
                     className="w-full h-full object-cover"
@@ -1308,6 +1308,8 @@ export default function App() {
                       <CleanImage
                         src={lucro1Image}
                         alt="Modelo 3D STL - Peça 1"
+                        width={128}
+                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -1326,6 +1328,8 @@ export default function App() {
                       <CleanImage
                         src={lucro2Image}
                         alt="Modelo 3D STL - Peça 2"
+                        width={128}
+                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -1344,6 +1348,8 @@ export default function App() {
                       <CleanImage
                         src={lucro3Image}
                         alt="Modelo 3D STL - Peça 3"
+                        width={128}
+                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>

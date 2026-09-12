@@ -12,11 +12,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ggcheckout.app" crossorigin>
     <link rel="preconnect" href="https://i.imgur.com" crossorigin>
+    <link rel="preconnect" href="https://www.clarity.ms" crossorigin>
     <link rel="dns-prefetch" href="https://ggcheckout.app">
     <link rel="dns-prefetch" href="https://i.imgur.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="dns-prefetch" href="https://www.clarity.ms">
+    <link rel="dns-prefetch" href="https://scripts.clarity.ms">
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap" media="print" onload="this.media='all'">
     <noscript>
@@ -40,7 +43,7 @@
           fbq('track', 'PageView');
         };
         if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(function() { initPixel(); }, { timeout: 1500 });
+          window.requestIdleCallback(function() { initPixel(); }, { timeout: 1200 });
         } else if (document.readyState === 'complete') {
           setTimeout(initPixel, 100);
         } else {
@@ -49,6 +52,28 @@
       })();
     </script>
     <!-- End Meta Pixel Code -->
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function() {
+        var initClarity = function() {
+          if (window._clarity_initialized) return;
+          window._clarity_initialized = true;
+          (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "yhe5wdl73s");
+        };
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(function() { initClarity(); }, { timeout: 1500 });
+        } else if (document.readyState === 'complete') {
+          setTimeout(initClarity, 150);
+        } else {
+          window.addEventListener('load', function() { setTimeout(initClarity, 150); });
+        }
+      })();
+    </script>
+    <!-- End Microsoft Clarity -->
   </head>
   <body class="bg-black text-white antialiased overflow-x-hidden">
     <!-- Meta Pixel Code (noscript) -->
