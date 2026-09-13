@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portal 3D - Acervo Premium de Impressão 3D</title>
+    <title>Portal 3D - Catálogo Premium de Impressão 3D</title>
     <meta name="description" content="Portal 3D - Biblioteca de arquivos STL para impressão 3D de colecionáveis, com divisão inteligente para peças de encaixe perfeito." />
     <meta name="theme-color" content="#000000" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -12,60 +12,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ggcheckout.app" crossorigin>
     <link rel="preconnect" href="https://i.imgur.com" crossorigin>
-    <link rel="preconnect" href="https://www.clarity.ms" crossorigin>
     <link rel="dns-prefetch" href="https://ggcheckout.app">
     <link rel="dns-prefetch" href="https://i.imgur.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://connect.facebook.net">
-    <link rel="dns-prefetch" href="https://www.clarity.ms">
-    <link rel="dns-prefetch" href="https://scripts.clarity.ms">
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap" media="print" onload="this.media='all'">
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap">
     </noscript>
-    <!-- Global Error Guard for WebViews and Analytics -->
-    <script>
-      window.addEventListener('error', function(e) {
-        if (e && e.filename && (e.filename.includes('facebook') || e.filename.includes('clarity') || e.filename.includes('instagram'))) {
-          e.preventDefault && e.preventDefault();
-        }
-      }, true);
-      window.addEventListener('unhandledrejection', function(e) {
-        if (e && e.reason) {
-          var str = String(e.reason);
-          if (str.includes('play()') || str.includes('AbortError') || str.includes('NotAllowedError')) {
-            e.preventDefault && e.preventDefault();
-          }
-        }
-      });
-    </script>
     <!-- Meta Pixel Code -->
     <script>
       (function() {
         var initPixel = function() {
           if (window._fbq_initialized) return;
           window._fbq_initialized = true;
-          try {
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            if (typeof fbq === 'function') {
-              fbq('init', '1077024758392496');
-              fbq('track', 'PageView');
-            }
-          } catch(err) {
-            console.warn('Pixel non-fatal error:', err);
-          }
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1077024758392496');
+          fbq('track', 'PageView');
         };
         if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(function() { initPixel(); }, { timeout: 1200 });
+          window.requestIdleCallback(function() { initPixel(); }, { timeout: 1500 });
         } else if (document.readyState === 'complete') {
           setTimeout(initPixel, 100);
         } else {
@@ -74,28 +49,6 @@
       })();
     </script>
     <!-- End Meta Pixel Code -->
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-      (function() {
-        var initClarity = function() {
-          if (window._clarity_initialized) return;
-          window._clarity_initialized = true;
-          (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "yhe5wdl73s");
-        };
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(function() { initClarity(); }, { timeout: 1500 });
-        } else if (document.readyState === 'complete') {
-          setTimeout(initClarity, 150);
-        } else {
-          window.addEventListener('load', function() { setTimeout(initClarity, 150); });
-        }
-      })();
-    </script>
-    <!-- End Microsoft Clarity -->
   </head>
   <body class="bg-black text-white antialiased overflow-x-hidden">
     <!-- Meta Pixel Code (noscript) -->

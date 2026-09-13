@@ -25,7 +25,7 @@ import lucro1Image from './assets/optimized/lucro-1.webp';
 import lucro2Image from './assets/optimized/lucro-2.webp';
 import lucro3Image from './assets/optimized/lucro-3.webp';
 import funkoBonusImage from './assets/optimized/funko-bonus.webp';
-import ofertaVipImage from './assets/optimized/oferta-vip.webp';
+import rotatingModelImg from './assets/optimized/rotating-model.webp';
 import carousel1 from './assets/optimized/carousel-1.webp';
 import carousel2 from './assets/optimized/carousel-2.webp';
 import carousel3 from './assets/optimized/carousel-3.webp';
@@ -54,6 +54,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Gift,
+  ShoppingCart,
 } from 'lucide-react';
 
 interface ModelItem {
@@ -483,7 +484,6 @@ const brands = [
 interface BonusItem {
   id: number;
   title: string;
-  description: string;
   priceOriginal: string;
   image?: string;
   imageClassName?: string;
@@ -493,8 +493,7 @@ interface BonusItem {
 const bonuses: BonusItem[] = [
   {
     id: 1,
-    title: 'PACK DE VEÍCULOS 3D PROFISSIONAIS',
-    description: 'Amplie seu acervo com uma coleção de veículos 3D, incluindo diferentes modelos de carros, motos, caminhões e outras opções para impressão.',
+    title: 'Pack de Veículos 3D Profissionais',
     priceOriginal: 'R$ 39,00',
     image: bonus1Image,
     icon: (
@@ -514,8 +513,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 2,
-    title: 'COLEÇÃO HERÓIS DA MARVEL',
-    description: 'Uma coleção especial com modelos 3D de heróis da Marvel, perfeita para quem procura personagens conhecidos, peças de exposição e itens colecionáveis.',
+    title: 'Coleção Heróis da Marvel',
     priceOriginal: 'R$ 49,00',
     image: bonus2Image,
     icon: (
@@ -529,8 +527,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 3,
-    title: 'PACK DE CHAVEIROS PERSONALIZADOS',
-    description: 'Tenha também uma coleção de chaveiros personalizados em 3D, com diversos modelos e estilos para imprimir e ampliar ainda mais as possibilidades do seu acervo.',
+    title: 'Pack de Chaveiros Personalizados',
     priceOriginal: 'R$ 29,00',
     image: bonus3Image,
     icon: (
@@ -543,8 +540,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 4,
-    title: 'MODELOS FLEXÍVEIS E ARTICULADOS',
-    description: 'Você também recebe uma coleção de modelos flexíveis e articulados, com peças que ganham movimento depois de impressas e chamam atenção pelo resultado.',
+    title: 'Modelos Flexíveis e Articulados',
     priceOriginal: 'R$ 37,00',
     image: bonus4Image,
     icon: (
@@ -559,8 +555,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 5,
-    title: 'COLEÇÃO CLÁSSICOS DOS DESENHOS',
-    description: 'Uma coleção repleta de personagens clássicos dos desenhos, com modelos conhecidos para imprimir, colecionar, presentear ou utilizar na decoração.',
+    title: 'Coleção Clássicos dos Desenhos',
     priceOriginal: 'R$ 35,00',
     image: bonus5Image,
     icon: (
@@ -576,8 +571,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 6,
-    title: 'COLEÇÃO MÁSCARAS 3D',
-    description: 'Tenha acesso a uma coleção de máscaras 3D, com diferentes personagens, estilos e designs para criar impressões maiores e ainda mais impressionantes.',
+    title: 'Coleção Máscaras 3D',
     priceOriginal: 'R$ 39,00',
     image: bonus6Image,
     icon: (
@@ -591,8 +585,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 7,
-    title: 'COLEÇÃO POKÉMON 3D',
-    description: 'Receba também uma coleção dedicada ao universo Pokémon, com diferentes personagens e criaturas transformados em modelos para impressão 3D.',
+    title: 'Coleção Pokémon 3D',
     priceOriginal: 'R$ 47,00',
     image: bonus7Image,
     icon: (
@@ -608,8 +601,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 8,
-    title: 'MASCOTES DE FUTEBOL 3D',
-    description: 'Uma coleção especial de mascotes de futebol em 3D, com diversos modelos inspirados no universo dos clubes e das torcidas.',
+    title: 'Mascotes de Futebol 3D',
     priceOriginal: 'R$ 39,00',
     image: bonus8Image,
     icon: (
@@ -622,8 +614,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 9,
-    title: 'HELICÓPTEROS 3D',
-    description: 'Adicione ao seu acervo uma coleção de helicópteros 3D, com diferentes modelos para quem gosta de aviação, veículos e projetos diferenciados.',
+    title: 'Helicópteros 3D',
     priceOriginal: 'R$ 39,00',
     image: bonus9Image,
     icon: (
@@ -643,8 +634,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 10,
-    title: 'COLEÇÃO LEGO 3D',
-    description: 'Você também recebe uma coleção de modelos em estilo LEGO, com personagens e peças variadas para deixar seu acervo ainda mais completo.',
+    title: 'Coleção Lego 3D',
     priceOriginal: 'R$ 39,00',
     image: bonus10Image,
     icon: (
@@ -659,8 +649,7 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 11,
-    title: 'COLEÇÃO MINECRAFT 3D',
-    description: 'E para completar, você recebe uma coleção inspirada no universo Minecraft, com personagens, criaturas e elementos conhecidos do jogo prontos para impressão 3D.',
+    title: 'Coleção Minecraft 3D',
     priceOriginal: 'R$ 47,00',
     image: bonus11Image,
     icon: (
@@ -686,7 +675,7 @@ const faqs = [
     a: 'Com certeza! Nos planos que acompanham a Licença Comercial, você tem autorização total para imprimir fisicamente os modelos e vender as peças prontas em marketplaces, feiras, lojas ou sob encomenda. O que não é permitido é redistribuir ou revender os arquivos digitais STL.',
   },
   {
-    q: 'Como e quando recebo o acesso ao acervo?',
+    q: 'Como e quando recebo o acesso ao catálogo?',
     a: 'O acesso é imediato. Assim que o pagamento for confirmado (no Pix ou Cartão de Crédito é instantâneo), você recebe no seu e-mail o link de acesso direto à Área de Membros VIP com login e senha para começar a baixar imediatamente.',
   },
   {
@@ -699,7 +688,7 @@ const faqs = [
   },
   {
     q: 'Como funciona a Garantia de 14 Dias?',
-    a: 'Você tem 14 dias inteiros de garantia incondicional. Entre na plataforma, explore as coleções e confira os arquivos. Se por qualquer motivo achar que o acervo não agregou para você, basta solicitar o reembolso que devolvemos 100% do seu dinheiro.',
+    a: 'Você tem 14 dias inteiros de garantia incondicional. Entre na plataforma, explore as coleções e confira os arquivos. Se por qualquer motivo achar que o catálogo não agregou para você, basta solicitar o reembolso que devolvemos 100% do seu dinheiro.',
   },
 ];
 
@@ -737,7 +726,7 @@ const depoimentosList: DepoimentoItem[] = [
   },
 ];
 
-const CarouselCard = React.memo(({ item, isPriority = false }: { item: ModelItem; isPriority?: boolean }) => {
+const CarouselCard = React.memo(({ item }: { item: ModelItem }) => {
   return (
     <div
       className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
@@ -750,12 +739,11 @@ const CarouselCard = React.memo(({ item, isPriority = false }: { item: ModelItem
             alt={item.title}
             width={256}
             height={256}
-            loading={isPriority ? 'eager' : 'lazy'}
-            fetchPriority={isPriority ? 'high' : 'low'}
+            loading="lazy"
             decoding="async"
+            fetchPriority="low"
             className={`w-full h-full object-contain object-bottom p-2 pb-1 md:group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
             onError={(e) => {
-              e.currentTarget.onerror = null;
               if (item.fallbackImage && e.currentTarget.src !== item.fallbackImage) {
                 e.currentTarget.src = item.fallbackImage;
               }
@@ -771,6 +759,54 @@ const CarouselCard = React.memo(({ item, isPriority = false }: { item: ModelItem
   );
 });
 CarouselCard.displayName = 'CarouselCard';
+
+const BonusCard = React.memo(({ bonus }: { bonus: BonusItem }) => {
+  return (
+    <div
+      className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3.5 md:p-5 pb-2 xs:pb-2.5 sm:pb-4 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-[1/1.45] xs:aspect-[1/1.4] sm:aspect-[1/1.3] md:aspect-[1/1.22] min-h-[180px] xs:min-h-[200px] sm:min-h-[235px] md:min-h-[290px] w-full"
+    >
+      <div className="w-full flex flex-col items-center shrink-0 mb-0.5 sm:mb-1">
+        <span className="grad-text font-black font-display text-[9.5px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
+          BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
+        </span>
+        <h4 className="text-[9px] xs:text-[10.5px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] xs:min-h-[25px] sm:min-h-[28px] md:min-h-[40px] flex items-center justify-center">
+          {bonus.title}
+        </h4>
+      </div>
+
+      <div className="w-full flex-1 min-h-[64px] xs:min-h-[76px] sm:min-h-[120px] md:min-h-[155px] flex items-center justify-center relative my-1 sm:my-2 px-1">
+        {bonus.image ? (
+          <img
+            src={bonus.image}
+            alt={bonus.title}
+            width={300}
+            height={300}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+            className="max-h-[62px] xs:max-h-[72px] sm:max-h-[125px] md:max-h-[160px] max-w-[92%] sm:max-w-[96%] w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
+          />
+        ) : (
+          <div className="w-11 h-11 xs:w-13 xs:h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3">
+            <div className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+              {bonus.icon}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="w-full flex items-center justify-center mt-auto pt-0.5 sm:pt-1.5 shrink-0">
+        <span
+          id={`bonus-gratis-${bonus.id}`}
+          className="text-[#FFC700] font-display font-black text-xs xs:text-sm sm:text-lg md:text-2xl lg:text-3xl uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_12px_rgba(255,199,0,0.7)]"
+        >
+          GRÁTIS
+        </span>
+      </div>
+    </div>
+  );
+});
+BonusCard.displayName = 'BonusCard';
 
 export default function App() {
   const [isMobile, setIsMobile] = useState<boolean>(() => {
@@ -797,74 +833,14 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [depoimentoIndex, setDepoimentoIndex] = useState(0);
   const [isHeroVideoActive, setIsHeroVideoActive] = useState(false);
-  const [isHeroPaused, setIsHeroPaused] = useState(false);
-  const [showHeroPlayTransient, setShowHeroPlayTransient] = useState(false);
-  const heroPlayAnimTimeoutRef = useRef<number | null>(null);
-  const lastHeroToggleTimeRef = useRef<number>(0);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [isNotebookVideoActive, setIsNotebookVideoActive] = useState(false);
   const notebookVideoRef = useRef<HTMLVideoElement>(null);
   const touchStartXRef = useRef<number | null>(null);
 
-  const triggerHeroPlayTransient = useCallback((durationMs = 350) => {
-    setShowHeroPlayTransient(true);
-    if (heroPlayAnimTimeoutRef.current) {
-      clearTimeout(heroPlayAnimTimeoutRef.current);
-    }
-    heroPlayAnimTimeoutRef.current = window.setTimeout(() => {
-      setShowHeroPlayTransient(false);
-    }, durationMs);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (heroPlayAnimTimeoutRef.current) {
-        clearTimeout(heroPlayAnimTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  // Proactive video pre-warming so video buffers before click
-  const warmHeroVideo = useCallback(() => {
-    if (heroVideoRef.current && heroVideoRef.current.preload !== 'auto') {
-      heroVideoRef.current.preload = 'auto';
-    }
-  }, []);
-
-  const warmNotebookVideo = useCallback(() => {
-    if (notebookVideoRef.current && notebookVideoRef.current.preload !== 'auto') {
-      notebookVideoRef.current.preload = 'auto';
-    }
-  }, []);
-
-  // Idle warm-up for instant video readiness without hurting initial render
-  useEffect(() => {
-    const idleWarm = () => {
-      if (heroVideoRef.current && heroVideoRef.current.preload !== 'auto') {
-        heroVideoRef.current.preload = 'metadata';
-      }
-      if (notebookVideoRef.current && notebookVideoRef.current.preload !== 'auto') {
-        notebookVideoRef.current.preload = 'metadata';
-      }
-    };
-    if (typeof window !== 'undefined') {
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(idleWarm, { timeout: 1500 });
-      } else {
-        setTimeout(idleWarm, 1000);
-      }
-    }
-  }, []);
-
   const handlePlayHeroVideo = useCallback(() => {
     setIsHeroVideoActive(true);
-    setIsHeroPaused(false);
-    setShowHeroPlayTransient(false);
-    if (heroPlayAnimTimeoutRef.current) {
-      clearTimeout(heroPlayAnimTimeoutRef.current);
-    }
     if (heroVideoRef.current) {
-      heroVideoRef.current.preload = 'auto';
       const playPromise = heroVideoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
@@ -874,66 +850,9 @@ export default function App() {
     }
   }, []);
 
-  const handleHeroOnPlay = useCallback(() => {
-    setIsHeroPaused(false);
-    if (heroPlayAnimTimeoutRef.current) {
-      clearTimeout(heroPlayAnimTimeoutRef.current);
-    }
-    setShowHeroPlayTransient(false);
-  }, []);
-
-  const handleHeroOnPause = useCallback(() => {
-    setIsHeroPaused(true);
-    setShowHeroPlayTransient(false);
-    if (heroPlayAnimTimeoutRef.current) {
-      clearTimeout(heroPlayAnimTimeoutRef.current);
-    }
-  }, []);
-
-  const handleHeroOnSeeked = useCallback(() => {
-    if (heroVideoRef.current && !heroVideoRef.current.paused) {
-      triggerHeroPlayTransient(350);
-    }
-  }, [triggerHeroPlayTransient]);
-
-  const handleHeroOnEnded = useCallback(() => {
-    setIsHeroPaused(true);
-    setShowHeroPlayTransient(false);
-    if (heroPlayAnimTimeoutRef.current) {
-      clearTimeout(heroPlayAnimTimeoutRef.current);
-    }
-  }, []);
-
-  const toggleHeroPlayPause = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
-    if (e) {
-      e.stopPropagation();
-    }
-    const now = Date.now();
-    if (now - lastHeroToggleTimeRef.current < 350) {
-      return;
-    }
-    lastHeroToggleTimeRef.current = now;
-
-    if (!heroVideoRef.current) return;
-    if (heroVideoRef.current.paused) {
-      setIsHeroPaused(false);
-      setShowHeroPlayTransient(false);
-      if (heroPlayAnimTimeoutRef.current) {
-        clearTimeout(heroPlayAnimTimeoutRef.current);
-      }
-      const playPromise = heroVideoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => console.warn('Hero video play error:', err));
-      }
-    } else {
-      heroVideoRef.current.pause();
-    }
-  }, []);
-
   const handlePlayNotebookVideo = useCallback(() => {
     setIsNotebookVideoActive(true);
     if (notebookVideoRef.current) {
-      notebookVideoRef.current.preload = 'auto';
       const playPromise = notebookVideoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
@@ -955,54 +874,17 @@ export default function App() {
     setOpenFaqIndex((prev) => (prev === index ? null : index));
   }, []);
 
-  const [isRedirecting, setIsRedirecting] = useState<string | null>(null);
-
-  const scrollToOffer = useCallback((e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-    }
-    const target = document.getElementById('oferta-pro') || document.getElementById('oferta');
-    if (target) {
-      const yOffset = -24;
-      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      try {
-        window.scrollTo({
-          top: Math.max(0, y),
-          behavior: 'smooth',
-        });
-      } catch {
-        window.scrollTo(0, Math.max(0, y));
-      }
-      try {
-        window.history.pushState(null, '', '#oferta-pro');
-      } catch {
-        window.location.hash = '#oferta-pro';
-      }
-    } else {
-      window.location.hash = '#oferta-pro';
-    }
-  }, []);
-
-  const handleCheckoutClick = useCallback((url: string, title = 'Pacote Completo VIP', price = 39.90) => {
-    return (_e: React.MouseEvent<HTMLAnchorElement>) => {
-      setIsRedirecting(url);
-      try {
-        if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
-          (window as any).fbq('track', 'InitiateCheckout', {
-            content_name: title,
-            value: price,
-            currency: 'BRL',
-          });
-        }
-      } catch (err) {
-        console.warn('InitiateCheckout tracking non-fatal error:', err);
-      }
-    };
-  }, []);
-
   const handleBaseClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     setIsUpsellOpen(true);
+  }, []);
+
+  const scrollToOffer = useCallback((e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const target = document.getElementById('oferta-pro');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }, []);
 
   return (
@@ -1020,17 +902,21 @@ export default function App() {
             <span className="block">Transforme sua impressora 3D em uma</span>
             <span className="block mt-1">
               <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">
-                fonte de renda com modelos que chamam atenção e vendem
+                fonte de renda com modelos que as pessoas realmente querem comprar
               </span>
             </span>
           </h1>
 
-          <p className="mt-4 text-sm sm:text-base md:text-lg text-zinc-300 max-w-2xl mx-auto font-medium leading-relaxed">
-            Tenha acesso imediato a uma coleção com modelos 3D prontos para imprimir, incluindo personagens, mascotes, Minecraft e muito mais.
-          </p>
+          {/* Live indicator badge */}
+          <div className="w-full flex flex-col items-center mt-6 mb-3">
+            <span className="text-sm sm:text-base md:text-lg font-black uppercase tracking-wide flex items-center gap-2">
+              <span className="live-dot inline-block w-3 h-3 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444]" />
+              Veja como funciona na prática
+            </span>
+          </div>
 
           {/* Video Presentation */}
-          <div className="w-full relative z-10 flex flex-col items-center mt-6 mb-8">
+          <div className="w-full relative z-10 flex flex-col items-center mt-1 mb-8">
             <div className="relative w-full max-w-3xl">
               <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#FFC700] via-[#F59E0B] to-[#D97706] opacity-70 blur-xl pointer-events-none" />
               <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border-2 border-[#FFC700] shadow-[0_0_30px_rgba(255,199,0,0.6)] bg-black flex items-center justify-center group">
@@ -1044,21 +930,15 @@ export default function App() {
                   preload="none"
                   width={1920}
                   height={1080}
-                  onPlay={handleHeroOnPlay}
-                  onPause={handleHeroOnPause}
-                  onSeeked={handleHeroOnSeeked}
-                  onEnded={handleHeroOnEnded}
                   className="w-full h-full object-cover rounded-2xl"
                 >
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
 
-                {/* Capa com o poster de apresentação e Botão Vermelho Estilo YouTube (antes do 1º play) */}
+                {/* Capa com o poster de apresentação e Botão Vermelho Estilo YouTube */}
                 {!isHeroVideoActive && (
                   <div
                     onClick={handlePlayHeroVideo}
-                    onMouseEnter={warmHeroVideo}
-                    onTouchStart={warmHeroVideo}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => {
@@ -1089,55 +969,24 @@ export default function App() {
                     </div>
                   </div>
                 )}
-
-                {/* Play no Meio da Tela durante Pausa ou Retomada / Voltar Vídeo (VSL Ativa) */}
-                {isHeroVideoActive && (
-                  <div
-                    onClick={isHeroPaused ? toggleHeroPlayPause : undefined}
-                    role={isHeroPaused ? 'button' : undefined}
-                    tabIndex={isHeroPaused ? 0 : -1}
-                    onKeyDown={(e) => {
-                      if (isHeroPaused && (e.key === 'Enter' || e.key === ' ')) {
-                        toggleHeroPlayPause();
-                      }
-                    }}
-                    className={`absolute top-0 left-0 right-0 bottom-14 z-20 flex items-center justify-center select-none ${
-                      isHeroPaused ? 'bg-black/25 pointer-events-auto cursor-pointer' : 'bg-transparent pointer-events-none'
-                    } transition-colors duration-150`}
-                    aria-label={isHeroPaused ? 'Retomar vídeo' : undefined}
-                  >
-                    {/* Botão Play Central Estilo YouTube - Some ultrarrápido ao retomar */}
-                    <div
-                      className={`relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] transition-all duration-150 transform ${
-                        isHeroPaused
-                          ? 'opacity-100 scale-100 shadow-[0_6px_35px_rgba(255,0,0,0.9)] cursor-pointer hover:scale-105 active:scale-95'
-                          : showHeroPlayTransient
-                          ? 'opacity-90 scale-105 shadow-[0_6px_35px_rgba(255,0,0,0.85)] pointer-events-none'
-                          : 'opacity-0 scale-75 pointer-events-none'
-                      }`}
-                    >
-                      <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
 
             {/* Botão de Compra Direto para a Oferta de 42,90 */}
             <div className="mt-8 w-full max-w-md px-2 flex flex-col items-center">
               <a
-                id="btn-hero-acesso-acervo"
                 href="#oferta-pro"
                 onClick={scrollToOffer}
-                className="group w-full inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(0,230,118,0.6)] hover:shadow-[0_0_50px_rgba(0,230,118,0.9)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
+                className="group w-full inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(0,230,118,0.6)] hover:shadow-[0_0_50px_rgba(0,230,118,0.9)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
               >
-                <span>QUERO MEU ACESSO AO ACERVO AGORA</span>
+                <ShoppingCart className="w-6 h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+                <span>QUERO MEU ACESSO AGORA</span>
               </a>
             </div>
           </div>
 
           <p className="mt-2 mb-8 text-zinc-300 text-base md:text-lg max-w-2xl font-light leading-relaxed">
-            Tenha acesso a um acervo completo de modelos 3D prontos para imprimir, sem perder horas garimpando arquivos na internet e tentando descobrir sozinho o que colocar na sua máquina para ter resultados reais.
+            Tenha acesso a um catálogo completo de modelos 3D prontos para imprimir, sem perder horas garimpando arquivos na internet e tentando descobrir sozinho o que colocar na sua máquina para ter resultados reais.
           </p>
         </div>
 
@@ -1187,12 +1036,12 @@ export default function App() {
           <div className="marquee-cards pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {activeLine1.map((item, idx) => (
-                <CarouselCard key={`card-l1-${item.id || idx}`} item={item} isPriority={idx < 4} />
+                <CarouselCard key={`card-l1-${item.id || idx}`} item={item} />
               ))}
             </div>
             <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
               {activeLine1.map((item, idx) => (
-                <CarouselCard key={`card-l1-dup-${item.id || idx}`} item={item} isPriority={false} />
+                <CarouselCard key={`card-l1-dup-${item.id || idx}`} item={item} />
               ))}
             </div>
           </div>
@@ -1205,12 +1054,12 @@ export default function App() {
           <div className="marquee-cards-reverse pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {activeLine2.map((item, idx) => (
-                <CarouselCard key={`card-l2-${item.id || idx}`} item={item} isPriority={false} />
+                <CarouselCard key={`card-l2-${item.id || idx}`} item={item} />
               ))}
             </div>
             <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
               {activeLine2.map((item, idx) => (
-                <CarouselCard key={`card-l2-dup-${item.id || idx}`} item={item} isPriority={false} />
+                <CarouselCard key={`card-l2-dup-${item.id || idx}`} item={item} />
               ))}
             </div>
           </div>
@@ -1223,12 +1072,12 @@ export default function App() {
           <div className="marquee-cards pointer-events-none select-none">
             <div className="flex items-center gap-4 px-2 shrink-0">
               {activeLine3.map((item, idx) => (
-                <CarouselCard key={`card-l3-${item.id || idx}`} item={item} isPriority={false} />
+                <CarouselCard key={`card-l3-${item.id || idx}`} item={item} />
               ))}
             </div>
             <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
               {activeLine3.map((item, idx) => (
-                <CarouselCard key={`card-l3-dup-${item.id || idx}`} item={item} isPriority={false} />
+                <CarouselCard key={`card-l3-dup-${item.id || idx}`} item={item} />
               ))}
             </div>
           </div>
@@ -1237,12 +1086,12 @@ export default function App() {
         {/* Botão de Compra - Seção Modelos */}
         <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
           <a
-            id="btn-carrossel-acesso-acervo"
             href="#oferta-pro"
             onClick={scrollToOffer}
-            className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
+            className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
           >
-            <span>LIBERAR TODOS OS MODELOS DO ACERVO</span>
+            <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+            <span>LIBERAR TODOS OS MODELOS 3D</span>
           </a>
         </div>
       </section>
@@ -1252,7 +1101,7 @@ export default function App() {
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
             <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
-              Conheça o <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.6)]">acervo</span> por dentro
+              Conheça o <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.6)]">catálogo</span> por dentro
             </h2>
             <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3.5 font-normal leading-relaxed">
               Você não vai precisar perder tempo procurando pasta por pasta. A <strong className="text-white font-semibold">Área de Membros VIP</strong> é 100% organizada por categorias para você encontrar o modelo desejado em segundos, baixar o arquivo pronto e colocar sua impressora para trabalhar.
@@ -1294,8 +1143,6 @@ export default function App() {
                   {!isNotebookVideoActive && (
                     <div
                       onClick={handlePlayNotebookVideo}
-                      onMouseEnter={warmNotebookVideo}
-                      onTouchStart={warmNotebookVideo}
                       role="button"
                       tabIndex={0}
                       onKeyDown={(e) => {
@@ -1345,15 +1192,70 @@ export default function App() {
             </div>
           </div>
 
+          {/* Card Vertical em Destaque com Modelo 3D Girando */}
+          <div className="mt-14 sm:mt-18 md:mt-24 flex flex-col items-center justify-center relative z-10 px-4 text-center">
+            {/* Copy em Destaque */}
+            <div className="max-w-xl mx-auto mb-6 sm:mb-8">
+              <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white leading-tight">
+                Você recebe também a <span className="grad-text drop-shadow-[0_0_20px_rgba(255,199,0,0.5)]">Coleção Minecraft 3D</span>
+              </h3>
+              <p className="text-zinc-400 text-xs sm:text-sm md:text-base mt-2 max-w-md mx-auto leading-relaxed">
+                Peças de forte apelo com fãs e colecionadores: arquivos STL de alta resolução, prontos para fatiar, imprimir e transformar em produtos físicos altamente procurados.
+              </p>
+            </div>
+
+            <div className="relative group w-[260px] xs:w-[290px] sm:w-[330px] md:w-[360px]">
+              {/* Brilho Dourado de Fundo */}
+              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-b from-[#FFC700]/25 via-transparent to-[#FFC700]/15 blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity" />
+
+              {/* Card Vertical (Mais Grandinho Retangular de Cima para Baixo) */}
+              <div className="relative aspect-[3/4.2] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col items-center justify-between overflow-hidden border border-[#FFC700]/35 border-t-2 border-t-[#FFC700] bg-gradient-to-b from-[#18181D]/90 via-[#0F0F13]/95 to-[#08080A] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(255,199,0,0.18)]">
+                {/* Iluminação de fundo atrás do modelo */}
+                <div className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full bg-[#FFC700]/10 blur-2xl pointer-events-none" />
+
+                {/* Badge Superior */}
+                <div className="relative z-10 w-full flex items-center justify-center">
+                  <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#FFC700] px-3 py-1 rounded-full bg-black/60 border border-[#FFC700]/30 shadow-inner">
+                    Arquivos STL Inclusos
+                  </span>
+                </div>
+
+                {/* Imagem Girando Devagar para Médio */}
+                <div className="relative z-10 w-full flex-1 flex items-center justify-center my-2">
+                  <img
+                    src={rotatingModelImg}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://i.imgur.com/OW0TvSS.png';
+                    }}
+                    alt="Coleção Minecraft 3D STL"
+                    width={235}
+                    height={231}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.95)] animate-spin-slow select-none"
+                  />
+                </div>
+
+                {/* Rodapé Interno */}
+                <div className="relative z-10 w-full text-center">
+                  <span className="text-zinc-400 font-display font-bold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFC700] animate-pulse" />
+                    Giro 360° do Modelo
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Botão de Compra - Seção Plataforma */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4 relative z-20">
             <a
-              id="btn-notebook-acesso-acervo"
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
-              <span>ACESSAR PLATAFORMA E ÁREA DE MEMBROS</span>
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>ACESSAR ÁREA DE MEMBROS VIP</span>
             </a>
           </div>
         </div>
@@ -1403,12 +1305,12 @@ export default function App() {
           {/* Botão de Compra - Seção Validação de Mercado */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
-              id="btn-validacao-imprimir-vender"
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
-              <span>QUERO IMPRIMIR E VENDER ESSAS PEÇAS</span>
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>QUERO VENDER ESSAS PEÇAS</span>
             </a>
           </div>
         </div>
@@ -1452,8 +1354,6 @@ export default function App() {
                       <CleanImage
                         src={lucro1Image}
                         alt="Modelo 3D STL - Peça 1"
-                        width={128}
-                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -1472,8 +1372,6 @@ export default function App() {
                       <CleanImage
                         src={lucro2Image}
                         alt="Modelo 3D STL - Peça 2"
-                        width={128}
-                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -1492,8 +1390,6 @@ export default function App() {
                       <CleanImage
                         src={lucro3Image}
                         alt="Modelo 3D STL - Peça 3"
-                        width={128}
-                        height={128}
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -1517,12 +1413,12 @@ export default function App() {
           {/* Botão de Compra - Seção Matemática Lucrativa */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
-              id="btn-lucros-multiplicar"
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
-              <span>QUERO MULTIPLICAR MEUS LUCROS NA IMPRESSÃO</span>
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>QUERO MULTIPLICAR MEUS LUCROS</span>
             </a>
           </div>
         </div>
@@ -1532,71 +1428,44 @@ export default function App() {
       <section id="bonus" className="section-lazy bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-44 md:w-[800px] md:h-[400px] bg-[#FFC700]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-2 text-[#FFC700] opacity-95">
-            E AINDA TEM MAIS NO SEU ACERVO
+          <p className="text-lg md:text-2xl font-bold uppercase tracking-widest mb-2 text-[#FFC700] opacity-95">
+            E não para por aí...
           </p>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-black uppercase tracking-tight mb-4 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] max-w-4xl mx-auto">
-            VOCÊ VAI RECEBER O ACERVO PRINCIPAL + 11 COLEÇÕES BÔNUS
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black uppercase tracking-tight mb-4 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            Além do Catálogo Principal
           </h2>
           <p className="text-zinc-300 text-base sm:text-xl md:text-2xl font-light max-w-3xl mx-auto mb-10 leading-relaxed">
-            Além de todos os modelos que você acabou de ver, seu acesso também inclui as <strong className="text-white font-semibold">11 coleções abaixo</strong>, sem pagar nada a mais.
+            Você ainda recebe <strong className="text-white font-semibold">11 coleções temáticas extras</strong> incluídas na sua oferta para ampliar ainda mais suas opções de impressão.
           </p>
-          <div className="inline-block px-6 py-3 sm:px-10 sm:py-4 bg-[#FFC700] text-black font-black font-display text-base sm:text-xl md:text-2xl uppercase tracking-tight mb-14 shadow-[0_0_40px_rgba(255,199,0,0.25)] rounded-xl">
-            CONFIRA TUDO O QUE TAMBÉM VAI FAZER PARTE DO SEU ACERVO
+          <div className="inline-block px-8 py-3.5 sm:px-10 sm:py-4 bg-[#FFC700] text-black font-black font-display text-xl sm:text-2xl md:text-3xl uppercase tracking-tight mb-14 shadow-[0_0_40px_rgba(255,199,0,0.25)] rounded-xl">
+            11 Coleções Bônus Inclusas
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-6xl mx-auto text-left">
-            {bonuses.map((bonus, index) => (
-              <div
-                key={`bonus-${bonus.id}`}
-                className={`bg-zinc-950/80 border border-white/10 hover:border-[#FFC700]/50 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 flex flex-row items-center gap-3.5 sm:gap-5 hover:bg-white/5 transition-all duration-300 border-t border-t-[#FFC700]/40 relative group shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(255,199,0,0.15)] ${
-                  index === 10 ? 'md:col-span-2 md:max-w-2xl md:mx-auto w-full' : 'w-full'
-                }`}
-              >
-                {/* Thumbnail */}
-                <div className="w-20 h-20 xs:w-24 xs:h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 shrink-0 bg-black/70 rounded-lg sm:rounded-xl border border-white/10 flex items-center justify-center p-2 group-hover:border-[#FFC700]/40 transition-colors relative overflow-hidden shadow-inner">
-                  {bonus.image ? (
-                    <img
-                      src={bonus.image}
-                      alt={bonus.title}
-                      width={200}
-                      height={200}
-                      loading="lazy"
-                      decoding="async"
-                      className="max-h-full max-w-full w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
-                    />
-                  ) : (
-                    <div className="w-10 h-10 rounded-lg bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center p-2 text-yellow-400">
-                      {bonus.icon}
-                    </div>
-                  )}
-                </div>
-
-                {/* Text Content */}
-                <div className="flex-1 flex flex-col justify-center min-w-0 py-0.5">
-                  <h4 className="font-display font-black text-xs xs:text-sm sm:text-base text-white group-hover:text-[#FFC700] transition-colors leading-snug mb-1.5 flex items-start gap-1.5">
-                    <span className="text-sm sm:text-base shrink-0">🎁</span>
-                    <span>
-                      BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id} — {bonus.title}
-                    </span>
-                  </h4>
-                  <p className="text-zinc-300 text-[11px] xs:text-xs sm:text-sm leading-relaxed font-normal">
-                    {bonus.description}
-                  </p>
-                </div>
-              </div>
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-6xl mx-auto text-left">
+            {bonuses.slice(0, 9).map((bonus) => (
+              <BonusCard key={`bonus-${bonus.id}`} bonus={bonus} />
             ))}
+            <div className="col-span-3 flex justify-center gap-2 sm:gap-4 md:gap-6">
+              {bonuses.slice(9).map((bonus) => (
+                <div
+                  key={`bonus-wrap-${bonus.id}`}
+                  className="w-[calc((100%-1rem)/3)] sm:w-[calc((100%-2rem)/3)] md:w-[calc((100%-3rem)/3)] flex"
+                >
+                  <BonusCard bonus={bonus} />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Botão de Compra - Seção Bônus */}
           <div className="mt-12 sm:mt-14 flex justify-center w-full px-4">
             <a
-              id="btn-bonus-acesso-acervo"
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
-              <span>GARANTIR ACERVO + 11 BÔNUS EXCLUSIVOS</span>
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>GARANTIR ACESSO + 11 BÔNUS GRÁTIS</span>
             </a>
           </div>
         </div>
@@ -1675,7 +1544,6 @@ export default function App() {
                       width={450}
                       height={800}
                       onError={(e) => {
-                        e.currentTarget.onerror = null;
                         if (dep.fallback && e.currentTarget.src !== dep.fallback) {
                           e.currentTarget.src = dep.fallback;
                         }
@@ -1731,12 +1599,12 @@ export default function App() {
           {/* Botão de Compra - Seção Depoimentos */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
-              id="btn-depoimentos-resultados"
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
-              <span>QUERO TER ESSES MESMOS RESULTADOS</span>
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>QUERO TER ESSES RESULTADOS</span>
             </a>
           </div>
         </div>
@@ -1837,12 +1705,8 @@ export default function App() {
                 <div className="w-full flex items-center justify-center mb-4 relative group">
                   <div className="absolute inset-0 bg-yellow-500/20 blur-xl rounded-full scale-90 pointer-events-none opacity-80" />
                   <img
-                    src={ofertaVipImage}
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = 'https://i.imgur.com/nXDJ6nH.png';
-                    }}
-                    alt="Pacote Completo VIP - Universo 3D"
+                    src={funkoBonusImage}
+                    alt="Pacote +500 Modelos Funkos STL"
                     width={320}
                     height={208}
                     loading="lazy"
@@ -1900,20 +1764,10 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
-                    id="btn-checkout-central-completa"
                     href="https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N"
-                    onClick={handleCheckoutClick('https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N', 'Pacote Completo VIP - R$ 39,90', 39.90)}
-                    rel="noopener noreferrer"
-                    className="block w-full bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer select-none"
+                    className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
                   >
-                    {isRedirecting === 'https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N' ? (
-                      <span className="flex items-center justify-center gap-2">
-                        <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-                        ABRINDO CHECKOUT SEGURO...
-                      </span>
-                    ) : (
-                      'QUERO A CENTRAL COMPLETA'
-                    )}
+                    QUERO A CENTRAL COMPLETA
                   </a>
                 </div>
               </div>
@@ -1950,7 +1804,7 @@ export default function App() {
                   Garantia Incondicional de 14 Dias
                 </h3>
                 <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">
-                  Se você acessar o acervo, olhar os modelos e achar que não valeu a pena, basta pedir o reembolso em até 14 dias. Devolvemos 100% do seu investimento, sem burocracia e sem perguntas.
+                  Se você acessar o catálogo, olhar os modelos e achar que não valeu a pena, basta pedir o reembolso em até 14 dias. Devolvemos 100% do seu investimento, sem burocracia e sem perguntas.
                 </p>
               </div>
             </div>
@@ -1995,12 +1849,12 @@ export default function App() {
           {/* Botão de Compra - Seção Garantia & FAQ */}
           <div className="mt-12 flex justify-center w-full px-4">
             <a
-              id="btn-faq-acesso-acervo"
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
             >
-              <span>EXPERIMENTAR POR 14 DIAS SEM RISCO</span>
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>EXPERIMENTAR SEM RISCO AGORA</span>
             </a>
           </div>
         </div>
@@ -2167,31 +2021,16 @@ export default function App() {
                   </ul>
                 </div>
                 <a
-                  id="btn-upsell-aceitar"
                   href="https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY"
-                  onClick={handleCheckoutClick('https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY', 'Oferta Especial Completa - R$ 21,90', 21.90)}
-                  rel="noopener noreferrer"
-                  className="block w-full bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] active:scale-95 shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer select-none"
+                  className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
                 >
-                  {isRedirecting === 'https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY' ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
-                      ABRINDO CHECKOUT...
-                    </span>
-                  ) : (
-                    'SIM! LEVAR TUDO POR R$ 21,90'
-                  )}
+                  SIM! LEVAR TUDO POR R$ 21,90
                 </a>
                 <a
-                  id="btn-upsell-recusar"
                   href="https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x"
-                  onClick={handleCheckoutClick('https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x', 'Plano Base - R$ 10,90', 10.90)}
-                  rel="noopener noreferrer"
-                  className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer select-none py-1 block"
+                  className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
-                  {isRedirecting === 'https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x'
-                    ? 'Abrindo Plano Base...'
-                    : 'Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »'}
+                  Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »
                 </a>
               </div>
             </div>

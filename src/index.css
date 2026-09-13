@@ -21,10 +21,6 @@
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
-
-  a, button, [role="button"], input, select, textarea {
-    touch-action: manipulation;
-  }
 }
 
 .font-display {
@@ -55,9 +51,10 @@
   transform: translateZ(0);
 }
 
-/* Estabilidade e fluidez de navegação móvel sem quebra de âncoras */
+/* Otimização de seções abaixo da dobra para carregar instantaneamente no celular */
 .section-lazy {
-  contain: none;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
 }
 
 @keyframes marqueeAnimation {
@@ -82,7 +79,6 @@
   display: flex;
   width: max-content;
   will-change: transform;
-  contain: layout paint;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -97,7 +93,6 @@
   display: flex;
   width: max-content;
   will-change: transform;
-  contain: layout paint;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -112,7 +107,6 @@
   display: flex;
   width: max-content;
   will-change: transform;
-  contain: layout paint;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;

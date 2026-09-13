@@ -33,7 +33,6 @@ export const CleanImage: React.FC<CleanImageProps> = memo(({
       fetchPriority={priority ? 'high' : 'low'}
       className={className}
       onError={(e) => {
-        e.currentTarget.onerror = null;
         if (fallbackSrc && e.currentTarget.src !== fallbackSrc) {
           e.currentTarget.src = fallbackSrc;
         }
