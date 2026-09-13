@@ -55,10 +55,9 @@
   transform: translateZ(0);
 }
 
-/* Otimização de seções abaixo da dobra para carregar instantaneamente no celular */
+/* Estabilidade e fluidez de navegação móvel sem quebra de âncoras */
 .section-lazy {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 700px;
+  contain: none;
 }
 
 @keyframes marqueeAnimation {

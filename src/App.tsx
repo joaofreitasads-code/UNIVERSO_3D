@@ -755,6 +755,7 @@ const CarouselCard = React.memo(({ item, isPriority = false }: { item: ModelItem
             decoding="async"
             className={`w-full h-full object-contain object-bottom p-2 pb-1 md:group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
             onError={(e) => {
+              e.currentTarget.onerror = null;
               if (item.fallbackImage && e.currentTarget.src !== item.fallbackImage) {
                 e.currentTarget.src = item.fallbackImage;
               }
@@ -796,10 +797,32 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [depoimentoIndex, setDepoimentoIndex] = useState(0);
   const [isHeroVideoActive, setIsHeroVideoActive] = useState(false);
+  const [isHeroPaused, setIsHeroPaused] = useState(false);
+  const [showHeroPlayTransient, setShowHeroPlayTransient] = useState(false);
+  const heroPlayAnimTimeoutRef = useRef<number | null>(null);
+  const lastHeroToggleTimeRef = useRef<number>(0);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [isNotebookVideoActive, setIsNotebookVideoActive] = useState(false);
   const notebookVideoRef = useRef<HTMLVideoElement>(null);
   const touchStartXRef = useRef<number | null>(null);
+
+  const triggerHeroPlayTransient = useCallback((durationMs = 350) => {
+    setShowHeroPlayTransient(true);
+    if (heroPlayAnimTimeoutRef.current) {
+      clearTimeout(heroPlayAnimTimeoutRef.current);
+    }
+    heroPlayAnimTimeoutRef.current = window.setTimeout(() => {
+      setShowHeroPlayTransient(false);
+    }, durationMs);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (heroPlayAnimTimeoutRef.current) {
+        clearTimeout(heroPlayAnimTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Proactive video pre-warming so video buffers before click
   const warmHeroVideo = useCallback(() => {
@@ -835,6 +858,11 @@ export default function App() {
 
   const handlePlayHeroVideo = useCallback(() => {
     setIsHeroVideoActive(true);
+    setIsHeroPaused(false);
+    setShowHeroPlayTransient(false);
+    if (heroPlayAnimTimeoutRef.current) {
+      clearTimeout(heroPlayAnimTimeoutRef.current);
+    }
     if (heroVideoRef.current) {
       heroVideoRef.current.preload = 'auto';
       const playPromise = heroVideoRef.current.play();
@@ -843,6 +871,62 @@ export default function App() {
           console.warn('Hero video play error:', err);
         });
       }
+    }
+  }, []);
+
+  const handleHeroOnPlay = useCallback(() => {
+    setIsHeroPaused(false);
+    if (heroPlayAnimTimeoutRef.current) {
+      clearTimeout(heroPlayAnimTimeoutRef.current);
+    }
+    setShowHeroPlayTransient(false);
+  }, []);
+
+  const handleHeroOnPause = useCallback(() => {
+    setIsHeroPaused(true);
+    setShowHeroPlayTransient(false);
+    if (heroPlayAnimTimeoutRef.current) {
+      clearTimeout(heroPlayAnimTimeoutRef.current);
+    }
+  }, []);
+
+  const handleHeroOnSeeked = useCallback(() => {
+    if (heroVideoRef.current && !heroVideoRef.current.paused) {
+      triggerHeroPlayTransient(350);
+    }
+  }, [triggerHeroPlayTransient]);
+
+  const handleHeroOnEnded = useCallback(() => {
+    setIsHeroPaused(true);
+    setShowHeroPlayTransient(false);
+    if (heroPlayAnimTimeoutRef.current) {
+      clearTimeout(heroPlayAnimTimeoutRef.current);
+    }
+  }, []);
+
+  const toggleHeroPlayPause = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    const now = Date.now();
+    if (now - lastHeroToggleTimeRef.current < 350) {
+      return;
+    }
+    lastHeroToggleTimeRef.current = now;
+
+    if (!heroVideoRef.current) return;
+    if (heroVideoRef.current.paused) {
+      setIsHeroPaused(false);
+      setShowHeroPlayTransient(false);
+      if (heroPlayAnimTimeoutRef.current) {
+        clearTimeout(heroPlayAnimTimeoutRef.current);
+      }
+      const playPromise = heroVideoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => console.warn('Hero video play error:', err));
+      }
+    } else {
+      heroVideoRef.current.pause();
     }
   }, []);
 
@@ -869,6 +953,51 @@ export default function App() {
 
   const toggleFaq = useCallback((index: number) => {
     setOpenFaqIndex((prev) => (prev === index ? null : index));
+  }, []);
+
+  const [isRedirecting, setIsRedirecting] = useState<string | null>(null);
+
+  const scrollToOffer = useCallback((e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+    const target = document.getElementById('oferta-pro') || document.getElementById('oferta');
+    if (target) {
+      const yOffset = -24;
+      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      try {
+        window.scrollTo({
+          top: Math.max(0, y),
+          behavior: 'smooth',
+        });
+      } catch {
+        window.scrollTo(0, Math.max(0, y));
+      }
+      try {
+        window.history.pushState(null, '', '#oferta-pro');
+      } catch {
+        window.location.hash = '#oferta-pro';
+      }
+    } else {
+      window.location.hash = '#oferta-pro';
+    }
+  }, []);
+
+  const handleCheckoutClick = useCallback((url: string, title = 'Pacote Completo VIP', price = 39.90) => {
+    return (_e: React.MouseEvent<HTMLAnchorElement>) => {
+      setIsRedirecting(url);
+      try {
+        if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
+          (window as any).fbq('track', 'InitiateCheckout', {
+            content_name: title,
+            value: price,
+            currency: 'BRL',
+          });
+        }
+      } catch (err) {
+        console.warn('InitiateCheckout tracking non-fatal error:', err);
+      }
+    };
   }, []);
 
   const handleBaseClick = useCallback((e: React.MouseEvent) => {
@@ -915,12 +1044,16 @@ export default function App() {
                   preload="none"
                   width={1920}
                   height={1080}
+                  onPlay={handleHeroOnPlay}
+                  onPause={handleHeroOnPause}
+                  onSeeked={handleHeroOnSeeked}
+                  onEnded={handleHeroOnEnded}
                   className="w-full h-full object-cover rounded-2xl"
                 >
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
 
-                {/* Capa com o poster de apresentação e Botão Vermelho Estilo YouTube */}
+                {/* Capa com o poster de apresentação e Botão Vermelho Estilo YouTube (antes do 1º play) */}
                 {!isHeroVideoActive && (
                   <div
                     onClick={handlePlayHeroVideo}
@@ -956,21 +1089,47 @@ export default function App() {
                     </div>
                   </div>
                 )}
+
+                {/* Play no Meio da Tela durante Pausa ou Retomada / Voltar Vídeo (VSL Ativa) */}
+                {isHeroVideoActive && (
+                  <div
+                    onClick={isHeroPaused ? toggleHeroPlayPause : undefined}
+                    role={isHeroPaused ? 'button' : undefined}
+                    tabIndex={isHeroPaused ? 0 : -1}
+                    onKeyDown={(e) => {
+                      if (isHeroPaused && (e.key === 'Enter' || e.key === ' ')) {
+                        toggleHeroPlayPause();
+                      }
+                    }}
+                    className={`absolute top-0 left-0 right-0 bottom-14 z-20 flex items-center justify-center select-none ${
+                      isHeroPaused ? 'bg-black/25 pointer-events-auto cursor-pointer' : 'bg-transparent pointer-events-none'
+                    } transition-colors duration-150`}
+                    aria-label={isHeroPaused ? 'Retomar vídeo' : undefined}
+                  >
+                    {/* Botão Play Central Estilo YouTube - Some ultrarrápido ao retomar */}
+                    <div
+                      className={`relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] transition-all duration-150 transform ${
+                        isHeroPaused
+                          ? 'opacity-100 scale-100 shadow-[0_6px_35px_rgba(255,0,0,0.9)] cursor-pointer hover:scale-105 active:scale-95'
+                          : showHeroPlayTransient
+                          ? 'opacity-90 scale-105 shadow-[0_6px_35px_rgba(255,0,0,0.85)] pointer-events-none'
+                          : 'opacity-0 scale-75 pointer-events-none'
+                      }`}
+                    >
+                      <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Botão de Compra Direto para a Oferta de 42,90 */}
             <div className="mt-8 w-full max-w-md px-2 flex flex-col items-center">
               <a
+                id="btn-hero-acesso-acervo"
                 href="#oferta-pro"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const target = document.getElementById('oferta-pro');
-                  if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                  }
-                }}
-                className="group w-full inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(0,230,118,0.6)] hover:shadow-[0_0_50px_rgba(0,230,118,0.9)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+                onClick={scrollToOffer}
+                className="group w-full inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(0,230,118,0.6)] hover:shadow-[0_0_50px_rgba(0,230,118,0.9)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
               >
                 <span>QUERO MEU ACESSO AO ACERVO AGORA</span>
               </a>
@@ -1078,15 +1237,10 @@ export default function App() {
         {/* Botão de Compra - Seção Modelos */}
         <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
           <a
+            id="btn-carrossel-acesso-acervo"
             href="#oferta-pro"
-            onClick={(e) => {
-              e.preventDefault();
-              const target = document.getElementById('oferta-pro');
-              if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
-            }}
-            className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            onClick={scrollToOffer}
+            className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
           >
             <span>LIBERAR TODOS OS MODELOS DO ACERVO</span>
           </a>
@@ -1194,15 +1348,10 @@ export default function App() {
           {/* Botão de Compra - Seção Plataforma */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4 relative z-20">
             <a
+              id="btn-notebook-acesso-acervo"
               href="#oferta-pro"
-              onClick={(e) => {
-                e.preventDefault();
-                const target = document.getElementById('oferta-pro');
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-              }}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              onClick={scrollToOffer}
+              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
             >
               <span>ACESSAR PLATAFORMA E ÁREA DE MEMBROS</span>
             </a>
@@ -1254,15 +1403,10 @@ export default function App() {
           {/* Botão de Compra - Seção Validação de Mercado */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
+              id="btn-validacao-imprimir-vender"
               href="#oferta-pro"
-              onClick={(e) => {
-                e.preventDefault();
-                const target = document.getElementById('oferta-pro');
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-              }}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              onClick={scrollToOffer}
+              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
             >
               <span>QUERO IMPRIMIR E VENDER ESSAS PEÇAS</span>
             </a>
@@ -1373,15 +1517,10 @@ export default function App() {
           {/* Botão de Compra - Seção Matemática Lucrativa */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
+              id="btn-lucros-multiplicar"
               href="#oferta-pro"
-              onClick={(e) => {
-                e.preventDefault();
-                const target = document.getElementById('oferta-pro');
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-              }}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              onClick={scrollToOffer}
+              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
             >
               <span>QUERO MULTIPLICAR MEUS LUCROS NA IMPRESSÃO</span>
             </a>
@@ -1452,15 +1591,10 @@ export default function App() {
           {/* Botão de Compra - Seção Bônus */}
           <div className="mt-12 sm:mt-14 flex justify-center w-full px-4">
             <a
+              id="btn-bonus-acesso-acervo"
               href="#oferta-pro"
-              onClick={(e) => {
-                e.preventDefault();
-                const target = document.getElementById('oferta-pro');
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-              }}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              onClick={scrollToOffer}
+              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
             >
               <span>GARANTIR ACERVO + 11 BÔNUS EXCLUSIVOS</span>
             </a>
@@ -1541,6 +1675,7 @@ export default function App() {
                       width={450}
                       height={800}
                       onError={(e) => {
+                        e.currentTarget.onerror = null;
                         if (dep.fallback && e.currentTarget.src !== dep.fallback) {
                           e.currentTarget.src = dep.fallback;
                         }
@@ -1596,15 +1731,10 @@ export default function App() {
           {/* Botão de Compra - Seção Depoimentos */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
+              id="btn-depoimentos-resultados"
               href="#oferta-pro"
-              onClick={(e) => {
-                e.preventDefault();
-                const target = document.getElementById('oferta-pro');
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-              }}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              onClick={scrollToOffer}
+              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
             >
               <span>QUERO TER ESSES MESMOS RESULTADOS</span>
             </a>
@@ -1709,7 +1839,8 @@ export default function App() {
                   <img
                     src={ofertaVipImage}
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://i.imgur.com/nXDJ6nH.png';
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = 'https://i.imgur.com/nXDJ6nH.png';
                     }}
                     alt="Pacote Completo VIP - Universo 3D"
                     width={320}
@@ -1769,10 +1900,20 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
+                    id="btn-checkout-central-completa"
                     href="https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N"
-                    className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
+                    onClick={handleCheckoutClick('https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N', 'Pacote Completo VIP - R$ 39,90', 39.90)}
+                    rel="noopener noreferrer"
+                    className="block w-full bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer select-none"
                   >
-                    QUERO A CENTRAL COMPLETA
+                    {isRedirecting === 'https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N' ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
+                        ABRINDO CHECKOUT SEGURO...
+                      </span>
+                    ) : (
+                      'QUERO A CENTRAL COMPLETA'
+                    )}
                   </a>
                 </div>
               </div>
@@ -1854,15 +1995,10 @@ export default function App() {
           {/* Botão de Compra - Seção Garantia & FAQ */}
           <div className="mt-12 flex justify-center w-full px-4">
             <a
+              id="btn-faq-acesso-acervo"
               href="#oferta-pro"
-              onClick={(e) => {
-                e.preventDefault();
-                const target = document.getElementById('oferta-pro');
-                if (target) {
-                  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-              }}
-              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              onClick={scrollToOffer}
+              className="group inline-flex items-center justify-center bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-emerald-300 cursor-pointer select-none"
             >
               <span>EXPERIMENTAR POR 14 DIAS SEM RISCO</span>
             </a>
@@ -2031,16 +2167,31 @@ export default function App() {
                   </ul>
                 </div>
                 <a
+                  id="btn-upsell-aceitar"
                   href="https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY"
-                  className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
+                  onClick={handleCheckoutClick('https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY', 'Oferta Especial Completa - R$ 21,90', 21.90)}
+                  rel="noopener noreferrer"
+                  className="block w-full bg-[#00E676] hover:bg-[#00C853] active:bg-[#00B248] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] active:scale-95 shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer select-none"
                 >
-                  SIM! LEVAR TUDO POR R$ 21,90
+                  {isRedirecting === 'https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY' ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin inline-block" />
+                      ABRINDO CHECKOUT...
+                    </span>
+                  ) : (
+                    'SIM! LEVAR TUDO POR R$ 21,90'
+                  )}
                 </a>
                 <a
+                  id="btn-upsell-recusar"
                   href="https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x"
-                  className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
+                  onClick={handleCheckoutClick('https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x', 'Plano Base - R$ 10,90', 10.90)}
+                  rel="noopener noreferrer"
+                  className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer select-none py-1 block"
                 >
-                  Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »
+                  {isRedirecting === 'https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x'
+                    ? 'Abrindo Plano Base...'
+                    : 'Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »'}
                 </a>
               </div>
             </div>
