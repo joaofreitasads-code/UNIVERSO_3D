@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import notebookPoster from './assets/poster-catalogo.webp';
-const heroPoster = '/poster-apresentacao.webp';
+const heroPoster = '/poster-apresentacao.webp?v=2';
 import seloGarantia from './assets/selo-garantia-14-dias.webp';
 import cardBg from './assets/card-bg.webp';
 import bonus1Image from './assets/optimized/bonus-1.webp';
@@ -825,9 +825,9 @@ export default function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const activeLine1 = isMobile ? line1Models.slice(0, 8) : line1Models.slice(0, 16);
-  const activeLine2 = isMobile ? line2Models.slice(0, 8) : line2Models.slice(0, 16);
-  const activeLine3 = isMobile ? line3Models.slice(0, 8) : line3Models.slice(0, 16);
+  const activeLine1 = isMobile ? line1Models.slice(0, 6) : line1Models.slice(0, 16);
+  const activeLine2 = isMobile ? line2Models.slice(0, 6) : line2Models.slice(0, 16);
+  const activeLine3 = isMobile ? line3Models.slice(0, 6) : line3Models.slice(0, 16);
 
   const [isUpsellOpen, setIsUpsellOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -897,40 +897,39 @@ export default function App() {
       <section id="hero-section" className="relative pb-16 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-yellow-500/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
 
-        <div className="w-full relative z-20 flex flex-col items-center pt-10 md:pt-16 pb-2 px-4 text-center max-w-4xl mx-auto">
-          <h1 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight leading-snug drop-shadow-2xl uppercase max-w-3xl mx-auto">
-            <span className="block">Transforme sua impressora 3D em uma</span>
-            <span className="block mt-1">
-              <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">
-                fonte de renda com modelos que as pessoas realmente querem comprar
-              </span>
+        <div className="w-full relative z-20 flex flex-col items-center pt-8 md:pt-14 pb-2 px-2 sm:px-4 text-center max-w-4xl mx-auto">
+          <h1 className="font-display font-black text-[clamp(11px,3.6vw,28px)] sm:text-2xl md:text-3xl lg:text-[2.35rem] tracking-tight leading-snug sm:leading-[1.25] uppercase inline-block text-left mx-auto select-none">
+            <span className="block whitespace-nowrap text-white drop-shadow-md">
+              VOCÊ NÃO COMPROU UMA IMPRESSORA 3D
+            </span>
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5">
+              <span className="text-white drop-shadow-md">PARA DEIXÁ-LA PARADA. </span>
+              <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">DESCUBRA NOVAS</span>
+            </span>
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">
+              IDEIAS DE PRODUTOS PARA IMPRIMIR E
+            </span>
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-center grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">
+              VENDER.
             </span>
           </h1>
 
-          {/* Live indicator badge */}
-          <div className="w-full flex flex-col items-center mt-6 mb-3">
-            <span className="text-sm sm:text-base md:text-lg font-black uppercase tracking-wide flex items-center gap-2">
-              <span className="live-dot inline-block w-3 h-3 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444]" />
-              Veja como funciona na prática
-            </span>
-          </div>
-
-          {/* Video Presentation */}
-          <div className="w-full relative z-10 flex flex-col items-center mt-1 mb-8">
-            <div className="relative w-full max-w-3xl">
-              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#FFC700] via-[#F59E0B] to-[#D97706] opacity-70 blur-xl pointer-events-none" />
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border-2 border-[#FFC700] shadow-[0_0_30px_rgba(255,199,0,0.6)] bg-black flex items-center justify-center group">
+          {/* Video Presentation - Vertical 9:16 */}
+          <div className="w-full relative z-10 flex flex-col items-center mt-6 mb-8">
+            <div className="relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[400px] mx-auto">
+              <div className="absolute -inset-2 rounded-[32px] sm:rounded-[40px] bg-gradient-to-r from-[#FFC700] via-[#F59E0B] to-[#D97706] opacity-75 blur-xl pointer-events-none" />
+              <div className="relative w-full aspect-[9/16] rounded-[24px] sm:rounded-[32px] overflow-hidden border-2 sm:border-[3px] border-[#FFC700] shadow-[0_0_40px_rgba(255,199,0,0.65)] bg-black flex items-center justify-center group">
                 <video
                   ref={heroVideoRef}
                   id="video-apresentacao"
-                  src="https://i.imgur.com/J2wZsui.mp4"
+                  src="https://i.imgur.com/n290rgX.mp4"
                   poster={heroPoster}
                   controls={isHeroVideoActive}
                   playsInline
                   preload="none"
-                  width={1920}
-                  height={1080}
-                  className="w-full h-full object-cover rounded-2xl"
+                  width={480}
+                  height={854}
+                  className="w-full h-full object-cover rounded-[24px] sm:rounded-[32px]"
                 >
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
@@ -939,6 +938,16 @@ export default function App() {
                 {!isHeroVideoActive && (
                   <div
                     onClick={handlePlayHeroVideo}
+                    onMouseEnter={() => {
+                      if (heroVideoRef.current && heroVideoRef.current.preload === 'none') {
+                        heroVideoRef.current.preload = 'metadata';
+                      }
+                    }}
+                    onTouchStart={() => {
+                      if (heroVideoRef.current && heroVideoRef.current.preload === 'none') {
+                        heroVideoRef.current.preload = 'metadata';
+                      }
+                    }}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => {
@@ -947,24 +956,25 @@ export default function App() {
                       }
                     }}
                     aria-label="Assistir ao vídeo de apresentação"
-                    className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none"
+                    className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none bg-black"
                   >
-                    {/* Imagem do Poster de Alta Nitidez */}
+                    {/* Imagem do Poster de Alta Nitidez em 9:16 */}
                     <img
                       src={heroPoster}
                       alt="Capa do Vídeo de Apresentação Universo 3D"
-                      width={1920}
-                      height={1080}
+                      width={480}
+                      height={854}
+                      loading="eager"
                       fetchPriority="high"
                       decoding="async"
                       className="absolute inset-0 w-full h-full object-cover select-none"
                     />
 
                     {/* Película sutil para dar profundidade sem escurecer nem embaçar */}
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors pointer-events-none" />
+                    <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors pointer-events-none" />
 
                     {/* Botão Oficial Vermelho Estilo YouTube */}
-                    <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:scale-110 group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                    <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-22 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:scale-110 group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
                       <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
                     </div>
                   </div>
@@ -972,8 +982,13 @@ export default function App() {
               </div>
             </div>
 
+            {/* Copy explicativa embaixo do vídeo */}
+            <p className="mt-6 mb-2 text-zinc-200 text-base sm:text-lg md:text-xl max-w-2xl text-center font-normal leading-relaxed px-4">
+              Tenha acesso a uma Central 3D com modelos selecionados, categorias com potencial comercial e novas ideias para você imprimir, anunciar e vender — sem passar horas procurando arquivos aleatórios pela internet.
+            </p>
+
             {/* Botão de Compra Direto para a Oferta de 42,90 */}
-            <div className="mt-8 w-full max-w-md px-2 flex flex-col items-center">
+            <div className="mt-6 w-full max-w-md px-2 flex flex-col items-center">
               <a
                 href="#oferta-pro"
                 onClick={scrollToOffer}
@@ -984,10 +999,6 @@ export default function App() {
               </a>
             </div>
           </div>
-
-          <p className="mt-2 mb-8 text-zinc-300 text-base md:text-lg max-w-2xl font-light leading-relaxed">
-            Tenha acesso a um catálogo completo de modelos 3D prontos para imprimir, sem perder horas garimpando arquivos na internet e tentando descobrir sozinho o que colocar na sua máquina para ter resultados reais.
-          </p>
         </div>
 
         {/* 6. Marcas Marquee */}
@@ -1122,6 +1133,16 @@ export default function App() {
                 {/* Screen Display area */}
                 <div
                   id="notebook-screen-area"
+                  onMouseEnter={() => {
+                    if (notebookVideoRef.current && notebookVideoRef.current.preload === 'none') {
+                      notebookVideoRef.current.preload = 'metadata';
+                    }
+                  }}
+                  onTouchStart={() => {
+                    if (notebookVideoRef.current && notebookVideoRef.current.preload === 'none') {
+                      notebookVideoRef.current.preload = 'metadata';
+                    }
+                  }}
                   className="relative rounded-md sm:rounded-lg md:rounded-xl overflow-hidden bg-[#000000] aspect-[16/9] border border-white/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.9)] flex items-center justify-center group"
                 >
                   <video
@@ -1691,7 +1712,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Card 2 - Coleção Completa VIP (R$ 39,90 - Destaque) */}
+            {/* Card 2 - Coleção Completa VIP (R$ 47,90 - Destaque) */}
             <div
               id="oferta-pro"
               className="w-full lg:max-w-[440px] bg-white text-black border-[2px] border-[#FFC700] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5)] flex flex-col scroll-mt-24"
@@ -1722,7 +1743,7 @@ export default function App() {
                   <p className="text-zinc-800 font-bold text-sm sm:text-base mb-1 leading-none uppercase">Por Apenas</p>
                   <div className="flex justify-center items-start text-black mb-1 drop-shadow-sm">
                     <span className="text-xl font-black mt-1 mr-1 text-black">R$</span>
-                    <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none text-black">39,90</span>
+                    <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none text-black">47,90</span>
                   </div>
                   <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">Pagamento Único</p>
                 </div>
@@ -1764,7 +1785,7 @@ export default function App() {
                 </div>
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://ggcheckout.app/checkout/v5/ntgPJQ4MrBCSDWVKZM7N"
+                    href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
                     className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
                   >
                     QUERO A CENTRAL COMPLETA
@@ -1861,7 +1882,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer id="main-footer" className="bg-[#0A0A0A] pt-12 pb-10 border-t border-white/10 text-zinc-400 font-light text-[11px] sm:text-xs text-center">
+      <footer id="main-footer" className="section-lazy bg-[#0A0A0A] pt-12 pb-10 border-t border-white/10 text-zinc-400 font-light text-[11px] sm:text-xs text-center">
         <div className="container mx-auto px-4 max-w-5xl">
           <p className="font-display font-black text-white text-lg sm:text-xl tracking-wider mb-3">
             UNIVERSO 3D™
@@ -2021,13 +2042,13 @@ export default function App() {
                   </ul>
                 </div>
                 <a
-                  href="https://ggcheckout.app/checkout/v5/x6diSt45MvOA9S0RraXY"
+                  href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
                   className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
                 >
                   SIM! LEVAR TUDO POR R$ 21,90
                 </a>
                 <a
-                  href="https://ggcheckout.app/checkout/v5/gXTXny9zA9muT9BeFg1x"
+                  href="https://checkout.wiven.com.br/checkout/cmtkws58g09hz01pypy1crecf?offer=32HECNZ"
                   className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
                   Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »

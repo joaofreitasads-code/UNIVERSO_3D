@@ -13,6 +13,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   body {
@@ -20,6 +21,11 @@
     background: #000000;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+  }
+
+  button, a {
+    touch-action: manipulation;
   }
 }
 
@@ -76,6 +82,7 @@
 }
 
 .marquee {
+  contain: layout style;
   display: flex;
   width: max-content;
   will-change: transform;
@@ -90,6 +97,7 @@
 }
 
 .marquee-cards {
+  contain: layout style;
   display: flex;
   width: max-content;
   will-change: transform;
@@ -104,6 +112,7 @@
 }
 
 .marquee-cards-reverse {
+  contain: layout style;
   display: flex;
   width: max-content;
   will-change: transform;

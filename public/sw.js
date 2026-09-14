@@ -1,5 +1,5 @@
 // Service Worker for Portal 3D - Ultra-fast caching
-const CACHE_NAME = 'portal3d-cache-v1';
+const CACHE_NAME = 'portal3d-cache-v3';
 
 const STATIC_ASSETS = [
   '/',
@@ -37,7 +37,7 @@ self.addEventListener('fetch', (event) => {
 
   // Skip non-GET requests or checkout/tracking requests
   if (event.request.method !== 'GET') return;
-  if (url.hostname.includes('facebook') || url.hostname.includes('ggcheckout')) return;
+  if (url.hostname.includes('facebook') || url.hostname.includes('ggcheckout') || url.hostname.includes('wiven.com.br')) return;
 
   // Stale-While-Revalidate for images, assets, fonts
   if (
