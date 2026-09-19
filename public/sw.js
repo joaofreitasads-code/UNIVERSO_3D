@@ -1,5 +1,5 @@
 // Service Worker for Portal 3D - Ultra-fast caching
-const CACHE_NAME = 'portal3d-cache-v3';
+const CACHE_NAME = 'portal3d-cache-v4';
 
 const STATIC_ASSETS = [
   '/',

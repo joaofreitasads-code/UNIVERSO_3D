@@ -2,9 +2,9 @@
 
 @layer base {
   :root {
-    --accent-1: #FFEF5C;
-    --accent-2: #FFC700;
-    --accent-3: #E5A100;
+    --accent-1: #FF6666;
+    --accent-2: #FF2B2B;
+    --accent-3: #D90429;
   }
 
   html {
@@ -34,7 +34,7 @@
 }
 
 .grad-text {
-  background: linear-gradient(90deg, #FFEF5C, #FFC700, #F59E0B);
+  background: linear-gradient(90deg, #FF6666, #FF2B2B, #D90429);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import notebookPoster from './assets/poster-catalogo.webp';
-const heroPoster = '/poster-apresentacao.webp?v=2';
+const heroPoster = '/poster-apresentacao.webp';
 import seloGarantia from './assets/selo-garantia-14-dias.webp';
+import pacoteVipImage from './assets/optimized/pacote-vip.webp';
 import cardBg from './assets/card-bg.webp';
 import bonus1Image from './assets/optimized/bonus-1.webp';
 import depoimento1 from './assets/optimized/depoimento-1.webp';
-import depoimento2 from './assets/optimized/depoimento-2.webp';
 import depoimento3 from './assets/optimized/depoimento-3.webp';
 import depoimento4 from './assets/optimized/depoimento-4.webp';
+import depoimento5 from './assets/optimized/depoimento-5.webp';
+import depoimento6 from './assets/optimized/depoimento-6.webp';
+import depoimento7 from './assets/optimized/depoimento-7.webp';
 import step1Img from './assets/optimized/step-1.webp';
 import step2Img from './assets/optimized/step-2.webp';
 import step3Img from './assets/optimized/step-3.webp';
@@ -25,7 +28,6 @@ import lucro1Image from './assets/optimized/lucro-1.webp';
 import lucro2Image from './assets/optimized/lucro-2.webp';
 import lucro3Image from './assets/optimized/lucro-3.webp';
 import funkoBonusImage from './assets/optimized/funko-bonus.webp';
-import rotatingModelImg from './assets/optimized/rotating-model.webp';
 import carousel1 from './assets/optimized/carousel-1.webp';
 import carousel2 from './assets/optimized/carousel-2.webp';
 import carousel3 from './assets/optimized/carousel-3.webp';
@@ -484,6 +486,7 @@ const brands = [
 interface BonusItem {
   id: number;
   title: string;
+  description: string;
   priceOriginal: string;
   image?: string;
   imageClassName?: string;
@@ -493,11 +496,13 @@ interface BonusItem {
 const bonuses: BonusItem[] = [
   {
     id: 1,
-    title: 'Pack de Veículos 3D Profissionais',
+    title: 'PACK DE VEÍCULOS 3D PROFISSIONAIS',
+    description:
+      'Amplie seu acervo com uma coleção de veículos 3D, incluindo diferentes modelos de carros, motos, caminhões e outras opções para impressão.',
     priceOriginal: 'R$ 39,00',
     image: bonus1Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <path
           d="M10 38 L16 28 C18 24 22 22 28 22 L40 22 C46 22 50 25 54 30 L58 35 C60 37 60 40 58 43 L56 45 C55 46 53 46 52 46 L12 46 C10 46 8 44 8 42 Z"
           fill="currentColor"
@@ -513,11 +518,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 2,
-    title: 'Coleção Heróis da Marvel',
+    title: 'COLEÇÃO HERÓIS DA MARVEL',
+    description:
+      'Uma coleção especial com modelos 3D de heróis da Marvel, perfeita para quem procura personagens conhecidos, peças de exposição e itens colecionáveis.',
     priceOriginal: 'R$ 49,00',
     image: bonus2Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.9" />
         <circle cx="32" cy="32" r="21" fill="none" stroke="currentColor" strokeWidth="2.5" opacity="0.6" />
         <circle cx="32" cy="32" r="14" fill="currentColor" opacity="0.3" />
@@ -527,11 +534,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 3,
-    title: 'Pack de Chaveiros Personalizados',
+    title: 'PACK DE CHAVEIROS PERSONALIZADOS',
+    description:
+      'Tenha também uma coleção de chaveiros personalizados em 3D, com diversos modelos e estilos para imprimir e ampliar ainda mais as possibilidades do seu acervo.',
     priceOriginal: 'R$ 29,00',
     image: bonus3Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <circle cx="22" cy="22" r="12" fill="none" stroke="currentColor" strokeWidth="3.5" />
         <circle cx="22" cy="22" r="6" fill="currentColor" opacity="0.3" />
         <path d="M31 31 L52 52 M44 44 L49 39 M49 49 L54 44" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
@@ -540,11 +549,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 4,
-    title: 'Modelos Flexíveis e Articulados',
+    title: 'MODELOS FLEXÍVEIS E ARTICULADOS',
+    description:
+      'Você também recebe uma coleção de modelos flexíveis e articulados, com peças que ganham movimento depois de impressas e chamam atenção pelo resultado.',
     priceOriginal: 'R$ 37,00',
     image: bonus4Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <path d="M10 32 C10 20 22 20 22 32 C22 44 34 44 34 32 C34 20 46 20 46 32 C46 44 58 44 58 32" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
         <circle cx="16" cy="32" r="4" fill="currentColor" />
         <circle cx="28" cy="32" r="4" fill="currentColor" />
@@ -555,11 +566,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 5,
-    title: 'Coleção Clássicos dos Desenhos',
+    title: 'COLEÇÃO CLÁSSICOS DOS DESENHOS',
+    description:
+      'Uma coleção repleta de personagens clássicos dos desenhos, com modelos conhecidos para imprimir, colecionar, presentear ou utilizar na decoração.',
     priceOriginal: 'R$ 35,00',
     image: bonus5Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <circle cx="32" cy="36" r="18" fill="currentColor" opacity="0.4" stroke="currentColor" strokeWidth="2.5" />
         <circle cx="18" cy="18" r="10" fill="currentColor" opacity="0.8" />
         <circle cx="46" cy="18" r="10" fill="currentColor" opacity="0.8" />
@@ -571,11 +584,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 6,
-    title: 'Coleção Máscaras 3D',
+    title: 'COLEÇÃO MÁSCARAS 3D',
+    description:
+      'Tenha acesso a uma coleção de máscaras 3D, com diferentes personagens, estilos e designs para criar impressões maiores e ainda mais impressionantes.',
     priceOriginal: 'R$ 39,00',
     image: bonus6Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <path d="M14 20 C14 12 50 12 50 20 C52 36 44 52 32 56 C20 52 12 36 14 20 Z" fill="none" stroke="currentColor" strokeWidth="3" />
         <path d="M19 28 Q26 24 30 30 M45 28 Q38 24 34 30" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none" />
         <line x1="32" y1="32" x2="32" y2="42" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
@@ -585,11 +600,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 7,
-    title: 'Coleção Pokémon 3D',
+    title: 'COLEÇÃO POKÉMON 3D',
+    description:
+      'Receba também uma coleção dedicada ao universo Pokémon, com diferentes personagens e criaturas transformados em modelos para impressão 3D.',
     priceOriginal: 'R$ 47,00',
     image: bonus7Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" strokeWidth="3.5" />
         <line x1="6" y1="32" x2="24" y2="32" stroke="currentColor" strokeWidth="3.5" />
         <line x1="40" y1="32" x2="58" y2="32" stroke="currentColor" strokeWidth="3.5" />
@@ -601,11 +618,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 8,
-    title: 'Mascotes de Futebol 3D',
+    title: 'MASCOTES DE FUTEBOL 3D',
+    description:
+      'Uma coleção especial de mascotes de futebol em 3D, com diversos modelos inspirados no universo dos clubes e das torcidas.',
     priceOriginal: 'R$ 39,00',
     image: bonus8Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <path d="M32 6 L52 14 V32 C52 46 32 58 32 58 C32 58 12 46 12 32 V14 Z" fill="none" stroke="currentColor" strokeWidth="2.5" opacity="0.6" />
         <circle cx="32" cy="30" r="15" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2" />
         <polygon points="32,23 37,27 35,33 29,33 27,27" fill="currentColor" opacity="0.9" />
@@ -614,11 +633,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 9,
-    title: 'Helicópteros 3D',
+    title: 'HELICÓPTEROS 3D',
+    description:
+      'Adicione ao seu acervo uma coleção de helicópteros 3D, com diferentes modelos para quem gosta de aviação, veículos e projetos diferenciados.',
     priceOriginal: 'R$ 39,00',
     image: bonus9Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <line x1="12" y1="16" x2="52" y2="16" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
         <line x1="32" y1="16" x2="32" y2="24" stroke="currentColor" strokeWidth="3" />
         <path d="M22 24 C14 24 10 30 10 38 C10 44 16 46 26 46 H40 C44 46 48 42 48 36 C48 30 42 24 34 24 Z" fill="currentColor" opacity="0.85" />
@@ -634,11 +655,13 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 10,
-    title: 'Coleção Lego 3D',
+    title: 'COLEÇÃO LEGO 3D',
+    description:
+      'Você também recebe uma coleção de modelos em estilo LEGO, com personagens e peças variadas para deixar seu acervo ainda mais completo.',
     priceOriginal: 'R$ 39,00',
     image: bonus10Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <rect x="12" y="24" width="40" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="2.5" />
         <rect x="18" y="16" width="10" height="8" rx="2" fill="currentColor" opacity="0.9" />
         <rect x="36" y="16" width="10" height="8" rx="2" fill="currentColor" opacity="0.9" />
@@ -649,17 +672,38 @@ const bonuses: BonusItem[] = [
   },
   {
     id: 11,
-    title: 'Coleção Minecraft 3D',
+    title: 'COLEÇÃO MINECRAFT 3D',
+    description:
+      'E para completar, você recebe uma coleção inspirada no universo Minecraft, com personagens, criaturas e elementos conhecidos do jogo prontos para impressão 3D.',
     priceOriginal: 'R$ 47,00',
     image: bonus11Image,
     icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-yellow-300">
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
         <rect x="14" y="14" width="36" height="36" rx="3" fill="none" stroke="currentColor" strokeWidth="3" />
         <rect x="22" y="24" width="6" height="6" fill="currentColor" opacity="0.9" />
         <rect x="36" y="24" width="6" height="6" fill="currentColor" opacity="0.9" />
         <rect x="28" y="30" width="8" height="10" fill="currentColor" opacity="0.9" />
         <rect x="24" y="40" width="4" height="6" fill="currentColor" opacity="0.9" />
         <rect x="36" y="40" width="4" height="6" fill="currentColor" opacity="0.9" />
+      </svg>
+    ),
+  },
+  {
+    id: 12,
+    title: 'COLEÇÃO AMIGURUMIS 3D',
+    description:
+      'Amplie ainda mais seu acervo com uma coleção de Amigurumis 3D, com modelos inspirados no visual do crochê, trazendo personagens, animais e peças fofas para imprimir e colecionar.',
+    priceOriginal: 'R$ 47,00',
+    image: 'https://i.imgur.com/BIKsask.png',
+    icon: (
+      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
+        <circle cx="32" cy="34" r="18" fill="none" stroke="currentColor" strokeWidth="2.5" />
+        <ellipse cx="22" cy="20" rx="6" ry="10" fill="currentColor" opacity="0.9" />
+        <ellipse cx="42" cy="20" rx="6" ry="10" fill="currentColor" opacity="0.9" />
+        <circle cx="26" cy="33" r="3" fill="currentColor" />
+        <circle cx="38" cy="33" r="3" fill="currentColor" />
+        <ellipse cx="32" cy="39" rx="3.5" ry="2.5" fill="currentColor" opacity="0.9" />
+        <path d="M29 42 Q32 45 35 42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
       </svg>
     ),
   },
@@ -708,20 +752,32 @@ const depoimentosList: DepoimentoItem[] = [
   },
   {
     id: 2,
-    image: depoimento2,
-    fallback: 'https://i.imgur.com/9oC2Dxw.png',
-    alt: 'Depoimento real de aluno - Universo 3D',
-  },
-  {
-    id: 3,
     image: depoimento3,
     fallback: 'https://i.imgur.com/u6Ni9cj.png',
     alt: 'Depoimento real de aluno - Universo 3D',
   },
   {
-    id: 4,
+    id: 3,
     image: depoimento4,
     fallback: 'https://i.imgur.com/ClBxb0D.png',
+    alt: 'Depoimento real de aluno - Universo 3D',
+  },
+  {
+    id: 4,
+    image: depoimento5,
+    fallback: 'https://i.imgur.com/Mpywmfj.png',
+    alt: 'Depoimento real de aluno - Universo 3D',
+  },
+  {
+    id: 5,
+    image: depoimento6,
+    fallback: 'https://i.imgur.com/jpBrWyK.png',
+    alt: 'Depoimento real de aluno - Universo 3D',
+  },
+  {
+    id: 6,
+    image: depoimento7,
+    fallback: 'https://i.imgur.com/Ys2ErTe.png',
     alt: 'Depoimento real de aluno - Universo 3D',
   },
 ];
@@ -750,7 +806,7 @@ const CarouselCard = React.memo(({ item }: { item: ModelItem }) => {
             }}
           />
         ) : (
-          <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-yellow-400'}`}>
+          <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-[#FF2B2B]'}`}>
             {item.icon}
           </div>
         )}
@@ -761,47 +817,50 @@ const CarouselCard = React.memo(({ item }: { item: ModelItem }) => {
 CarouselCard.displayName = 'CarouselCard';
 
 const BonusCard = React.memo(({ bonus }: { bonus: BonusItem }) => {
+  const formattedId = bonus.id < 10 ? `0${bonus.id}` : `${bonus.id}`;
+
   return (
     <div
-      className="bg-black/50 border border-white/10 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3.5 md:p-5 pb-2 xs:pb-2.5 sm:pb-4 md:pb-6 flex flex-col items-center justify-between text-center hover:bg-white/5 transition-colors border-t border-t-[#FFC700]/40 relative group aspect-[1/1.45] xs:aspect-[1/1.4] sm:aspect-[1/1.3] md:aspect-[1/1.22] min-h-[180px] xs:min-h-[200px] sm:min-h-[235px] md:min-h-[290px] w-full"
+      id={`bonus-card-${bonus.id}`}
+      className="w-full bg-[#0E0E12] border border-white/10 hover:border-[#FF2B2B]/50 rounded-xl p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.8),0_0_15px_rgba(255,43,43,0.18)] group relative overflow-hidden text-left"
     >
-      <div className="w-full flex flex-col items-center shrink-0 mb-0.5 sm:mb-1">
-        <span className="grad-text font-black font-display text-[9.5px] xs:text-xs sm:text-base md:text-2xl mb-0.5 sm:mb-1 md:mb-1.5 tracking-wider sm:tracking-widest">
-          BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
-        </span>
-        <h4 className="text-[9px] xs:text-[10.5px] sm:text-xs md:text-base font-bold uppercase tracking-tight sm:tracking-wide line-clamp-2 leading-tight min-h-[22px] xs:min-h-[25px] sm:min-h-[28px] md:min-h-[40px] flex items-center justify-center">
-          {bonus.title}
-        </h4>
-      </div>
+      <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-gradient-to-b from-[#FF2B2B] via-[#FF2B2B]/40 to-transparent" />
 
-      <div className="w-full flex-1 min-h-[64px] xs:min-h-[76px] sm:min-h-[120px] md:min-h-[155px] flex items-center justify-center relative my-1 sm:my-2 px-1">
+      {/* Caixa compacta retangular da imagem */}
+      <div className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 shrink-0 bg-black/70 rounded-lg border border-white/5 flex items-center justify-center p-1 sm:p-2 relative overflow-hidden group-hover:border-[#FF2B2B]/30 transition-colors">
+        <div className="absolute inset-0 bg-[#FF2B2B]/5 blur-md rounded-full scale-75 pointer-events-none opacity-40" />
         {bonus.image ? (
           <img
             src={bonus.image}
             alt={bonus.title}
-            width={300}
-            height={300}
+            width={120}
+            height={120}
             loading="lazy"
             decoding="async"
             fetchPriority="low"
-            className="max-h-[62px] xs:max-h-[72px] sm:max-h-[125px] md:max-h-[160px] max-w-[92%] sm:max-w-[96%] w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none"
+            className="max-h-14 xs:max-h-16 sm:max-h-20 w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none relative z-10"
           />
         ) : (
-          <div className="w-11 h-11 xs:w-13 xs:h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-lg sm:rounded-xl bg-yellow-400/5 border border-yellow-400/15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(255,199,0,0.15)] p-2 sm:p-3">
-            <div className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
-              {bonus.icon}
-            </div>
+          <div className="w-10 h-10 rounded-lg bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 flex items-center justify-center relative z-10">
+            {bonus.icon}
           </div>
         )}
       </div>
 
-      <div className="w-full flex items-center justify-center mt-auto pt-0.5 sm:pt-1.5 shrink-0">
-        <span
-          id={`bonus-gratis-${bonus.id}`}
-          className="text-[#FFC700] font-display font-black text-xs xs:text-sm sm:text-lg md:text-2xl lg:text-3xl uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_12px_rgba(255,199,0,0.7)]"
-        >
-          GRÁTIS
-        </span>
+      {/* Conteúdo da Copy */}
+      <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
+        <div className="mb-1">
+          <h3 className="font-display font-black text-xs sm:text-[13px] md:text-sm text-white uppercase tracking-tight flex items-center gap-1.5 leading-tight">
+            <span className="text-xs sm:text-sm shrink-0">🎁</span>
+            <span className="text-[#FF2B2B] shrink-0">BÔNUS {formattedId}</span>
+            <span className="text-zinc-500 font-bold shrink-0">—</span>
+            <span className="text-white truncate">{bonus.title}</span>
+          </h3>
+        </div>
+
+        <p className="text-zinc-300 text-[11px] sm:text-xs leading-relaxed font-normal">
+          {bonus.description}
+        </p>
       </div>
     </div>
   );
@@ -841,10 +900,18 @@ export default function App() {
   const handlePlayHeroVideo = useCallback(() => {
     setIsHeroVideoActive(true);
     if (heroVideoRef.current) {
+      if (!heroVideoRef.current.src || !heroVideoRef.current.src.includes('s6S0rd5.mp4')) {
+        heroVideoRef.current.src = "https://i.imgur.com/s6S0rd5.mp4";
+      }
+      heroVideoRef.current.muted = false;
+      heroVideoRef.current.volume = 1.0;
       const playPromise = heroVideoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
-          console.warn('Hero video play error:', err);
+          console.warn('Hero video play error with sound, attempting retry:', err);
+          if (heroVideoRef.current) {
+            heroVideoRef.current.play().catch(() => {});
+          }
         });
       }
     }
@@ -853,10 +920,18 @@ export default function App() {
   const handlePlayNotebookVideo = useCallback(() => {
     setIsNotebookVideoActive(true);
     if (notebookVideoRef.current) {
+      if (!notebookVideoRef.current.src || !notebookVideoRef.current.src.includes('XMHWIse.mp4')) {
+        notebookVideoRef.current.src = "https://i.imgur.com/XMHWIse.mp4";
+      }
+      notebookVideoRef.current.muted = false;
+      notebookVideoRef.current.volume = 1.0;
       const playPromise = notebookVideoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
-          console.warn('Notebook video play error:', err);
+          console.warn('Notebook video play error with sound, attempting retry:', err);
+          if (notebookVideoRef.current) {
+            notebookVideoRef.current.play().catch(() => {});
+          }
         });
       }
     }
@@ -888,14 +963,14 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white relative antialiased selection:bg-yellow-400 selection:text-black">
+    <div className="min-h-screen bg-black text-white relative antialiased selection:bg-[#FF2B2B] selection:text-white">
       {/* Background Starfield */}
       <div className="fixed inset-0 z-[-1] pointer-events-none bg-stars opacity-60" />
 
 
       {/* 2-5. Hero Section */}
       <section id="hero-section" className="relative pb-16 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-yellow-500/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#FF2B2B]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
 
         <div className="w-full relative z-20 flex flex-col items-center pt-8 md:pt-14 pb-2 px-2 sm:px-4 text-center max-w-4xl mx-auto">
           <h1 className="font-display font-black text-[clamp(11px,3.6vw,28px)] sm:text-2xl md:text-3xl lg:text-[2.35rem] tracking-tight leading-snug sm:leading-[1.25] uppercase inline-block text-left mx-auto select-none">
@@ -904,12 +979,12 @@ export default function App() {
             </span>
             <span className="block whitespace-nowrap mt-1 sm:mt-1.5">
               <span className="text-white drop-shadow-md">PARA DEIXÁ-LA PARADA. </span>
-              <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">DESCUBRA NOVAS</span>
+              <span className="text-[#FF2B2B]">DESCUBRA NOVAS</span>
             </span>
-            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-[#FF2B2B]">
               IDEIAS DE PRODUTOS PARA IMPRIMIR E
             </span>
-            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-center grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.5)]">
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-center text-[#FF2B2B]">
               VENDER.
             </span>
           </h1>
@@ -917,12 +992,13 @@ export default function App() {
           {/* Video Presentation - Vertical 9:16 */}
           <div className="w-full relative z-10 flex flex-col items-center mt-6 mb-8">
             <div className="relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[400px] mx-auto">
-              <div className="absolute -inset-2 rounded-[32px] sm:rounded-[40px] bg-gradient-to-r from-[#FFC700] via-[#F59E0B] to-[#D97706] opacity-75 blur-xl pointer-events-none" />
-              <div className="relative w-full aspect-[9/16] rounded-[24px] sm:rounded-[32px] overflow-hidden border-2 sm:border-[3px] border-[#FFC700] shadow-[0_0_40px_rgba(255,199,0,0.65)] bg-black flex items-center justify-center group">
+              <div className="absolute -inset-2 rounded-[32px] sm:rounded-[40px] bg-gradient-to-r from-[#FF2B2B] via-[#FF4444] to-[#CC0022] opacity-75 blur-xl pointer-events-none" />
+              <div className="relative w-full aspect-[9/16] rounded-[24px] sm:rounded-[32px] overflow-hidden border-2 sm:border-[3px] border-[#FF2B2B] shadow-[0_0_40px_rgba(255,43,43,0.7)] bg-black flex items-center justify-center group">
                 <video
                   ref={heroVideoRef}
                   id="video-apresentacao"
-                  src="https://i.imgur.com/n290rgX.mp4"
+                  src={isHeroVideoActive ? "https://i.imgur.com/s6S0rd5.mp4" : undefined}
+                  data-src="https://i.imgur.com/s6S0rd5.mp4"
                   poster={heroPoster}
                   controls={isHeroVideoActive}
                   playsInline
@@ -973,9 +1049,14 @@ export default function App() {
                     {/* Película sutil para dar profundidade sem escurecer nem embaçar */}
                     <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors pointer-events-none" />
 
-                    {/* Botão Oficial Vermelho Estilo YouTube */}
-                    <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-22 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:scale-110 group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
-                      <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                    {/* Botão Oficial Vermelho Estilo YouTube com Texto 'Assistir Vídeo' */}
+                    <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
+                      <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-22 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                        <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                      </div>
+                      <span className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white font-display font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+                        Assistir Vídeo
+                      </span>
                     </div>
                   </div>
                 )}
@@ -992,7 +1073,7 @@ export default function App() {
               <a
                 href="#oferta-pro"
                 onClick={scrollToOffer}
-                className="group w-full inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_35px_rgba(0,230,118,0.6)] hover:shadow-[0_0_50px_rgba(0,230,118,0.9)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+                className="group w-full inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-base sm:text-lg uppercase tracking-wide py-4 px-6 rounded-2xl text-center shadow-[0_0_40px_rgba(0,255,102,0.8),0_0_20px_rgba(0,255,102,0.5)] hover:shadow-[0_0_55px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
               >
                 <ShoppingCart className="w-6 h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
                 <span>QUERO MEU ACESSO AGORA</span>
@@ -1028,7 +1109,7 @@ export default function App() {
       <section id="modelos-carrossel" className="section-lazy pt-0 pb-16 relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFC700]/10 border border-[#FFC700]/30 text-[#FFC700] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(255,199,0,0.15)]">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FF2B2B]/10 border border-[#FF2B2B]/30 text-[#FF2B2B] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(255,43,43,0.2)]">
               Ter uma impressora 3D é só o início. Saber o que imprimir muda tudo.
             </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4 leading-tight">
@@ -1099,7 +1180,7 @@ export default function App() {
           <a
             href="#oferta-pro"
             onClick={scrollToOffer}
-            className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+            className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
           >
             <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
             <span>LIBERAR TODOS OS MODELOS 3D</span>
@@ -1112,22 +1193,21 @@ export default function App() {
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
             <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
-              Conheça o <span className="grad-text drop-shadow-[0_0_25px_rgba(255,199,0,0.6)]">catálogo</span> por dentro
+              Conheça a <span className="grad-text drop-shadow-[0_0_25px_rgba(255,43,43,0.6)]">área de membros</span> por dentro
             </h2>
             <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3.5 font-normal leading-relaxed">
               Você não vai precisar perder tempo procurando pasta por pasta. A <strong className="text-white font-semibold">Área de Membros VIP</strong> é 100% organizada por categorias para você encontrar o modelo desejado em segundos, baixar o arquivo pronto e colocar sua impressora para trabalhar.
             </p>
           </div>
           <div className="max-w-4xl md:max-w-5xl mx-auto relative px-2 sm:px-4 md:px-6">
-            <div className="absolute -inset-4 sm:-inset-8 bg-gradient-to-r from-[#FFC700]/30 via-[#F59E0B]/40 to-[#FFEF5C]/30 rounded-[50px] blur-2xl md:blur-3xl opacity-90 pointer-events-none" />
             <div className="relative z-10">
               {/* Laptop Screen Top */}
-              <div className="relative bg-[#18181C] rounded-t-[20px] sm:rounded-t-[26px] md:rounded-t-[32px] p-2 sm:p-2.5 md:p-3.5 border-t-[2px] border-x-[2px] border-[#383842] shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_40px_rgba(255,199,0,0.3)]">
+              <div className="relative bg-[#18181C] rounded-t-[20px] sm:rounded-t-[26px] md:rounded-t-[32px] rounded-b-[4px] p-2 sm:p-2.5 md:p-3.5 border-2 border-[#FF2B2B] shadow-[0_25px_70px_rgba(0,0,0,0.95)]">
                 {/* Camera notch */}
                 <div className="flex items-center justify-center relative -mb-1 z-20">
                   <div className="w-10 sm:w-14 h-2 sm:h-2.5 bg-[#0A0A0C] rounded-b-md flex items-center justify-center gap-1.5 shadow-inner">
                     <div className="w-1 h-1 rounded-full bg-[#1A1A22] border border-white/20" />
-                    <div className="w-0.5 h-0.5 rounded-full bg-[#FACC15] opacity-75" />
+                    <div className="w-0.5 h-0.5 rounded-full bg-[#FF2B2B] opacity-75" />
                   </div>
                 </div>
                 {/* Screen Display area */}
@@ -1148,7 +1228,8 @@ export default function App() {
                   <video
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
-                    src="https://i.imgur.com/XMHWIse.mp4"
+                    src={isNotebookVideoActive ? "https://i.imgur.com/XMHWIse.mp4" : undefined}
+                    data-src="https://i.imgur.com/XMHWIse.mp4"
                     poster={notebookPoster}
                     controls={isNotebookVideoActive}
                     playsInline
@@ -1188,9 +1269,14 @@ export default function App() {
                       {/* Leve película escura translúcida para contraste e realismo */}
                       <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
 
-                      {/* Botão Oficial Vermelho Estilo YouTube */}
-                      <div className="relative z-10 w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:scale-110 group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
-                        <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                      {/* Botão Oficial Vermelho Estilo YouTube com Texto 'Assistir Vídeo' */}
+                      <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
+                        <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                          <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                        </div>
+                        <span className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white font-display font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+                          Assistir Vídeo
+                        </span>
                       </div>
                     </div>
                   )}
@@ -1202,69 +1288,85 @@ export default function App() {
               <div className="relative -mt-1 w-[104%] -ml-[2%] h-3.5 sm:h-4.5 md:h-5.5 bg-gradient-to-b from-[#2E2E36] via-[#1A1A20] to-[#0D0D10] rounded-b-[16px] sm:rounded-b-[22px] md:rounded-b-[26px] shadow-[0_30px_70px_rgba(0,0,0,0.95)] border-t border-white/25 flex justify-center items-start">
                 <div className="w-20 sm:w-28 md:w-36 h-1 sm:h-1.5 bg-[#08080A] rounded-b-md border-x border-b border-[#3A3A44]/80 shadow-inner" />
               </div>
-              <div className="w-[85%] h-4 bg-gradient-to-r from-transparent via-[#FFC700]/30 to-transparent blur-xl mx-auto -mt-1.5 pointer-events-none" />
               <div className="w-[75%] h-3 bg-gradient-to-r from-transparent via-black/90 to-transparent blur-md mx-auto -mt-2.5 pointer-events-none" />
 
               <div className="mt-4 text-center">
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-400">
-                  <Play className="w-3.5 h-3.5 text-[#FFC700]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
+                  <Play className="w-3.5 h-3.5 text-[#FF2B2B]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Card Vertical em Destaque com Modelo 3D Girando */}
-          <div className="mt-14 sm:mt-18 md:mt-24 flex flex-col items-center justify-center relative z-10 px-4 text-center">
-            {/* Copy em Destaque */}
-            <div className="max-w-xl mx-auto mb-6 sm:mb-8">
-              <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white leading-tight">
-                Você recebe também a <span className="grad-text drop-shadow-[0_0_20px_rgba(255,199,0,0.5)]">Coleção Minecraft 3D</span>
-              </h3>
-              <p className="text-zinc-400 text-xs sm:text-sm md:text-base mt-2 max-w-md mx-auto leading-relaxed">
-                Peças de forte apelo com fãs e colecionadores: arquivos STL de alta resolução, prontos para fatiar, imprimir e transformar em produtos físicos altamente procurados.
-              </p>
+          {/* Seção: "Mas eu não sei qual produto escolher..." */}
+          <div className="mt-12 sm:mt-16 md:mt-18 max-w-2xl mx-auto relative z-10 px-4 text-center">
+            <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white leading-tight mb-3">
+              “MAS EU NÃO SEI QUAL PRODUTO ESCOLHER…”
+            </h3>
+
+            <p className="text-zinc-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed mb-4">
+              E esse é justamente um dos motivos para ter uma biblioteca organizada.
+            </p>
+
+            <p className="text-zinc-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed mb-6 sm:mb-8">
+              Você não precisa acertar “o produto perfeito” de primeira. Você pode:
+            </p>
+
+            <div className="max-w-xl mx-auto space-y-2.5 sm:space-y-3 my-5 sm:my-6 text-left inline-block">
+              <div className="flex items-center gap-3">
+                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
+                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
+                  explorar diferentes categorias
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
+                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
+                  escolher modelos que façam sentido para sua estrutura
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
+                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
+                  produzir pequenas quantidades
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
+                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
+                  testar novas ideias
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
+                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
+                  observar a resposta do mercado
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
+                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
+                  repetir o que fizer sentido para sua operação
+                </p>
+              </div>
             </div>
 
-            <div className="relative group w-[260px] xs:w-[290px] sm:w-[330px] md:w-[360px]">
-              {/* Brilho Dourado de Fundo */}
-              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-b from-[#FFC700]/25 via-transparent to-[#FFC700]/15 blur-2xl pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity" />
+            <p className="text-white font-display font-black text-lg sm:text-xl md:text-2xl mt-6 mb-4 leading-snug">
+              O objetivo não é adivinhar. É ter opções para testar.
+            </p>
 
-              {/* Card Vertical (Mais Grandinho Retangular de Cima para Baixo) */}
-              <div className="relative aspect-[3/4.2] rounded-2xl sm:rounded-3xl p-5 sm:p-7 flex flex-col items-center justify-between overflow-hidden border border-[#FFC700]/35 border-t-2 border-t-[#FFC700] bg-gradient-to-b from-[#18181D]/90 via-[#0F0F13]/95 to-[#08080A] shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_35px_rgba(255,199,0,0.18)]">
-                {/* Iluminação de fundo atrás do modelo */}
-                <div className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full bg-[#FFC700]/10 blur-2xl pointer-events-none" />
-
-                {/* Badge Superior */}
-                <div className="relative z-10 w-full flex items-center justify-center">
-                  <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#FFC700] px-3 py-1 rounded-full bg-black/60 border border-[#FFC700]/30 shadow-inner">
-                    Arquivos STL Inclusos
-                  </span>
-                </div>
-
-                {/* Imagem Girando Devagar para Médio */}
-                <div className="relative z-10 w-full flex-1 flex items-center justify-center my-2">
-                  <img
-                    src={rotatingModelImg}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://i.imgur.com/OW0TvSS.png';
-                    }}
-                    alt="Coleção Minecraft 3D STL"
-                    width={235}
-                    height={231}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain drop-shadow-[0_12px_28px_rgba(0,0,0,0.95)] animate-spin-slow select-none"
-                  />
-                </div>
-
-                {/* Rodapé Interno */}
-                <div className="relative z-10 w-full text-center">
-                  <span className="text-zinc-400 font-display font-bold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFC700] animate-pulse" />
-                    Giro 360° do Modelo
-                  </span>
-                </div>
-              </div>
+            <div className="mt-4 mb-2">
+              <a
+                href="#mercado"
+                className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-[#FF2B2B] text-base sm:text-lg font-bold tracking-wide transition-colors cursor-pointer"
+              >
+                Continuar ↓
+              </a>
             </div>
           </div>
 
@@ -1273,7 +1375,7 @@ export default function App() {
             <a
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>ACESSAR ÁREA DE MEMBROS VIP</span>
@@ -1294,7 +1396,7 @@ export default function App() {
             </p>
           </div>
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-6">
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#FF2B2B]/60 shadow-[0_0_35px_rgba(255,43,43,0.35)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step1Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (1)"
@@ -1303,7 +1405,7 @@ export default function App() {
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#FF2B2B]/60 shadow-[0_0_35px_rgba(255,43,43,0.35)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step2Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (2)"
@@ -1312,7 +1414,7 @@ export default function App() {
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-yellow-500/60 shadow-[0_0_35px_rgba(255,199,0,0.3)] relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#FF2B2B]/60 shadow-[0_0_35px_rgba(255,43,43,0.35)] relative w-full p-2 sm:p-4">
               <CleanImage
                 src={step3Img}
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (3)"
@@ -1328,7 +1430,7 @@ export default function App() {
             <a
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>QUERO VENDER ESSAS PEÇAS</span>
@@ -1339,11 +1441,11 @@ export default function App() {
 
       {/* 11. Matemática Lucrativa */}
       <section id="matematica-lucrativa" className="section-lazy pt-8 pb-16 relative overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#FF2B2B]/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mt-0">
-              Entenda o <span className="grad-text drop-shadow-[0_0_12px_rgba(255,199,0,0.4)]">potencial</span> por trás de uma única impressão
+              Entenda o <span className="text-[#FF2B2B]">potencial</span> por trás de uma única impressão
             </h2>
             <p className="text-base md:text-lg mt-4 max-w-3xl mx-auto font-normal text-zinc-300 leading-relaxed">
               Compare a estimativa de consumo de filamento com faixas de valores praticadas no mercado para peças similares:
@@ -1363,7 +1465,7 @@ export default function App() {
                   <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-gray-200 uppercase tracking-wider border border-white/10 w-1/3 text-center align-middle">
                     Consumo est. de filamento
                   </th>
-                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-[#FFEF5C] uppercase tracking-wider border border-[#FFC700]/30 bg-[#FFC700]/5 w-1/3 text-center align-middle">
+                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-[#FF6666] uppercase tracking-wider border border-[#FF2B2B]/30 bg-[#FF2B2B]/5 w-1/3 text-center align-middle">
                     Anúncios encontrados
                   </th>
                 </tr>
@@ -1382,7 +1484,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
                     R$ 11,14
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#FFC700]/30 text-yellow-400 font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FFC700]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,199,0,0.3)]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#FF2B2B]/30 text-[#FF2B2B] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FF2B2B]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,43,43,0.4)]">
                     R$ 147–165
                   </td>
                 </tr>
@@ -1400,7 +1502,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
                     R$ 9,74
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#FFC700]/30 text-yellow-400 font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FFC700]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,199,0,0.3)]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#FF2B2B]/30 text-[#FF2B2B] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FF2B2B]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,43,43,0.4)]">
                     R$ 123–147
                   </td>
                 </tr>
@@ -1418,7 +1520,7 @@ export default function App() {
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
                     R$ 8,37
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#FFC700]/30 text-yellow-400 font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FFC700]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,199,0,0.3)]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#FF2B2B]/30 text-[#FF2B2B] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FF2B2B]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,43,43,0.4)]">
                     R$ 75–107
                   </td>
                 </tr>
@@ -1436,7 +1538,7 @@ export default function App() {
             <a
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>QUERO MULTIPLICAR MEUS LUCROS</span>
@@ -1445,37 +1547,24 @@ export default function App() {
         </div>
       </section>
 
-      {/* 12. 11 Bônus Exclusivos */}
-      <section id="bonus" className="section-lazy bg-black relative border-y border-[#FFC700]/10 overflow-hidden py-16 md:py-24">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-44 md:w-[800px] md:h-[400px] bg-[#FFC700]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
+      {/* 12. 12 Bônus Exclusivos */}
+      <section id="bonus" className="section-lazy bg-black relative border-y border-[#FF2B2B]/15 overflow-hidden py-16 md:py-24">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-44 md:w-[800px] md:h-[400px] bg-[#FF2B2B]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <p className="text-lg md:text-2xl font-bold uppercase tracking-widest mb-2 text-[#FFC700] opacity-95">
-            E não para por aí...
+          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-3 text-[#FF2B2B]">
+            BÔNUS INCLUSOS NO ACESSO PREMIUM
           </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black uppercase tracking-tight mb-4 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-            Além do Catálogo Principal
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-display font-black uppercase tracking-tight mb-5 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] max-w-4xl mx-auto leading-tight">
+            UMA ÚNICA IDEIA PODE VIRAR SEU PRÓXIMO PRODUTO. TODOS ESTES BÔNUS ESTÃO LIBERADOS NO ACESSO PREMIUM.
           </h2>
-          <p className="text-zinc-300 text-base sm:text-xl md:text-2xl font-light max-w-3xl mx-auto mb-10 leading-relaxed">
-            Você ainda recebe <strong className="text-white font-semibold">11 coleções temáticas extras</strong> incluídas na sua oferta para ampliar ainda mais suas opções de impressão.
+          <p className="text-zinc-300 text-sm sm:text-base md:text-lg lg:text-xl font-normal max-w-3xl mx-auto mb-12 sm:mb-14 leading-relaxed">
+            Ao garantir o seu Acesso Premium, você não leva apenas os modelos minerados — você recebe de presente todos os 14 bônus exclusivos abaixo, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
           </p>
-          <div className="inline-block px-8 py-3.5 sm:px-10 sm:py-4 bg-[#FFC700] text-black font-black font-display text-xl sm:text-2xl md:text-3xl uppercase tracking-tight mb-14 shadow-[0_0_40px_rgba(255,199,0,0.25)] rounded-xl">
-            11 Coleções Bônus Inclusas
-          </div>
 
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-6xl mx-auto text-left">
-            {bonuses.slice(0, 9).map((bonus) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 sm:gap-3.5 max-w-5xl mx-auto text-left">
+            {bonuses.map((bonus) => (
               <BonusCard key={`bonus-${bonus.id}`} bonus={bonus} />
             ))}
-            <div className="col-span-3 flex justify-center gap-2 sm:gap-4 md:gap-6">
-              {bonuses.slice(9).map((bonus) => (
-                <div
-                  key={`bonus-wrap-${bonus.id}`}
-                  className="w-[calc((100%-1rem)/3)] sm:w-[calc((100%-2rem)/3)] md:w-[calc((100%-3rem)/3)] flex"
-                >
-                  <BonusCard bonus={bonus} />
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Botão de Compra - Seção Bônus */}
@@ -1483,10 +1572,10 @@ export default function App() {
             <a
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
-              <span>GARANTIR ACESSO + 11 BÔNUS GRÁTIS</span>
+              <span>GARANTIR ACESSO + 12 BÔNUS GRÁTIS</span>
             </a>
           </div>
         </div>
@@ -1494,7 +1583,7 @@ export default function App() {
 
       {/* Depoimento Real em Layout de Celular */}
       <section id="depoimento" className="section-lazy bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[650px] md:h-[650px] bg-[#FFC700]/5 rounded-full blur-2xl md:blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[650px] md:h-[650px] bg-[#FF2B2B]/5 rounded-full blur-2xl md:blur-[140px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
             <h2 id="depoimento-titulo" className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mb-3">
@@ -1535,7 +1624,7 @@ export default function App() {
               }}
             >
               {/* Ambient phone back glow */}
-              <div className="absolute inset-0 bg-[#FFC700]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none" />
+              <div className="absolute inset-0 bg-[#FF2B2B]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none" />
 
               {/* Realistic Phone Frame: Ampliado em altura para visualização destacada */}
               <div
@@ -1556,27 +1645,37 @@ export default function App() {
 
                 {/* Inner Screen Bezel - Altura ampliada para melhor leitura dos depoimentos */}
                 <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#efeae2] border border-white/40 shadow-inner aspect-[9/16] w-full">
-                  {depoimentosList.map((dep, idx) => (
-                    <img
-                      key={dep.id}
-                      id={`celular-depoimento-img-${dep.id}`}
-                      src={dep.image}
-                      alt={dep.alt}
-                      width={450}
-                      height={800}
-                      onError={(e) => {
-                        if (dep.fallback && e.currentTarget.src !== dep.fallback) {
-                          e.currentTarget.src = dep.fallback;
-                        }
-                      }}
-                      className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-300 ease-in-out ${
-                        depoimentoIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                      }`}
-                      loading="lazy"
-                      decoding="async"
-                      fetchPriority={depoimentoIndex === idx ? 'high' : 'low'}
-                    />
-                  ))}
+                  {depoimentosList.map((dep, idx) => {
+                    const isCurrent = depoimentoIndex === idx;
+                    const isAdjacent =
+                      Math.abs(depoimentoIndex - idx) <= 1 ||
+                      (depoimentoIndex === 0 && idx === depoimentosList.length - 1) ||
+                      (depoimentoIndex === depoimentosList.length - 1 && idx === 0);
+
+                    if (!isCurrent && !isAdjacent) return null;
+
+                    return (
+                      <img
+                        key={dep.id}
+                        id={`celular-depoimento-img-${dep.id}`}
+                        src={dep.image}
+                        alt={dep.alt}
+                        width={450}
+                        height={800}
+                        onError={(e) => {
+                          if (dep.fallback && e.currentTarget.src !== dep.fallback) {
+                            e.currentTarget.src = dep.fallback;
+                          }
+                        }}
+                        className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-300 ease-in-out ${
+                          isCurrent ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                        }`}
+                        loading={isCurrent ? 'eager' : 'lazy'}
+                        decoding="async"
+                        fetchPriority={isCurrent ? 'high' : 'low'}
+                      />
+                    );
+                  })}
                 </div>
 
                 {/* Bottom Bezel: Barra inferior de navegação na moldura externa */}
@@ -1622,7 +1721,7 @@ export default function App() {
             <a
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>QUERO TER ESSES RESULTADOS</span>
@@ -1633,14 +1732,14 @@ export default function App() {
 
       {/* 13-14. Seção de Oferta & Preços */}
       <section id="oferta" className="section-lazy bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-yellow-500/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#FF2B2B]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center mb-10 md:mb-12 w-full flex flex-col items-center justify-center relative">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-24 md:w-96 md:h-40 bg-[#FFC700]/20 blur-xl md:blur-[60px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-24 md:w-96 md:h-40 bg-[#FF2B2B]/20 blur-xl md:blur-[60px] rounded-full pointer-events-none" />
             <h2
               className="relative z-10 font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight mb-4 text-center leading-tight"
               style={{
-                textShadow: '0 0 25px rgba(255,255,255,0.6), 0 0 50px rgba(255,199,0,0.5)',
+                textShadow: '0 0 25px rgba(255,255,255,0.6), 0 0 50px rgba(255,43,43,0.6)',
               }}
             >
               ESCOLHA O PLANO IDEAL<br />
@@ -1674,34 +1773,30 @@ export default function App() {
               </div>
               <ul className="space-y-3 mb-6 text-[13px] text-zinc-300 font-medium">
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
-                  <span>500 Modelos Funkos STL</span>
+                  <span className="text-[#FF2B2B] text-base font-bold leading-none">✓</span>
+                  <span>150 Mil Modelos STL</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
+                  <span className="text-[#FF2B2B] text-base font-bold leading-none">✓</span>
                   <span>Acesso por 3 Meses</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#FFC700] text-base font-bold leading-none">✓</span>
+                  <span className="text-[#FF2B2B] text-base font-bold leading-none">✓</span>
                   <span>Garantia de 14 Dias</span>
                 </li>
                 <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
                   <span className="text-base font-bold leading-none">✕</span>
-                  <span>Sem os 11 Bônus Inclusos</span>
+                  <span>Sem os 12 Bônus Inclusos</span>
                 </li>
                 <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
                   <span className="text-base font-bold leading-none">✕</span>
                   <span>Sem Atualizações Futuras</span>
                 </li>
-                <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
-                  <span className="text-base font-bold leading-none">✕</span>
-                  <span>Sem Licença Comercial</span>
-                </li>
               </ul>
               <button
                 type="button"
                 onClick={handleBaseClick}
-                className="block w-full text-center py-4 rounded-xl border-2 border-[#00E676] text-[#00E676] hover:text-black hover:bg-[#00E676] text-sm uppercase tracking-wider transition-all mt-auto font-black cursor-pointer shadow-[0_0_15px_rgba(0,230,118,0.2)]"
+                className="block w-full text-center py-4 rounded-xl bg-transparent border-2 border-zinc-600 hover:border-zinc-400 text-zinc-300 hover:text-white hover:bg-white/5 text-sm uppercase tracking-wider transition-all mt-auto font-bold cursor-pointer"
               >
                 QUERO O BASE (R$ 10,90)
               </button>
@@ -1715,25 +1810,31 @@ export default function App() {
             {/* Card 2 - Coleção Completa VIP (R$ 47,90 - Destaque) */}
             <div
               id="oferta-pro"
-              className="w-full lg:max-w-[440px] bg-white text-black border-[2px] border-[#FFC700] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5)] flex flex-col scroll-mt-24"
+              className="w-full lg:max-w-[440px] bg-white text-black border-[2px] border-[#FF2B2B] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,43,43,0.5)] flex flex-col scroll-mt-24"
             >
-              <div className="bg-[#FFC700] text-black text-center py-2 px-3">
+              <div className="bg-[#FF2B2B] text-white text-center py-2 px-3">
                 <p className="text-xs font-black uppercase tracking-wider">
                   🔥 MAIS RECOMENDADO — PACOTE COMPLETO VIP
                 </p>
               </div>
               <div className="p-6 sm:p-7 h-full flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-4 relative group">
-                  <div className="absolute inset-0 bg-yellow-500/20 blur-xl rounded-full scale-90 pointer-events-none opacity-80" />
+                  <div className="absolute inset-0 bg-[#FF2B2B]/20 blur-xl rounded-full scale-90 pointer-events-none opacity-80" />
                   <img
-                    src={funkoBonusImage}
-                    alt="Pacote +500 Modelos Funkos STL"
-                    width={320}
-                    height={208}
+                    src={pacoteVipImage}
+                    onError={(e) => {
+                      if (e.currentTarget.src !== 'https://i.imgur.com/Hy6W1VB.png') {
+                        e.currentTarget.src = 'https://i.imgur.com/Hy6W1VB.png';
+                      }
+                    }}
+                    alt="Pacote Completo VIP Universo 3D"
+                    width={360}
+                    height={240}
                     loading="lazy"
                     decoding="async"
+                    fetchPriority="low"
                     referrerPolicy="no-referrer"
-                    className="relative z-10 w-auto h-auto max-h-44 sm:max-h-52 object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)] hover:scale-105 transition-transform duration-300 select-none"
+                    className="relative z-10 w-auto h-auto max-h-48 sm:max-h-56 object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)] hover:scale-105 transition-transform duration-300 select-none"
                   />
                 </div>
                 <div className="text-center w-full mb-4">
@@ -1748,36 +1849,30 @@ export default function App() {
                   <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">Pagamento Único</p>
                 </div>
                 <div className="w-full bg-zinc-100 rounded-2xl p-4 sm:p-5 mb-5 border border-zinc-200">
-                  <ul className="w-full space-y-2.5 text-[13px] text-zinc-900 font-medium">
+                  <ul className="w-full space-y-2.5 text-[13px] text-black font-medium">
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-xs sm:text-[13px] font-black uppercase tracking-tight text-black">
                         + 150 MIL MODELOS STL
                       </strong>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
-                      <strong className="text-xs sm:text-[13px] font-black uppercase tracking-tight text-black">
-                        + 500 MODELOS FUNKOS STL
-                      </strong>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-black font-bold">Licença Comercial para Venda de Peças Físicas</strong>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
-                      <span className="text-zinc-800 font-semibold">Acesso Vitalício + Todas as Atualizações</span>
+                      <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-black font-bold">Acesso Vitalício + Todas as Atualizações</span>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
-                      <span className="text-zinc-800 font-semibold">Garantia Incondicional de 14 Dias</span>
+                      <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-black font-bold">Garantia Incondicional de 14 Dias</span>
                     </li>
                     {bonuses.map((b) => (
-                      <li key={`offer-bonus-${b.id}`} className="flex items-start gap-2.5 text-zinc-800">
-                        <span className="text-[#00C853] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
-                        <span className="text-zinc-800 leading-snug">
-                          <strong className="text-black font-bold">Bônus {b.id}:</strong> {b.title}
+                      <li key={`offer-bonus-${b.id}`} className="flex items-start gap-2.5 text-black">
+                        <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                        <span className="text-black font-bold leading-snug">
+                          <strong className="text-black font-black">Bônus {b.id}:</strong> {b.title}
                         </span>
                       </li>
                     ))}
@@ -1786,9 +1881,9 @@ export default function App() {
                 <div className="text-center w-full mt-auto">
                   <a
                     href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
-                    className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(0,230,118,0.5)] hover:shadow-[0_0_45px_rgba(0,230,118,0.8)] cursor-pointer"
+                    className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_35px_rgba(0,255,102,0.7)] hover:shadow-[0_0_50px_rgba(0,255,102,1)] border-2 border-[#80FFB2] cursor-pointer"
                   >
-                    QUERO A CENTRAL COMPLETA
+                    QUERO O ACERVO COMPLETO
                   </a>
                 </div>
               </div>
@@ -1797,14 +1892,20 @@ export default function App() {
         </div>
       </section>
 
-      {/* 15. Garantia & FAQ */}
-      <section id="garantia-faq" className="section-lazy py-16 relative">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="glass-card border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col gap-12 bg-black/50">
-            {/* Guarantee Box */}
-            <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-10 lg:gap-12">
+      {/* 15. Garantia Incondicional de 14 Dias - Seção Única e Exclusiva */}
+      <section id="garantia" className="section-lazy py-16 md:py-24 relative overflow-hidden bg-black border-t border-white/10">
+        {/* Glow de fundo neon */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[700px] md:h-[450px] bg-[#FF2B2B]/10 rounded-full blur-2xl md:blur-[130px] pointer-events-none" />
+
+        <div className="container mx-auto px-4 max-w-5xl relative z-10">
+          <div className="rounded-3xl border-2 border-[#FF2B2B]/35 bg-gradient-to-b from-[#191212]/95 via-[#120D0D]/95 to-[#0A0707] p-6 sm:p-10 md:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_45px_rgba(255,43,43,0.18)] relative overflow-hidden">
+            {/* Linha de brilho superior */}
+            <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#FF2B2B] to-transparent" />
+
+            <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-12">
+              {/* Selo de Garantia 3D com destaque */}
               <div className="relative shrink-0 flex items-center justify-center group">
-                <div className="absolute inset-0 bg-[#FFC700]/20 blur-2xl rounded-full scale-90 pointer-events-none" />
+                <div className="absolute inset-0 bg-[#FF2B2B]/25 blur-3xl rounded-full scale-90 pointer-events-none" />
                 <img
                   src={seloGarantia}
                   onError={(e) => {
@@ -1812,67 +1913,108 @@ export default function App() {
                     e.currentTarget.src = 'https://i.imgur.com/xfMM1xb.png';
                   }}
                   alt="Selo de Garantia Incondicional de 14 Dias"
-                  width={240}
-                  height={240}
+                  width={280}
+                  height={280}
                   loading="lazy"
                   decoding="async"
                   referrerPolicy="no-referrer"
-                  className="relative z-10 w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 object-contain drop-shadow-[0_10px_35px_rgba(255,199,0,0.35)] select-none transition-transform duration-300 group-hover:scale-105"
+                  className="relative z-10 w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_15px_40px_rgba(255,43,43,0.45)] select-none transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <div className="text-center md:text-left flex-1">
-                <h3 className="font-display font-black text-2xl md:text-3xl mb-2.5">
-                  Garantia Incondicional de 14 Dias
-                </h3>
-                <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">
-                  Se você acessar o catálogo, olhar os modelos e achar que não valeu a pena, basta pedir o reembolso em até 14 dias. Devolvemos 100% do seu investimento, sem burocracia e sem perguntas.
-                </p>
-              </div>
-            </div>
 
-            {/* FAQ Accordion */}
-            <div>
-              <h3 className="font-display font-black text-2xl mb-6 text-center">
-                Perguntas frequentes
-              </h3>
-              <div className="space-y-4">
-                {faqs.map((faq, index) => {
-                  const isOpen = openFaqIndex === index;
-                  return (
-                    <div
-                      key={`faq-${index}`}
-                      className="rounded-xl bg-white/5 border border-white/10 overflow-hidden transition-colors hover:border-white/20"
-                    >
-                      <button
-                        type="button"
-                        onClick={() => toggleFaq(index)}
-                        className="w-full p-4 text-left font-bold flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
-                      >
-                        <span className="text-sm md:text-base text-zinc-100">{faq.q}</span>
-                        <ChevronDown
-                          className={`w-5 h-5 text-yellow-400 shrink-0 transition-transform duration-200 ${
-                            isOpen ? 'transform rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-                      {isOpen && (
-                        <div className="px-4 pb-4 text-zinc-400 font-light text-sm leading-relaxed border-t border-white/5 pt-3">
-                          <p>{faq.a}</p>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+              {/* Textos da Garantia com a copy solicitada */}
+              <div className="text-center lg:text-left flex-1">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF2B2B]/10 border border-[#FF2B2B]/30 text-[#FF2B2B] text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 shadow-[0_0_15px_rgba(255,43,43,0.2)]">
+                  <span>🛡️</span> RISCO ZERO PARA VOCÊ
+                </div>
+
+                <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white mb-4 leading-tight">
+                  GARANTIA INCONDICIONAL DE <span className="grad-text drop-shadow-[0_0_25px_rgba(255,43,43,0.6)]">14 DIAS</span>
+                </h2>
+
+                <p className="text-zinc-200 text-sm sm:text-base md:text-lg font-normal leading-relaxed mb-3.5">
+                  Você tem 14 dias completos para acessar o Universo 3D™, explorar todas as categorias, baixar os arquivos STL e testar os modelos na sua impressora.
+                </p>
+
+                <p className="text-zinc-300 text-sm sm:text-base md:text-lg font-normal leading-relaxed mb-6">
+                  Se por qualquer motivo você achar que o conteúdo não é para você, basta solicitar o reembolso na plataforma que devolvemos 100% do seu investimento, sem complicações e sem burocracia.
+                </p>
+
+                {/* Itens com checkmark */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-4 border-t border-white/10">
+                  <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
+                    <span className="text-[#FF2B2B] text-base font-black shrink-0">✓</span>
+                    <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
+                      Teste sem riscos
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
+                    <span className="text-[#FF2B2B] text-base font-black shrink-0">✓</span>
+                    <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
+                      Reembolso simplificado
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
+                    <span className="text-[#FF2B2B] text-base font-black shrink-0">✓</span>
+                    <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
+                      Suporte dedicado
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Botão de Compra - Seção Garantia & FAQ */}
+      {/* 16. Perguntas Frequentes (FAQ) */}
+      <section id="faq" className="section-lazy py-16 md:py-20 relative bg-black border-t border-white/5">
+        <div className="container mx-auto px-4 max-w-4xl relative z-10">
+          <div className="text-center mb-10 md:mb-12">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs sm:text-sm font-bold uppercase tracking-wider mb-3">
+              Tire suas dúvidas
+            </span>
+            <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white">
+              Perguntas <span className="grad-text drop-shadow-[0_0_20px_rgba(255,43,43,0.5)]">Frequentes</span>
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div
+                  key={`faq-${index}`}
+                  className="rounded-xl bg-zinc-950/80 border border-white/10 overflow-hidden transition-colors hover:border-[#FF2B2B]/30"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleFaq(index)}
+                    className="w-full p-4 md:p-5 text-left font-bold flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
+                  >
+                    <span className="text-sm md:text-base text-zinc-100">{faq.q}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-[#FF2B2B] shrink-0 transition-transform duration-200 ${
+                        isOpen ? 'transform rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="px-4 md:px-5 pb-5 text-zinc-300 font-light text-sm leading-relaxed border-t border-white/5 pt-3.5">
+                      <p>{faq.a}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Botão de Compra - Seção FAQ */}
           <div className="mt-12 flex justify-center w-full px-4">
             <a
               href="#oferta-pro"
               onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_30px_rgba(0,230,118,0.6)] hover:shadow-[0_0_45px_rgba(0,230,118,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-emerald-300 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
               <span>EXPERIMENTAR SEM RISCO AGORA</span>
@@ -1893,21 +2035,21 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 border-y border-white/5 py-8 text-zinc-300">
             <div className="flex flex-col items-center justify-center gap-2">
-              <Lock className="w-6 h-6 text-[#FFC700] mb-1" />
+              <Lock className="w-6 h-6 text-[#FF2B2B] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Ambiente 100% Seguro
               </span>
               <span className="text-[10px] text-zinc-400">Dados criptografados de ponta a ponta</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <Mail className="w-6 h-6 text-[#FFEF5C] mb-1" />
+              <Mail className="w-6 h-6 text-[#FF2B2B] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Suporte Especializado
               </span>
               <span className="text-[10px] text-zinc-300">suporte@universo3d.com.br</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <Building2 className="w-6 h-6 text-[#FFEF5C] mb-1" />
+              <Building2 className="w-6 h-6 text-[#FF2B2B] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Empresa Verificada
               </span>
@@ -1920,10 +2062,10 @@ export default function App() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 uppercase tracking-widest mb-6 font-bold text-[10px] text-zinc-400">
-            <a href="#termos" className="hover:text-[#FFEF5C] transition-colors">
+            <a href="#termos" className="hover:text-[#FF2B2B] transition-colors">
               Termos de Uso
             </a>
-            <a href="#privacidade" className="hover:text-[#FFEF5C] transition-colors">
+            <a href="#privacidade" className="hover:text-[#FF2B2B] transition-colors">
               Política de Privacidade
             </a>
           </div>
@@ -1946,7 +2088,7 @@ export default function App() {
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-[350px] sm:max-w-[370px] my-auto transform transition-all duration-300"
           >
-            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#FFC700] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,199,0,0.5),inset_0_0_12px_rgba(255,199,0,0.25)] flex flex-col mx-auto my-1">
+            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#FF2B2B] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,43,43,0.5),inset_0_0_12px_rgba(255,43,43,0.25)] flex flex-col mx-auto my-1">
               <button
                 type="button"
                 onClick={() => setIsUpsellOpen(false)}
@@ -1959,24 +2101,24 @@ export default function App() {
               <div className="py-2 sm:py-2.5 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F] pr-8 pl-2">
                 <h3 className="font-display font-black text-xs sm:text-sm md:text-base uppercase tracking-tight px-1 whitespace-nowrap">
                   <span className="grad-text font-extrabold">ESPERE! LEVE TUDO POR </span>
-                  <span className="text-[#FFC700]">R$ 21,90</span>
+                  <span className="text-[#FF2B2B]">R$ 21,90</span>
                 </h3>
               </div>
 
-              <div className="bg-gradient-to-r from-[#D97706] via-[#FBBF24] to-[#B45309] py-1 px-2.5 shadow-[0_0_15px_rgba(245,158,11,0.4)] border-y border-[#FBBF24]/60">
-                <p className="font-black text-black text-center leading-tight">
+              <div className="bg-gradient-to-r from-[#C80000] via-[#FF2B2B] to-[#A80000] py-1 px-2.5 shadow-[0_0_15px_rgba(255,43,43,0.4)] border-y border-[#FF2B2B]/60">
+                <p className="font-black text-white text-center leading-tight">
                   <span className="block text-[8px] sm:text-[9px] uppercase tracking-[0.15em] opacity-90">
                     O PACOTE MAIS COMPLETO E VANTAJOSO
                   </span>
                   <span className="block text-[10px] sm:text-[11px] uppercase tracking-tight">
-                    + 150 MIL MODELOS STL + 500 FUNKOS + TODOS OS 11 BÔNUS
+                    + 150 MIL MODELOS STL + 500 FUNKOS + TODOS OS 12 BÔNUS
                   </span>
                 </p>
               </div>
 
               <div className="p-3.5 sm:p-4 flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-1.5 relative group">
-                  <div className="absolute inset-0 bg-yellow-500/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60" />
+                  <div className="absolute inset-0 bg-[#FF2B2B]/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60" />
                   <img
                     src={funkoBonusImage}
                     alt="Pacote +500 Modelos Funkos STL"
@@ -1989,13 +2131,13 @@ export default function App() {
                   />
                 </div>
                 <div className="text-center w-full mb-2">
-                  <p className="text-[11px] sm:text-xs text-yellow-400 font-black mb-0.5 italic">
+                  <p className="text-[11px] sm:text-xs text-[#FF6666] font-black mb-0.5 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
-                  <p className="text-[#FFEF5C] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
+                  <p className="text-[#FF2B2B] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
                     Por Apenas
                   </p>
-                  <div className="flex justify-center items-start text-[#FFC700] mb-0.5 drop-shadow-md">
+                  <div className="flex justify-center items-start text-[#FF2B2B] mb-0.5 drop-shadow-[0_0_15px_rgba(255,43,43,0.5)]">
                     <span className="text-base sm:text-lg font-black mt-0.5 mr-0.5">R$</span>
                     <span className="text-4xl sm:text-5xl font-display font-black tracking-tighter leading-none">
                       21,90
@@ -2008,34 +2150,28 @@ export default function App() {
                 <div className="w-full bg-[#1A1A1A] rounded-xl p-2.5 sm:p-3 mb-2.5 border border-white/5 max-h-36 sm:max-h-40 overflow-y-auto">
                   <ul className="w-full space-y-1.5 text-[11px] text-white/90 font-medium">
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#00E676] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
-                      <strong className="text-[11px] font-black uppercase text-[#00E676]">
+                      <span className="text-[#FF2B2B] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-[11px] font-black uppercase text-[#FF2B2B]">
                         + 150 MIL MODELOS STL
                       </strong>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#00E676] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
-                      <strong className="text-[11px] font-black uppercase text-[#FFEF5C]">
-                        + 500 MODELOS FUNKOS STL
-                      </strong>
-                    </li>
-                    <li className="flex items-start gap-1.5">
-                      <span className="text-[#00E676] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#FF2B2B] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-white">Licença Comercial para Venda de Peças Físicas</strong>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#00E676] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#FF2B2B] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <span>Acesso Vitalício + Todas as Atualizações</span>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#00E676] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#FF2B2B] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <span>Garantia Incondicional de 14 Dias</span>
                     </li>
                     {bonuses.map((b) => (
                       <li key={`upsell-bonus-${b.id}`} className="flex items-start gap-1.5 text-zinc-300">
-                        <span className="text-[#00E676] text-[11px] font-black leading-none shrink-0 mt-0.5">✓</span>
+                        <span className="text-[#FF2B2B] text-[11px] font-black leading-none shrink-0 mt-0.5">✓</span>
                         <span className="text-zinc-200 leading-tight text-[10px] sm:text-[11px]">
-                          <strong className="text-[#FFEF5C]">Bônus {b.id}:</strong> {b.title}
+                          <strong className="text-[#FF2B2B]">Bônus {b.id}:</strong> {b.title}
                         </span>
                       </li>
                     ))}
@@ -2043,7 +2179,7 @@ export default function App() {
                 </div>
                 <a
                   href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
-                  className="block w-full bg-[#00E676] hover:bg-[#00C853] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_25px_rgba(0,230,118,0.5)] cursor-pointer"
+                  className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(0,255,102,0.7)] border-2 border-[#80FFB2] cursor-pointer"
                 >
                   SIM! LEVAR TUDO POR R$ 21,90
                 </a>
