@@ -17,9 +17,6 @@ export default defineConfig(() => {
       minify: 'esbuild' as const,
       modulePreload: { polyfill: false },
       rollupOptions: {
-        treeshake: {
-          moduleSideEffects: false,
-        },
         output: {
           manualChunks(id) {
             if (id.includes('node_modules/react') || id.includes('node_modules/scheduler')) {
