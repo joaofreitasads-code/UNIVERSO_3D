@@ -2,7 +2,8 @@ import express from 'express';
 import path from 'path';
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.DEFAULT_APP_PORT) || 
+  (process.env.NGINX_PORT ? 3000 : (Number(process.env.PORT) || 3000));
 const distPath = path.resolve(process.cwd(), 'dist');
 
 // Enforce no-cache for HTML files and SPA routes so updates appear immediately

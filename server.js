@@ -2,7 +2,7 @@
 import express from "express";
 import path from "path";
 var app = express();
-var PORT = Number(process.env.PORT) || 3e3;
+var PORT = Number(process.env.DEFAULT_APP_PORT) || (process.env.NGINX_PORT ? 3e3 : Number(process.env.PORT) || 3e3);
 var distPath = path.resolve(process.cwd(), "dist");
 app.use((req, res, next) => {
   if (req.path === "/" || req.path === "/index.html" || !path.extname(req.path)) {
