@@ -1,66 +1,38 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --accent-1: #FF6666;
-    --accent-2: #FF2B2B;
-    --accent-3: #D90429;
+@layer utilities {
+  .font-display {
+    font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
-  html {
-    scroll-behavior: smooth;
-    text-rendering: optimizeSpeed;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+  .grad-text {
+    color: transparent;
+    background: linear-gradient(90deg, #38bdf8, #0066ff, #0044cc);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #000000;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    touch-action: manipulation;
+  .bg-stars {
+    pointer-events: none;
+    background-image: radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.5) 100%, transparent),
+      radial-gradient(1px 1px at 90px 120px, rgba(255, 255, 255, 0.4) 100%, transparent),
+      radial-gradient(1.5px 1.5px at 160px 60px, rgba(255, 255, 255, 0.5) 100%, transparent),
+      radial-gradient(1px 1px at 210px 180px, rgba(255, 255, 255, 0.3) 100%, transparent);
+    background-repeat: repeat;
+    background-size: 240px 220px;
+    transform: translateZ(0);
   }
 
-  button, a {
-    touch-action: manipulation;
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transform: translateZ(0);
   }
-}
 
-.font-display {
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-.grad-text {
-  background: linear-gradient(90deg, #FF6666, #FF2B2B, #D90429);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.bg-stars {
-  background-image: radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.5) 100%, transparent),
-                    radial-gradient(1px 1px at 90px 120px, rgba(255, 255, 255, 0.4) 100%, transparent),
-                    radial-gradient(1.5px 1.5px at 160px 60px, rgba(255, 255, 255, 0.5) 100%, transparent),
-                    radial-gradient(1px 1px at 210px 180px, rgba(255, 255, 255, 0.3) 100%, transparent);
-  background-repeat: repeat;
-  background-size: 240px 220px;
-  pointer-events: none;
-  transform: translateZ(0);
-}
-
-.glass-card {
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  transform: translateZ(0);
-}
-
-/* Otimização de seções abaixo da dobra para carregar instantaneamente no celular */
-.section-lazy {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 700px;
+  .section-lazy {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 700px;
+  }
 }
 
 @keyframes marqueeAnimation {
@@ -82,126 +54,54 @@
 }
 
 .marquee {
-  contain: layout style;
   display: flex;
   width: max-content;
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  animation: marqueeAnimation 24s linear infinite !important;
-  animation-play-state: running !important;
-  pointer-events: none !important;
-  user-select: none;
-  -webkit-user-select: none;
+  animation: marqueeAnimation 28s linear infinite !important;
 }
 
 .marquee-cards {
-  contain: layout style;
   display: flex;
   width: max-content;
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  animation: marqueeAnimation 24s linear infinite !important;
-  animation-play-state: running !important;
-  pointer-events: none !important;
-  user-select: none;
-  -webkit-user-select: none;
+  animation: marqueeAnimation 38s linear infinite !important;
 }
 
 .marquee-cards-reverse {
-  contain: layout style;
   display: flex;
   width: max-content;
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  animation: marqueeReverseAnimation 24s linear infinite !important;
-  animation-play-state: running !important;
-  pointer-events: none !important;
-  user-select: none;
-  -webkit-user-select: none;
+  animation: marqueeReverseAnimation 38s linear infinite !important;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .marquee {
-    animation-duration: 36s !important;
+    animation-duration: 22s !important;
   }
   .marquee-cards {
-    animation-duration: 44s !important;
+    animation-duration: 28s !important;
   }
   .marquee-cards-reverse {
-    animation-duration: 44s !important;
+    animation-duration: 28s !important;
   }
 }
 
-/* O carrossel deve continuar andando continuamente sem pausar por clique, toque, hover ou foco */
-.marquee,
-.marquee:hover,
-.marquee:active,
-.marquee:focus,
-.marquee:focus-within,
-.marquee-cards,
-.marquee-cards:hover,
-.marquee-cards:active,
-.marquee-cards:focus,
-.marquee-cards:focus-within,
-.marquee-cards-reverse,
-.marquee-cards-reverse:hover,
-.marquee-cards-reverse:active,
-.marquee-cards-reverse:focus,
-.marquee-cards-reverse:focus-within,
-.marquee *,
-.marquee *:hover,
-.marquee *:active,
-.marquee *:focus,
-.marquee-cards *,
-.marquee-cards *:hover,
-.marquee-cards *:active,
-.marquee-cards *:focus,
-.marquee-cards-reverse *,
-.marquee-cards-reverse *:hover,
-.marquee-cards-reverse *:active,
-.marquee-cards-reverse *:focus {
-  animation-play-state: running !important;
-  pointer-events: none !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-@keyframes livePulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
+img {
+  content-visibility: auto;
 }
-
-.live-dot {
-  animation: livePulse 1.4s ease-in-out infinite;
-}
-
-/* Otimização de estabilidade e fluidez móvel */
-.content-auto {
-  contain: none;
-}
-
-/* Animação de rotação contínua (devagar para médio) */
-@keyframes spinSlow {
-  from {
-    transform: rotate(0deg) translateZ(0);
-  }
-  to {
-    transform: rotate(360deg) translateZ(0);
-  }
-}
-
-.animate-spin-slow {
-  animation: spinSlow 13s linear infinite;
-  will-change: transform;
-}
-

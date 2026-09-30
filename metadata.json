@@ -1,6 +1,6 @@
 {
-  "name": "Portal 3D",
-  "description": "Portal 3D - Catálogo Premium de Impressão 3D e biblioteca de arquivos STL para colecionáveis com divisão inteligente.",
+  "name": "Portal 3D - Catálogo Premium de Impressão 3D",
+  "description": "Portal 3D - Biblioteca de arquivos STL para impressão 3D de colecionáveis, com divisão inteligente para peças de encaixe perfeito.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

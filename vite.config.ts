@@ -11,29 +11,9 @@ export default defineConfig(() => {
         '@': path.resolve(__dirname, '.'),
       },
     },
-    build: {
-      target: 'es2022',
-      cssMinify: true,
-      minify: 'esbuild' as const,
-      modulePreload: { polyfill: false },
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules/react') || id.includes('node_modules/scheduler')) {
-              return 'vendor-react';
-            }
-            if (id.includes('node_modules/lucide-react')) {
-              return 'vendor-icons';
-            }
-          },
-        },
-      },
-    },
     server: {
-      port: 3000,
-      host: '0.0.0.0',
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify - file watching is disabled to prevent flickering during agent edits.
+      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},

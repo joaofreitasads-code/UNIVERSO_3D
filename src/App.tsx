@@ -1,478 +1,44 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import notebookPoster from './assets/poster-catalogo.webp';
-const heroPoster = '/poster-apresentacao.webp';
-import seloGarantia from './assets/selo-garantia-14-dias.webp';
-import pacoteVipImage from './assets/optimized/pacote-vip.webp';
-import cardBg from './assets/card-bg.webp';
-import bonus1Image from './assets/optimized/bonus-1.webp';
-import depoimento1 from './assets/optimized/depoimento-1.webp';
-import depoimento3 from './assets/optimized/depoimento-3.webp';
-import depoimento4 from './assets/optimized/depoimento-4.webp';
-import depoimento5 from './assets/optimized/depoimento-5.webp';
-import depoimento6 from './assets/optimized/depoimento-6.webp';
-import depoimento7 from './assets/optimized/depoimento-7.webp';
-import step1Img from './assets/optimized/step-1.webp';
-import step2Img from './assets/optimized/step-2.webp';
-import step3Img from './assets/optimized/step-3.webp';
-import bonus2Image from './assets/optimized/bonus-2.webp';
-import bonus3Image from './assets/optimized/bonus-3.webp';
-import bonus4Image from './assets/optimized/bonus-4.webp';
-import bonus5Image from './assets/optimized/bonus-5.webp';
-import bonus6Image from './assets/optimized/bonus-6.webp';
-import bonus7Image from './assets/optimized/bonus-7.webp';
-import bonus8Image from './assets/optimized/bonus-8.webp';
-import bonus9Image from './assets/optimized/bonus-9.webp';
-import bonus10Image from './assets/optimized/bonus-10.webp';
-import bonus11Image from './assets/optimized/bonus-11.webp';
-import lucro1Image from './assets/optimized/lucro-1.webp';
-import lucro2Image from './assets/optimized/lucro-2.webp';
-import lucro3Image from './assets/optimized/lucro-3.webp';
-import funkoBonusImage from './assets/optimized/funko-bonus.webp';
-import carousel1 from './assets/optimized/carousel-1.webp';
-import carousel2 from './assets/optimized/carousel-2.webp';
-import carousel3 from './assets/optimized/carousel-3.webp';
-import carousel4 from './assets/optimized/carousel-4.webp';
-import carousel5 from './assets/optimized/carousel-5.webp';
-import carousel6 from './assets/optimized/carousel-6.webp';
-import carouselExtra1 from './assets/optimized/carousel-new/carousel-extra-1.webp';
-import carouselExtra2 from './assets/optimized/carousel-new/carousel-extra-2.webp';
-import carouselExtra3 from './assets/optimized/carousel-new/carousel-extra-3.webp';
-import carouselExtra4 from './assets/optimized/carousel-new/carousel-extra-4.webp';
-import carouselExtra5 from './assets/optimized/carousel-new/carousel-extra-5.webp';
-import carouselExtra6 from './assets/optimized/carousel-new/carousel-extra-6.webp';
-import carouselExtra7 from './assets/optimized/carousel-new/carousel-extra-7.webp';
-import carouselExtra8 from './assets/optimized/carousel-new/carousel-extra-8.webp';
-import carouselExtra9 from './assets/optimized/carousel-new/carousel-extra-9.webp';
-import carouselExtra10 from './assets/optimized/carousel-new/carousel-extra-10.webp';
-import { CleanImage } from './components/CleanImage';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Play,
-  Check,
+  ShoppingCart,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
   X,
   Lock,
   Mail,
   Building2,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  Gift,
-  ShoppingCart,
+  Check,
 } from 'lucide-react';
 
-interface ModelItem {
-  id: string | number;
-  image?: string;
-  fallbackImage?: string;
-  icon?: React.ReactNode;
-  color?: string;
+interface CarouselItem {
+  id: string;
+  image: string;
   title: string;
-  imageClassName?: string;
+  className?: string;
 }
 
-const newModels: ModelItem[] = [
-  {
-    id: 'c-1',
-    image: carousel1,
-    fallbackImage: 'https://i.imgur.com/OW0TvSS.png',
-    title: 'Minecraft 3D STL',
-  },
-  {
-    id: 'c-2',
-    image: carousel2,
-    fallbackImage: 'https://i.imgur.com/YSY10He.png',
-    title: 'Colecionável STL',
-  },
-  {
-    id: 'c-3',
-    image: carousel3,
-    fallbackImage: 'https://i.imgur.com/4ffriGz.png',
-    title: 'Action Figure STL',
-  },
-  {
-    id: 'c-4',
-    image: carousel4,
-    fallbackImage: 'https://i.imgur.com/N8g8Jkb.png',
-    title: 'Miniatura STL',
-  },
-  {
-    id: 'c-5',
-    image: carousel5,
-    fallbackImage: 'https://i.imgur.com/IQfJhqF.png',
-    title: 'Guerreiro 3D STL',
-  },
-  {
-    id: 'c-6',
-    image: carousel6,
-    fallbackImage: 'https://i.imgur.com/ApsYGdc.png',
-    title: 'Escultura Detalhada STL',
-  },
-];
-
-const normalizedExistingImages = import.meta.glob<{ default: string }>('./assets/optimized/carousel-existing/*.webp', { eager: true });
-
-function getNormalizedImage(url: string): string {
-  const match = url.match(/\/([a-zA-Z0-9_-]+)\.png$/);
-  if (match) {
-    const key = `./assets/optimized/carousel-existing/${match[1]}.webp`;
-    if (normalizedExistingImages[key]) {
-      return normalizedExistingImages[key].default;
-    }
-  }
-  return url;
+interface BonusItem {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
 }
 
-const extraCarouselModels: ModelItem[] = [
-  {
-    id: 'extra-1',
-    image: carouselExtra1,
-    fallbackImage: 'https://i.imgur.com/0JBWYlv.png',
-    title: 'Modelo 3D STL',
-  },
-  {
-    id: 'extra-2',
-    image: carouselExtra2,
-    fallbackImage: 'https://i.imgur.com/wzoh3dn.png',
-    title: 'Colecionável STL',
-  },
-  {
-    id: 'extra-3',
-    image: carouselExtra3,
-    fallbackImage: 'https://i.imgur.com/Dbo3JOo.png',
-    title: 'Action Figure STL',
-  },
-  {
-    id: 'extra-4',
-    image: carouselExtra4,
-    fallbackImage: 'https://i.imgur.com/ND72KlP.png',
-    title: 'Miniatura 3D STL',
-  },
-  {
-    id: 'extra-5',
-    image: carouselExtra5,
-    fallbackImage: 'https://i.imgur.com/CHQtbUe.png',
-    title: 'Guerreiro 3D STL',
-  },
-  {
-    id: 'extra-6',
-    image: carouselExtra6,
-    fallbackImage: 'https://i.imgur.com/mkEOXIs.png',
-    title: 'Escultura Detalhada STL',
-  },
-  {
-    id: 'extra-7',
-    image: carouselExtra7,
-    fallbackImage: 'https://i.imgur.com/gXpWfT3.png',
-    title: 'Personagem Épico STL',
-  },
-  {
-    id: 'extra-8',
-    image: carouselExtra8,
-    fallbackImage: 'https://i.imgur.com/EefCNIq.png',
-    title: 'Figura de Ação STL',
-  },
-  {
-    id: 'extra-9',
-    image: carouselExtra9,
-    fallbackImage: 'https://i.imgur.com/euq5sBC.png',
-    title: 'Colecionável Premium STL',
-  },
-  {
-    id: 'extra-10',
-    image: carouselExtra10,
-    fallbackImage: 'https://i.imgur.com/OceZmpV.png',
-    title: 'Busto Colecionável STL',
-  },
-];
-
-function normalizeModelItem(item: ModelItem): ModelItem {
-  if (typeof item.image === 'string' && item.image.startsWith('http')) {
-    return {
-      ...item,
-      image: getNormalizedImage(item.image),
-      fallbackImage: item.fallbackImage || item.image,
-    };
-  }
-  return item;
+interface FaqItem {
+  q: string;
+  a: string;
 }
 
-const line1Models: ModelItem[] = [
-  newModels[0], // Minecraft 3D STL
-  extraCarouselModels[0],
-  {
-    id: 'l1-img-1',
-    image: 'https://i.imgur.com/6cCq8Rf.png',
-    title: 'Colecionável STL',
-  },
-  {
-    id: 'l1-img-2',
-    image: 'https://i.imgur.com/burmX7i.png',
-    title: 'Modelo 3D STL',
-  },
-  {
-    id: 'l1-img-3',
-    image: 'https://i.imgur.com/iiQWumG.png',
-    title: 'Escultura Colecionável STL',
-  },
-  newModels[1], // Colecionável STL
-  extraCarouselModels[1],
-  {
-    id: 'l1-img-4',
-    image: 'https://i.imgur.com/RvI8Tgc.png',
-    title: 'Action Figure STL',
-  },
-  {
-    id: 'l1-img-5',
-    image: 'https://i.imgur.com/IiNLkyN.png',
-    title: 'Personagem Detalhado STL',
-  },
-  {
-    id: 'l1-img-6',
-    image: 'https://i.imgur.com/fqqiyqt.png',
-    title: 'Busto Colecionável STL',
-  },
-  newModels[2], // Action Figure STL
-  extraCarouselModels[2],
-  {
-    id: 'l1-img-7',
-    image: 'https://i.imgur.com/RbxY5oY.png',
-    title: 'Artefato Épico STL',
-  },
-  {
-    id: 'l1-img-8',
-    image: 'https://i.imgur.com/S2xF2tJ.png',
-    title: 'Guerreiro 3D STL',
-  },
-  {
-    id: 'l1-img-9',
-    image: 'https://i.imgur.com/eCDBAvz.png',
-    title: 'Criatura Lendária STL',
-  },
-  newModels[3], // Miniatura STL
-  extraCarouselModels[3],
-  {
-    id: 'l1-img-10',
-    image: 'https://i.imgur.com/fdpcefu.png',
-    title: 'Colecionável Especial STL',
-  },
-  {
-    id: 'l1-img-11',
-    image: 'https://i.imgur.com/6up371W.png',
-    title: 'Figura de Ação STL',
-  },
-  {
-    id: 'l1-img-12',
-    image: 'https://i.imgur.com/NUjg7qK.png',
-    title: 'Personagem Anime STL',
-  },
-  newModels[4], // Guerreiro 3D STL
-  {
-    id: 'l1-img-13',
-    image: 'https://i.imgur.com/XJqt9ir.png',
-    title: 'Escultura Articulada STL',
-  },
-  {
-    id: 'l1-img-14',
-    image: 'https://i.imgur.com/9UwfIza.png',
-    title: 'Modelo Premium STL',
-  },
-  newModels[5], // Escultura Detalhada STL
-  {
-    id: 'l1-img-15',
-    image: 'https://i.imgur.com/lO3J8Wb.png',
-    title: 'Personagem Fantasia STL',
-  },
-  {
-    id: 'l1-img-16',
-    image: 'https://i.imgur.com/3YWeqjV.png',
-    title: 'Estátua Decorativa STL',
-  },
-].map(normalizeModelItem);
+interface TestimonialItem {
+  id: number;
+  image: string;
+  fallback: string;
+  alt: string;
+}
 
-const line2Models: ModelItem[] = [
-  newModels[3], // Miniatura STL
-  extraCarouselModels[4],
-  {
-    id: 'l2-img-1',
-    image: 'https://i.imgur.com/vxV9uGs.png',
-    title: 'Figura Colecionável STL',
-  },
-  {
-    id: 'l2-img-2',
-    image: 'https://i.imgur.com/OWPMAw9.png',
-    title: 'Escultura Detalhada STL',
-  },
-  {
-    id: 'l2-img-3',
-    image: 'https://i.imgur.com/NxLXZKR.png',
-    title: 'Action Figure Lendária STL',
-  },
-  newModels[4], // Guerreiro 3D STL
-  extraCarouselModels[5],
-  {
-    id: 'l2-img-4',
-    image: 'https://i.imgur.com/dtGZy9j.png',
-    title: 'Diorama Épico STL',
-  },
-  {
-    id: 'l2-img-5',
-    image: 'https://i.imgur.com/wI4YRI2.png',
-    title: 'Colecionável de Sucesso STL',
-  },
-  {
-    id: 'l2-img-6',
-    image: 'https://i.imgur.com/Nzv1cDH.png',
-    title: 'Personagem Mítico STL',
-  },
-  newModels[5], // Escultura Detalhada STL
-  extraCarouselModels[6],
-  {
-    id: 'l2-img-7',
-    image: 'https://i.imgur.com/BLI3Ocr.png',
-    title: 'Modelo High-Poly STL',
-  },
-  {
-    id: 'l2-img-8',
-    image: 'https://i.imgur.com/Q2gtaee.png',
-    title: 'Guerreiro Épico STL',
-  },
-  {
-    id: 'l2-img-9',
-    image: 'https://i.imgur.com/CldKhUH.png',
-    title: 'Escultura Fantástica STL',
-  },
-  newModels[0], // Minecraft 3D STL
-  {
-    id: 'l2-img-10',
-    image: 'https://i.imgur.com/x9zamns.png',
-    title: 'Colecionável Raro STL',
-  },
-  {
-    id: 'l2-img-11',
-    image: 'https://i.imgur.com/p2ftAEg.png',
-    title: 'Action Figure Especial STL',
-  },
-  {
-    id: 'l2-img-12',
-    image: 'https://i.imgur.com/XColugb.png',
-    title: 'Personagem Lendário STL',
-  },
-  newModels[1], // Colecionável STL
-  {
-    id: 'l2-img-13',
-    image: 'https://i.imgur.com/IcKX7kO.png',
-    title: 'Estátua Decorativa 3D STL',
-  },
-  {
-    id: 'l2-img-14',
-    image: 'https://i.imgur.com/AWA8wvx.png',
-    title: 'Colecionável Premium STL',
-  },
-  newModels[2], // Action Figure STL
-  {
-    id: 'l2-img-15',
-    image: 'https://i.imgur.com/1s9hRPB.png',
-    title: 'Modelo Articulado Exclusivo STL',
-  },
-  {
-    id: 'l2-img-16',
-    image: 'https://i.imgur.com/PZGhNQL.png',
-    title: 'Guerreiro 3D STL',
-  },
-].map(normalizeModelItem);
-
-const line3Models: ModelItem[] = [
-  newModels[1], // Colecionável STL
-  extraCarouselModels[7],
-  {
-    id: 'l3-img-1',
-    image: 'https://i.imgur.com/Iexyj0f.png',
-    title: 'Colecionável Raro 3D STL',
-  },
-  {
-    id: 'l3-img-2',
-    image: 'https://i.imgur.com/5Ld6EQd.png',
-    title: 'Guerreiro de Fantasia STL',
-  },
-  {
-    id: 'l3-img-3',
-    image: 'https://i.imgur.com/NucoHxQ.png',
-    title: 'Modelo Articulado STL',
-  },
-  newModels[5], // Escultura Detalhada STL
-  extraCarouselModels[8],
-  {
-    id: 'l3-img-4',
-    image: 'https://i.imgur.com/4jWcKxZ.png',
-    title: 'Action Figure Clássica STL',
-  },
-  {
-    id: 'l3-img-5',
-    image: 'https://i.imgur.com/tnHf4pV.png',
-    title: 'Personagem Futurista STL',
-  },
-  {
-    id: 'l3-img-6',
-    image: 'https://i.imgur.com/MiJs0Ha.png',
-    title: 'Artefato Decorativo STL',
-  },
-  newModels[0], // Minecraft 3D STL
-  extraCarouselModels[9],
-  {
-    id: 'l3-img-7',
-    image: 'https://i.imgur.com/KWdI0NJ.png',
-    title: 'Escultura Mítica 3D STL',
-  },
-  {
-    id: 'l3-img-8',
-    image: 'https://i.imgur.com/bu4uvAA.png',
-    title: 'Herói Colecionável STL',
-  },
-  {
-    id: 'l3-img-9',
-    image: 'https://i.imgur.com/agiTngK.png',
-    title: 'Modelo Exclusivo Limitado STL',
-  },
-  newModels[4], // Guerreiro 3D STL
-  {
-    id: 'l3-img-10',
-    image: 'https://i.imgur.com/cT3ZstC.png',
-    title: 'Action Figure Épica STL',
-  },
-  {
-    id: 'l3-img-11',
-    image: 'https://i.imgur.com/0A84s2W.png',
-    title: 'Escultura Articulada 3D STL',
-  },
-  {
-    id: 'l3-img-12',
-    image: 'https://i.imgur.com/quzXTcN.png',
-    title: 'Personagem Anime STL',
-  },
-  newModels[2], // Action Figure STL
-  {
-    id: 'l3-img-13',
-    image: 'https://i.imgur.com/BrFGpUf.png',
-    title: 'Colecionável Especial STL',
-  },
-  {
-    id: 'l3-img-14',
-    image: 'https://i.imgur.com/ys8ZIIc.png',
-    title: 'Guerreiro Épico STL',
-  },
-  newModels[3], // Miniatura STL
-  {
-    id: 'l3-img-15',
-    image: 'https://i.imgur.com/tT3WbfJ.png',
-    title: 'Figura Decorativa STL',
-  },
-  {
-    id: 'l3-img-16',
-    image: 'https://i.imgur.com/OwSvkry.png',
-    title: 'Colecionável Especial 3D STL',
-  },
-].map(normalizeModelItem);
-
-const brands = [
+const BRANDS = [
   'CREALITY',
   'ELEGOO',
   'BAMBU LAB',
@@ -483,233 +49,176 @@ const brands = [
   'VORON DESIGN',
 ];
 
-interface BonusItem {
-  id: number;
-  title: string;
-  description: string;
-  priceOriginal: string;
-  image?: string;
-  imageClassName?: string;
-  icon?: React.ReactNode;
-}
+const ROW_1_CARDS: CarouselItem[] = [
+  { id: 'r1-1', title: 'Minecraft 3D STL', image: 'https://www.universo3d.online/assets/carousel-1-BVYYLJwg.webp' },
+  { id: 'r1-2', title: 'Colecionável 3D STL', image: '/car-pryqbdy.webp', className: '!max-w-[94%] !max-h-[90%]' },
+  { id: 'r1-3', title: 'Modelo 3D STL', image: 'https://www.universo3d.online/assets/carousel-extra-1-YQixWJ53.webp' },
+  { id: 'r1-4', title: 'Colecionável STL', image: 'https://www.universo3d.online/assets/6cCq8Rf--uwUDN_k.webp' },
+  { id: 'r1-5', title: 'Action Figure STL', image: '/car-fbsor17.webp' },
+  { id: 'r1-6', title: 'Modelo 3D STL', image: 'https://www.universo3d.online/assets/burmX7i-GPUYIH0P.webp' },
+  { id: 'r1-7', title: 'Escultura Colecionável STL', image: 'https://www.universo3d.online/assets/iiQWumG-DEjf-ZmF.webp' },
+  { id: 'r1-8', title: 'Colecionável STL', image: 'https://www.universo3d.online/assets/carousel-2-BqK37slN.webp' },
+];
 
-const bonuses: BonusItem[] = [
+const ROW_2_CARDS: CarouselItem[] = [
+  { id: 'r2-1', title: 'Miniatura STL', image: 'https://www.universo3d.online/assets/carousel-4-D8ZTFvgk.webp' },
+  { id: 'r2-2', title: 'Miniatura Colecionável STL', image: '/car-y1v14tp.webp', className: '!max-w-[88%] !max-h-[88%]' },
+  { id: 'r2-3', title: 'Guerreiro 3D STL', image: 'https://www.universo3d.online/assets/carousel-extra-5-I_WwLo6g.webp' },
+  { id: 'r2-4', title: 'Figura Colecionável STL', image: 'https://www.universo3d.online/assets/vxV9uGs-BPqdIOyn.webp' },
+  { id: 'r2-5', title: 'Escultura 3D STL', image: '/car-dskufwd.webp', className: '!max-w-[80%] !max-h-[84%]' },
+  { id: 'r2-6', title: 'Escultura Detalhada STL', image: 'https://www.universo3d.online/assets/OWPMAw9-Dggt7BAj.webp' },
+  { id: 'r2-7', title: 'Action Figure Lendária STL', image: 'https://www.universo3d.online/assets/NxLXZKR-dB8EFN5N.webp' },
+  { id: 'r2-8', title: 'Guerreiro 3D STL', image: 'https://www.universo3d.online/assets/carousel-5-Cq8fdoJi.webp' },
+];
+
+const ROW_3_CARDS: CarouselItem[] = [
+  { id: 'r3-1', title: 'Colecionável STL', image: 'https://www.universo3d.online/assets/carousel-2-BqK37slN.webp' },
+  { id: 'r3-2', title: 'Modelo Detalhado STL', image: '/car-wryskmh.webp' },
+  { id: 'r3-3', title: 'Figura de Ação STL', image: 'https://www.universo3d.online/assets/carousel-extra-8-IxzUvBU4.webp' },
+  { id: 'r3-4', title: 'Colecionável Raro 3D STL', image: 'https://www.universo3d.online/assets/Iexyj0f-DE3EMOHB.webp' },
+  { id: 'r3-5', title: 'Personagem 3D STL', image: '/car-tr2emxn.webp' },
+  { id: 'r3-6', title: 'Guerreiro de Fantasia STL', image: 'https://www.universo3d.online/assets/5Ld6EQd-DPRpyfzW.webp' },
+  { id: 'r3-7', title: 'Modelo Articulado STL', image: 'https://www.universo3d.online/assets/NucoHxQ-E8WOFn2a.webp' },
+  { id: 'r3-8', title: 'Escultura Detalhada STL', image: 'https://www.universo3d.online/assets/carousel-6-DCrze3Vc.webp' },
+];
+
+const ROW_4_CARDS: CarouselItem[] = [
+  { id: 'r4-1', title: 'Porta Copos Monster 3D', image: '/car-mlww9d1.webp', className: '!max-w-[92%] !max-h-[90%]' },
+  { id: 'r4-2', title: 'Estatueta Colecionável STL', image: '/car-or71jqw.webp' },
+  { id: 'r4-3', title: 'Canecas de Time 3D', image: '/car-gg0yzcn.webp', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-4', title: 'Colecionável Geek 3D', image: '/car-rerhdfp.webp' },
+  { id: 'r4-5', title: 'Modelo Geek STL', image: '/car-dtnlqds.webp', className: '!max-w-[96%] !max-h-[90%] scale-[1.12]' },
+  { id: 'r4-6', title: 'Action Figure Especial STL', image: '/car-a6xifct.webp' },
+  { id: 'r4-7', title: 'Escultura Premium 3D', image: '/car-f5nklb0.webp' },
+];
+
+const BONUSES: BonusItem[] = [
   {
     id: 1,
     title: 'PACK DE VEÍCULOS 3D PROFISSIONAIS',
-    description:
-      'Amplie seu acervo com uma coleção de veículos 3D, incluindo diferentes modelos de carros, motos, caminhões e outras opções para impressão.',
-    priceOriginal: 'R$ 39,00',
-    image: bonus1Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <path
-          d="M10 38 L16 28 C18 24 22 22 28 22 L40 22 C46 22 50 25 54 30 L58 35 C60 37 60 40 58 43 L56 45 C55 46 53 46 52 46 L12 46 C10 46 8 44 8 42 Z"
-          fill="currentColor"
-          opacity="0.85"
-        />
-        <path d="M26 25 L38 25 C42 25 45 27 48 30 L20 30 C22 27 24 25 26 25 Z" fill="#111" opacity="0.9" />
-        <circle cx="18" cy="46" r="6" fill="#111" stroke="currentColor" strokeWidth="2.5" />
-        <circle cx="18" cy="46" r="2.5" fill="currentColor" />
-        <circle cx="48" cy="46" r="6" fill="#111" stroke="currentColor" strokeWidth="2.5" />
-        <circle cx="48" cy="46" r="2.5" fill="currentColor" />
-      </svg>
-    ),
+    description: 'Amplie seu acervo com uma coleção de veículos 3D, incluindo diferentes modelos de carros, motos, caminhões e outras opções para impressão.',
+    image: 'https://www.universo3d.online/assets/bonus-1-D7xp77aP.webp',
   },
   {
     id: 2,
     title: 'COLEÇÃO HERÓIS DA MARVEL',
-    description:
-      'Uma coleção especial com modelos 3D de heróis da Marvel, perfeita para quem procura personagens conhecidos, peças de exposição e itens colecionáveis.',
-    priceOriginal: 'R$ 49,00',
-    image: bonus2Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.9" />
-        <circle cx="32" cy="32" r="21" fill="none" stroke="currentColor" strokeWidth="2.5" opacity="0.6" />
-        <circle cx="32" cy="32" r="14" fill="currentColor" opacity="0.3" />
-        <polygon points="32,20 35.5,27.5 43.5,28.5 37.5,34 39,42 32,38 25,42 26.5,34 20.5,28.5 28.5,27.5" fill="currentColor" />
-      </svg>
-    ),
+    description: 'Uma coleção especial com modelos 3D de heróis da Marvel, perfeita para quem procura personagens conhecidos, peças de exposição e itens colecionáveis.',
+    image: 'https://www.universo3d.online/assets/bonus-2-DhtXjDoR.webp',
   },
   {
     id: 3,
     title: 'PACK DE CHAVEIROS PERSONALIZADOS',
-    description:
-      'Tenha também uma coleção de chaveiros personalizados em 3D, com diversos modelos e estilos para imprimir e ampliar ainda mais as possibilidades do seu acervo.',
-    priceOriginal: 'R$ 29,00',
-    image: bonus3Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <circle cx="22" cy="22" r="12" fill="none" stroke="currentColor" strokeWidth="3.5" />
-        <circle cx="22" cy="22" r="6" fill="currentColor" opacity="0.3" />
-        <path d="M31 31 L52 52 M44 44 L49 39 M49 49 L54 44" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
-      </svg>
-    ),
+    description: 'Tenha também uma coleção de chaveiros personalizados em 3D, com diversos modelos e estilos para imprimir e ampliar ainda mais as possibilidades do seu acervo.',
+    image: 'https://www.universo3d.online/assets/bonus-3-Bf4I0ShX.webp',
   },
   {
     id: 4,
     title: 'MODELOS FLEXÍVEIS E ARTICULADOS',
-    description:
-      'Você também recebe uma coleção de modelos flexíveis e articulados, com peças que ganham movimento depois de impressas e chamam atenção pelo resultado.',
-    priceOriginal: 'R$ 37,00',
-    image: bonus4Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <path d="M10 32 C10 20 22 20 22 32 C22 44 34 44 34 32 C34 20 46 20 46 32 C46 44 58 44 58 32" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-        <circle cx="16" cy="32" r="4" fill="currentColor" />
-        <circle cx="28" cy="32" r="4" fill="currentColor" />
-        <circle cx="40" cy="32" r="4" fill="currentColor" />
-        <circle cx="52" cy="32" r="4" fill="currentColor" />
-      </svg>
-    ),
+    description: 'Você também recebe uma coleção de modelos flexíveis e articulados, com peças que ganham movimento depois de impressas e chamam atenção pelo resultado.',
+    image: 'https://www.universo3d.online/assets/bonus-4-DwIXkaw_.webp',
   },
   {
     id: 5,
     title: 'COLEÇÃO CLÁSSICOS DOS DESENHOS',
-    description:
-      'Uma coleção repleta de personagens clássicos dos desenhos, com modelos conhecidos para imprimir, colecionar, presentear ou utilizar na decoração.',
-    priceOriginal: 'R$ 35,00',
-    image: bonus5Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <circle cx="32" cy="36" r="18" fill="currentColor" opacity="0.4" stroke="currentColor" strokeWidth="2.5" />
-        <circle cx="18" cy="18" r="10" fill="currentColor" opacity="0.8" />
-        <circle cx="46" cy="18" r="10" fill="currentColor" opacity="0.8" />
-        <ellipse cx="27" cy="34" rx="2.5" ry="4" fill="#111" />
-        <ellipse cx="37" cy="34" rx="2.5" ry="4" fill="#111" />
-        <path d="M25 43 Q32 50 39 43" stroke="#111" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-      </svg>
-    ),
+    description: 'Uma coleção repleta de personagens clássicos dos desenhos, com modelos conhecidos para imprimir, colecionar, presentear ou utilizar na decoração.',
+    image: 'https://www.universo3d.online/assets/bonus-5-DMXtPMtT.webp',
   },
   {
     id: 6,
     title: 'COLEÇÃO MÁSCARAS 3D',
-    description:
-      'Tenha acesso a uma coleção de máscaras 3D, com diferentes personagens, estilos e designs para criar impressões maiores e ainda mais impressionantes.',
-    priceOriginal: 'R$ 39,00',
-    image: bonus6Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <path d="M14 20 C14 12 50 12 50 20 C52 36 44 52 32 56 C20 52 12 36 14 20 Z" fill="none" stroke="currentColor" strokeWidth="3" />
-        <path d="M19 28 Q26 24 30 30 M45 28 Q38 24 34 30" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none" />
-        <line x1="32" y1="32" x2="32" y2="42" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M26 46 Q32 50 38 46" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-      </svg>
-    ),
+    description: 'Tenha acesso a uma coleção de máscaras 3D, com diferentes personagens, estilos e designs para criar impressões maiores e ainda mais impressionantes.',
+    image: 'https://www.universo3d.online/assets/bonus-6-CQCK1QZU.webp',
   },
   {
     id: 7,
     title: 'COLEÇÃO POKÉMON 3D',
-    description:
-      'Receba também uma coleção dedicada ao universo Pokémon, com diferentes personagens e criaturas transformados em modelos para impressão 3D.',
-    priceOriginal: 'R$ 47,00',
-    image: bonus7Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" strokeWidth="3.5" />
-        <line x1="6" y1="32" x2="24" y2="32" stroke="currentColor" strokeWidth="3.5" />
-        <line x1="40" y1="32" x2="58" y2="32" stroke="currentColor" strokeWidth="3.5" />
-        <circle cx="32" cy="32" r="8" fill="#111" stroke="currentColor" strokeWidth="3" />
-        <circle cx="32" cy="32" r="3.5" fill="currentColor" />
-        <path d="M7 30 A 25 25 0 0 1 57 30 Z" fill="currentColor" opacity="0.3" />
-      </svg>
-    ),
+    description: 'Receba também uma coleção dedicada ao universo Pokémon, com diferentes personagens e criaturas transformados em modelos para impressão 3D.',
+    image: 'https://www.universo3d.online/assets/bonus-7-B6ElVMsO.webp',
   },
   {
     id: 8,
     title: 'MASCOTES DE FUTEBOL 3D',
-    description:
-      'Uma coleção especial de mascotes de futebol em 3D, com diversos modelos inspirados no universo dos clubes e das torcidas.',
-    priceOriginal: 'R$ 39,00',
-    image: bonus8Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <path d="M32 6 L52 14 V32 C52 46 32 58 32 58 C32 58 12 46 12 32 V14 Z" fill="none" stroke="currentColor" strokeWidth="2.5" opacity="0.6" />
-        <circle cx="32" cy="30" r="15" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2" />
-        <polygon points="32,23 37,27 35,33 29,33 27,27" fill="currentColor" opacity="0.9" />
-      </svg>
-    ),
+    description: 'Uma coleção especial de mascotes de futebol em 3D, com diversos modelos inspirados no universo dos clubes e das torcidas.',
+    image: 'https://www.universo3d.online/assets/bonus-8-mlyb3qoR.webp',
   },
   {
     id: 9,
     title: 'HELICÓPTEROS 3D',
-    description:
-      'Adicione ao seu acervo uma coleção de helicópteros 3D, com diferentes modelos para quem gosta de aviação, veículos e projetos diferenciados.',
-    priceOriginal: 'R$ 39,00',
-    image: bonus9Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <line x1="12" y1="16" x2="52" y2="16" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        <line x1="32" y1="16" x2="32" y2="24" stroke="currentColor" strokeWidth="3" />
-        <path d="M22 24 C14 24 10 30 10 38 C10 44 16 46 26 46 H40 C44 46 48 42 48 36 C48 30 42 24 34 24 Z" fill="currentColor" opacity="0.85" />
-        <path d="M12 34 C12 30 16 26 22 26 H28 V38 H14 C12.5 38 12 36 12 34 Z" fill="#111" />
-        <path d="M40 32 L56 28 V30 L40 38 Z" fill="currentColor" />
-        <line x1="56" y1="22" x2="56" y2="36" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-        <circle cx="56" cy="29" r="2" fill="currentColor" />
-        <line x1="20" y1="46" x2="18" y2="52" stroke="currentColor" strokeWidth="2.5" />
-        <line x1="36" y1="46" x2="34" y2="52" stroke="currentColor" strokeWidth="2.5" />
-        <path d="M12 52 H42 C45 52 46 50 46 50" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none" />
-      </svg>
-    ),
+    description: 'Adicione ao seu acervo uma coleção de helicópteros 3D, com diferentes modelos para quem gosta de aviação, veículos e projetos diferenciados.',
+    image: 'https://www.universo3d.online/assets/bonus-9-BczusQui.webp',
   },
   {
     id: 10,
     title: 'COLEÇÃO LEGO 3D',
-    description:
-      'Você também recebe uma coleção de modelos em estilo LEGO, com personagens e peças variadas para deixar seu acervo ainda mais completo.',
-    priceOriginal: 'R$ 39,00',
-    image: bonus10Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <rect x="12" y="24" width="40" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="2.5" />
-        <rect x="18" y="16" width="10" height="8" rx="2" fill="currentColor" opacity="0.9" />
-        <rect x="36" y="16" width="10" height="8" rx="2" fill="currentColor" opacity="0.9" />
-        <circle cx="23" cy="38" r="4.5" fill="currentColor" opacity="0.4" />
-        <circle cx="41" cy="38" r="4.5" fill="currentColor" opacity="0.4" />
-      </svg>
-    ),
+    description: 'Você também recebe uma coleção de modelos em estilo LEGO, com personagens e peças variadas para deixar seu acervo ainda mais completo.',
+    image: 'https://www.universo3d.online/assets/bonus-10-Bc2U9BDu.webp',
   },
   {
     id: 11,
     title: 'COLEÇÃO MINECRAFT 3D',
-    description:
-      'E para completar, você recebe uma coleção inspirada no universo Minecraft, com personagens, criaturas e elementos conhecidos do jogo prontos para impressão 3D.',
-    priceOriginal: 'R$ 47,00',
-    image: bonus11Image,
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <rect x="14" y="14" width="36" height="36" rx="3" fill="none" stroke="currentColor" strokeWidth="3" />
-        <rect x="22" y="24" width="6" height="6" fill="currentColor" opacity="0.9" />
-        <rect x="36" y="24" width="6" height="6" fill="currentColor" opacity="0.9" />
-        <rect x="28" y="30" width="8" height="10" fill="currentColor" opacity="0.9" />
-        <rect x="24" y="40" width="4" height="6" fill="currentColor" opacity="0.9" />
-        <rect x="36" y="40" width="4" height="6" fill="currentColor" opacity="0.9" />
-      </svg>
-    ),
+    description: 'E para completar, você recebe uma coleção inspirada no universo Minecraft, com personagens, criaturas e elementos conhecidos do jogo prontos para impressão 3D.',
+    image: 'https://www.universo3d.online/assets/bonus-11-CsS1NIGA.webp',
   },
   {
     id: 12,
     title: 'COLEÇÃO AMIGURUMIS 3D',
-    description:
-      'Amplie ainda mais seu acervo com uma coleção de Amigurumis 3D, com modelos inspirados no visual do crochê, trazendo personagens, animais e peças fofas para imprimir e colecionar.',
-    priceOriginal: 'R$ 47,00',
+    description: 'Amplie ainda mais seu acervo com uma coleção de Amigurumis 3D, com modelos inspirados no visual do crochê, trazendo personagens, animais e peças fofas para imprimir e colecionar.',
     image: 'https://i.imgur.com/BIKsask.png',
-    icon: (
-      <svg viewBox="0 0 64 64" className="w-16 h-16 text-[#FF2B2B]">
-        <circle cx="32" cy="34" r="18" fill="none" stroke="currentColor" strokeWidth="2.5" />
-        <ellipse cx="22" cy="20" rx="6" ry="10" fill="currentColor" opacity="0.9" />
-        <ellipse cx="42" cy="20" rx="6" ry="10" fill="currentColor" opacity="0.9" />
-        <circle cx="26" cy="33" r="3" fill="currentColor" />
-        <circle cx="38" cy="33" r="3" fill="currentColor" />
-        <ellipse cx="32" cy="39" rx="3.5" ry="2.5" fill="currentColor" opacity="0.9" />
-        <path d="M29 42 Q32 45 35 42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
-      </svg>
-    ),
+  },
+  {
+    id: 13,
+    title: 'PORTA COPOS MONSTER 3D',
+    description: 'Adicione ao seu catálogo uma coleção exclusiva de porta copos inspirados no tema Monster em 3D, com visual marcante, relevo detalhado e alta saída para venda.',
+    image: 'https://i.imgur.com/MLWW9d1.png',
+  },
+  {
+    id: 14,
+    title: 'COLEÇÃO CANECAS DE TIME 3D',
+    description: 'Receba uma coleção especial de canecas 3D personalizadas inspiradas em grandes times e torcidas de futebol, com designs exclusivos e excelente aceitação comercial.',
+    image: '/car-gg0yzcn.webp',
   },
 ];
 
-const faqs = [
+const TESTIMONIALS: TestimonialItem[] = [
+  {
+    id: 1,
+    image: 'https://www.universo3d.online/assets/depoimento-1-BBN2Oe74.webp',
+    fallback: '/depoimento-1-fb.webp',
+    alt: 'Depoimento real de aluno - Universo 3D 1',
+  },
+  {
+    id: 2,
+    image: 'https://www.universo3d.online/assets/depoimento-3-Cn7cJzGT.webp',
+    fallback: '/depoimento-2-fb.webp',
+    alt: 'Depoimento real de aluno - Universo 3D 2',
+  },
+  {
+    id: 3,
+    image: 'https://www.universo3d.online/assets/depoimento-4-DJVEDa94.webp',
+    fallback: '/depoimento-3-fb.webp',
+    alt: 'Depoimento real de aluno - Universo 3D 3',
+  },
+  {
+    id: 4,
+    image: 'https://www.universo3d.online/assets/depoimento-5-DG3Xdqvb.webp',
+    fallback: '/depoimento-4-fb.webp',
+    alt: 'Depoimento real de aluno - Universo 3D 4',
+  },
+  {
+    id: 5,
+    image: 'https://www.universo3d.online/assets/depoimento-6-CwvLNkMG.webp',
+    fallback: '/depoimento-5-fb.webp',
+    alt: 'Depoimento real de aluno - Universo 3D 5',
+  },
+  {
+    id: 6,
+    image: 'https://www.universo3d.online/assets/depoimento-7-4HoiAS5R.webp',
+    fallback: '/depoimento-6-fb.webp',
+    alt: 'Depoimento real de aluno - Universo 3D 6',
+  },
+];
+
+const FAQ_ITEMS: FaqItem[] = [
   {
     q: 'Os modelos são compatíveis com a minha impressora 3D?',
     a: 'Sim! Os arquivos estão em formato STL padrão universal e funcionam perfeitamente em qualquer fatiador (Cura, PrusaSlicer, Bambu Studio, OrcaSlicer, Chitubox, etc.) e em praticamente qualquer impressora 3D FDM (Filamento) ou Resina (Creality, Bambu Lab, Anycubic, Elegoo, Sovol, etc.).',
@@ -736,322 +245,150 @@ const faqs = [
   },
 ];
 
-interface DepoimentoItem {
-  id: number;
-  image: string;
-  fallback?: string;
-  alt: string;
-}
-
-const depoimentosList: DepoimentoItem[] = [
-  {
-    id: 1,
-    image: depoimento1,
-    fallback: 'https://i.imgur.com/6m6ZBlW.png',
-    alt: 'Depoimento real de aluno - Universo 3D',
-  },
-  {
-    id: 2,
-    image: depoimento3,
-    fallback: 'https://i.imgur.com/u6Ni9cj.png',
-    alt: 'Depoimento real de aluno - Universo 3D',
-  },
-  {
-    id: 3,
-    image: depoimento4,
-    fallback: 'https://i.imgur.com/ClBxb0D.png',
-    alt: 'Depoimento real de aluno - Universo 3D',
-  },
-  {
-    id: 4,
-    image: depoimento5,
-    fallback: 'https://i.imgur.com/Mpywmfj.png',
-    alt: 'Depoimento real de aluno - Universo 3D',
-  },
-  {
-    id: 5,
-    image: depoimento6,
-    fallback: 'https://i.imgur.com/jpBrWyK.png',
-    alt: 'Depoimento real de aluno - Universo 3D',
-  },
-  {
-    id: 6,
-    image: depoimento7,
-    fallback: 'https://i.imgur.com/Ys2ErTe.png',
-    alt: 'Depoimento real de aluno - Universo 3D',
-  },
-];
-
-const CarouselCard = React.memo(({ item }: { item: ModelItem }) => {
-  return (
-    <div
-      className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
-      style={{ backgroundImage: `url('${cardBg}')` }}
-    >
-      <div className="w-full aspect-square flex items-end justify-center overflow-hidden rounded-xl bg-black/20 relative">
-        {item.image ? (
-          <img
-            src={item.image}
-            alt={item.title}
-            width={256}
-            height={256}
-            loading="lazy"
-            decoding="async"
-            fetchPriority="low"
-            className={`w-full h-full object-contain object-bottom p-2 pb-1 md:group-hover:scale-105 transition-transform duration-300 rounded-lg select-none ${item.imageClassName || ''}`}
-            onError={(e) => {
-              if (item.fallbackImage && e.currentTarget.src !== item.fallbackImage) {
-                e.currentTarget.src = item.fallbackImage;
-              }
-            }}
-          />
-        ) : (
-          <div className={`w-full h-full flex items-center justify-center ${item.color || 'text-[#FF2B2B]'}`}>
-            {item.icon}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-});
-CarouselCard.displayName = 'CarouselCard';
-
-const BonusCard = React.memo(({ bonus }: { bonus: BonusItem }) => {
-  const formattedId = bonus.id < 10 ? `0${bonus.id}` : `${bonus.id}`;
-
-  return (
-    <div
-      id={`bonus-card-${bonus.id}`}
-      className="w-full bg-[#0E0E12] border border-white/10 hover:border-[#FF2B2B]/50 rounded-xl p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.8),0_0_15px_rgba(255,43,43,0.18)] group relative overflow-hidden text-left"
-    >
-      <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-gradient-to-b from-[#FF2B2B] via-[#FF2B2B]/40 to-transparent" />
-
-      {/* Caixa compacta retangular da imagem */}
-      <div className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 shrink-0 bg-black/70 rounded-lg border border-white/5 flex items-center justify-center p-1 sm:p-2 relative overflow-hidden group-hover:border-[#FF2B2B]/30 transition-colors">
-        <div className="absolute inset-0 bg-[#FF2B2B]/5 blur-md rounded-full scale-75 pointer-events-none opacity-40" />
-        {bonus.image ? (
-          <img
-            src={bonus.image}
-            alt={bonus.title}
-            width={120}
-            height={120}
-            loading="lazy"
-            decoding="async"
-            fetchPriority="low"
-            className="max-h-14 xs:max-h-16 sm:max-h-20 w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none relative z-10"
-          />
-        ) : (
-          <div className="w-10 h-10 rounded-lg bg-[#FF2B2B]/10 border border-[#FF2B2B]/20 flex items-center justify-center relative z-10">
-            {bonus.icon}
-          </div>
-        )}
-      </div>
-
-      {/* Conteúdo da Copy */}
-      <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
-        <div className="mb-1">
-          <h3 className="font-display font-black text-xs sm:text-[13px] md:text-sm text-white uppercase tracking-tight flex items-center gap-1.5 leading-tight">
-            <span className="text-xs sm:text-sm shrink-0">🎁</span>
-            <span className="text-[#FF2B2B] shrink-0">BÔNUS {formattedId}</span>
-            <span className="text-zinc-500 font-bold shrink-0">—</span>
-            <span className="text-white truncate">{bonus.title}</span>
-          </h3>
-        </div>
-
-        <p className="text-zinc-300 text-[11px] sm:text-xs leading-relaxed font-normal">
-          {bonus.description}
-        </p>
-      </div>
-    </div>
-  );
-});
-BonusCard.displayName = 'BonusCard';
-
 export default function App() {
-  const [isMobile, setIsMobile] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth < 768;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile((prev) => (prev !== mobile ? mobile : prev));
-    };
-    window.addEventListener('resize', handleResize, { passive: true });
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const activeLine1 = isMobile ? line1Models.slice(0, 6) : line1Models.slice(0, 16);
-  const activeLine2 = isMobile ? line2Models.slice(0, 6) : line2Models.slice(0, 16);
-  const activeLine3 = isMobile ? line3Models.slice(0, 6) : line3Models.slice(0, 16);
-
-  const [isUpsellOpen, setIsUpsellOpen] = useState(false);
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-  const [depoimentoIndex, setDepoimentoIndex] = useState(0);
-  const [isHeroVideoActive, setIsHeroVideoActive] = useState(false);
+  // Video Presentation State
+  const [isPlayingHeroVideo, setIsPlayingHeroVideo] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
-  const [isNotebookVideoActive, setIsNotebookVideoActive] = useState(false);
+
+  // Notebook Video State
+  const [isPlayingNotebookVideo, setIsPlayingNotebookVideo] = useState(false);
   const notebookVideoRef = useRef<HTMLVideoElement>(null);
-  const touchStartXRef = useRef<number | null>(null);
 
-  const handlePlayHeroVideo = useCallback(() => {
-    setIsHeroVideoActive(true);
-    if (heroVideoRef.current) {
-      if (!heroVideoRef.current.src || !heroVideoRef.current.src.includes('s6S0rd5.mp4')) {
-        heroVideoRef.current.src = "https://i.imgur.com/s6S0rd5.mp4";
+  // Testimonial Carousel State
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  // FAQ Accordion State
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  // Upsell Modal State
+  const [showUpsellModal, setShowUpsellModal] = useState(false);
+
+  // Legal Modals State
+  const [legalModalType, setLegalModalType] = useState<'termos' | 'privacidade' | null>(null);
+
+  const handlePlayHeroVideo = () => {
+    setIsPlayingHeroVideo(true);
+    setTimeout(() => {
+      if (heroVideoRef.current) {
+        heroVideoRef.current.play().catch(() => {});
       }
-      heroVideoRef.current.muted = false;
-      heroVideoRef.current.volume = 1.0;
-      const playPromise = heroVideoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn('Hero video play error with sound, attempting retry:', err);
-          if (heroVideoRef.current) {
-            heroVideoRef.current.play().catch(() => {});
-          }
-        });
+    }, 50);
+  };
+
+  const handlePlayNotebookVideo = () => {
+    setIsPlayingNotebookVideo(true);
+    setTimeout(() => {
+      if (notebookVideoRef.current) {
+        notebookVideoRef.current.play().catch(() => {});
       }
-    }
-  }, []);
+    }, 50);
+  };
 
-  const handlePlayNotebookVideo = useCallback(() => {
-    setIsNotebookVideoActive(true);
-    if (notebookVideoRef.current) {
-      if (!notebookVideoRef.current.src || !notebookVideoRef.current.src.includes('XMHWIse.mp4')) {
-        notebookVideoRef.current.src = "https://i.imgur.com/XMHWIse.mp4";
-      }
-      notebookVideoRef.current.muted = false;
-      notebookVideoRef.current.volume = 1.0;
-      const playPromise = notebookVideoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn('Notebook video play error with sound, attempting retry:', err);
-          if (notebookVideoRef.current) {
-            notebookVideoRef.current.play().catch(() => {});
-          }
-        });
-      }
-    }
-  }, []);
+  const handlePrevTestimonial = () => {
+    setTestimonialIndex((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1));
+  };
 
-  const prevDepoimento = useCallback(() => {
-    setDepoimentoIndex((prev) => (prev === 0 ? depoimentosList.length - 1 : prev - 1));
-  }, []);
+  const handleNextTestimonial = () => {
+    setTestimonialIndex((prev) => (prev === TESTIMONIALS.length - 1 ? 0 : prev + 1));
+  };
 
-  const nextDepoimento = useCallback(() => {
-    setDepoimentoIndex((prev) => (prev === depoimentosList.length - 1 ? 0 : prev + 1));
-  }, []);
-
-  const toggleFaq = useCallback((index: number) => {
-    setOpenFaqIndex((prev) => (prev === index ? null : index));
-  }, []);
-
-  const handleBaseClick = useCallback((e: React.MouseEvent) => {
+  const scrollToOffer = (e: React.MouseEvent) => {
     e.preventDefault();
-    setIsUpsellOpen(true);
-  }, []);
-
-  const scrollToOffer = useCallback((e?: React.MouseEvent) => {
-    if (e) e.preventDefault();
-    const target = document.getElementById('oferta-pro');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const elem = document.getElementById('oferta-pro');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const scrollToMercado = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const elem = document.getElementById('validacao-mercado');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Keyboard navigation for testimonials
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') handlePrevTestimonial();
+      if (e.key === 'ArrowRight') handleNextTestimonial();
+      if (e.key === 'Escape') {
+        setShowUpsellModal(false);
+        setLegalModalType(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white relative antialiased selection:bg-[#FF2B2B] selection:text-white">
+    <div className="min-h-screen bg-black text-white relative antialiased selection:bg-[#0066FF] selection:text-white">
       {/* Background Starfield */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none bg-stars opacity-60" />
+      <div className="fixed inset-0 z-[-1] pointer-events-none bg-stars opacity-60"></div>
 
-
-      {/* 2-5. Hero Section */}
+      {/* Hero Section */}
       <section id="hero-section" className="relative pb-16 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#FF2B2B]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#0066FF]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
 
         <div className="w-full relative z-20 flex flex-col items-center pt-8 md:pt-14 pb-2 px-2 sm:px-4 text-center max-w-4xl mx-auto">
-          <h1 className="font-display font-black text-[clamp(11px,3.6vw,28px)] sm:text-2xl md:text-3xl lg:text-[2.35rem] tracking-tight leading-snug sm:leading-[1.25] uppercase inline-block text-left mx-auto select-none">
+          {/* Main Headline */}
+          <h1 className="font-display font-black text-[clamp(13px,3.6vw,28px)] sm:text-2xl md:text-3xl lg:text-[2.35rem] tracking-tight leading-snug sm:leading-[1.25] uppercase inline-block text-left mx-auto select-none">
             <span className="block whitespace-nowrap text-white drop-shadow-md">
               VOCÊ NÃO COMPROU UMA IMPRESSORA 3D
             </span>
             <span className="block whitespace-nowrap mt-1 sm:mt-1.5">
               <span className="text-white drop-shadow-md">PARA DEIXÁ-LA PARADA. </span>
-              <span className="text-[#FF2B2B]">DESCUBRA NOVAS</span>
+              <span className="text-[#0066FF]">DESCUBRA NOVAS</span>
             </span>
-            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-[#FF2B2B]">
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-[#0066FF]">
               IDEIAS DE PRODUTOS PARA IMPRIMIR E
             </span>
-            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-center text-[#FF2B2B]">
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-center text-[#0066FF]">
               VENDER.
             </span>
           </h1>
 
-          {/* Video Presentation - Vertical 9:16 */}
+          {/* Hero Video Container (9:16 Aspect Ratio) */}
           <div className="w-full relative z-10 flex flex-col items-center mt-6 mb-8">
             <div className="relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[400px] mx-auto">
-              <div className="absolute -inset-2 rounded-[32px] sm:rounded-[40px] bg-gradient-to-r from-[#FF2B2B] via-[#FF4444] to-[#CC0022] opacity-75 blur-xl pointer-events-none" />
-              <div className="relative w-full aspect-[9/16] rounded-[24px] sm:rounded-[32px] overflow-hidden border-2 sm:border-[3px] border-[#FF2B2B] shadow-[0_0_40px_rgba(255,43,43,0.7)] bg-black flex items-center justify-center group">
+              {/* Outer Glow */}
+              <div className="absolute -inset-2 rounded-[32px] sm:rounded-[40px] bg-gradient-to-r from-[#0066FF] via-[#38BDF8] to-[#0044CC] opacity-75 blur-xl pointer-events-none"></div>
+
+              <div className="relative w-full aspect-[9/16] rounded-[24px] sm:rounded-[32px] overflow-hidden border-2 sm:border-[3px] border-[#0066FF] shadow-[0_0_40px_rgba(0,102,255,0.7)] bg-black flex items-center justify-center group">
                 <video
                   ref={heroVideoRef}
                   id="video-apresentacao"
-                  src={isHeroVideoActive ? "https://i.imgur.com/s6S0rd5.mp4" : undefined}
-                  data-src="https://i.imgur.com/s6S0rd5.mp4"
-                  poster={heroPoster}
-                  controls={isHeroVideoActive}
+                  src={isPlayingHeroVideo ? 'https://i.imgur.com/s6S0rd5.mp4' : undefined}
+                  poster="https://www.universo3d.online/poster-apresentacao.webp"
                   playsInline
-                  preload="none"
-                  width={480}
-                  height={854}
+                  controls={isPlayingHeroVideo}
+                  preload={isPlayingHeroVideo ? 'auto' : 'none'}
                   className="w-full h-full object-cover rounded-[24px] sm:rounded-[32px]"
                 >
                   Seu navegador não suporta a reprodução de vídeo.
                 </video>
 
-                {/* Capa com o poster de apresentação e Botão Vermelho Estilo YouTube */}
-                {!isHeroVideoActive && (
+                {!isPlayingHeroVideo && (
                   <div
-                    onClick={handlePlayHeroVideo}
-                    onMouseEnter={() => {
-                      if (heroVideoRef.current && heroVideoRef.current.preload === 'none') {
-                        heroVideoRef.current.preload = 'metadata';
-                      }
-                    }}
-                    onTouchStart={() => {
-                      if (heroVideoRef.current && heroVideoRef.current.preload === 'none') {
-                        heroVideoRef.current.preload = 'metadata';
-                      }
-                    }}
                     role="button"
                     tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        handlePlayHeroVideo();
-                      }
-                    }}
+                    onClick={handlePlayHeroVideo}
+                    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handlePlayHeroVideo()}
                     aria-label="Assistir ao vídeo de apresentação"
                     className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none bg-black"
                   >
-                    {/* Imagem do Poster de Alta Nitidez em 9:16 */}
                     <img
-                      src={heroPoster}
                       alt="Capa do Vídeo de Apresentação Universo 3D"
                       width={480}
                       height={854}
                       loading="eager"
-                      fetchPriority="high"
-                      decoding="async"
                       className="absolute inset-0 w-full h-full object-cover select-none"
+                      src="https://www.universo3d.online/poster-apresentacao.webp"
                     />
-
-                    {/* Película sutil para dar profundidade sem escurecer nem embaçar */}
-                    <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors pointer-events-none" />
-
-                    {/* Botão Oficial Vermelho Estilo YouTube com Texto 'Assistir Vídeo' */}
+                    <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
-                      <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-22 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                      <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-22 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#0066FF] hover:bg-[#0052CC] flex items-center justify-center shadow-[0_4px_30px_rgba(0,102,255,0.7)] group-hover:shadow-[0_6px_45px_rgba(0,102,255,0.95)] transition-all duration-300">
                         <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
                       </div>
                       <span className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white font-display font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
@@ -1063,12 +400,11 @@ export default function App() {
               </div>
             </div>
 
-            {/* Copy explicativa embaixo do vídeo */}
             <p className="mt-6 mb-2 text-zinc-200 text-base sm:text-lg md:text-xl max-w-2xl text-center font-normal leading-relaxed px-4">
               Tenha acesso a uma Central 3D com modelos selecionados, categorias com potencial comercial e novas ideias para você imprimir, anunciar e vender — sem passar horas procurando arquivos aleatórios pela internet.
             </p>
 
-            {/* Botão de Compra Direto para a Oferta de 42,90 */}
+            {/* CTA Button */}
             <div className="mt-6 w-full max-w-md px-2 flex flex-col items-center">
               <a
                 href="#oferta-pro"
@@ -1082,21 +418,27 @@ export default function App() {
           </div>
         </div>
 
-        {/* 6. Marcas Marquee */}
+        {/* Brands Marquee */}
         <div id="brands-marquee" className="w-full overflow-hidden relative mb-4 pointer-events-none select-none">
-          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee pointer-events-none select-none">
             <div className="flex items-center gap-16 px-8 shrink-0">
-              {brands.map((brand, i) => (
-                <span key={`brand-1-${i}`} className="text-zinc-500 font-display font-bold text-xl tracking-widest hover:text-zinc-300 transition-colors">
+              {BRANDS.map((brand, i) => (
+                <span
+                  key={`brand-1-${i}`}
+                  className="text-zinc-500 font-display font-bold text-xl tracking-widest hover:text-zinc-300 transition-colors"
+                >
                   {brand}
                 </span>
               ))}
             </div>
             <div className="flex items-center gap-16 px-8 shrink-0" aria-hidden="true">
-              {brands.map((brand, i) => (
-                <span key={`brand-2-${i}`} className="text-zinc-500 font-display font-bold text-xl tracking-widest hover:text-zinc-300 transition-colors">
+              {BRANDS.map((brand, i) => (
+                <span
+                  key={`brand-2-${i}`}
+                  className="text-zinc-500 font-display font-bold text-xl tracking-widest hover:text-zinc-300 transition-colors"
+                >
                   {brand}
                 </span>
               ))}
@@ -1105,11 +447,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* 7. Carrossel de Modelos */}
+      {/* Model Carousel Section */}
       <section id="modelos-carrossel" className="section-lazy pt-0 pb-16 relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FF2B2B]/10 border border-[#FF2B2B]/30 text-[#FF2B2B] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(255,43,43,0.2)]">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#0066FF]/10 border border-[#0066FF]/30 text-[#0066FF] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(0,102,255,0.2)]">
               Ter uma impressora 3D é só o início. Saber o que imprimir muda tudo.
             </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4 leading-tight">
@@ -1121,61 +463,115 @@ export default function App() {
           </div>
         </div>
 
-        {/* Carrossel Linha 1 - Direção Normal */}
+        {/* Row 1: Marquee Cards */}
         <div className="w-full overflow-hidden relative mb-4 pointer-events-none select-none">
-          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
-            <div className="flex items-center gap-4 px-2 shrink-0">
-              {activeLine1.map((item, idx) => (
-                <CarouselCard key={`card-l1-${item.id || idx}`} item={item} />
-              ))}
-            </div>
-            <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
-              {activeLine1.map((item, idx) => (
-                <CarouselCard key={`card-l1-dup-${item.id || idx}`} item={item} />
-              ))}
-            </div>
+            {[...ROW_1_CARDS, ...ROW_1_CARDS].map((item, idx) => (
+              <div
+                key={`r1-${idx}`}
+                className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
+                style={{ backgroundImage: 'url("https://www.universo3d.online/assets/card-bg-oI72pivU.webp")' }}
+              >
+                <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-black/25 relative p-2.5 sm:p-3.5">
+                  <img
+                    alt={item.title}
+                    width={256}
+                    height={256}
+                    loading="lazy"
+                    decoding="async"
+                    className={`max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] ${item.className || ''}`}
+                    src={item.image}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Carrossel Linha 2 - Sentido Contrário (Reverse) */}
+        {/* Row 2: Reverse Marquee Cards */}
         <div className="w-full overflow-hidden relative mb-4 pointer-events-none select-none">
-          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
-            <div className="flex items-center gap-4 px-2 shrink-0">
-              {activeLine2.map((item, idx) => (
-                <CarouselCard key={`card-l2-${item.id || idx}`} item={item} />
-              ))}
-            </div>
-            <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
-              {activeLine2.map((item, idx) => (
-                <CarouselCard key={`card-l2-dup-${item.id || idx}`} item={item} />
-              ))}
-            </div>
+            {[...ROW_2_CARDS, ...ROW_2_CARDS].map((item, idx) => (
+              <div
+                key={`r2-${idx}`}
+                className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
+                style={{ backgroundImage: 'url("https://www.universo3d.online/assets/card-bg-oI72pivU.webp")' }}
+              >
+                <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-black/25 relative p-2.5 sm:p-3.5">
+                  <img
+                    alt={item.title}
+                    width={256}
+                    height={256}
+                    loading="lazy"
+                    decoding="async"
+                    className={`max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] ${item.className || ''}`}
+                    src={item.image}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Carrossel Linha 3 - Sentido Normal (Igual à Linha 1) */}
-        <div className="w-full overflow-hidden relative pointer-events-none select-none">
-          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        {/* Row 3: Marquee Cards */}
+        <div className="w-full overflow-hidden relative mb-4 pointer-events-none select-none">
+          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
-            <div className="flex items-center gap-4 px-2 shrink-0">
-              {activeLine3.map((item, idx) => (
-                <CarouselCard key={`card-l3-${item.id || idx}`} item={item} />
-              ))}
-            </div>
-            <div className="flex items-center gap-4 px-2 shrink-0" aria-hidden="true">
-              {activeLine3.map((item, idx) => (
-                <CarouselCard key={`card-l3-dup-${item.id || idx}`} item={item} />
-              ))}
-            </div>
+            {[...ROW_3_CARDS, ...ROW_3_CARDS].map((item, idx) => (
+              <div
+                key={`r3-${idx}`}
+                className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
+                style={{ backgroundImage: 'url("https://www.universo3d.online/assets/card-bg-oI72pivU.webp")' }}
+              >
+                <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-black/25 relative p-2.5 sm:p-3.5">
+                  <img
+                    alt={item.title}
+                    width={256}
+                    height={256}
+                    loading="lazy"
+                    decoding="async"
+                    className={`max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] ${item.className || ''}`}
+                    src={item.image}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Botão de Compra - Seção Modelos */}
+        {/* Row 4: Reverse Marquee Cards */}
+        <div className="w-full overflow-hidden relative pointer-events-none select-none">
+          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="marquee-cards-reverse pointer-events-none select-none">
+            {[...ROW_4_CARDS, ...ROW_4_CARDS, ...ROW_4_CARDS].map((item, idx) => (
+              <div
+                key={`r4-${idx}`}
+                className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
+                style={{ backgroundImage: 'url("https://www.universo3d.online/assets/card-bg-oI72pivU.webp")' }}
+              >
+                <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-black/25 relative p-2.5 sm:p-3.5">
+                  <img
+                    alt={item.title}
+                    width={256}
+                    height={256}
+                    loading="lazy"
+                    decoding="async"
+                    className={`max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] ${item.className || ''}`}
+                    src={item.image}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Button */}
         <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
           <a
             href="#oferta-pro"
@@ -1188,90 +584,69 @@ export default function App() {
         </div>
       </section>
 
-      {/* 8. Mockup Notebook */}
+      {/* Notebook Mockup Section */}
       <section id="mockup-notebook" className="section-lazy py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10">
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
             <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
-              Conheça a <span className="grad-text drop-shadow-[0_0_25px_rgba(255,43,43,0.6)]">área de membros</span> por dentro
+              Conheça a <span className="grad-text drop-shadow-[0_0_25px_rgba(0,102,255,0.6)]">área de membros</span> por dentro
             </h2>
             <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3.5 font-normal leading-relaxed">
               Você não vai precisar perder tempo procurando pasta por pasta. A <strong className="text-white font-semibold">Área de Membros VIP</strong> é 100% organizada por categorias para você encontrar o modelo desejado em segundos, baixar o arquivo pronto e colocar sua impressora para trabalhar.
             </p>
           </div>
+
+          {/* Notebook Hardware Frame */}
           <div className="max-w-4xl md:max-w-5xl mx-auto relative px-2 sm:px-4 md:px-6">
             <div className="relative z-10">
-              {/* Laptop Screen Top */}
-              <div className="relative bg-[#18181C] rounded-t-[20px] sm:rounded-t-[26px] md:rounded-t-[32px] rounded-b-[4px] p-2 sm:p-2.5 md:p-3.5 border-2 border-[#FF2B2B] shadow-[0_25px_70px_rgba(0,0,0,0.95)]">
-                {/* Camera notch */}
+              <div className="relative bg-[#18181C] rounded-t-[20px] sm:rounded-t-[26px] md:rounded-t-[32px] rounded-b-[4px] p-2 sm:p-2.5 md:p-3.5 border-2 border-[#0066FF] shadow-[0_25px_70px_rgba(0,0,0,0.95)]">
+                {/* Camera / Bezel */}
                 <div className="flex items-center justify-center relative -mb-1 z-20">
                   <div className="w-10 sm:w-14 h-2 sm:h-2.5 bg-[#0A0A0C] rounded-b-md flex items-center justify-center gap-1.5 shadow-inner">
-                    <div className="w-1 h-1 rounded-full bg-[#1A1A22] border border-white/20" />
-                    <div className="w-0.5 h-0.5 rounded-full bg-[#FF2B2B] opacity-75" />
+                    <div className="w-1 h-1 rounded-full bg-[#1A1A22] border border-white/20"></div>
+                    <div className="w-0.5 h-0.5 rounded-full bg-[#0066FF] opacity-75"></div>
                   </div>
                 </div>
-                {/* Screen Display area */}
+
+                {/* Notebook Screen */}
                 <div
                   id="notebook-screen-area"
-                  onMouseEnter={() => {
-                    if (notebookVideoRef.current && notebookVideoRef.current.preload === 'none') {
-                      notebookVideoRef.current.preload = 'metadata';
-                    }
-                  }}
-                  onTouchStart={() => {
-                    if (notebookVideoRef.current && notebookVideoRef.current.preload === 'none') {
-                      notebookVideoRef.current.preload = 'metadata';
-                    }
-                  }}
                   className="relative rounded-md sm:rounded-lg md:rounded-xl overflow-hidden bg-[#000000] aspect-[16/9] border border-white/10 shadow-[inset_0_0_30px_rgba(0,0,0,0.9)] flex items-center justify-center group"
                 >
                   <video
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
-                    src={isNotebookVideoActive ? "https://i.imgur.com/XMHWIse.mp4" : undefined}
-                    data-src="https://i.imgur.com/XMHWIse.mp4"
-                    poster={notebookPoster}
-                    controls={isNotebookVideoActive}
+                    src={isPlayingNotebookVideo ? 'https://i.imgur.com/XMHWIse.mp4' : undefined}
+                    poster="https://www.universo3d.online/assets/poster-catalogo-B3YjnjQd.webp"
                     playsInline
-                    preload="none"
-                    width={854}
-                    height={480}
+                    controls={isPlayingNotebookVideo}
+                    preload={isPlayingNotebookVideo ? 'auto' : 'none'}
                     className="w-full h-full object-cover"
                   >
                     Seu navegador não suporta a reprodução de vídeo.
                   </video>
 
-                  {/* Capa com a imagem da Área de Membros aparente e Botão Estilo YouTube */}
-                  {!isNotebookVideoActive && (
+                  {!isPlayingNotebookVideo && (
                     <div
-                      onClick={handlePlayNotebookVideo}
                       role="button"
                       tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          handlePlayNotebookVideo();
-                        }
-                      }}
-                      aria-label="Assistir tour pela Área de Membros no YouTube"
+                      onClick={handlePlayNotebookVideo}
+                      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handlePlayNotebookVideo()}
+                      aria-label="Assistir tour pela Área de Membros"
                       className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none"
                     >
-                      {/* Imagem da Área de Membros visível */}
                       <img
-                        src={notebookPoster}
                         alt="Área de Membros Universo 3D"
                         width={854}
                         height={480}
                         loading="lazy"
                         decoding="async"
                         className="absolute inset-0 w-full h-full object-cover select-none"
+                        src="https://www.universo3d.online/assets/poster-catalogo-B3YjnjQd.webp"
                       />
-
-                      {/* Leve película escura translúcida para contraste e realismo */}
-                      <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none" />
-
-                      {/* Botão Oficial Vermelho Estilo YouTube com Texto 'Assistir Vídeo' */}
+                      <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none"></div>
                       <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
-                        <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#FF0000] hover:bg-[#E60000] flex items-center justify-center shadow-[0_4px_30px_rgba(255,0,0,0.7)] group-hover:shadow-[0_6px_45px_rgba(255,0,0,0.95)] transition-all duration-300">
+                        <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#0066FF] hover:bg-[#0052CC] flex items-center justify-center shadow-[0_4px_30px_rgba(0,102,255,0.7)] group-hover:shadow-[0_6px_45px_rgba(0,102,255,0.95)] transition-all duration-300">
                           <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
                         </div>
                         <span className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white font-display font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
@@ -1283,77 +658,47 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Laptop Hinge & Base */}
-              <div className="w-32 sm:w-44 md:w-56 h-1.5 sm:h-2 md:h-2.5 bg-[#0F0F12] border-t border-[#2A2A32] mx-auto rounded-b-sm shadow-sm" />
+              {/* Notebook Base Hinge */}
+              <div className="w-32 sm:w-44 md:w-56 h-1.5 sm:h-2 md:h-2.5 bg-[#0F0F12] border-t border-[#2A2A32] mx-auto rounded-b-sm shadow-sm"></div>
               <div className="relative -mt-1 w-[104%] -ml-[2%] h-3.5 sm:h-4.5 md:h-5.5 bg-gradient-to-b from-[#2E2E36] via-[#1A1A20] to-[#0D0D10] rounded-b-[16px] sm:rounded-b-[22px] md:rounded-b-[26px] shadow-[0_30px_70px_rgba(0,0,0,0.95)] border-t border-white/25 flex justify-center items-start">
-                <div className="w-20 sm:w-28 md:w-36 h-1 sm:h-1.5 bg-[#08080A] rounded-b-md border-x border-b border-[#3A3A44]/80 shadow-inner" />
+                <div className="w-20 sm:w-28 md:w-36 h-1 sm:h-1.5 bg-[#08080A] rounded-b-md border-x border-b border-[#3A3A44]/80 shadow-inner"></div>
               </div>
-              <div className="w-[75%] h-3 bg-gradient-to-r from-transparent via-black/90 to-transparent blur-md mx-auto -mt-2.5 pointer-events-none" />
+              <div className="w-[75%] h-3 bg-gradient-to-r from-transparent via-black/90 to-transparent blur-md mx-auto -mt-2.5 pointer-events-none"></div>
 
               <div className="mt-4 text-center">
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-400">
-                  <Play className="w-3.5 h-3.5 text-[#FF2B2B]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
+                  <Play className="w-3.5 h-3.5 text-[#0066FF]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Seção: "Mas eu não sei qual produto escolher..." */}
+          {/* Argumentation Checklist */}
           <div className="mt-12 sm:mt-16 md:mt-18 max-w-2xl mx-auto relative z-10 px-4 text-center">
             <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white leading-tight mb-3">
               “MAS EU NÃO SEI QUAL PRODUTO ESCOLHER…”
             </h3>
-
             <p className="text-zinc-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed mb-4">
               E esse é justamente um dos motivos para ter uma biblioteca organizada.
             </p>
-
             <p className="text-zinc-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed mb-6 sm:mb-8">
               Você não precisa acertar “o produto perfeito” de primeira. Você pode:
             </p>
 
             <div className="max-w-xl mx-auto space-y-2.5 sm:space-y-3 my-5 sm:my-6 text-left inline-block">
-              <div className="flex items-center gap-3">
-                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
-                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
-                  explorar diferentes categorias
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
-                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
-                  escolher modelos que façam sentido para sua estrutura
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
-                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
-                  produzir pequenas quantidades
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
-                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
-                  testar novas ideias
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
-                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
-                  observar a resposta do mercado
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="text-[#FF2B2B] text-xl sm:text-2xl font-black shrink-0">✓</span>
-                <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">
-                  repetir o que fizer sentido para sua operação
-                </p>
-              </div>
+              {[
+                'explorar diferentes categorias',
+                'escolher modelos que façam sentido para sua estrutura',
+                'produzir pequenas quantidades',
+                'testar novas ideias',
+                'observar a resposta do mercado',
+                'repetir o que fizer sentido para sua operação',
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <span className="text-[#0066FF] text-xl sm:text-2xl font-black shrink-0">✓</span>
+                  <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">{item}</p>
+                </div>
+              ))}
             </div>
 
             <p className="text-white font-display font-black text-lg sm:text-xl md:text-2xl mt-6 mb-4 leading-snug">
@@ -1362,15 +707,16 @@ export default function App() {
 
             <div className="mt-4 mb-2">
               <a
-                href="#mercado"
-                className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-[#FF2B2B] text-base sm:text-lg font-bold tracking-wide transition-colors cursor-pointer"
+                href="#validacao-mercado"
+                onClick={scrollToMercado}
+                className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-[#0066FF] text-base sm:text-lg font-bold tracking-wide transition-colors cursor-pointer"
               >
                 Continuar ↓
               </a>
             </div>
           </div>
 
-          {/* Botão de Compra - Seção Plataforma */}
+          {/* CTA Button */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4 relative z-20">
             <a
               href="#oferta-pro"
@@ -1384,7 +730,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 10. Validação de Mercado */}
+      {/* Market Validation Section */}
       <section id="validacao-mercado" className="section-lazy pt-4 pb-16 relative bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12 max-w-2xl mx-auto">
@@ -1395,37 +741,43 @@ export default function App() {
               Veja como peças semelhantes criadas com esse tipo de arquivo já possuem alta procura e aparecem com frequência nos maiores marketplaces do país.
             </p>
           </div>
+
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-6">
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#FF2B2B]/60 shadow-[0_0_35px_rgba(255,43,43,0.35)] relative w-full p-2 sm:p-4">
-              <CleanImage
-                src={step1Img}
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
+              <img
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (1)"
                 width={1774}
                 height={887}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
+                src="/mercado-1.webp"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#FF2B2B]/60 shadow-[0_0_35px_rgba(255,43,43,0.35)] relative w-full p-2 sm:p-4">
-              <CleanImage
-                src={step2Img}
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
+              <img
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (2)"
                 width={1774}
                 height={887}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
+                src="https://www.universo3d.online/assets/step-2-Y7N50RdW.webp"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#FF2B2B]/60 shadow-[0_0_35px_rgba(255,43,43,0.35)] relative w-full p-2 sm:p-4">
-              <CleanImage
-                src={step3Img}
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
+              <img
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (3)"
                 width={1774}
                 height={887}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
+                src="/mercado-3.webp"
               />
             </div>
           </div>
 
-          {/* Botão de Compra - Seção Validação de Mercado */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
               href="#oferta-pro"
@@ -1439,23 +791,20 @@ export default function App() {
         </div>
       </section>
 
-      {/* 11. Matemática Lucrativa */}
+      {/* Lucrative Math Comparison Table */}
       <section id="matematica-lucrativa" className="section-lazy pt-8 pb-16 relative overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#FF2B2B]/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#0066FF]/5 rounded-full blur-[100px] pointer-events-none"></div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mt-0">
-              Entenda o <span className="text-[#FF2B2B]">potencial</span> por trás de uma única impressão
+              Entenda o <span className="text-[#0066FF]">potencial</span> por trás de uma única impressão
             </h2>
             <p className="text-base md:text-lg mt-4 max-w-3xl mx-auto font-normal text-zinc-300 leading-relaxed">
               Compare a estimativa de consumo de filamento com faixas de valores praticadas no mercado para peças similares:
             </p>
           </div>
 
-          <div
-            className="relative w-full rounded-2xl md:rounded-[2rem] overflow-hidden border-2 border-white/10"
-            style={{ boxShadow: '0 0 50px rgba(0,0,0,0.8)' }}
-          >
+          <div className="relative w-full rounded-2xl md:rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
             <table className="w-full text-left border-collapse">
               <thead className="bg-black/80">
                 <tr>
@@ -1465,7 +814,7 @@ export default function App() {
                   <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-gray-200 uppercase tracking-wider border border-white/10 w-1/3 text-center align-middle">
                     Consumo est. de filamento
                   </th>
-                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-[#FF6666] uppercase tracking-wider border border-[#FF2B2B]/30 bg-[#FF2B2B]/5 w-1/3 text-center align-middle">
+                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-[#60A5FA] uppercase tracking-wider border border-[#0066FF]/30 bg-[#0066FF]/5 w-1/3 text-center align-middle">
                     Anúncios encontrados
                   </th>
                 </tr>
@@ -1474,17 +823,21 @@ export default function App() {
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
                     <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
-                      <CleanImage
-                        src={lucro1Image}
+                      <img
                         alt="Modelo 3D STL - Peça 1"
+                        width={300}
+                        height={300}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
+                        src="https://www.universo3d.online/assets/lucro-1-Cyd4RhEq.webp"
                       />
                     </div>
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#3B82F6]">
                     R$ 11,14
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#FF2B2B]/30 text-[#FF2B2B] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FF2B2B]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,43,43,0.4)]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#0066FF]/30 text-[#0066FF] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#0066FF]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(0,102,255,0.4)]">
                     R$ 147–165
                   </td>
                 </tr>
@@ -1492,17 +845,21 @@ export default function App() {
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
                     <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
-                      <CleanImage
-                        src={lucro2Image}
+                      <img
                         alt="Modelo 3D STL - Peça 2"
+                        width={300}
+                        height={300}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
+                        src="https://www.universo3d.online/assets/lucro-2-BFVmtSp3.webp"
                       />
                     </div>
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#3B82F6]">
                     R$ 9,74
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#FF2B2B]/30 text-[#FF2B2B] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FF2B2B]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,43,43,0.4)]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#0066FF]/30 text-[#0066FF] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#0066FF]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(0,102,255,0.4)]">
                     R$ 123–147
                   </td>
                 </tr>
@@ -1510,17 +867,21 @@ export default function App() {
                 <tr className="hover:bg-white/5 transition-colors">
                   <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
                     <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
-                      <CleanImage
-                        src={lucro3Image}
+                      <img
                         alt="Modelo 3D STL - Peça 3"
+                        width={300}
+                        height={300}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
+                        src="https://www.universo3d.online/assets/lucro-3-Ca-zv9V7.webp"
                       />
                     </div>
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#ef4444]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#3B82F6]">
                     R$ 8,37
                   </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#FF2B2B]/30 text-[#FF2B2B] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#FF2B2B]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(255,43,43,0.4)]">
+                  <td className="p-2 sm:p-4 md:p-6 border border-[#0066FF]/30 text-[#0066FF] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#0066FF]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(0,102,255,0.4)]">
                     R$ 75–107
                   </td>
                 </tr>
@@ -1528,12 +889,10 @@ export default function App() {
             </table>
           </div>
 
-          {/* Disclaimer de valores ilustrativos */}
           <p className="text-zinc-400 text-xs sm:text-sm text-center max-w-2xl mx-auto mt-4 font-normal leading-relaxed italic">
             *Valores meramente ilustrativos. Custos, preços e margens podem variar conforme material, tamanho da peça, acabamento, região e estratégia de venda.
           </p>
 
-          {/* Botão de Compra - Seção Matemática Lucrativa */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
               href="#oferta-pro"
@@ -1547,11 +906,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* 12. 12 Bônus Exclusivos */}
-      <section id="bonus" className="section-lazy bg-black relative border-y border-[#FF2B2B]/15 overflow-hidden py-16 md:py-24">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-44 md:w-[800px] md:h-[400px] bg-[#FF2B2B]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
+      {/* Bonuses Section */}
+      <section id="bonus" className="section-lazy bg-black relative border-y border-[#0066FF]/15 overflow-hidden py-16 md:py-24">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-44 md:w-[800px] md:h-[400px] bg-[#0066FF]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
+
         <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-3 text-[#FF2B2B]">
+          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-3 text-[#0066FF]">
             BÔNUS INCLUSOS NO ACESSO PREMIUM
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-display font-black uppercase tracking-tight mb-5 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] max-w-4xl mx-auto leading-tight">
@@ -1562,12 +922,44 @@ export default function App() {
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 sm:gap-3.5 max-w-5xl mx-auto text-left">
-            {bonuses.map((bonus) => (
-              <BonusCard key={`bonus-${bonus.id}`} bonus={bonus} />
+            {BONUSES.map((bonus) => (
+              <div
+                key={bonus.id}
+                id={`bonus-card-${bonus.id}`}
+                className="w-full bg-[#0E0E12] border border-white/10 hover:border-[#0066FF]/50 rounded-xl p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.8),0_0_15px_rgba(0,102,255,0.18)] group relative overflow-hidden text-left"
+              >
+                <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-gradient-to-b from-[#0066FF] via-[#0066FF]/40 to-transparent"></div>
+                <div className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 shrink-0 bg-black/70 rounded-lg border border-white/5 flex items-center justify-center p-1 sm:p-2 relative overflow-hidden group-hover:border-[#0066FF]/30 transition-colors">
+                  <div className="absolute inset-0 bg-[#0066FF]/5 blur-md rounded-full scale-75 pointer-events-none opacity-40"></div>
+                  <img
+                    alt={bonus.title}
+                    width={120}
+                    height={120}
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-14 xs:max-h-16 sm:max-h-20 w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none relative z-10"
+                    src={bonus.image}
+                  />
+                </div>
+                <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
+                  <div className="mb-1">
+                    <h3 className="font-display font-black text-xs sm:text-[13px] md:text-sm text-white uppercase tracking-tight flex items-center gap-1.5 leading-tight">
+                      <span className="text-xs sm:text-sm shrink-0">🎁</span>
+                      <span className="text-[#0066FF] shrink-0">
+                        BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
+                      </span>
+                      <span className="text-zinc-500 font-bold shrink-0">—</span>
+                      <span className="text-white truncate">{bonus.title}</span>
+                    </h3>
+                  </div>
+                  <p className="text-zinc-300 text-[11px] sm:text-xs leading-relaxed font-normal">
+                    {bonus.description}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
 
-          {/* Botão de Compra - Seção Bônus */}
           <div className="mt-12 sm:mt-14 flex justify-center w-full px-4">
             <a
               href="#oferta-pro"
@@ -1575,15 +967,16 @@ export default function App() {
               className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
             >
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
-              <span>GARANTIR ACESSO + 12 BÔNUS GRÁTIS</span>
+              <span>GARANTIR ACESSO + 14 BÔNUS GRÁTIS</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* Depoimento Real em Layout de Celular */}
+      {/* Testimonials Phone Slider Section */}
       <section id="depoimento" className="section-lazy bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[650px] md:h-[650px] bg-[#FF2B2B]/5 rounded-full blur-2xl md:blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[650px] md:h-[650px] bg-[#0066FF]/5 rounded-full blur-2xl md:blur-[140px] pointer-events-none"></div>
+
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
             <h2 id="depoimento-titulo" className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mb-3">
@@ -1594,102 +987,75 @@ export default function App() {
             </p>
           </div>
 
-          {/* Smartphone Mockup & Carrossel com Setas de Navegação */}
+          {/* Smartphone Showcase */}
           <div id="celular-depoimento-slider" className="relative w-full max-w-4xl mx-auto flex items-center justify-center gap-1.5 xs:gap-3 sm:gap-6 md:gap-8 px-1 sm:px-4">
-            {/* Seta Esquerda */}
             <button
               id="btn-depoimento-anterior"
               type="button"
-              onClick={prevDepoimento}
+              onClick={handlePrevTestimonial}
               aria-label="Ver depoimento anterior"
               className="group w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
             >
               <ChevronLeft className="w-4 h-4 xs:w-5 xs:h-5 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white group-hover:-translate-x-0.5 transition-transform" />
             </button>
 
-            {/* Smartphone Mockup Alongado / Vertical com Borda Branca */}
-            <div
-              id="celular-depoimento-wrapper"
-              className="relative flex justify-center items-center select-none"
-              onTouchStart={(e) => {
-                touchStartXRef.current = e.touches[0].clientX;
-              }}
-              onTouchEnd={(e) => {
-                if (touchStartXRef.current !== null) {
-                  const diff = touchStartXRef.current - e.changedTouches[0].clientX;
-                  if (diff > 45) nextDepoimento();
-                  else if (diff < -45) prevDepoimento();
-                  touchStartXRef.current = null;
-                }
-              }}
-            >
-              {/* Ambient phone back glow */}
-              <div className="absolute inset-0 bg-[#FF2B2B]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none" />
+            <div id="celular-depoimento-wrapper" className="relative flex justify-center items-center select-none">
+              <div className="absolute inset-0 bg-[#0066FF]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none"></div>
 
-              {/* Realistic Phone Frame: Ampliado em altura para visualização destacada */}
+              {/* Realistic Phone Case */}
               <div
                 id="celular-depoimento-frame"
                 className="relative w-[295px] xs:w-[330px] sm:w-[380px] md:w-[430px] lg:w-[460px] max-w-[80vw] xs:max-w-[82vw] sm:max-w-[84vw] rounded-[36px] sm:rounded-[48px] pt-2.5 pb-3 px-1.5 xs:pt-3 xs:pb-3.5 xs:px-2 sm:pt-4 sm:pb-4 sm:px-3 bg-gradient-to-b from-[#333333] via-[#1a1a1a] to-[#0a0a0a] shadow-[0_0_35px_rgba(255,255,255,0.45),0_30px_90px_rgba(0,0,0,0.95)] border-[3px] sm:border-4 border-white ring-2 ring-white/30 flex flex-col"
               >
-                {/* Phone side buttons (exterior realism) */}
-                <div className="absolute -left-[3.5px] top-20 sm:top-24 w-[3.5px] h-6 sm:h-8 bg-zinc-400 rounded-l-sm" />
-                <div className="absolute -left-[3.5px] top-30 sm:top-36 w-[3.5px] h-10 sm:h-12 bg-zinc-400 rounded-l-sm" />
-                <div className="absolute -left-[3.5px] top-44 sm:top-52 w-[3.5px] h-10 sm:h-12 bg-zinc-400 rounded-l-sm" />
-                <div className="absolute -right-[3.5px] top-24 sm:top-28 w-[3.5px] h-14 sm:h-16 bg-zinc-400 rounded-r-sm" />
+                {/* Physical buttons on sides */}
+                <div className="absolute -left-[3.5px] top-20 sm:top-24 w-[3.5px] h-6 sm:h-8 bg-zinc-400 rounded-l-sm"></div>
+                <div className="absolute -left-[3.5px] top-30 sm:top-36 w-[3.5px] h-10 sm:h-12 bg-zinc-400 rounded-l-sm"></div>
+                <div className="absolute -left-[3.5px] top-44 sm:top-52 w-[3.5px] h-10 sm:h-12 bg-zinc-400 rounded-l-sm"></div>
+                <div className="absolute -right-[3.5px] top-24 sm:top-28 w-[3.5px] h-14 sm:h-16 bg-zinc-400 rounded-r-sm"></div>
 
-                {/* Top Bezel: Alto-falante e sensor externo */}
+                {/* Speaker & Front Camera */}
                 <div className="flex items-center justify-center gap-2 mb-2 sm:mb-2.5">
-                  <div className="w-12 sm:w-16 h-1 sm:h-1.5 bg-zinc-600 rounded-full opacity-80" />
-                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-zinc-700/90 border border-zinc-600" />
+                  <div className="w-12 sm:w-16 h-1 sm:h-1.5 bg-zinc-600 rounded-full opacity-80"></div>
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-zinc-700/90 border border-zinc-600"></div>
                 </div>
 
-                {/* Inner Screen Bezel - Altura ampliada para melhor leitura dos depoimentos */}
+                {/* Inner Screen */}
                 <div className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#efeae2] border border-white/40 shadow-inner aspect-[9/16] w-full">
-                  {depoimentosList.map((dep, idx) => {
-                    const isCurrent = depoimentoIndex === idx;
-                    const isAdjacent =
-                      Math.abs(depoimentoIndex - idx) <= 1 ||
-                      (depoimentoIndex === 0 && idx === depoimentosList.length - 1) ||
-                      (depoimentoIndex === depoimentosList.length - 1 && idx === 0);
-
-                    if (!isCurrent && !isAdjacent) return null;
-
+                  {TESTIMONIALS.map((item, idx) => {
+                    const isActive = testimonialIndex === idx;
                     return (
                       <img
-                        key={dep.id}
-                        id={`celular-depoimento-img-${dep.id}`}
-                        src={dep.image}
-                        alt={dep.alt}
+                        key={item.id}
+                        id={`celular-depoimento-img-${item.id}`}
+                        alt={item.alt}
                         width={450}
                         height={800}
+                        className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-300 ease-in-out ${
+                          isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                        }`}
+                        loading={idx === 0 ? 'eager' : 'lazy'}
+                        src={item.image}
                         onError={(e) => {
-                          if (dep.fallback && e.currentTarget.src !== dep.fallback) {
-                            e.currentTarget.src = dep.fallback;
+                          if (e.currentTarget.src !== item.fallback) {
+                            e.currentTarget.src = item.fallback;
                           }
                         }}
-                        className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-300 ease-in-out ${
-                          isCurrent ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                        }`}
-                        loading={isCurrent ? 'eager' : 'lazy'}
-                        decoding="async"
-                        fetchPriority={isCurrent ? 'high' : 'low'}
                       />
                     );
                   })}
                 </div>
 
-                {/* Bottom Bezel: Barra inferior de navegação na moldura externa */}
+                {/* Home Indicator Bar */}
                 <div className="mt-1.5 sm:mt-2.5 flex justify-center">
-                  <div className="w-16 sm:w-24 h-1 bg-white/40 rounded-full" />
+                  <div className="w-16 sm:w-24 h-1 bg-white/40 rounded-full"></div>
                 </div>
               </div>
             </div>
 
-            {/* Seta Direita */}
             <button
               id="btn-depoimento-proximo"
               type="button"
-              onClick={nextDepoimento}
+              onClick={handleNextTestimonial}
               aria-label="Ver próximo depoimento"
               className="group w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-zinc-950/95 hover:bg-zinc-900 text-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.75)] hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer z-30 flex items-center justify-center shrink-0"
             >
@@ -1697,17 +1063,17 @@ export default function App() {
             </button>
           </div>
 
-          {/* Indicadores / Paginação dos Depoimentos */}
+          {/* Dots Indicator */}
           <div id="depoimento-indicadores" className="mt-8 flex flex-col items-center gap-2.5 z-20">
             <div className="flex items-center gap-2">
-              {depoimentosList.map((_, idx) => (
+              {TESTIMONIALS.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => setDepoimentoIndex(idx)}
+                  onClick={() => setTestimonialIndex(idx)}
                   aria-label={`Ir para depoimento ${idx + 1}`}
                   className={`transition-all duration-300 rounded-full h-2.5 cursor-pointer ${
-                    depoimentoIndex === idx
+                    testimonialIndex === idx
                       ? 'w-8 bg-white shadow-[0_0_12px_rgba(255,255,255,0.9)]'
                       : 'w-2.5 bg-zinc-600 hover:bg-zinc-400'
                   }`}
@@ -1716,7 +1082,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Botão de Compra - Seção Depoimentos */}
           <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
             <a
               href="#oferta-pro"
@@ -1730,16 +1095,17 @@ export default function App() {
         </div>
       </section>
 
-      {/* 13-14. Seção de Oferta & Preços */}
+      {/* Pricing / Offers Section */}
       <section id="oferta" className="section-lazy bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#FF2B2B]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#0066FF]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
+
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center mb-10 md:mb-12 w-full flex flex-col items-center justify-center relative">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-24 md:w-96 md:h-40 bg-[#FF2B2B]/20 blur-xl md:blur-[60px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-24 md:w-96 md:h-40 bg-[#0066FF]/20 blur-xl md:blur-[60px] rounded-full pointer-events-none"></div>
             <h2
               className="relative z-10 font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight mb-4 text-center leading-tight"
               style={{
-                textShadow: '0 0 25px rgba(255,255,255,0.6), 0 0 50px rgba(255,43,43,0.6)',
+                textShadow: 'rgba(255, 255, 255, 0.6) 0px 0px 25px, rgba(0, 102, 255, 0.6) 0px 0px 50px',
               }}
             >
               ESCOLHA O PLANO IDEAL<br />
@@ -1751,7 +1117,7 @@ export default function App() {
           </div>
 
           <div className="w-full max-w-5xl flex flex-col lg:flex-row items-stretch justify-center gap-8 lg:gap-10">
-            {/* Card 1 - Coleção Base (R$ 10,90 - Ao clicar abre o Pop-up de R$ 21,90) */}
+            {/* Plan 1: Base */}
             <div className="w-full lg:max-w-[420px] glass-card border border-white/10 rounded-3xl py-7 px-6 sm:px-8 opacity-95 hover:opacity-100 transition-opacity flex flex-col bg-black/40">
               <div className="text-center mb-4">
                 <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-zinc-400 bg-white/5 border border-white/10 px-3 py-1 rounded-full mb-3">
@@ -1761,116 +1127,123 @@ export default function App() {
                   Coleção Base
                 </h3>
               </div>
+
               <div className="border-b border-white/10 pb-4 mb-5 text-center">
                 <p className="text-xs text-zinc-500 line-through mb-0.5">De R$ 47,00</p>
                 <div className="flex justify-center items-baseline gap-1 mb-1">
                   <span className="text-lg text-zinc-400 font-bold">R$</span>
                   <span className="text-4xl sm:text-5xl font-display font-black text-white">10,90</span>
                 </div>
-                <p className="text-zinc-400/80 text-[11px] uppercase tracking-widest font-bold">
-                  Pagamento Único
-                </p>
+                <p className="text-zinc-400/80 text-[11px] uppercase tracking-widest font-bold">Pagamento Único</p>
               </div>
+
               <ul className="space-y-3 mb-6 text-[13px] text-zinc-300 font-medium">
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#FF2B2B] text-base font-bold leading-none">✓</span>
+                  <Check className="w-4 h-4 text-[#0066FF] stroke-[3]" />
                   <span>150 Mil Modelos STL</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#FF2B2B] text-base font-bold leading-none">✓</span>
+                  <Check className="w-4 h-4 text-[#0066FF] stroke-[3]" />
                   <span>Acesso por 3 Meses</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <span className="text-[#FF2B2B] text-base font-bold leading-none">✓</span>
+                  <Check className="w-4 h-4 text-[#0066FF] stroke-[3]" />
                   <span>Garantia de 14 Dias</span>
                 </li>
-                <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
-                  <span className="text-base font-bold leading-none">✕</span>
-                  <span>Sem os 12 Bônus Inclusos</span>
+                <li className="flex items-center gap-2.5 font-semibold text-[#3B82F6]">
+                  <X className="w-4 h-4 text-[#3B82F6] stroke-[3]" />
+                  <span>Sem os 14 Bônus Inclusos</span>
                 </li>
-                <li className="flex items-center gap-2.5 font-semibold text-[#ef4444]">
-                  <span className="text-base font-bold leading-none">✕</span>
+                <li className="flex items-center gap-2.5 font-semibold text-[#3B82F6]">
+                  <X className="w-4 h-4 text-[#3B82F6] stroke-[3]" />
                   <span>Sem Atualizações Futuras</span>
                 </li>
               </ul>
+
               <button
                 type="button"
-                onClick={handleBaseClick}
+                onClick={() => setShowUpsellModal(true)}
                 className="block w-full text-center py-4 rounded-xl bg-transparent border-2 border-zinc-600 hover:border-zinc-400 text-zinc-300 hover:text-white hover:bg-white/5 text-sm uppercase tracking-wider transition-all mt-auto font-bold cursor-pointer"
               >
                 QUERO O BASE (R$ 10,90)
               </button>
+
               <div className="mt-4 text-center">
-                <p className="font-bold text-[13px] sm:text-[14px] leading-snug px-2 text-[#ef4444]">
+                <p className="font-bold text-[13px] sm:text-[14px] leading-snug px-2 text-[#3B82F6]">
                   💡 Recomendação: o Pacote Completo <span className="lg:hidden">logo abaixo</span><span className="hidden lg:inline">ao lado</span> é muito mais vantajoso!
                 </p>
               </div>
             </div>
 
-            {/* Card 2 - Coleção Completa VIP (R$ 47,90 - Destaque) */}
+            {/* Plan 2: VIP Completo (Recommended) */}
             <div
               id="oferta-pro"
-              className="w-full lg:max-w-[440px] bg-white text-black border-[2px] border-[#FF2B2B] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,43,43,0.5)] flex flex-col scroll-mt-24"
+              className="w-full lg:max-w-[440px] bg-white text-black border-[2px] border-[#0066FF] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(0,102,255,0.5)] flex flex-col scroll-mt-24"
             >
-              <div className="bg-[#FF2B2B] text-white text-center py-2 px-3">
+              <div className="bg-[#0066FF] text-white text-center py-2 px-3">
                 <p className="text-xs font-black uppercase tracking-wider">
                   🔥 MAIS RECOMENDADO — PACOTE COMPLETO VIP
                 </p>
               </div>
+
               <div className="p-6 sm:p-7 h-full flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-4 relative group">
-                  <div className="absolute inset-0 bg-[#FF2B2B]/20 blur-xl rounded-full scale-90 pointer-events-none opacity-80" />
+                  <div className="absolute inset-0 bg-[#0066FF]/20 blur-xl rounded-full scale-90 pointer-events-none opacity-80"></div>
                   <img
-                    src={pacoteVipImage}
-                    onError={(e) => {
-                      if (e.currentTarget.src !== 'https://i.imgur.com/Hy6W1VB.png') {
-                        e.currentTarget.src = 'https://i.imgur.com/Hy6W1VB.png';
-                      }
-                    }}
                     alt="Pacote Completo VIP Universo 3D"
                     width={360}
                     height={240}
                     loading="lazy"
                     decoding="async"
-                    fetchPriority="low"
-                    referrerPolicy="no-referrer"
-                    className="relative z-10 w-auto h-auto max-h-48 sm:max-h-56 object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.25)] hover:scale-105 transition-transform duration-300 select-none"
+                    className="relative z-10 w-auto h-auto max-h-52 sm:max-h-60 object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform duration-300 select-none"
+                    src="/oferta-vip-4790.webp"
                   />
                 </div>
+
                 <div className="text-center w-full mb-4">
                   <p className="text-base sm:text-lg text-zinc-500 font-black mb-1 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
-                  <p className="text-zinc-800 font-bold text-sm sm:text-base mb-1 leading-none uppercase">Por Apenas</p>
+                  <p className="text-zinc-800 font-bold text-sm sm:text-base mb-1 leading-none uppercase">
+                    Por Apenas
+                  </p>
                   <div className="flex justify-center items-start text-black mb-1 drop-shadow-sm">
                     <span className="text-xl font-black mt-1 mr-1 text-black">R$</span>
-                    <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none text-black">47,90</span>
+                    <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none text-black">
+                      47,90
+                    </span>
                   </div>
-                  <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">Pagamento Único</p>
+                  <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">
+                    Pagamento Único
+                  </p>
                 </div>
+
                 <div className="w-full bg-zinc-100 rounded-2xl p-4 sm:p-5 mb-5 border border-zinc-200">
                   <ul className="w-full space-y-2.5 text-[13px] text-black font-medium">
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-xs sm:text-[13px] font-black uppercase tracking-tight text-black">
                         + 150 MIL MODELOS STL
                       </strong>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
-                      <strong className="text-black font-bold">Licença Comercial para Venda de Peças Físicas</strong>
+                      <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-black font-bold">
+                        Licença Comercial para Venda de Peças Físicas
+                      </strong>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <span className="text-black font-bold">Acesso Vitalício + Todas as Atualizações</span>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <span className="text-black font-bold">Garantia Incondicional de 14 Dias</span>
                     </li>
-                    {bonuses.map((b) => (
-                      <li key={`offer-bonus-${b.id}`} className="flex items-start gap-2.5 text-black">
-                        <span className="text-[#FF2B2B] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+
+                    {BONUSES.map((b) => (
+                      <li key={b.id} className="flex items-start gap-2.5 text-black">
+                        <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                         <span className="text-black font-bold leading-snug">
                           <strong className="text-black font-black">Bônus {b.id}:</strong> {b.title}
                         </span>
@@ -1878,9 +1251,12 @@ export default function App() {
                     ))}
                   </ul>
                 </div>
+
                 <div className="text-center w-full mt-auto">
                   <a
                     href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_35px_rgba(0,255,102,0.7)] hover:shadow-[0_0_50px_rgba(0,255,102,1)] border-2 border-[#80FFB2] cursor-pointer"
                   >
                     QUERO O ACERVO COMPLETO
@@ -1892,70 +1268,57 @@ export default function App() {
         </div>
       </section>
 
-      {/* 15. Garantia Incondicional de 14 Dias - Seção Única e Exclusiva */}
+      {/* Guarantee Section */}
       <section id="garantia" className="section-lazy py-16 md:py-24 relative overflow-hidden bg-black border-t border-white/10">
-        {/* Glow de fundo neon */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[700px] md:h-[450px] bg-[#FF2B2B]/10 rounded-full blur-2xl md:blur-[130px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[700px] md:h-[450px] bg-[#0066FF]/10 rounded-full blur-2xl md:blur-[130px] pointer-events-none"></div>
 
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
-          <div className="rounded-3xl border-2 border-[#FF2B2B]/35 bg-gradient-to-b from-[#191212]/95 via-[#120D0D]/95 to-[#0A0707] p-6 sm:p-10 md:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_45px_rgba(255,43,43,0.18)] relative overflow-hidden">
-            {/* Linha de brilho superior */}
-            <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#FF2B2B] to-transparent" />
+          <div className="rounded-3xl border-2 border-[#0066FF]/35 bg-gradient-to-b from-[#0a1120]/95 via-[#080d18]/95 to-[#05080f] p-6 sm:p-10 md:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_45px_rgba(0,102,255,0.18)] relative overflow-hidden">
+            <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#0066FF] to-transparent"></div>
 
             <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-12">
-              {/* Selo de Garantia 3D com destaque */}
               <div className="relative shrink-0 flex items-center justify-center group">
-                <div className="absolute inset-0 bg-[#FF2B2B]/25 blur-3xl rounded-full scale-90 pointer-events-none" />
+                <div className="absolute inset-0 bg-[#0066FF]/25 blur-3xl rounded-full scale-90 pointer-events-none"></div>
                 <img
-                  src={seloGarantia}
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = 'https://i.imgur.com/xfMM1xb.png';
-                  }}
                   alt="Selo de Garantia Incondicional de 14 Dias"
                   width={280}
                   height={280}
                   loading="lazy"
                   decoding="async"
-                  referrerPolicy="no-referrer"
-                  className="relative z-10 w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_15px_40px_rgba(255,43,43,0.45)] select-none transition-transform duration-300 group-hover:scale-105"
+                  className="relative z-10 w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_15px_40px_rgba(0,102,255,0.45)] select-none transition-transform duration-300 group-hover:scale-105"
+                  src="https://www.universo3d.online/assets/selo-garantia-14-dias-BCpm6Odj.webp"
                 />
               </div>
 
-              {/* Textos da Garantia com a copy solicitada */}
               <div className="text-center lg:text-left flex-1">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF2B2B]/10 border border-[#FF2B2B]/30 text-[#FF2B2B] text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 shadow-[0_0_15px_rgba(255,43,43,0.2)]">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0066FF]/10 border border-[#0066FF]/30 text-[#0066FF] text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 shadow-[0_0_15px_rgba(0,102,255,0.2)]">
                   <span>🛡️</span> RISCO ZERO PARA VOCÊ
                 </div>
-
                 <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white mb-4 leading-tight">
-                  GARANTIA INCONDICIONAL DE <span className="grad-text drop-shadow-[0_0_25px_rgba(255,43,43,0.6)]">14 DIAS</span>
+                  GARANTIA INCONDICIONAL DE <span className="grad-text drop-shadow-[0_0_25px_rgba(0,102,255,0.6)]">14 DIAS</span>
                 </h2>
-
                 <p className="text-zinc-200 text-sm sm:text-base md:text-lg font-normal leading-relaxed mb-3.5">
                   Você tem 14 dias completos para acessar o Universo 3D™, explorar todas as categorias, baixar os arquivos STL e testar os modelos na sua impressora.
                 </p>
-
                 <p className="text-zinc-300 text-sm sm:text-base md:text-lg font-normal leading-relaxed mb-6">
                   Se por qualquer motivo você achar que o conteúdo não é para você, basta solicitar o reembolso na plataforma que devolvemos 100% do seu investimento, sem complicações e sem burocracia.
                 </p>
 
-                {/* Itens com checkmark */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-4 border-t border-white/10">
                   <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
-                    <span className="text-[#FF2B2B] text-base font-black shrink-0">✓</span>
+                    <span className="text-[#0066FF] text-base font-black shrink-0">✓</span>
                     <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
                       Teste sem riscos
                     </span>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
-                    <span className="text-[#FF2B2B] text-base font-black shrink-0">✓</span>
+                    <span className="text-[#0066FF] text-base font-black shrink-0">✓</span>
                     <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
                       Reembolso simplificado
                     </span>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
-                    <span className="text-[#FF2B2B] text-base font-black shrink-0">✓</span>
+                    <span className="text-[#0066FF] text-base font-black shrink-0">✓</span>
                     <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
                       Suporte dedicado
                     </span>
@@ -1967,7 +1330,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 16. Perguntas Frequentes (FAQ) */}
+      {/* FAQ Section */}
       <section id="faq" className="section-lazy py-16 md:py-20 relative bg-black border-t border-white/5">
         <div className="container mx-auto px-4 max-w-4xl relative z-10">
           <div className="text-center mb-10 md:mb-12">
@@ -1975,33 +1338,34 @@ export default function App() {
               Tire suas dúvidas
             </span>
             <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white">
-              Perguntas <span className="grad-text drop-shadow-[0_0_20px_rgba(255,43,43,0.5)]">Frequentes</span>
+              Perguntas <span className="grad-text drop-shadow-[0_0_20px_rgba(0,102,255,0.5)]">Frequentes</span>
             </h2>
           </div>
 
           <div className="space-y-4">
-            {faqs.map((faq, index) => {
-              const isOpen = openFaqIndex === index;
+            {FAQ_ITEMS.map((item, idx) => {
+              const isOpen = openFaqIndex === idx;
               return (
                 <div
-                  key={`faq-${index}`}
-                  className="rounded-xl bg-zinc-950/80 border border-white/10 overflow-hidden transition-colors hover:border-[#FF2B2B]/30"
+                  key={`faq-${idx}`}
+                  className="rounded-xl bg-zinc-950/80 border border-white/10 overflow-hidden transition-colors hover:border-[#0066FF]/30"
                 >
                   <button
                     type="button"
-                    onClick={() => toggleFaq(index)}
+                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
                     className="w-full p-4 md:p-5 text-left font-bold flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
                   >
-                    <span className="text-sm md:text-base text-zinc-100">{faq.q}</span>
+                    <span className="text-sm md:text-base text-zinc-100">{item.q}</span>
                     <ChevronDown
-                      className={`w-5 h-5 text-[#FF2B2B] shrink-0 transition-transform duration-200 ${
+                      className={`w-5 h-5 text-[#0066FF] shrink-0 transition-transform duration-200 ${
                         isOpen ? 'transform rotate-180' : ''
                       }`}
                     />
                   </button>
+
                   {isOpen && (
                     <div className="px-4 md:px-5 pb-5 text-zinc-300 font-light text-sm leading-relaxed border-t border-white/5 pt-3.5">
-                      <p>{faq.a}</p>
+                      <p>{item.a}</p>
                     </div>
                   )}
                 </div>
@@ -2009,7 +1373,6 @@ export default function App() {
             })}
           </div>
 
-          {/* Botão de Compra - Seção FAQ */}
           <div className="mt-12 flex justify-center w-full px-4">
             <a
               href="#oferta-pro"
@@ -2035,21 +1398,21 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 border-y border-white/5 py-8 text-zinc-300">
             <div className="flex flex-col items-center justify-center gap-2">
-              <Lock className="w-6 h-6 text-[#FF2B2B] mb-1" />
+              <Lock className="w-6 h-6 text-[#0066FF] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Ambiente 100% Seguro
               </span>
               <span className="text-[10px] text-zinc-400">Dados criptografados de ponta a ponta</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <Mail className="w-6 h-6 text-[#FF2B2B] mb-1" />
+              <Mail className="w-6 h-6 text-[#0066FF] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Suporte Especializado
               </span>
               <span className="text-[10px] text-zinc-300">suporte@universo3d.com.br</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <Building2 className="w-6 h-6 text-[#FF2B2B] mb-1" />
+              <Building2 className="w-6 h-6 text-[#0066FF] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Empresa Verificada
               </span>
@@ -2062,12 +1425,20 @@ export default function App() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 uppercase tracking-widest mb-6 font-bold text-[10px] text-zinc-400">
-            <a href="#termos" className="hover:text-[#FF2B2B] transition-colors">
+            <button
+              type="button"
+              onClick={() => setLegalModalType('termos')}
+              className="hover:text-[#0066FF] transition-colors cursor-pointer"
+            >
               Termos de Uso
-            </a>
-            <a href="#privacidade" className="hover:text-[#FF2B2B] transition-colors">
+            </button>
+            <button
+              type="button"
+              onClick={() => setLegalModalType('privacidade')}
+              className="hover:text-[#0066FF] transition-colors cursor-pointer"
+            >
               Política de Privacidade
-            </a>
+            </button>
           </div>
 
           <p className="text-zinc-400 tracking-widest text-[10px] uppercase">
@@ -2076,11 +1447,11 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Upsell Modal */}
-      {isUpsellOpen && (
+      {/* Upsell Popup Modal */}
+      {showUpsellModal && (
         <div
           id="upsellModal"
-          onClick={() => setIsUpsellOpen(false)}
+          onClick={() => setShowUpsellModal(false)}
           className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md transition-opacity duration-300 overflow-y-auto"
         >
           <div
@@ -2088,10 +1459,10 @@ export default function App() {
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-[350px] sm:max-w-[370px] my-auto transform transition-all duration-300"
           >
-            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#FF2B2B] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(255,43,43,0.5),inset_0_0_12px_rgba(255,43,43,0.25)] flex flex-col mx-auto my-1">
+            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#0066FF] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(0,102,255,0.5),inset_0_0_12px_rgba(0,102,255,0.25)] flex flex-col mx-auto my-1">
               <button
                 type="button"
-                onClick={() => setIsUpsellOpen(false)}
+                onClick={() => setShowUpsellModal(false)}
                 aria-label="Fechar modal"
                 className="absolute top-2 right-2.5 sm:top-2.5 sm:right-3 text-white/60 hover:text-white transition-colors z-30 p-1 rounded-full hover:bg-white/10 cursor-pointer"
               >
@@ -2101,43 +1472,43 @@ export default function App() {
               <div className="py-2 sm:py-2.5 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F] pr-8 pl-2">
                 <h3 className="font-display font-black text-xs sm:text-sm md:text-base uppercase tracking-tight px-1 whitespace-nowrap">
                   <span className="grad-text font-extrabold">ESPERE! LEVE TUDO POR </span>
-                  <span className="text-[#FF2B2B]">R$ 21,90</span>
+                  <span className="text-[#0066FF]">R$ 21,90</span>
                 </h3>
               </div>
 
-              <div className="bg-gradient-to-r from-[#C80000] via-[#FF2B2B] to-[#A80000] py-1 px-2.5 shadow-[0_0_15px_rgba(255,43,43,0.4)] border-y border-[#FF2B2B]/60">
+              <div className="bg-gradient-to-r from-[#0052CC] via-[#0066FF] to-[#003399] py-1 px-2.5 shadow-[0_0_15px_rgba(0,102,255,0.4)] border-y border-[#0066FF]/60">
                 <p className="font-black text-white text-center leading-tight">
                   <span className="block text-[8px] sm:text-[9px] uppercase tracking-[0.15em] opacity-90">
                     O PACOTE MAIS COMPLETO E VANTAJOSO
                   </span>
                   <span className="block text-[10px] sm:text-[11px] uppercase tracking-tight">
-                    + 150 MIL MODELOS STL + 500 FUNKOS + TODOS OS 12 BÔNUS
+                    + 150 MIL MODELOS STL + 500 FUNKOS + TODOS OS 14 BÔNUS
                   </span>
                 </p>
               </div>
 
               <div className="p-3.5 sm:p-4 flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-1.5 relative group">
-                  <div className="absolute inset-0 bg-[#FF2B2B]/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60" />
+                  <div className="absolute inset-0 bg-[#0066FF]/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60"></div>
                   <img
-                    src={funkoBonusImage}
+                    src="https://www.universo3d.online/assets/funko-bonus-Czaxy3mw.webp"
                     alt="Pacote +500 Modelos Funkos STL"
                     width={240}
                     height={128}
                     loading="lazy"
                     decoding="async"
-                    referrerPolicy="no-referrer"
                     className="relative z-10 w-auto h-auto max-h-28 sm:max-h-32 object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)] select-none"
                   />
                 </div>
+
                 <div className="text-center w-full mb-2">
-                  <p className="text-[11px] sm:text-xs text-[#FF6666] font-black mb-0.5 italic">
+                  <p className="text-[11px] sm:text-xs text-[#60A5FA] font-black mb-0.5 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
-                  <p className="text-[#FF2B2B] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
+                  <p className="text-[#0066FF] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
                     Por Apenas
                   </p>
-                  <div className="flex justify-center items-start text-[#FF2B2B] mb-0.5 drop-shadow-[0_0_15px_rgba(255,43,43,0.5)]">
+                  <div className="flex justify-center items-start text-[#0066FF] mb-0.5 drop-shadow-[0_0_15px_rgba(0,102,255,0.5)]">
                     <span className="text-base sm:text-lg font-black mt-0.5 mr-0.5">R$</span>
                     <span className="text-4xl sm:text-5xl font-display font-black tracking-tighter leading-none">
                       21,90
@@ -2147,50 +1518,126 @@ export default function App() {
                     Pagamento Único
                   </p>
                 </div>
+
                 <div className="w-full bg-[#1A1A1A] rounded-xl p-2.5 sm:p-3 mb-2.5 border border-white/5 max-h-36 sm:max-h-40 overflow-y-auto">
                   <ul className="w-full space-y-1.5 text-[11px] text-white/90 font-medium">
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#FF2B2B] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
-                      <strong className="text-[11px] font-black uppercase text-[#FF2B2B]">
+                      <span className="text-[#0066FF] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-[11px] font-black uppercase text-[#0066FF]">
                         + 150 MIL MODELOS STL
                       </strong>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#FF2B2B] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#0066FF] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-white">Licença Comercial para Venda de Peças Físicas</strong>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#FF2B2B] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#0066FF] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <span>Acesso Vitalício + Todas as Atualizações</span>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#FF2B2B] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#0066FF] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <span>Garantia Incondicional de 14 Dias</span>
                     </li>
-                    {bonuses.map((b) => (
-                      <li key={`upsell-bonus-${b.id}`} className="flex items-start gap-1.5 text-zinc-300">
-                        <span className="text-[#FF2B2B] text-[11px] font-black leading-none shrink-0 mt-0.5">✓</span>
+                    {BONUSES.map((t) => (
+                      <li key={`upsell-bonus-${t.id}`} className="flex items-start gap-1.5 text-zinc-300">
+                        <span className="text-[#0066FF] text-[11px] font-black leading-none shrink-0 mt-0.5">✓</span>
                         <span className="text-zinc-200 leading-tight text-[10px] sm:text-[11px]">
-                          <strong className="text-[#FF2B2B]">Bônus {b.id}:</strong> {b.title}
+                          <strong className="text-[#0066FF]">Bônus {t.id}:</strong> {t.title}
                         </span>
                       </li>
                     ))}
                   </ul>
                 </div>
+
                 <a
                   href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(0,255,102,0.7)] border-2 border-[#80FFB2] cursor-pointer"
                 >
                   SIM! LEVAR TUDO POR R$ 21,90
                 </a>
+
                 <a
                   href="https://checkout.wiven.com.br/checkout/cmtkws58g09hz01pypy1crecf?offer=32HECNZ"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
                   Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Legal Information Modal */}
+      {legalModalType && (
+        <div
+          onClick={() => setLegalModalType(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-2xl bg-zinc-950 border border-white/20 rounded-2xl p-6 sm:p-8 text-left shadow-2xl my-auto text-zinc-300"
+          >
+            <button
+              type="button"
+              onClick={() => setLegalModalType(null)}
+              className="absolute top-4 right-4 text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-white/10"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {legalModalType === 'termos' ? (
+              <div>
+                <h3 className="text-xl font-display font-black text-white uppercase mb-4">
+                  Termos de Uso
+                </h3>
+                <div className="space-y-3 text-sm leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
+                  <p>
+                    Bem-vindo ao <strong>Universo 3D™</strong>. Ao acessar nosso catálogo e serviços, você concorda em cumprir e sujeitar-se a estes Termos de Uso.
+                  </p>
+                  <p>
+                    <strong>1. Licença de Uso:</strong> Os arquivos digitais em formato .STL disponibilizados destinam-se à impressão tridimensional de peças físicas. Para os planos com Licença Comercial, é expressamente autorizada a comercialização dos produtos físicos impressos.
+                  </p>
+                  <p>
+                    <strong>2. Direitos de Propriedade Intelectual:</strong> É estritamente proibida a revenda, sublicenciamento, doação, redistribuição ou compartilhamento público ou privado dos arquivos digitais .STL propriamente ditos.
+                  </p>
+                  <p>
+                    <strong>3. Garantia:</strong> Oferecemos garantia incondicional de 14 dias para reembolso integral caso o usuário solicite dentro do prazo estipulado através da plataforma de pagamento.
+                  </p>
+                  <p>
+                    <strong>4. Suporte:</strong> Para dúvidas técnicas ou de acesso, entre em contato via nosso e-mail oficial: suporte@universo3d.com.br.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h3 className="text-xl font-display font-black text-white uppercase mb-4">
+                  Política de Privacidade
+                </h3>
+                <div className="space-y-3 text-sm leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
+                  <p>
+                    A sua privacidade é fundamental para nós. Esta política descreve como tratamos e protegemos suas informações no <strong>Universo 3D™</strong>.
+                  </p>
+                  <p>
+                    <strong>1. Coleta de Informações:</strong> Coletamos apenas as informações necessárias para liberação do acesso e identificação do usuário, como nome e endereço de e-mail.
+                  </p>
+                  <p>
+                    <strong>2. Segurança dos Dados:</strong> Os pagamentos e dados transacionais são processados com criptografia de ponta a ponta através de gateways seguros e certificados. Não armazenamos números de cartão de crédito.
+                  </p>
+                  <p>
+                    <strong>3. Uso das Informações:</strong> Seus dados jamais serão vendidos ou compartilhados com terceiros não autorizados. Usamos seu e-mail exclusivamente para envio dos acessos, atualizações e suporte ao cliente.
+                  </p>
+                  <p>
+                    <strong>4. Contato:</strong> Qualquer solicitação sobre seus dados pode ser enviada diretamente a suporte@universo3d.com.br.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
