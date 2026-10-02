@@ -58,6 +58,7 @@
   width: max-content;
   will-change: transform;
   transform: translate3d(0, 0, 0);
+  contain: layout paint;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   animation: marqueeAnimation 28s linear infinite !important;
@@ -68,6 +69,7 @@
   width: max-content;
   will-change: transform;
   transform: translate3d(0, 0, 0);
+  contain: layout paint;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   animation: marqueeAnimation 38s linear infinite !important;
@@ -78,6 +80,7 @@
   width: max-content;
   will-change: transform;
   transform: translate3d(0, 0, 0);
+  contain: layout paint;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   animation: marqueeReverseAnimation 38s linear infinite !important;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 import {
   Play,
   ShoppingCart,
@@ -17,6 +17,7 @@ interface CarouselItem {
   image: string;
   title: string;
   className?: string;
+  fallback?: string;
 }
 
 interface BonusItem {
@@ -50,46 +51,108 @@ const BRANDS = [
 ];
 
 const ROW_1_CARDS: CarouselItem[] = [
-  { id: 'r1-1', title: 'Minecraft 3D STL', image: 'https://www.universo3d.online/assets/carousel-1-BVYYLJwg.webp' },
-  { id: 'r1-2', title: 'Colecionável 3D STL', image: '/car-pryqbdy.webp', className: '!max-w-[94%] !max-h-[90%]' },
-  { id: 'r1-3', title: 'Modelo 3D STL', image: 'https://www.universo3d.online/assets/carousel-extra-1-YQixWJ53.webp' },
-  { id: 'r1-4', title: 'Colecionável STL', image: 'https://www.universo3d.online/assets/6cCq8Rf--uwUDN_k.webp' },
-  { id: 'r1-5', title: 'Action Figure STL', image: '/car-fbsor17.webp' },
-  { id: 'r1-6', title: 'Modelo 3D STL', image: 'https://www.universo3d.online/assets/burmX7i-GPUYIH0P.webp' },
-  { id: 'r1-7', title: 'Escultura Colecionável STL', image: 'https://www.universo3d.online/assets/iiQWumG-DEjf-ZmF.webp' },
-  { id: 'r1-8', title: 'Colecionável STL', image: 'https://www.universo3d.online/assets/carousel-2-BqK37slN.webp' },
+  { id: 'r1-1', title: 'Colecionável 3D STL', image: 'https://i.imgur.com/acQb0Cn.png' },
+  { id: 'r1-2', title: 'Action Figure STL', image: 'https://i.imgur.com/mUG5K9f.png' },
+  { id: 'r1-3', title: 'Modelo 3D STL', image: 'https://i.imgur.com/h6mQ3La.png' },
+  { id: 'r1-4', title: 'Escultura Colecionável STL', image: 'https://i.imgur.com/ov8u5qE.png' },
+  { id: 'r1-5', title: 'Figura Articulada STL', image: 'https://i.imgur.com/YDMDIj8.png' },
+  { id: 'r1-6', title: 'Modelo Detalhado STL', image: 'https://i.imgur.com/Vti43Xr.png' },
+  { id: 'r1-7', title: 'Colecionável Geek STL', image: 'https://i.imgur.com/7gOyQxG.png' },
+  { id: 'r1-8', title: 'Porta Copos Monster 3D', image: 'https://i.imgur.com/MLWW9d1.png', className: '!max-w-[92%] !max-h-[90%]' },
+  { id: 'r1-9', title: 'Canecas de Time 3D', image: 'https://i.imgur.com/gg0YzCN.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
 ];
 
 const ROW_2_CARDS: CarouselItem[] = [
-  { id: 'r2-1', title: 'Miniatura STL', image: 'https://www.universo3d.online/assets/carousel-4-D8ZTFvgk.webp' },
-  { id: 'r2-2', title: 'Miniatura Colecionável STL', image: '/car-y1v14tp.webp', className: '!max-w-[88%] !max-h-[88%]' },
-  { id: 'r2-3', title: 'Guerreiro 3D STL', image: 'https://www.universo3d.online/assets/carousel-extra-5-I_WwLo6g.webp' },
-  { id: 'r2-4', title: 'Figura Colecionável STL', image: 'https://www.universo3d.online/assets/vxV9uGs-BPqdIOyn.webp' },
-  { id: 'r2-5', title: 'Escultura 3D STL', image: '/car-dskufwd.webp', className: '!max-w-[80%] !max-h-[84%]' },
-  { id: 'r2-6', title: 'Escultura Detalhada STL', image: 'https://www.universo3d.online/assets/OWPMAw9-Dggt7BAj.webp' },
-  { id: 'r2-7', title: 'Action Figure Lendária STL', image: 'https://www.universo3d.online/assets/NxLXZKR-dB8EFN5N.webp' },
-  { id: 'r2-8', title: 'Guerreiro 3D STL', image: 'https://www.universo3d.online/assets/carousel-5-Cq8fdoJi.webp' },
+  { id: 'r2-1', title: 'Personagem 3D STL', image: 'https://i.imgur.com/YYaAKKc.png' },
+  { id: 'r2-2', title: 'Action Figure Lendária STL', image: 'https://i.imgur.com/xijVh8N.png' },
+  { id: 'r2-3', title: 'Miniatura STL', image: 'https://i.imgur.com/7ajlyz6.png' },
+  { id: 'r2-4', title: 'Colecionável Especial STL', image: 'https://i.imgur.com/UzS2KVc.png' },
+  { id: 'r2-5', title: 'Guerreiro 3D STL', image: 'https://i.imgur.com/qIYxzP7.png' },
+  { id: 'r2-6', title: 'Escultura Detalhada STL', image: 'https://i.imgur.com/1xF4sAf.png' },
+  { id: 'r2-7', title: 'Modelo 3D Premium STL', image: 'https://i.imgur.com/575M4mS.png' },
+  { id: 'r2-8', title: 'Colecionável Geek 3D', image: 'https://i.imgur.com/rERHDFp.png' },
+  { id: 'r2-9', title: 'Escultura Premium 3D', image: 'https://i.imgur.com/f5nklb0.png' },
 ];
 
 const ROW_3_CARDS: CarouselItem[] = [
-  { id: 'r3-1', title: 'Colecionável STL', image: 'https://www.universo3d.online/assets/carousel-2-BqK37slN.webp' },
-  { id: 'r3-2', title: 'Modelo Detalhado STL', image: '/car-wryskmh.webp' },
-  { id: 'r3-3', title: 'Figura de Ação STL', image: 'https://www.universo3d.online/assets/carousel-extra-8-IxzUvBU4.webp' },
-  { id: 'r3-4', title: 'Colecionável Raro 3D STL', image: 'https://www.universo3d.online/assets/Iexyj0f-DE3EMOHB.webp' },
-  { id: 'r3-5', title: 'Personagem 3D STL', image: '/car-tr2emxn.webp' },
-  { id: 'r3-6', title: 'Guerreiro de Fantasia STL', image: 'https://www.universo3d.online/assets/5Ld6EQd-DPRpyfzW.webp' },
-  { id: 'r3-7', title: 'Modelo Articulado STL', image: 'https://www.universo3d.online/assets/NucoHxQ-E8WOFn2a.webp' },
-  { id: 'r3-8', title: 'Escultura Detalhada STL', image: 'https://www.universo3d.online/assets/carousel-6-DCrze3Vc.webp' },
+  { id: 'r3-1', title: 'Figura Colecionável STL', image: 'https://i.imgur.com/GremzbV.png' },
+  { id: 'r3-2', title: 'Personagem Lendário STL', image: 'https://i.imgur.com/VpxApVf.png' },
+  { id: 'r3-3', title: 'Estatueta 3D STL', image: 'https://i.imgur.com/bxT1zGy.png' },
+  { id: 'r3-4', title: 'Action Figure Especial STL', image: 'https://i.imgur.com/7ntF971.png' },
+  { id: 'r3-5', title: 'Colecionável Raro 3D STL', image: 'https://i.imgur.com/Xv6tKO4.png' },
+  { id: 'r3-6', title: 'Guerreiro Colecionável STL', image: 'https://i.imgur.com/M55lq3C.png' },
+  { id: 'r3-7', title: 'Escultura Geek 3D STL', image: 'https://i.imgur.com/5JVuJT9.png' },
+  { id: 'r3-8', title: 'Modelo Detalhado STL', image: 'https://i.imgur.com/wRYSKMh.png' },
+  { id: 'r3-9', title: 'Personagem 3D STL', image: 'https://i.imgur.com/tR2eMxN.png' },
 ];
 
 const ROW_4_CARDS: CarouselItem[] = [
-  { id: 'r4-1', title: 'Porta Copos Monster 3D', image: '/car-mlww9d1.webp', className: '!max-w-[92%] !max-h-[90%]' },
-  { id: 'r4-2', title: 'Estatueta Colecionável STL', image: '/car-or71jqw.webp' },
-  { id: 'r4-3', title: 'Canecas de Time 3D', image: '/car-gg0yzcn.webp', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r4-4', title: 'Colecionável Geek 3D', image: '/car-rerhdfp.webp' },
-  { id: 'r4-5', title: 'Modelo Geek STL', image: '/car-dtnlqds.webp', className: '!max-w-[96%] !max-h-[90%] scale-[1.12]' },
-  { id: 'r4-6', title: 'Action Figure Especial STL', image: '/car-a6xifct.webp' },
-  { id: 'r4-7', title: 'Escultura Premium 3D', image: '/car-f5nklb0.webp' },
+  { id: 'r4-1', title: 'Modelo Decorativo STL', image: 'https://i.imgur.com/51TUjFl.png' },
+  { id: 'r4-2', title: 'Colecionável Geek STL', image: 'https://i.imgur.com/R7Opg72.png' },
+  { id: 'r4-3', title: 'Action Figure 3D STL', image: 'https://i.imgur.com/yUCi83W.png' },
+  { id: 'r4-4', title: 'Estatueta Colecionável STL', image: 'https://i.imgur.com/mX4tEDP.png' },
+  { id: 'r4-5', title: 'Miniatura Premium STL', image: 'https://i.imgur.com/IohQ8H6.png' },
+  { id: 'r4-6', title: 'Modelo Articulado STL', image: 'https://i.imgur.com/qmOqGAQ.png' },
+  { id: 'r4-7', title: 'Personagem Especial STL', image: 'https://i.imgur.com/W8BlwCP.png' },
+  { id: 'r4-8', title: 'Estatueta Colecionável STL', image: 'https://i.imgur.com/or71jqW.png' },
+  { id: 'r4-9', title: 'Modelo Geek STL', image: 'https://i.imgur.com/DTnlqds.png', className: '!max-w-[96%] !max-h-[90%] scale-[1.12]' },
+];
+
+const SHOWCASE_ROW_1: CarouselItem[] = [
+  { id: 'sc1-1', title: 'Sonic Vermelho', image: '/models-carrossel/sonic-vermelho.jpg', fallback: 'https://lh3.googleusercontent.com/d/1aPKlJEHTwKUyuzBqPi32OfxK6vjg9nPN=w800' },
+  { id: 'sc1-2', title: 'Sonic Azul', image: '/models-carrossel/sonic-azul.jpg', fallback: 'https://lh3.googleusercontent.com/d/1U2gs8uDv8s-Ue2BJ8AJa23XpLzT5ee7j=w800' },
+  { id: 'sc1-3', title: 'Sub Zero', image: '/models-carrossel/sub-zero.jpg', fallback: 'https://lh3.googleusercontent.com/d/1iobUId4HNPpHQKDMtVTksE-VEWGh2ZHy=w800' },
+  { id: 'sc1-4', title: 'Boneco Spawn', image: '/models-carrossel/spawn.jpg', fallback: 'https://lh3.googleusercontent.com/d/1sBWHMVjExyrXJZchiH3EZE4M24-u4uIY=w800' },
+  { id: 'sc1-5', title: 'Boneco Mortal Kombat', image: '/models-carrossel/mortal-kombat.jpg', fallback: 'https://lh3.googleusercontent.com/d/1r4-arXdB3vJQbwi_noiBJDZxhwIeT9yD=w800' },
+  { id: 'sc1-6', title: 'Pantera Negra', image: '/models-carrossel/pantera-negra.jpg', fallback: 'https://lh3.googleusercontent.com/d/1SrxHAmFhpQhkyCdULg9e-xA4XcFqa30U=w800' },
+  { id: 'sc1-7', title: 'Xenomorfo Alien', image: '/models-carrossel/xenomorfo.jpg', fallback: 'https://lh3.googleusercontent.com/d/1s_CwDR-E11lgXsYajG9G_UNzDabipCyV=w800' },
+  { id: 'sc1-8', title: 'Tico e Teco Peaky Blinders', image: '/models-carrossel/tico-teco-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/16mImFuEYFQZ9eUUxZGexx0OTY276I0bD=w800' },
+  { id: 'sc1-9', title: 'Boneco Jason', image: '/models-carrossel/jason.jpg', fallback: 'https://lh3.googleusercontent.com/d/1MpW07_kOd7BxkQmpOEKxAfOYXF0AhGky=w800' },
+  { id: 'sc1-10', title: 'Boneco Sonic Versão Goku', image: '/models-carrossel/sonic-goku.jpg', fallback: 'https://lh3.googleusercontent.com/d/15nAebSxoChQ-NpAk1UXae8k_j6Jqmpi5=w800' },
+  { id: 'sc1-11', title: 'Luffy Urban One Piece', image: '/models-carrossel/luffy-urban.jpg', fallback: 'https://lh3.googleusercontent.com/d/108-d_ARKvopN0xHjg3e2xbhfjiBP3c75=w800' },
+  { id: 'sc1-12', title: 'Boneco Head Pyramid', image: '/models-carrossel/head-pyramid.jpg', fallback: 'https://lh3.googleusercontent.com/d/1wEg6H1mVWOtylLtqFPY16hmGoT_UEkUM=w800' },
+  { id: 'sc1-13', title: 'Boneco Knuckles', image: '/models-carrossel/knuckles.jpg', fallback: 'https://lh3.googleusercontent.com/d/1nrrPiGSny8BelWJgU78j7MaxXvLte8oT=w800' },
+  { id: 'sc1-14', title: 'Mario Peaky Blinders', image: '/models-carrossel/mario-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1QutOVtYRb5QO6jJvt-GIrI0e9hZWFwAS=w800' },
+  { id: 'sc1-15', title: 'Luigi Peaky Blinders', image: '/models-carrossel/luigi-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1cmTRdKEjEDcOxPAAOVyukG4caAewbWig=w800' },
+  { id: 'sc1-16', title: 'Tiffany Boneca', image: '/models-carrossel/tiffany.jpg', fallback: 'https://lh3.googleusercontent.com/d/1UErvCooY258OIx5aARuLt89eqgsW5AgA=w800' },
+  { id: 'sc1-17', title: 'Alienígena Roxo', image: '/models-carrossel/alienigena-roxo.jpg', fallback: 'https://lh3.googleusercontent.com/d/1wouT1a7Gohu4tZ7RV_Mr5WJJQ2cH03Hi=w800' },
+  { id: 'sc1-18', title: 'Mickey Mouse Peaky Blinders', image: '/models-carrossel/mickey-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1F5cffZwia4Dy7KiJyKNVVPMHDfTEnnHS=w800' },
+  { id: 'sc1-19', title: 'Luigi Samurai', image: '/models-carrossel/luigi-samurai.jpg', fallback: 'https://lh3.googleusercontent.com/d/10JT608dsEz6FuS3okYsgd4hdHWjBdeIe=w800' },
+  { id: 'sc1-20', title: 'Mario Samurai', image: '/models-carrossel/mario-samurai.jpg', fallback: 'https://lh3.googleusercontent.com/d/12K835RkOD3Pr5mAaWKPgj9sRfGA9DWjV=w800' },
+  { id: 'sc1-21', title: 'Boneco Terminator', image: '/models-carrossel/terminator.jpg', fallback: 'https://lh3.googleusercontent.com/d/1y15xcAL7mQyiSj81PnGL4AuxJONTP9qD=w800' },
+  { id: 'sc1-22', title: 'Boneco Ghostface', image: '/models-carrossel/ghostface.jpg', fallback: 'https://lh3.googleusercontent.com/d/1icNPCwvfNC-0Xnn3kbWaEH0KHMc6KTGO=w800' },
+  { id: 'sc1-23', title: 'Sonic Superman', image: '/models-carrossel/sonic-superman.jpg', fallback: 'https://lh3.googleusercontent.com/d/1KUc-rJqlUBmRcOlIzmavhNuK5HRoMsQl=w800' },
+  { id: 'sc1-24', title: 'Knuckles Superman', image: '/models-carrossel/knuckles-superman.jpg', fallback: 'https://lh3.googleusercontent.com/d/1a8OAyv81Yhu0XvajqwLRP1gPCsjMHdmJ=w800' },
+  { id: 'sc1-25', title: 'Boneca Amy Rose', image: '/models-carrossel/amy-rose.jpg', fallback: 'https://lh3.googleusercontent.com/d/11S2wa6I7xgDgeRY5pGnGjGbpIjyeO1PD=w800' },
+  { id: 'sc1-26', title: 'Mario Assassino', image: '/models-carrossel/mario-assassino.jpg', fallback: 'https://lh3.googleusercontent.com/d/1wr4Uss4WZCtmqk8wyv7h13-aAfvxvDIm=w800' },
+];
+
+const SHOWCASE_ROW_2: CarouselItem[] = [
+  { id: 'sc2-1', title: 'Sonic Batman', image: '/models-carrossel/sonic-batman.jpg', fallback: 'https://lh3.googleusercontent.com/d/1yG7BZeRbabBz89jUe5vLrYaQ6Iq1f8-b=w800' },
+  { id: 'sc2-2', title: 'Logan Wolverine', image: '/models-carrossel/logan-wolverine.jpg', fallback: 'https://lh3.googleusercontent.com/d/1Zxxm_UyuQTuzKPGUqrIHqCZIiRqk-yqe=w800' },
+  { id: 'sc2-3', title: 'Donald Wolverine', image: '/models-carrossel/donald-wolverine.jpg', fallback: 'https://lh3.googleusercontent.com/d/1YMQcLu4TDE9ocRrUkuYaSVUzKGQI4Dx7=w800' },
+  { id: 'sc2-4', title: 'Donald Capitão América', image: '/models-carrossel/donald-capitao.jpg', fallback: 'https://lh3.googleusercontent.com/d/1kp7q5EkJ9RbD3HT75S6RPtl0eAavmAuS=w800' },
+  { id: 'sc2-5', title: 'Donald Forasteiro', image: '/models-carrossel/donald-forasteiro.jpg', fallback: 'https://lh3.googleusercontent.com/d/19nzNvSxo9ZaxnToEOl80xkYxVdzK0Qa4=w800' },
+  { id: 'sc2-6', title: 'Mario Capitão América', image: '/models-carrossel/mario-capitao.jpg', fallback: 'https://lh3.googleusercontent.com/d/1xR2i8z2dqVGluMkwtwkWegFvTaIU-uzE=w800' },
+  { id: 'sc2-7', title: 'Boneco Zoro Urban', image: '/models-carrossel/zoro-urban.jpg', fallback: 'https://lh3.googleusercontent.com/d/1urccVYxz63srgEtiQSKO3Cx-pTdbqLkq=w800' },
+  { id: 'sc2-8', title: 'Darkseid', image: '/models-carrossel/darkseid.jpg', fallback: 'https://lh3.googleusercontent.com/d/1hPhddn74tcCola1-3LlEzEOqUOZD3Abb=w800' },
+  { id: 'sc2-9', title: 'Lion-O Thundercats', image: '/models-carrossel/lion-o.jpg', fallback: 'https://lh3.googleusercontent.com/d/1oRcnIWBFbx9EyZM8WiSSgkA8Pb8jUHB7=w800' },
+  { id: 'sc2-10', title: 'Raiden Mortal Kombat', image: '/models-carrossel/raiden.jpg', fallback: 'https://lh3.googleusercontent.com/d/1cvCEb904Lvz3xPpFvCx4l0YVhYd9_HsT=w800' },
+  { id: 'sc2-11', title: 'Cavaleiro da Lua', image: '/models-carrossel/cavaleiro-da-lua.jpg', fallback: 'https://lh3.googleusercontent.com/d/1Q1DPXUKt3YR_-Y0xKk_gl4jhe92x1LIu=w800' },
+  { id: 'sc2-12', title: 'Chucky', image: '/models-carrossel/chucky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1hZIb46Wjz98lEeo_CZrzFC5LeIJ4d3FE=w800' },
+  { id: 'sc2-13', title: 'Cara de Couro Leatherface', image: '/models-carrossel/leatherface.jpg', fallback: 'https://lh3.googleusercontent.com/d/1LH75mJl0EjVFZ1GFqsI0-K176xF10_oI=w800' },
+  { id: 'sc2-14', title: 'Michael Myers', image: '/models-carrossel/michael-myers.jpg', fallback: 'https://lh3.googleusercontent.com/d/1qvycKjLL6PsI2PVIOTq8h1Kg9TGgh9Ss=w800' },
+  { id: 'sc2-15', title: 'Freddy Krueger', image: '/models-carrossel/freddy-krueger.jpg', fallback: 'https://lh3.googleusercontent.com/d/1HPUbON_IEV54tTH14qAoYSVq1LgpqTcs=w800' },
+  { id: 'sc2-16', title: 'Pennywise', image: '/models-carrossel/pennywise.jpg', fallback: 'https://lh3.googleusercontent.com/d/1ZEItuU5FHTFr_pt8RKeEmTKncVwnHXGG=w800' },
+  { id: 'sc2-17', title: 'Goku Dragon Ball', image: '/models-carrossel/goku.jpg', fallback: 'https://lh3.googleusercontent.com/d/17VtuRVd1nmetdO62edut6qhj-7ekaIsu=w800' },
+  { id: 'sc2-18', title: 'Vegeta', image: '/models-carrossel/vegeta.jpg', fallback: 'https://lh3.googleusercontent.com/d/10ArqYskP8IP6XvVhyYxwY7OXqLIYUMIC=w800' },
+  { id: 'sc2-19', title: 'Vegito', image: '/models-carrossel/vegito.jpg', fallback: 'https://lh3.googleusercontent.com/d/1u1BUdbvihFCfPgewXRSszn5CO-atmz0C=w800' },
+  { id: 'sc2-20', title: 'Gogeta Fusão', image: '/models-carrossel/gogeta.jpg', fallback: 'https://lh3.googleusercontent.com/d/1VdyONaBQxRUuBPoI1S7BHRl8lK9MziMl=w800' },
+  { id: 'sc2-21', title: 'Liu Kang', image: '/models-carrossel/liu-kang-mk.jpg', fallback: 'https://lh3.googleusercontent.com/d/1Q46ZDGBGJJBxnF4e1pIDofiNG5gXBj8R=w800' },
+  { id: 'sc2-22', title: 'Noob Saibot', image: '/models-carrossel/noob-saibot.jpg', fallback: 'https://lh3.googleusercontent.com/d/1hTr8tZGF9DclXdb8gKxvO_D4mQgqu7x0=w800' },
+  { id: 'sc2-23', title: 'Peach Peaky Boneca', image: '/models-carrossel/peach-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1DzMbalxiYjR_LU6qqn-ai0ly-ibVtRCX=w800' },
+  { id: 'sc2-24', title: 'Broly Dragon Ball', image: '/models-carrossel/broly.jpg', fallback: 'https://lh3.googleusercontent.com/d/1ARvVqBUkdh6cexzNwtEtPFIcNNvP0hHT=w800' },
+  { id: 'sc2-25', title: 'Boneco Thor', image: '/models-carrossel/thor.jpg', fallback: 'https://lh3.googleusercontent.com/d/1bRugzuJGp4ZFP-LAgwyn7O6lBNlGFJmK=w800' },
 ];
 
 const BONUSES: BonusItem[] = [
@@ -97,67 +160,67 @@ const BONUSES: BonusItem[] = [
     id: 1,
     title: 'PACK DE VEÍCULOS 3D PROFISSIONAIS',
     description: 'Amplie seu acervo com uma coleção de veículos 3D, incluindo diferentes modelos de carros, motos, caminhões e outras opções para impressão.',
-    image: 'https://www.universo3d.online/assets/bonus-1-D7xp77aP.webp',
+    image: 'https://i.imgur.com/a1UwWYq.png',
   },
   {
     id: 2,
     title: 'COLEÇÃO HERÓIS DA MARVEL',
     description: 'Uma coleção especial com modelos 3D de heróis da Marvel, perfeita para quem procura personagens conhecidos, peças de exposição e itens colecionáveis.',
-    image: 'https://www.universo3d.online/assets/bonus-2-DhtXjDoR.webp',
+    image: 'https://i.imgur.com/Jed7yOC.png',
   },
   {
     id: 3,
     title: 'PACK DE CHAVEIROS PERSONALIZADOS',
     description: 'Tenha também uma coleção de chaveiros personalizados em 3D, com diversos modelos e estilos para imprimir e ampliar ainda mais as possibilidades do seu acervo.',
-    image: 'https://www.universo3d.online/assets/bonus-3-Bf4I0ShX.webp',
+    image: 'https://i.imgur.com/gJDDIKs.png',
   },
   {
     id: 4,
     title: 'MODELOS FLEXÍVEIS E ARTICULADOS',
     description: 'Você também recebe uma coleção de modelos flexíveis e articulados, com peças que ganham movimento depois de impressas e chamam atenção pelo resultado.',
-    image: 'https://www.universo3d.online/assets/bonus-4-DwIXkaw_.webp',
+    image: 'https://i.imgur.com/BvlOrqv.png',
   },
   {
     id: 5,
     title: 'COLEÇÃO CLÁSSICOS DOS DESENHOS',
     description: 'Uma coleção repleta de personagens clássicos dos desenhos, com modelos conhecidos para imprimir, colecionar, presentear ou utilizar na decoração.',
-    image: 'https://www.universo3d.online/assets/bonus-5-DMXtPMtT.webp',
+    image: 'https://i.imgur.com/AxWjNOz.png',
   },
   {
     id: 6,
     title: 'COLEÇÃO MÁSCARAS 3D',
     description: 'Tenha acesso a uma coleção de máscaras 3D, com diferentes personagens, estilos e designs para criar impressões maiores e ainda mais impressionantes.',
-    image: 'https://www.universo3d.online/assets/bonus-6-CQCK1QZU.webp',
+    image: 'https://i.imgur.com/H5riCqx.png',
   },
   {
     id: 7,
     title: 'COLEÇÃO POKÉMON 3D',
     description: 'Receba também uma coleção dedicada ao universo Pokémon, com diferentes personagens e criaturas transformados em modelos para impressão 3D.',
-    image: 'https://www.universo3d.online/assets/bonus-7-B6ElVMsO.webp',
+    image: 'https://i.imgur.com/ElrKAys.png',
   },
   {
     id: 8,
     title: 'MASCOTES DE FUTEBOL 3D',
     description: 'Uma coleção especial de mascotes de futebol em 3D, com diversos modelos inspirados no universo dos clubes e das torcidas.',
-    image: 'https://www.universo3d.online/assets/bonus-8-mlyb3qoR.webp',
+    image: 'https://i.imgur.com/xgxElyu.png',
   },
   {
     id: 9,
     title: 'HELICÓPTEROS 3D',
     description: 'Adicione ao seu acervo uma coleção de helicópteros 3D, com diferentes modelos para quem gosta de aviação, veículos e projetos diferenciados.',
-    image: 'https://www.universo3d.online/assets/bonus-9-BczusQui.webp',
+    image: 'https://i.imgur.com/QNwWpdh.png',
   },
   {
     id: 10,
     title: 'COLEÇÃO LEGO 3D',
     description: 'Você também recebe uma coleção de modelos em estilo LEGO, com personagens e peças variadas para deixar seu acervo ainda mais completo.',
-    image: 'https://www.universo3d.online/assets/bonus-10-Bc2U9BDu.webp',
+    image: 'https://i.imgur.com/51TUjFl.png',
   },
   {
     id: 11,
     title: 'COLEÇÃO MINECRAFT 3D',
     description: 'E para completar, você recebe uma coleção inspirada no universo Minecraft, com personagens, criaturas e elementos conhecidos do jogo prontos para impressão 3D.',
-    image: 'https://www.universo3d.online/assets/bonus-11-CsS1NIGA.webp',
+    image: 'https://i.imgur.com/xijVh8N.png',
   },
   {
     id: 12,
@@ -175,7 +238,7 @@ const BONUSES: BonusItem[] = [
     id: 14,
     title: 'COLEÇÃO CANECAS DE TIME 3D',
     description: 'Receba uma coleção especial de canecas 3D personalizadas inspiradas em grandes times e torcidas de futebol, com designs exclusivos e excelente aceitação comercial.',
-    image: '/car-gg0yzcn.webp',
+    image: 'https://i.imgur.com/gg0YzCN.png',
   },
 ];
 
@@ -183,37 +246,37 @@ const TESTIMONIALS: TestimonialItem[] = [
   {
     id: 1,
     image: 'https://www.universo3d.online/assets/depoimento-1-BBN2Oe74.webp',
-    fallback: '/depoimento-1-fb.webp',
+    fallback: 'https://i.imgur.com/6m6ZBlW.png',
     alt: 'Depoimento real de aluno - Universo 3D 1',
   },
   {
     id: 2,
     image: 'https://www.universo3d.online/assets/depoimento-3-Cn7cJzGT.webp',
-    fallback: '/depoimento-2-fb.webp',
+    fallback: 'https://i.imgur.com/u6Ni9cj.png',
     alt: 'Depoimento real de aluno - Universo 3D 2',
   },
   {
     id: 3,
     image: 'https://www.universo3d.online/assets/depoimento-4-DJVEDa94.webp',
-    fallback: '/depoimento-3-fb.webp',
+    fallback: 'https://i.imgur.com/ClBxb0D.png',
     alt: 'Depoimento real de aluno - Universo 3D 3',
   },
   {
     id: 4,
     image: 'https://www.universo3d.online/assets/depoimento-5-DG3Xdqvb.webp',
-    fallback: '/depoimento-4-fb.webp',
+    fallback: 'https://i.imgur.com/Mpywmfj.png',
     alt: 'Depoimento real de aluno - Universo 3D 4',
   },
   {
     id: 5,
     image: 'https://www.universo3d.online/assets/depoimento-6-CwvLNkMG.webp',
-    fallback: '/depoimento-5-fb.webp',
+    fallback: 'https://i.imgur.com/jpBrWyK.png',
     alt: 'Depoimento real de aluno - Universo 3D 5',
   },
   {
     id: 6,
     image: 'https://www.universo3d.online/assets/depoimento-7-4HoiAS5R.webp',
-    fallback: '/depoimento-6-fb.webp',
+    fallback: 'https://i.imgur.com/Ys2ErTe.png',
     alt: 'Depoimento real de aluno - Universo 3D 6',
   },
 ];
@@ -244,6 +307,32 @@ const FAQ_ITEMS: FaqItem[] = [
     a: 'Você tem 14 dias inteiros de garantia incondicional. Entre na plataforma, explore as coleções e confira os arquivos. Se por qualquer motivo achar que o catálogo não agregou para você, basta solicitar o reembolso que devolvemos 100% do seu dinheiro.',
   },
 ];
+
+const CarouselCard = memo(function CarouselCard({ item }: { item: CarouselItem }) {
+  return (
+    <div className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 bg-[#080808] border border-[#00A3FF] shadow-[0_0_15px_rgba(0,163,255,0.4)] md:hover:shadow-[0_0_25px_rgba(0,163,255,0.7)] group transition-all duration-300">
+      <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-[#050505] relative p-2.5 sm:p-3.5 border border-[#00A3FF]/20">
+        {/* Brilho leve azul/roxo atrás dos bonecos */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(0,163,255,0.32)_0%,_rgba(168,85,247,0.22)_45%,_transparent_72%)] pointer-events-none" />
+        <img
+          alt={item.title}
+          width={256}
+          height={256}
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            if (item.fallback && e.currentTarget.src !== item.fallback) {
+              e.currentTarget.src = item.fallback;
+            }
+          }}
+          className={`relative z-10 max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] ${item.className || ''}`}
+          src={item.image}
+        />
+      </div>
+    </div>
+  );
+});
 
 export default function App() {
   // Video Presentation State
@@ -279,6 +368,7 @@ export default function App() {
     setIsPlayingNotebookVideo(true);
     setTimeout(() => {
       if (notebookVideoRef.current) {
+        notebookVideoRef.current.currentTime = 0;
         notebookVideoRef.current.play().catch(() => {});
       }
     }, 50);
@@ -383,6 +473,8 @@ export default function App() {
                       width={480}
                       height={854}
                       loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
                       className="absolute inset-0 w-full h-full object-cover select-none"
                       src="https://www.universo3d.online/poster-apresentacao.webp"
                     />
@@ -469,23 +561,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
             {[...ROW_1_CARDS, ...ROW_1_CARDS].map((item, idx) => (
-              <div
-                key={`r1-${idx}`}
-                className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
-                style={{ backgroundImage: 'url("https://www.universo3d.online/assets/card-bg-oI72pivU.webp")' }}
-              >
-                <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-black/25 relative p-2.5 sm:p-3.5">
-                  <img
-                    alt={item.title}
-                    width={256}
-                    height={256}
-                    loading="lazy"
-                    decoding="async"
-                    className={`max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] ${item.className || ''}`}
-                    src={item.image}
-                  />
-                </div>
-              </div>
+              <CarouselCard key={`r1-${idx}`} item={item} />
             ))}
           </div>
         </div>
@@ -496,23 +572,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
             {[...ROW_2_CARDS, ...ROW_2_CARDS].map((item, idx) => (
-              <div
-                key={`r2-${idx}`}
-                className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
-                style={{ backgroundImage: 'url("https://www.universo3d.online/assets/card-bg-oI72pivU.webp")' }}
-              >
-                <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-black/25 relative p-2.5 sm:p-3.5">
-                  <img
-                    alt={item.title}
-                    width={256}
-                    height={256}
-                    loading="lazy"
-                    decoding="async"
-                    className={`max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] ${item.className || ''}`}
-                    src={item.image}
-                  />
-                </div>
-              </div>
+              <CarouselCard key={`r2-${idx}`} item={item} />
             ))}
           </div>
         </div>
@@ -523,23 +583,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
             {[...ROW_3_CARDS, ...ROW_3_CARDS].map((item, idx) => (
-              <div
-                key={`r3-${idx}`}
-                className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
-                style={{ backgroundImage: 'url("https://www.universo3d.online/assets/card-bg-oI72pivU.webp")' }}
-              >
-                <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-black/25 relative p-2.5 sm:p-3.5">
-                  <img
-                    alt={item.title}
-                    width={256}
-                    height={256}
-                    loading="lazy"
-                    decoding="async"
-                    className={`max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] ${item.className || ''}`}
-                    src={item.image}
-                  />
-                </div>
-              </div>
+              <CarouselCard key={`r3-${idx}`} item={item} />
             ))}
           </div>
         </div>
@@ -549,24 +593,8 @@ export default function App() {
           <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
-            {[...ROW_4_CARDS, ...ROW_4_CARDS, ...ROW_4_CARDS].map((item, idx) => (
-              <div
-                key={`r4-${idx}`}
-                className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 border border-zinc-700/60 md:shadow-xl group bg-cover bg-center"
-                style={{ backgroundImage: 'url("https://www.universo3d.online/assets/card-bg-oI72pivU.webp")' }}
-              >
-                <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-black/25 relative p-2.5 sm:p-3.5">
-                  <img
-                    alt={item.title}
-                    width={256}
-                    height={256}
-                    loading="lazy"
-                    decoding="async"
-                    className={`max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] ${item.className || ''}`}
-                    src={item.image}
-                  />
-                </div>
-              </div>
+            {[...ROW_4_CARDS, ...ROW_4_CARDS].map((item, idx) => (
+              <CarouselCard key={`r4-${idx}`} item={item} />
             ))}
           </div>
         </div>
@@ -616,11 +644,10 @@ export default function App() {
                   <video
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
-                    src={isPlayingNotebookVideo ? 'https://i.imgur.com/XMHWIse.mp4' : undefined}
-                    poster="https://www.universo3d.online/assets/poster-catalogo-B3YjnjQd.webp"
+                    src="https://i.imgur.com/it19bfB.mp4#t=0.001"
                     playsInline
                     controls={isPlayingNotebookVideo}
-                    preload={isPlayingNotebookVideo ? 'auto' : 'none'}
+                    preload="metadata"
                     className="w-full h-full object-cover"
                   >
                     Seu navegador não suporta a reprodução de vídeo.
@@ -633,18 +660,8 @@ export default function App() {
                       onClick={handlePlayNotebookVideo}
                       onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handlePlayNotebookVideo()}
                       aria-label="Assistir tour pela Área de Membros"
-                      className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none"
+                      className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none bg-black/25 hover:bg-black/15 transition-colors"
                     >
-                      <img
-                        alt="Área de Membros Universo 3D"
-                        width={854}
-                        height={480}
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover select-none"
-                        src="https://www.universo3d.online/assets/poster-catalogo-B3YjnjQd.webp"
-                      />
-                      <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors pointer-events-none"></div>
                       <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
                         <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#0066FF] hover:bg-[#0052CC] flex items-center justify-center shadow-[0_4px_30px_rgba(0,102,255,0.7)] group-hover:shadow-[0_6px_45px_rgba(0,102,255,0.95)] transition-all duration-300">
                           <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
@@ -750,8 +767,9 @@ export default function App() {
                 height={887}
                 loading="lazy"
                 decoding="async"
+                referrerPolicy="no-referrer"
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
-                src="/mercado-1.webp"
+                src="https://i.imgur.com/k8NGhmh.png"
               />
             </div>
             <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
@@ -761,8 +779,9 @@ export default function App() {
                 height={887}
                 loading="lazy"
                 decoding="async"
+                referrerPolicy="no-referrer"
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
-                src="https://www.universo3d.online/assets/step-2-Y7N50RdW.webp"
+                src="https://i.imgur.com/USQ9ivu.png"
               />
             </div>
             <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
@@ -772,8 +791,9 @@ export default function App() {
                 height={887}
                 loading="lazy"
                 decoding="async"
+                referrerPolicy="no-referrer"
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
-                src="/mercado-3.webp"
+                src="https://i.imgur.com/7Vejky0.png"
               />
             </div>
           </div>
@@ -791,118 +811,53 @@ export default function App() {
         </div>
       </section>
 
-      {/* Lucrative Math Comparison Table */}
-      <section id="matematica-lucrativa" className="section-lazy pt-8 pb-16 relative overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#0066FF]/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="container mx-auto px-4 relative z-10 max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mt-0">
-              Entenda o <span className="text-[#0066FF]">potencial</span> por trás de uma única impressão
-            </h2>
-            <p className="text-base md:text-lg mt-4 max-w-3xl mx-auto font-normal text-zinc-300 leading-relaxed">
-              Compare a estimativa de consumo de filamento com faixas de valores praticadas no mercado para peças similares:
-            </p>
-          </div>
-
-          <div className="relative w-full rounded-2xl md:rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
-            <table className="w-full text-left border-collapse">
-              <thead className="bg-black/80">
-                <tr>
-                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display uppercase tracking-wider border border-white/10 w-1/3 text-center align-middle">
-                    Modelo
-                  </th>
-                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-gray-200 uppercase tracking-wider border border-white/10 w-1/3 text-center align-middle">
-                    Consumo est. de filamento
-                  </th>
-                  <th className="p-2 sm:p-4 md:p-6 text-[10px] sm:text-xs md:text-lg font-black font-display text-[#60A5FA] uppercase tracking-wider border border-[#0066FF]/30 bg-[#0066FF]/5 w-1/3 text-center align-middle">
-                    Anúncios encontrados
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-black/60">
-                <tr className="hover:bg-white/5 transition-colors">
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
-                    <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
-                      <img
-                        alt="Modelo 3D STL - Peça 1"
-                        width={300}
-                        height={300}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
-                        src="https://www.universo3d.online/assets/lucro-1-Cyd4RhEq.webp"
-                      />
-                    </div>
-                  </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#3B82F6]">
-                    R$ 11,14
-                  </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#0066FF]/30 text-[#0066FF] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#0066FF]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(0,102,255,0.4)]">
-                    R$ 147–165
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-white/5 transition-colors">
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
-                    <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
-                      <img
-                        alt="Modelo 3D STL - Peça 2"
-                        width={300}
-                        height={300}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
-                        src="https://www.universo3d.online/assets/lucro-2-BFVmtSp3.webp"
-                      />
-                    </div>
-                  </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#3B82F6]">
-                    R$ 9,74
-                  </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#0066FF]/30 text-[#0066FF] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#0066FF]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(0,102,255,0.4)]">
-                    R$ 123–147
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-white/5 transition-colors">
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 text-center align-middle">
-                    <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto rounded-xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-1 sm:p-2 flex items-center justify-center overflow-hidden group">
-                      <img
-                        alt="Modelo 3D STL - Peça 3"
-                        width={300}
-                        height={300}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
-                        src="https://www.universo3d.online/assets/lucro-3-Ca-zv9V7.webp"
-                      />
-                    </div>
-                  </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-white/10 font-bold font-display text-[11px] sm:text-sm md:text-xl text-center align-middle text-[#3B82F6]">
-                    R$ 8,37
-                  </td>
-                  <td className="p-2 sm:p-4 md:p-6 border border-[#0066FF]/30 text-[#0066FF] font-black font-display text-sm sm:text-lg md:text-3xl bg-[#0066FF]/5 text-center align-middle drop-shadow-[0_0_10px_rgba(0,102,255,0.4)]">
-                    R$ 75–107
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p className="text-zinc-400 text-xs sm:text-sm text-center max-w-2xl mx-auto mt-4 font-normal leading-relaxed italic">
-            *Valores meramente ilustrativos. Custos, preços e margens podem variar conforme material, tamanho da peça, acabamento, região e estratégia de venda.
+      {/* Novas Coleções em Alta / Carrossel Duplo */}
+      <section id="novos-modelos" className="section-lazy pt-12 pb-16 relative overflow-hidden bg-black border-y border-[#0066FF]/20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#0066FF]/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="container mx-auto px-4 relative z-10 max-w-6xl mb-8 sm:mb-10 text-center">
+          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-3 text-[#0066FF]">
+            COLEÇÕES EXCLUSIVAS LIBERADAS
           </p>
+          <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-tight max-w-4xl mx-auto">
+            NOVOS MODELOS <span className="text-[#00A3FF] drop-shadow-[0_0_20px_rgba(0,163,255,0.6)]">CYBERPOP & GEEK</span> PRONTOS PARA IMPRIMIR
+          </h2>
+          <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3 font-normal leading-relaxed">
+            Arquivos STL de altíssima definição com encaixes inteligentes e testados para máxima qualidade em qualquer impressora 3D.
+          </p>
+        </div>
 
-          <div className="mt-10 sm:mt-12 flex justify-center w-full px-4">
-            <a
-              href="#oferta-pro"
-              onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
-            >
-              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
-              <span>QUERO MULTIPLICAR MEUS LUCROS</span>
-            </a>
+        {/* Linha 1 do Carrossel */}
+        <div className="w-full overflow-hidden relative mb-4 pointer-events-none select-none">
+          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="marquee-cards pointer-events-none select-none">
+            {[...SHOWCASE_ROW_1, ...SHOWCASE_ROW_1].map((item, idx) => (
+              <CarouselCard key={`sc1-${idx}`} item={item} />
+            ))}
           </div>
+        </div>
+
+        {/* Linha 2 do Carrossel (Reverse) */}
+        <div className="w-full overflow-hidden relative pointer-events-none select-none">
+          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+          <div className="marquee-cards-reverse pointer-events-none select-none">
+            {[...SHOWCASE_ROW_2, ...SHOWCASE_ROW_2].map((item, idx) => (
+              <CarouselCard key={`sc2-${idx}`} item={item} />
+            ))}
+          </div>
+        </div>
+
+        {/* Botão de Ação */}
+        <div className="mt-10 sm:mt-12 flex justify-center w-full px-4 relative z-20">
+          <a
+            href="#oferta-pro"
+            onClick={scrollToOffer}
+            className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
+          >
+            <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+            <span>LIBERAR ACESSO A TODOS OS MODELOS 3D</span>
+          </a>
         </div>
       </section>
 
@@ -937,6 +892,7 @@ export default function App() {
                     height={120}
                     loading="lazy"
                     decoding="async"
+                    referrerPolicy="no-referrer"
                     className="max-h-14 xs:max-h-16 sm:max-h-20 w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none relative z-10"
                     src={bonus.image}
                   />
@@ -1033,7 +989,8 @@ export default function App() {
                         className={`absolute inset-0 w-full h-full object-cover object-top select-none transition-opacity duration-300 ease-in-out ${
                           isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                         }`}
-                        loading={idx === 0 ? 'eager' : 'lazy'}
+                        loading="lazy"
+                        decoding="async"
                         src={item.image}
                         onError={(e) => {
                           if (e.currentTarget.src !== item.fallback) {
@@ -1132,7 +1089,7 @@ export default function App() {
                 <p className="text-xs text-zinc-500 line-through mb-0.5">De R$ 47,00</p>
                 <div className="flex justify-center items-baseline gap-1 mb-1">
                   <span className="text-lg text-zinc-400 font-bold">R$</span>
-                  <span className="text-4xl sm:text-5xl font-display font-black text-white">10,90</span>
+                  <span className="text-4xl sm:text-5xl font-display font-black text-white">16,90</span>
                 </div>
                 <p className="text-zinc-400/80 text-[11px] uppercase tracking-widest font-bold">Pagamento Único</p>
               </div>
@@ -1165,7 +1122,7 @@ export default function App() {
                 onClick={() => setShowUpsellModal(true)}
                 className="block w-full text-center py-4 rounded-xl bg-transparent border-2 border-zinc-600 hover:border-zinc-400 text-zinc-300 hover:text-white hover:bg-white/5 text-sm uppercase tracking-wider transition-all mt-auto font-bold cursor-pointer"
               >
-                QUERO O BASE (R$ 10,90)
+                QUERO O BASE (R$ 16,90)
               </button>
 
               <div className="mt-4 text-center">
@@ -1195,8 +1152,9 @@ export default function App() {
                     height={240}
                     loading="lazy"
                     decoding="async"
+                    referrerPolicy="no-referrer"
                     className="relative z-10 w-auto h-auto max-h-52 sm:max-h-60 object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform duration-300 select-none"
-                    src="/oferta-vip-4790.webp"
+                    src="https://i.imgur.com/yJlxzpw.png"
                   />
                 </div>
 
@@ -1210,11 +1168,14 @@ export default function App() {
                   <div className="flex justify-center items-start text-black mb-1 drop-shadow-sm">
                     <span className="text-xl font-black mt-1 mr-1 text-black">R$</span>
                     <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none text-black">
-                      47,90
+                      49,90
                     </span>
                   </div>
+                  <p className="text-zinc-800 font-extrabold text-sm sm:text-base mb-1">
+                    ou 6x de <span className="text-[#0066FF] font-black">R$ 8,32</span>
+                  </p>
                   <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">
-                    Pagamento Único
+                    Pagamento Único à Vista ou Parcelado
                   </p>
                 </div>
 
@@ -1285,8 +1246,9 @@ export default function App() {
                   height={280}
                   loading="lazy"
                   decoding="async"
+                  referrerPolicy="no-referrer"
                   className="relative z-10 w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_15px_40px_rgba(0,102,255,0.45)] select-none transition-transform duration-300 group-hover:scale-105"
-                  src="https://www.universo3d.online/assets/selo-garantia-14-dias-BCpm6Odj.webp"
+                  src="https://i.imgur.com/WyzcrLj.png"
                 />
               </div>
 
@@ -1472,7 +1434,7 @@ export default function App() {
               <div className="py-2 sm:py-2.5 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F] pr-8 pl-2">
                 <h3 className="font-display font-black text-xs sm:text-sm md:text-base uppercase tracking-tight px-1 whitespace-nowrap">
                   <span className="grad-text font-extrabold">ESPERE! LEVE TUDO POR </span>
-                  <span className="text-[#0066FF]">R$ 21,90</span>
+                  <span className="text-[#0066FF]">R$ 27,90</span>
                 </h3>
               </div>
 
@@ -1491,12 +1453,13 @@ export default function App() {
                 <div className="w-full flex items-center justify-center mb-1.5 relative group">
                   <div className="absolute inset-0 bg-[#0066FF]/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60"></div>
                   <img
-                    src="https://www.universo3d.online/assets/funko-bonus-Czaxy3mw.webp"
+                    src="https://i.imgur.com/Ct9XhZp.png"
                     alt="Pacote +500 Modelos Funkos STL"
                     width={240}
                     height={128}
                     loading="lazy"
                     decoding="async"
+                    referrerPolicy="no-referrer"
                     className="relative z-10 w-auto h-auto max-h-28 sm:max-h-32 object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)] select-none"
                   />
                 </div>
@@ -1511,7 +1474,7 @@ export default function App() {
                   <div className="flex justify-center items-start text-[#0066FF] mb-0.5 drop-shadow-[0_0_15px_rgba(0,102,255,0.5)]">
                     <span className="text-base sm:text-lg font-black mt-0.5 mr-0.5">R$</span>
                     <span className="text-4xl sm:text-5xl font-display font-black tracking-tighter leading-none">
-                      21,90
+                      27,90
                     </span>
                   </div>
                   <p className="text-zinc-400 font-bold text-[9px] sm:text-[10px] uppercase tracking-widest">
@@ -1556,7 +1519,7 @@ export default function App() {
                   rel="noopener noreferrer"
                   className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(0,255,102,0.7)] border-2 border-[#80FFB2] cursor-pointer"
                 >
-                  SIM! LEVAR TUDO POR R$ 21,90
+                  SIM! LEVAR TUDO POR R$ 27,90
                 </a>
 
                 <a
@@ -1565,7 +1528,7 @@ export default function App() {
                   rel="noopener noreferrer"
                   className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
-                  Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »
+                  Não quero os bônus, continuar apenas com o Plano Base por R$ 16,90 »
                 </a>
               </div>
             </div>
