@@ -19,12 +19,41 @@
     <link rel="dns-prefetch" href="https://www.universo3d.online" />
     <link rel="preconnect" href="https://i.imgur.com" crossorigin />
     <link rel="dns-prefetch" href="https://i.imgur.com" />
+    <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin />
+    <link rel="dns-prefetch" href="https://lh3.googleusercontent.com" />
     <link rel="preconnect" href="https://checkout.wiven.com.br" crossorigin />
     <link rel="dns-prefetch" href="https://checkout.wiven.com.br" />
+    <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
+    <link rel="dns-prefetch" href="https://connect.facebook.net" />
     <link rel="preload" as="image" href="https://www.universo3d.online/poster-apresentacao.webp" fetchpriority="high" type="image/webp" />
+    <link rel="preload" as="image" href="https://i.imgur.com/acQb0Cn.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="https://i.imgur.com/mUG5K9f.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/models-carrossel/sonic-vermelho.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/models-carrossel/sonic-azul.webp" type="image/webp" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1368569075303614');
+      fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
   </head>
   <body class="bg-black text-white antialiased overflow-x-hidden selection:bg-[#0066FF] selection:text-white">
+    <!-- Meta Pixel Fallback noscript -->
+    <noscript>
+      <img height="1" width="1" style="display:none" alt=""
+        src="https://www.facebook.com/tr?id=1368569075303614&ev=PageView&noscript=1"
+      />
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

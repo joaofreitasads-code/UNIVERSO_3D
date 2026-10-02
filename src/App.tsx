@@ -39,6 +39,26 @@ interface TestimonialItem {
   alt: string;
 }
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
+const trackInitiateCheckout = (value: number, contentName: string) => {
+  if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+    try {
+      window.fbq('track', 'InitiateCheckout', {
+        value,
+        currency: 'BRL',
+        content_name: contentName,
+      });
+    } catch {
+      // ignore
+    }
+  }
+};
+
 const BRANDS = [
   'CREALITY',
   'ELEGOO',
@@ -99,60 +119,60 @@ const ROW_4_CARDS: CarouselItem[] = [
 ];
 
 const SHOWCASE_ROW_1: CarouselItem[] = [
-  { id: 'sc1-1', title: 'Sonic Vermelho', image: '/models-carrossel/sonic-vermelho.jpg', fallback: 'https://lh3.googleusercontent.com/d/1aPKlJEHTwKUyuzBqPi32OfxK6vjg9nPN=w800' },
-  { id: 'sc1-2', title: 'Sonic Azul', image: '/models-carrossel/sonic-azul.jpg', fallback: 'https://lh3.googleusercontent.com/d/1U2gs8uDv8s-Ue2BJ8AJa23XpLzT5ee7j=w800' },
-  { id: 'sc1-3', title: 'Sub Zero', image: '/models-carrossel/sub-zero.jpg', fallback: 'https://lh3.googleusercontent.com/d/1iobUId4HNPpHQKDMtVTksE-VEWGh2ZHy=w800' },
-  { id: 'sc1-4', title: 'Boneco Spawn', image: '/models-carrossel/spawn.jpg', fallback: 'https://lh3.googleusercontent.com/d/1sBWHMVjExyrXJZchiH3EZE4M24-u4uIY=w800' },
-  { id: 'sc1-5', title: 'Boneco Mortal Kombat', image: '/models-carrossel/mortal-kombat.jpg', fallback: 'https://lh3.googleusercontent.com/d/1r4-arXdB3vJQbwi_noiBJDZxhwIeT9yD=w800' },
-  { id: 'sc1-6', title: 'Pantera Negra', image: '/models-carrossel/pantera-negra.jpg', fallback: 'https://lh3.googleusercontent.com/d/1SrxHAmFhpQhkyCdULg9e-xA4XcFqa30U=w800' },
-  { id: 'sc1-7', title: 'Xenomorfo Alien', image: '/models-carrossel/xenomorfo.jpg', fallback: 'https://lh3.googleusercontent.com/d/1s_CwDR-E11lgXsYajG9G_UNzDabipCyV=w800' },
-  { id: 'sc1-8', title: 'Tico e Teco Peaky Blinders', image: '/models-carrossel/tico-teco-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/16mImFuEYFQZ9eUUxZGexx0OTY276I0bD=w800' },
-  { id: 'sc1-9', title: 'Boneco Jason', image: '/models-carrossel/jason.jpg', fallback: 'https://lh3.googleusercontent.com/d/1MpW07_kOd7BxkQmpOEKxAfOYXF0AhGky=w800' },
-  { id: 'sc1-10', title: 'Boneco Sonic Versão Goku', image: '/models-carrossel/sonic-goku.jpg', fallback: 'https://lh3.googleusercontent.com/d/15nAebSxoChQ-NpAk1UXae8k_j6Jqmpi5=w800' },
-  { id: 'sc1-11', title: 'Luffy Urban One Piece', image: '/models-carrossel/luffy-urban.jpg', fallback: 'https://lh3.googleusercontent.com/d/108-d_ARKvopN0xHjg3e2xbhfjiBP3c75=w800' },
-  { id: 'sc1-12', title: 'Boneco Head Pyramid', image: '/models-carrossel/head-pyramid.jpg', fallback: 'https://lh3.googleusercontent.com/d/1wEg6H1mVWOtylLtqFPY16hmGoT_UEkUM=w800' },
-  { id: 'sc1-13', title: 'Boneco Knuckles', image: '/models-carrossel/knuckles.jpg', fallback: 'https://lh3.googleusercontent.com/d/1nrrPiGSny8BelWJgU78j7MaxXvLte8oT=w800' },
-  { id: 'sc1-14', title: 'Mario Peaky Blinders', image: '/models-carrossel/mario-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1QutOVtYRb5QO6jJvt-GIrI0e9hZWFwAS=w800' },
-  { id: 'sc1-15', title: 'Luigi Peaky Blinders', image: '/models-carrossel/luigi-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1cmTRdKEjEDcOxPAAOVyukG4caAewbWig=w800' },
-  { id: 'sc1-16', title: 'Tiffany Boneca', image: '/models-carrossel/tiffany.jpg', fallback: 'https://lh3.googleusercontent.com/d/1UErvCooY258OIx5aARuLt89eqgsW5AgA=w800' },
-  { id: 'sc1-17', title: 'Alienígena Roxo', image: '/models-carrossel/alienigena-roxo.jpg', fallback: 'https://lh3.googleusercontent.com/d/1wouT1a7Gohu4tZ7RV_Mr5WJJQ2cH03Hi=w800' },
-  { id: 'sc1-18', title: 'Mickey Mouse Peaky Blinders', image: '/models-carrossel/mickey-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1F5cffZwia4Dy7KiJyKNVVPMHDfTEnnHS=w800' },
-  { id: 'sc1-19', title: 'Luigi Samurai', image: '/models-carrossel/luigi-samurai.jpg', fallback: 'https://lh3.googleusercontent.com/d/10JT608dsEz6FuS3okYsgd4hdHWjBdeIe=w800' },
-  { id: 'sc1-20', title: 'Mario Samurai', image: '/models-carrossel/mario-samurai.jpg', fallback: 'https://lh3.googleusercontent.com/d/12K835RkOD3Pr5mAaWKPgj9sRfGA9DWjV=w800' },
-  { id: 'sc1-21', title: 'Boneco Terminator', image: '/models-carrossel/terminator.jpg', fallback: 'https://lh3.googleusercontent.com/d/1y15xcAL7mQyiSj81PnGL4AuxJONTP9qD=w800' },
-  { id: 'sc1-22', title: 'Boneco Ghostface', image: '/models-carrossel/ghostface.jpg', fallback: 'https://lh3.googleusercontent.com/d/1icNPCwvfNC-0Xnn3kbWaEH0KHMc6KTGO=w800' },
-  { id: 'sc1-23', title: 'Sonic Superman', image: '/models-carrossel/sonic-superman.jpg', fallback: 'https://lh3.googleusercontent.com/d/1KUc-rJqlUBmRcOlIzmavhNuK5HRoMsQl=w800' },
-  { id: 'sc1-24', title: 'Knuckles Superman', image: '/models-carrossel/knuckles-superman.jpg', fallback: 'https://lh3.googleusercontent.com/d/1a8OAyv81Yhu0XvajqwLRP1gPCsjMHdmJ=w800' },
-  { id: 'sc1-25', title: 'Boneca Amy Rose', image: '/models-carrossel/amy-rose.jpg', fallback: 'https://lh3.googleusercontent.com/d/11S2wa6I7xgDgeRY5pGnGjGbpIjyeO1PD=w800' },
-  { id: 'sc1-26', title: 'Mario Assassino', image: '/models-carrossel/mario-assassino.jpg', fallback: 'https://lh3.googleusercontent.com/d/1wr4Uss4WZCtmqk8wyv7h13-aAfvxvDIm=w800' },
+  { id: 'sc1-1', title: 'Sonic Vermelho', image: '/models-carrossel/sonic-vermelho.webp', fallback: 'https://lh3.googleusercontent.com/d/1aPKlJEHTwKUyuzBqPi32OfxK6vjg9nPN=w800' },
+  { id: 'sc1-2', title: 'Sonic Azul', image: '/models-carrossel/sonic-azul.webp', fallback: 'https://lh3.googleusercontent.com/d/1U2gs8uDv8s-Ue2BJ8AJa23XpLzT5ee7j=w800' },
+  { id: 'sc1-3', title: 'Sub Zero', image: '/models-carrossel/sub-zero.webp', fallback: 'https://lh3.googleusercontent.com/d/1iobUId4HNPpHQKDMtVTksE-VEWGh2ZHy=w800' },
+  { id: 'sc1-4', title: 'Boneco Spawn', image: '/models-carrossel/spawn.webp', fallback: 'https://lh3.googleusercontent.com/d/1sBWHMVjExyrXJZchiH3EZE4M24-u4uIY=w800' },
+  { id: 'sc1-5', title: 'Boneco Mortal Kombat', image: '/models-carrossel/mortal-kombat.webp', fallback: 'https://lh3.googleusercontent.com/d/1r4-arXdB3vJQbwi_noiBJDZxhwIeT9yD=w800' },
+  { id: 'sc1-6', title: 'Pantera Negra', image: '/models-carrossel/pantera-negra.webp', fallback: 'https://lh3.googleusercontent.com/d/1SrxHAmFhpQhkyCdULg9e-xA4XcFqa30U=w800' },
+  { id: 'sc1-7', title: 'Xenomorfo Alien', image: '/models-carrossel/xenomorfo.webp', fallback: 'https://lh3.googleusercontent.com/d/1s_CwDR-E11lgXsYajG9G_UNzDabipCyV=w800' },
+  { id: 'sc1-8', title: 'Tico e Teco Peaky Blinders', image: '/models-carrossel/tico-teco-peaky.webp', fallback: 'https://lh3.googleusercontent.com/d/16mImFuEYFQZ9eUUxZGexx0OTY276I0bD=w800' },
+  { id: 'sc1-9', title: 'Boneco Jason', image: '/models-carrossel/jason.webp', fallback: 'https://lh3.googleusercontent.com/d/1MpW07_kOd7BxkQmpOEKxAfOYXF0AhGky=w800' },
+  { id: 'sc1-10', title: 'Boneco Sonic Versão Goku', image: '/models-carrossel/sonic-goku.webp', fallback: 'https://lh3.googleusercontent.com/d/15nAebSxoChQ-NpAk1UXae8k_j6Jqmpi5=w800' },
+  { id: 'sc1-11', title: 'Luffy Urban One Piece', image: '/models-carrossel/luffy-urban.webp', fallback: 'https://lh3.googleusercontent.com/d/108-d_ARKvopN0xHjg3e2xbhfjiBP3c75=w800' },
+  { id: 'sc1-12', title: 'Boneco Head Pyramid', image: '/models-carrossel/head-pyramid.webp', fallback: 'https://lh3.googleusercontent.com/d/1wEg6H1mVWOtylLtqFPY16hmGoT_UEkUM=w800' },
+  { id: 'sc1-13', title: 'Boneco Knuckles', image: '/models-carrossel/knuckles.webp', fallback: 'https://lh3.googleusercontent.com/d/1nrrPiGSny8BelWJgU78j7MaxXvLte8oT=w800' },
+  { id: 'sc1-14', title: 'Mario Peaky Blinders', image: '/models-carrossel/mario-peaky.webp', fallback: 'https://lh3.googleusercontent.com/d/1QutOVtYRb5QO6jJvt-GIrI0e9hZWFwAS=w800' },
+  { id: 'sc1-15', title: 'Luigi Peaky Blinders', image: '/models-carrossel/luigi-peaky.webp', fallback: 'https://lh3.googleusercontent.com/d/1cmTRdKEjEDcOxPAAOVyukG4caAewbWig=w800' },
+  { id: 'sc1-16', title: 'Tiffany Boneca', image: '/models-carrossel/tiffany.webp', fallback: 'https://lh3.googleusercontent.com/d/1UErvCooY258OIx5aARuLt89eqgsW5AgA=w800' },
+  { id: 'sc1-17', title: 'Alienígena Roxo', image: '/models-carrossel/alienigena-roxo.webp', fallback: 'https://lh3.googleusercontent.com/d/1wouT1a7Gohu4tZ7RV_Mr5WJJQ2cH03Hi=w800' },
+  { id: 'sc1-18', title: 'Mickey Mouse Peaky Blinders', image: '/models-carrossel/mickey-peaky.webp', fallback: 'https://lh3.googleusercontent.com/d/1F5cffZwia4Dy7KiJyKNVVPMHDfTEnnHS=w800' },
+  { id: 'sc1-19', title: 'Luigi Samurai', image: '/models-carrossel/luigi-samurai.webp', fallback: 'https://lh3.googleusercontent.com/d/10JT608dsEz6FuS3okYsgd4hdHWjBdeIe=w800' },
+  { id: 'sc1-20', title: 'Mario Samurai', image: '/models-carrossel/mario-samurai.webp', fallback: 'https://lh3.googleusercontent.com/d/12K835RkOD3Pr5mAaWKPgj9sRfGA9DWjV=w800' },
+  { id: 'sc1-21', title: 'Boneco Terminator', image: '/models-carrossel/terminator.webp', fallback: 'https://lh3.googleusercontent.com/d/1y15xcAL7mQyiSj81PnGL4AuxJONTP9qD=w800' },
+  { id: 'sc1-22', title: 'Boneco Ghostface', image: '/models-carrossel/ghostface.webp', fallback: 'https://lh3.googleusercontent.com/d/1icNPCwvfNC-0Xnn3kbWaEH0KHMc6KTGO=w800' },
+  { id: 'sc1-23', title: 'Sonic Superman', image: '/models-carrossel/sonic-superman.webp', fallback: 'https://lh3.googleusercontent.com/d/1KUc-rJqlUBmRcOlIzmavhNuK5HRoMsQl=w800' },
+  { id: 'sc1-24', title: 'Knuckles Superman', image: '/models-carrossel/knuckles-superman.webp', fallback: 'https://lh3.googleusercontent.com/d/1a8OAyv81Yhu0XvajqwLRP1gPCsjMHdmJ=w800' },
+  { id: 'sc1-25', title: 'Boneca Amy Rose', image: '/models-carrossel/amy-rose.webp', fallback: 'https://lh3.googleusercontent.com/d/11S2wa6I7xgDgeRY5pGnGjGbpIjyeO1PD=w800' },
+  { id: 'sc1-26', title: 'Mario Assassino', image: '/models-carrossel/mario-assassino.webp', fallback: 'https://lh3.googleusercontent.com/d/1wr4Uss4WZCtmqk8wyv7h13-aAfvxvDIm=w800' },
 ];
 
 const SHOWCASE_ROW_2: CarouselItem[] = [
-  { id: 'sc2-1', title: 'Sonic Batman', image: '/models-carrossel/sonic-batman.jpg', fallback: 'https://lh3.googleusercontent.com/d/1yG7BZeRbabBz89jUe5vLrYaQ6Iq1f8-b=w800' },
-  { id: 'sc2-2', title: 'Logan Wolverine', image: '/models-carrossel/logan-wolverine.jpg', fallback: 'https://lh3.googleusercontent.com/d/1Zxxm_UyuQTuzKPGUqrIHqCZIiRqk-yqe=w800' },
-  { id: 'sc2-3', title: 'Donald Wolverine', image: '/models-carrossel/donald-wolverine.jpg', fallback: 'https://lh3.googleusercontent.com/d/1YMQcLu4TDE9ocRrUkuYaSVUzKGQI4Dx7=w800' },
-  { id: 'sc2-4', title: 'Donald Capitão América', image: '/models-carrossel/donald-capitao.jpg', fallback: 'https://lh3.googleusercontent.com/d/1kp7q5EkJ9RbD3HT75S6RPtl0eAavmAuS=w800' },
-  { id: 'sc2-5', title: 'Donald Forasteiro', image: '/models-carrossel/donald-forasteiro.jpg', fallback: 'https://lh3.googleusercontent.com/d/19nzNvSxo9ZaxnToEOl80xkYxVdzK0Qa4=w800' },
-  { id: 'sc2-6', title: 'Mario Capitão América', image: '/models-carrossel/mario-capitao.jpg', fallback: 'https://lh3.googleusercontent.com/d/1xR2i8z2dqVGluMkwtwkWegFvTaIU-uzE=w800' },
-  { id: 'sc2-7', title: 'Boneco Zoro Urban', image: '/models-carrossel/zoro-urban.jpg', fallback: 'https://lh3.googleusercontent.com/d/1urccVYxz63srgEtiQSKO3Cx-pTdbqLkq=w800' },
-  { id: 'sc2-8', title: 'Darkseid', image: '/models-carrossel/darkseid.jpg', fallback: 'https://lh3.googleusercontent.com/d/1hPhddn74tcCola1-3LlEzEOqUOZD3Abb=w800' },
-  { id: 'sc2-9', title: 'Lion-O Thundercats', image: '/models-carrossel/lion-o.jpg', fallback: 'https://lh3.googleusercontent.com/d/1oRcnIWBFbx9EyZM8WiSSgkA8Pb8jUHB7=w800' },
-  { id: 'sc2-10', title: 'Raiden Mortal Kombat', image: '/models-carrossel/raiden.jpg', fallback: 'https://lh3.googleusercontent.com/d/1cvCEb904Lvz3xPpFvCx4l0YVhYd9_HsT=w800' },
-  { id: 'sc2-11', title: 'Cavaleiro da Lua', image: '/models-carrossel/cavaleiro-da-lua.jpg', fallback: 'https://lh3.googleusercontent.com/d/1Q1DPXUKt3YR_-Y0xKk_gl4jhe92x1LIu=w800' },
-  { id: 'sc2-12', title: 'Chucky', image: '/models-carrossel/chucky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1hZIb46Wjz98lEeo_CZrzFC5LeIJ4d3FE=w800' },
-  { id: 'sc2-13', title: 'Cara de Couro Leatherface', image: '/models-carrossel/leatherface.jpg', fallback: 'https://lh3.googleusercontent.com/d/1LH75mJl0EjVFZ1GFqsI0-K176xF10_oI=w800' },
-  { id: 'sc2-14', title: 'Michael Myers', image: '/models-carrossel/michael-myers.jpg', fallback: 'https://lh3.googleusercontent.com/d/1qvycKjLL6PsI2PVIOTq8h1Kg9TGgh9Ss=w800' },
-  { id: 'sc2-15', title: 'Freddy Krueger', image: '/models-carrossel/freddy-krueger.jpg', fallback: 'https://lh3.googleusercontent.com/d/1HPUbON_IEV54tTH14qAoYSVq1LgpqTcs=w800' },
-  { id: 'sc2-16', title: 'Pennywise', image: '/models-carrossel/pennywise.jpg', fallback: 'https://lh3.googleusercontent.com/d/1ZEItuU5FHTFr_pt8RKeEmTKncVwnHXGG=w800' },
-  { id: 'sc2-17', title: 'Goku Dragon Ball', image: '/models-carrossel/goku.jpg', fallback: 'https://lh3.googleusercontent.com/d/17VtuRVd1nmetdO62edut6qhj-7ekaIsu=w800' },
-  { id: 'sc2-18', title: 'Vegeta', image: '/models-carrossel/vegeta.jpg', fallback: 'https://lh3.googleusercontent.com/d/10ArqYskP8IP6XvVhyYxwY7OXqLIYUMIC=w800' },
-  { id: 'sc2-19', title: 'Vegito', image: '/models-carrossel/vegito.jpg', fallback: 'https://lh3.googleusercontent.com/d/1u1BUdbvihFCfPgewXRSszn5CO-atmz0C=w800' },
-  { id: 'sc2-20', title: 'Gogeta Fusão', image: '/models-carrossel/gogeta.jpg', fallback: 'https://lh3.googleusercontent.com/d/1VdyONaBQxRUuBPoI1S7BHRl8lK9MziMl=w800' },
-  { id: 'sc2-21', title: 'Liu Kang', image: '/models-carrossel/liu-kang-mk.jpg', fallback: 'https://lh3.googleusercontent.com/d/1Q46ZDGBGJJBxnF4e1pIDofiNG5gXBj8R=w800' },
-  { id: 'sc2-22', title: 'Noob Saibot', image: '/models-carrossel/noob-saibot.jpg', fallback: 'https://lh3.googleusercontent.com/d/1hTr8tZGF9DclXdb8gKxvO_D4mQgqu7x0=w800' },
-  { id: 'sc2-23', title: 'Peach Peaky Boneca', image: '/models-carrossel/peach-peaky.jpg', fallback: 'https://lh3.googleusercontent.com/d/1DzMbalxiYjR_LU6qqn-ai0ly-ibVtRCX=w800' },
-  { id: 'sc2-24', title: 'Broly Dragon Ball', image: '/models-carrossel/broly.jpg', fallback: 'https://lh3.googleusercontent.com/d/1ARvVqBUkdh6cexzNwtEtPFIcNNvP0hHT=w800' },
-  { id: 'sc2-25', title: 'Boneco Thor', image: '/models-carrossel/thor.jpg', fallback: 'https://lh3.googleusercontent.com/d/1bRugzuJGp4ZFP-LAgwyn7O6lBNlGFJmK=w800' },
+  { id: 'sc2-1', title: 'Sonic Batman', image: '/models-carrossel/sonic-batman.webp', fallback: 'https://lh3.googleusercontent.com/d/1yG7BZeRbabBz89jUe5vLrYaQ6Iq1f8-b=w800' },
+  { id: 'sc2-2', title: 'Logan Wolverine', image: '/models-carrossel/logan-wolverine.webp', fallback: 'https://lh3.googleusercontent.com/d/1Zxxm_UyuQTuzKPGUqrIHqCZIiRqk-yqe=w800' },
+  { id: 'sc2-3', title: 'Donald Wolverine', image: '/models-carrossel/donald-wolverine.webp', fallback: 'https://lh3.googleusercontent.com/d/1YMQcLu4TDE9ocRrUkuYaSVUzKGQI4Dx7=w800' },
+  { id: 'sc2-4', title: 'Donald Capitão América', image: '/models-carrossel/donald-capitao.webp', fallback: 'https://lh3.googleusercontent.com/d/1kp7q5EkJ9RbD3HT75S6RPtl0eAavmAuS=w800' },
+  { id: 'sc2-5', title: 'Donald Forasteiro', image: '/models-carrossel/donald-forasteiro.webp', fallback: 'https://lh3.googleusercontent.com/d/19nzNvSxo9ZaxnToEOl80xkYxVdzK0Qa4=w800' },
+  { id: 'sc2-6', title: 'Mario Capitão América', image: '/models-carrossel/mario-capitao.webp', fallback: 'https://lh3.googleusercontent.com/d/1xR2i8z2dqVGluMkwtwkWegFvTaIU-uzE=w800' },
+  { id: 'sc2-7', title: 'Boneco Zoro Urban', image: '/models-carrossel/zoro-urban.webp', fallback: 'https://lh3.googleusercontent.com/d/1urccVYxz63srgEtiQSKO3Cx-pTdbqLkq=w800' },
+  { id: 'sc2-8', title: 'Darkseid', image: '/models-carrossel/darkseid.webp', fallback: 'https://lh3.googleusercontent.com/d/1hPhddn74tcCola1-3LlEzEOqUOZD3Abb=w800' },
+  { id: 'sc2-9', title: 'Lion-O Thundercats', image: '/models-carrossel/lion-o.webp', fallback: 'https://lh3.googleusercontent.com/d/1oRcnIWBFbx9EyZM8WiSSgkA8Pb8jUHB7=w800' },
+  { id: 'sc2-10', title: 'Raiden Mortal Kombat', image: '/models-carrossel/raiden.webp', fallback: 'https://lh3.googleusercontent.com/d/1cvCEb904Lvz3xPpFvCx4l0YVhYd9_HsT=w800' },
+  { id: 'sc2-11', title: 'Cavaleiro da Lua', image: '/models-carrossel/cavaleiro-da-lua.webp', fallback: 'https://lh3.googleusercontent.com/d/1Q1DPXUKt3YR_-Y0xKk_gl4jhe92x1LIu=w800' },
+  { id: 'sc2-12', title: 'Chucky', image: '/models-carrossel/chucky.webp', fallback: 'https://lh3.googleusercontent.com/d/1hZIb46Wjz98lEeo_CZrzFC5LeIJ4d3FE=w800' },
+  { id: 'sc2-13', title: 'Cara de Couro Leatherface', image: '/models-carrossel/leatherface.webp', fallback: 'https://lh3.googleusercontent.com/d/1LH75mJl0EjVFZ1GFqsI0-K176xF10_oI=w800' },
+  { id: 'sc2-14', title: 'Michael Myers', image: '/models-carrossel/michael-myers.webp', fallback: 'https://lh3.googleusercontent.com/d/1qvycKjLL6PsI2PVIOTq8h1Kg9TGgh9Ss=w800' },
+  { id: 'sc2-15', title: 'Freddy Krueger', image: '/models-carrossel/freddy-krueger.webp', fallback: 'https://lh3.googleusercontent.com/d/1HPUbON_IEV54tTH14qAoYSVq1LgpqTcs=w800' },
+  { id: 'sc2-16', title: 'Pennywise', image: '/models-carrossel/pennywise.webp', fallback: 'https://lh3.googleusercontent.com/d/1ZEItuU5FHTFr_pt8RKeEmTKncVwnHXGG=w800' },
+  { id: 'sc2-17', title: 'Goku Dragon Ball', image: '/models-carrossel/goku.webp', fallback: 'https://lh3.googleusercontent.com/d/17VtuRVd1nmetdO62edut6qhj-7ekaIsu=w800' },
+  { id: 'sc2-18', title: 'Vegeta', image: '/models-carrossel/vegeta.webp', fallback: 'https://lh3.googleusercontent.com/d/10ArqYskP8IP6XvVhyYxwY7OXqLIYUMIC=w800' },
+  { id: 'sc2-19', title: 'Vegito', image: '/models-carrossel/vegito.webp', fallback: 'https://lh3.googleusercontent.com/d/1u1BUdbvihFCfPgewXRSszn5CO-atmz0C=w800' },
+  { id: 'sc2-20', title: 'Gogeta Fusão', image: '/models-carrossel/gogeta.webp', fallback: 'https://lh3.googleusercontent.com/d/1VdyONaBQxRUuBPoI1S7BHRl8lK9MziMl=w800' },
+  { id: 'sc2-21', title: 'Liu Kang', image: '/models-carrossel/liu-kang-mk.webp', fallback: 'https://lh3.googleusercontent.com/d/1Q46ZDGBGJJBxnF4e1pIDofiNG5gXBj8R=w800' },
+  { id: 'sc2-22', title: 'Noob Saibot', image: '/models-carrossel/noob-saibot.webp', fallback: 'https://lh3.googleusercontent.com/d/1hTr8tZGF9DclXdb8gKxvO_D4mQgqu7x0=w800' },
+  { id: 'sc2-23', title: 'Peach Peaky Boneca', image: '/models-carrossel/peach-peaky.webp', fallback: 'https://lh3.googleusercontent.com/d/1DzMbalxiYjR_LU6qqn-ai0ly-ibVtRCX=w800' },
+  { id: 'sc2-24', title: 'Broly Dragon Ball', image: '/models-carrossel/broly.webp', fallback: 'https://lh3.googleusercontent.com/d/1ARvVqBUkdh6cexzNwtEtPFIcNNvP0hHT=w800' },
+  { id: 'sc2-25', title: 'Boneco Thor', image: '/models-carrossel/thor.webp', fallback: 'https://lh3.googleusercontent.com/d/1bRugzuJGp4ZFP-LAgwyn7O6lBNlGFJmK=w800' },
 ];
 
 const BONUSES: BonusItem[] = [
@@ -308,7 +328,7 @@ const FAQ_ITEMS: FaqItem[] = [
   },
 ];
 
-const CarouselCard = memo(function CarouselCard({ item }: { item: CarouselItem }) {
+const CarouselCard = memo(function CarouselCard({ item, priority = false }: { item: CarouselItem; priority?: boolean }) {
   return (
     <div className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 bg-[#080808] border border-[#00A3FF] shadow-[0_0_15px_rgba(0,163,255,0.4)] md:hover:shadow-[0_0_25px_rgba(0,163,255,0.7)] group transition-all duration-300">
       <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-[#050505] relative p-2.5 sm:p-3.5 border border-[#00A3FF]/20">
@@ -318,7 +338,8 @@ const CarouselCard = memo(function CarouselCard({ item }: { item: CarouselItem }
           alt={item.title}
           width={256}
           height={256}
-          loading="lazy"
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'low'}
           decoding="async"
           referrerPolicy="no-referrer"
           onError={(e) => {
@@ -354,6 +375,40 @@ export default function App() {
 
   // Legal Modals State
   const [legalModalType, setLegalModalType] = useState<'termos' | 'privacidade' | null>(null);
+
+  // Pre-warm browser cache for high-frequency images
+  useEffect(() => {
+    const urls = [
+      '/models-carrossel/sonic-vermelho.webp',
+      '/models-carrossel/sonic-azul.webp',
+      '/models-carrossel/sub-zero.webp',
+      '/models-carrossel/spawn.webp',
+      '/models-carrossel/mortal-kombat.webp',
+      '/models-carrossel/pantera-negra.webp',
+      '/models-carrossel/sonic-batman.webp',
+      '/models-carrossel/logan-wolverine.webp',
+      'https://i.imgur.com/acQb0Cn.png',
+      'https://i.imgur.com/mUG5K9f.png',
+      'https://i.imgur.com/h6mQ3La.png',
+      'https://i.imgur.com/YYaAKKc.png',
+      'https://i.imgur.com/xijVh8N.png',
+    ];
+
+    const warmCache = () => {
+      urls.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(warmCache);
+      } else {
+        setTimeout(warmCache, 200);
+      }
+    }
+  }, []);
 
   const handlePlayHeroVideo = () => {
     setIsPlayingHeroVideo(true);
@@ -561,7 +616,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
             {[...ROW_1_CARDS, ...ROW_1_CARDS].map((item, idx) => (
-              <CarouselCard key={`r1-${idx}`} item={item} />
+              <CarouselCard key={`r1-${idx}`} item={item} priority={idx < 5} />
             ))}
           </div>
         </div>
@@ -572,7 +627,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
             {[...ROW_2_CARDS, ...ROW_2_CARDS].map((item, idx) => (
-              <CarouselCard key={`r2-${idx}`} item={item} />
+              <CarouselCard key={`r2-${idx}`} item={item} priority={idx < 5} />
             ))}
           </div>
         </div>
@@ -583,7 +638,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
             {[...ROW_3_CARDS, ...ROW_3_CARDS].map((item, idx) => (
-              <CarouselCard key={`r3-${idx}`} item={item} />
+              <CarouselCard key={`r3-${idx}`} item={item} priority={idx < 5} />
             ))}
           </div>
         </div>
@@ -594,7 +649,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
             {[...ROW_4_CARDS, ...ROW_4_CARDS].map((item, idx) => (
-              <CarouselCard key={`r4-${idx}`} item={item} />
+              <CarouselCard key={`r4-${idx}`} item={item} priority={idx < 5} />
             ))}
           </div>
         </div>
@@ -832,7 +887,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
             {[...SHOWCASE_ROW_1, ...SHOWCASE_ROW_1].map((item, idx) => (
-              <CarouselCard key={`sc1-${idx}`} item={item} />
+              <CarouselCard key={`sc1-${idx}`} item={item} priority={idx < 5} />
             ))}
           </div>
         </div>
@@ -843,7 +898,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
             {[...SHOWCASE_ROW_2, ...SHOWCASE_ROW_2].map((item, idx) => (
-              <CarouselCard key={`sc2-${idx}`} item={item} />
+              <CarouselCard key={`sc2-${idx}`} item={item} priority={idx < 5} />
             ))}
           </div>
         </div>
@@ -1218,6 +1273,7 @@ export default function App() {
                     href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackInitiateCheckout(49.90, 'Plano Completo STL +150 Mil')}
                     className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_35px_rgba(0,255,102,0.7)] hover:shadow-[0_0_50px_rgba(0,255,102,1)] border-2 border-[#80FFB2] cursor-pointer"
                   >
                     QUERO O ACERVO COMPLETO
@@ -1517,6 +1573,7 @@ export default function App() {
                   href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackInitiateCheckout(27.90, 'Oferta Especial VIP STL')}
                   className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(0,255,102,0.7)] border-2 border-[#80FFB2] cursor-pointer"
                 >
                   SIM! LEVAR TUDO POR R$ 27,90
@@ -1526,6 +1583,7 @@ export default function App() {
                   href="https://checkout.wiven.com.br/checkout/cmtkws58g09hz01pypy1crecf?offer=32HECNZ"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackInitiateCheckout(16.90, 'Plano Base STL')}
                   className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
                   Não quero os bônus, continuar apenas com o Plano Base por R$ 16,90 »
