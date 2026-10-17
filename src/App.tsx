@@ -1270,7 +1270,7 @@ export default function App() {
 
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
+                    href="https://ggcheckout.app/checkout/v5/lbkkIqrBMSkOgaEZ8rNwrV"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackInitiateCheckout(49.90, 'Plano Completo STL +150 Mil')}
@@ -1570,7 +1570,7 @@ export default function App() {
                 </div>
 
                 <a
-                  href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
+                  href="https://ggcheckout.app/checkout/v5/7vNEOYY1zGIOjW4NWaId0A"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackInitiateCheckout(27.90, 'Oferta Especial VIP STL')}
@@ -1580,7 +1580,7 @@ export default function App() {
                 </a>
 
                 <a
-                  href="https://checkout.wiven.com.br/checkout/cmtkws58g09hz01pypy1crecf?offer=32HECNZ"
+                  href="https://ggcheckout.app/checkout/v5/YwOr4UUAs4sDvUHhgVZ9aX"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackInitiateCheckout(16.90, 'Plano Base STL')}
