@@ -387,6 +387,9 @@ export default function App() {
       '/models-carrossel/pantera-negra.webp',
       '/models-carrossel/sonic-batman.webp',
       '/models-carrossel/logan-wolverine.webp',
+      '/images/oferta-vip.webp',
+      '/images/garantia-14-dias.webp',
+      '/images/mercado-1.webp',
       'https://i.imgur.com/acQb0Cn.png',
       'https://i.imgur.com/mUG5K9f.png',
       'https://i.imgur.com/h6mQ3La.png',
@@ -699,10 +702,10 @@ export default function App() {
                   <video
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
-                    src="https://i.imgur.com/it19bfB.mp4#t=0.001"
+                    src={isPlayingNotebookVideo ? 'https://i.imgur.com/it19bfB.mp4' : undefined}
                     playsInline
                     controls={isPlayingNotebookVideo}
-                    preload="metadata"
+                    preload={isPlayingNotebookVideo ? 'auto' : 'none'}
                     className="w-full h-full object-cover"
                   >
                     Seu navegador não suporta a reprodução de vídeo.
@@ -823,8 +826,13 @@ export default function App() {
                 loading="lazy"
                 decoding="async"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  if (e.currentTarget.src !== 'https://i.imgur.com/k8NGhmhh.jpg') {
+                    e.currentTarget.src = 'https://i.imgur.com/k8NGhmhh.jpg';
+                  }
+                }}
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
-                src="https://i.imgur.com/k8NGhmh.png"
+                src="/images/mercado-1.webp"
               />
             </div>
             <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
@@ -835,8 +843,13 @@ export default function App() {
                 loading="lazy"
                 decoding="async"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  if (e.currentTarget.src !== 'https://i.imgur.com/USQ9ivuh.jpg') {
+                    e.currentTarget.src = 'https://i.imgur.com/USQ9ivuh.jpg';
+                  }
+                }}
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
-                src="https://i.imgur.com/USQ9ivu.png"
+                src="/images/mercado-2.webp"
               />
             </div>
             <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
@@ -847,8 +860,13 @@ export default function App() {
                 loading="lazy"
                 decoding="async"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  if (e.currentTarget.src !== 'https://i.imgur.com/7Vejky0h.jpg') {
+                    e.currentTarget.src = 'https://i.imgur.com/7Vejky0h.jpg';
+                  }
+                }}
                 className="w-full h-auto aspect-[1774/887] object-contain rounded-2xl select-none"
-                src="https://i.imgur.com/7Vejky0.png"
+                src="/images/mercado-3.webp"
               />
             </div>
           </div>
@@ -1208,8 +1226,13 @@ export default function App() {
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      if (e.currentTarget.src !== 'https://i.imgur.com/yJlxzpw.png') {
+                        e.currentTarget.src = 'https://i.imgur.com/yJlxzpw.png';
+                      }
+                    }}
                     className="relative z-10 w-auto h-auto max-h-52 sm:max-h-60 object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform duration-300 select-none"
-                    src="https://i.imgur.com/yJlxzpw.png"
+                    src="/images/oferta-vip.webp"
                   />
                 </div>
 
@@ -1303,8 +1326,13 @@ export default function App() {
                   loading="lazy"
                   decoding="async"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    if (e.currentTarget.src !== 'https://i.imgur.com/WyzcrLj.png') {
+                      e.currentTarget.src = 'https://i.imgur.com/WyzcrLj.png';
+                    }
+                  }}
                   className="relative z-10 w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_15px_40px_rgba(0,102,255,0.45)] select-none transition-transform duration-300 group-hover:scale-105"
-                  src="https://i.imgur.com/WyzcrLj.png"
+                  src="/images/garantia-14-dias.webp"
                 />
               </div>
 
@@ -1509,13 +1537,18 @@ export default function App() {
                 <div className="w-full flex items-center justify-center mb-1.5 relative group">
                   <div className="absolute inset-0 bg-[#0066FF]/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60"></div>
                   <img
-                    src="https://i.imgur.com/Ct9XhZp.png"
+                    src="/images/modal-funkos.webp"
                     alt="Pacote +500 Modelos Funkos STL"
                     width={240}
                     height={128}
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      if (e.currentTarget.src !== 'https://i.imgur.com/Ct9XhZp.png') {
+                        e.currentTarget.src = 'https://i.imgur.com/Ct9XhZp.png';
+                      }
+                    }}
                     className="relative z-10 w-auto h-auto max-h-28 sm:max-h-32 object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)] select-none"
                   />
                 </div>
