@@ -1246,11 +1246,11 @@ export default function App() {
                   <div className="flex justify-center items-start text-black mb-1 drop-shadow-sm">
                     <span className="text-xl font-black mt-1 mr-1 text-black">R$</span>
                     <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none text-black">
-                      49,90
+                      57,90
                     </span>
                   </div>
                   <p className="text-zinc-800 font-extrabold text-sm sm:text-base mb-1">
-                    ou 6x de <span className="text-[#0066FF] font-black">R$ 8,32</span>
+                    ou 6x de <span className="text-[#0066FF] font-black">R$ 9,65</span>
                   </p>
                   <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">
                     Pagamento Único à Vista ou Parcelado
@@ -1296,7 +1296,7 @@ export default function App() {
                     href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackInitiateCheckout(49.90, 'Plano Completo STL +150 Mil')}
+                    onClick={() => trackInitiateCheckout(57.90, 'Plano Completo STL +150 Mil')}
                     className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_35px_rgba(0,255,102,0.7)] hover:shadow-[0_0_50px_rgba(0,255,102,1)] border-2 border-[#80FFB2] cursor-pointer"
                   >
                     QUERO O ACERVO COMPLETO
