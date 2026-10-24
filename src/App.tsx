@@ -703,6 +703,7 @@ export default function App() {
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
                     src={isPlayingNotebookVideo ? 'https://i.imgur.com/it19bfB.mp4' : undefined}
+                    poster="/images/poster-notebook.webp"
                     playsInline
                     controls={isPlayingNotebookVideo}
                     preload={isPlayingNotebookVideo ? 'auto' : 'none'}
@@ -718,8 +719,16 @@ export default function App() {
                       onClick={handlePlayNotebookVideo}
                       onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handlePlayNotebookVideo()}
                       aria-label="Assistir tour pela Área de Membros"
-                      className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none bg-black/25 hover:bg-black/15 transition-colors"
+                      className="absolute inset-0 w-full h-full cursor-pointer flex flex-col items-center justify-center z-20 group select-none overflow-hidden"
                     >
+                      {/* Imagem estática do frame do vídeo aparecendo logo de início */}
+                      <img
+                        src="/images/poster-notebook.webp"
+                        alt="Área de Membros VIP Universo 3D"
+                        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors pointer-events-none" />
+
                       <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
                         <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#0066FF] hover:bg-[#0052CC] flex items-center justify-center shadow-[0_4px_30px_rgba(0,102,255,0.7)] group-hover:shadow-[0_6px_45px_rgba(0,102,255,0.95)] transition-all duration-300">
                           <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
@@ -1293,7 +1302,7 @@ export default function App() {
 
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://checkout.wiven.com.br/checkout/cmtmetu95064r01ohne5n1gub?offer=NBUSUEP"
+                    href="https://ggcheckout.app/checkout/v5/OERYW1b0MHezp7hxz6mun8"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackInitiateCheckout(57.90, 'Plano Completo STL +150 Mil')}
@@ -1603,7 +1612,7 @@ export default function App() {
                 </div>
 
                 <a
-                  href="https://checkout.wiven.com.br/checkout/cmtmf009r05xg01psocuf4cal?offer=5MJUM3P"
+                  href="https://ggcheckout.app/checkout/v5/m0sdruVlUGFUfyeYtT2ARV"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackInitiateCheckout(27.90, 'Oferta Especial VIP STL')}
@@ -1613,7 +1622,7 @@ export default function App() {
                 </a>
 
                 <a
-                  href="https://checkout.wiven.com.br/checkout/cmtkws58g09hz01pypy1crecf?offer=32HECNZ"
+                  href="https://ggcheckout.app/checkout/v5/9jmEGPY2ADBUjIFHNcYQKy"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackInitiateCheckout(16.90, 'Plano Base STL')}

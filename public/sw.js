@@ -8,7 +8,8 @@ const STATIC_ASSETS = [
   '/images/garantia-14-dias.webp',
   '/images/mercado-1.webp',
   '/images/mercado-2.webp',
-  '/images/mercado-3.webp'
+  '/images/mercado-3.webp',
+  '/images/poster-notebook.webp'
 ];
 
 self.addEventListener('install', (event) => {
