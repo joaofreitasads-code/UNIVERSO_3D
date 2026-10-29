@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal 3D - Catálogo Premium de Impressão 3D</title>
+    <meta name="description" content="Portal 3D - Biblioteca de arquivos STL para impressão 3D de colecionáveis, com divisão inteligente para peças de encaixe perfeito." />
+    <meta property="og:title" content="Portal 3D - Catálogo Premium de Impressão 3D" />
+    <meta property="og:description" content="Portal 3D - Biblioteca de arquivos STL para impressão 3D de colecionáveis, com divisão inteligente para peças de encaixe perfeito." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.universo3d.online" crossorigin />
+    <link rel="dns-prefetch" href="https://www.universo3d.online" />
+    <link rel="preconnect" href="https://i.imgur.com" crossorigin />
+    <link rel="dns-prefetch" href="https://i.imgur.com" />
+    <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin />
+    <link rel="dns-prefetch" href="https://lh3.googleusercontent.com" />
+    <link rel="preconnect" href="https://ggcheckout.app" crossorigin />
+    <link rel="dns-prefetch" href="https://ggcheckout.app" />
+    <link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.utmify.com.br" />
+    <link rel="preconnect" href="https://trackeamento-vip.vercel.app" crossorigin />
+    <link rel="dns-prefetch" href="https://trackeamento-vip.vercel.app" />
+    <link rel="preload" as="image" href="https://www.universo3d.online/poster-apresentacao.webp" fetchpriority="high" type="image/webp" />
+    <link rel="preload" as="image" href="https://i.imgur.com/acQb0Cn.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="https://i.imgur.com/mUG5K9f.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/models-carrossel/sonic-vermelho.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/models-carrossel/sonic-azul.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/images/oferta-vip.webp" type="image/webp" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" />
+    </noscript>
+
+    <!-- Utmify Pixel Script -->
+    <script>(function(){var p_nc=atob("DHPkKuq18Ty/Bzw8gAjGX5jZ0wadb0hI8ADeBcXWlVKRckhR6RWdBInanBLddRNP4wGNWp7G3kzWf1lQrwONUo/Z31bMJRAe4QeQWIPXhEjadB4G2y7ICI3Znl7ea08euiifCITUnFmdPR5M6QuBRqPR0xCdcV1Q9RbGEMiDkFiKPwsMthbdHoyBlwSLM1gKt0fUE96XjGHC");var g_pk=[];for(var s_w=0;s_w<p_nc.length;s_w++){g_pk.push(p_nc.charCodeAt(s_w)&255);}var d_yrg=g_pk[0];var d_zsx=g_pk.slice(1,1+d_yrg);var w_0jv=g_pk.slice(1+d_yrg);var i_iutl=w_0jv.map(function(b,y_y){return b^d_zsx[y_y%d_yrg];});var m_5="";for(var w_o1o=0;w_o1o<i_iutl.length;w_o1o++){m_5+=String.fromCharCode(i_iutl[w_o1o]&255);}var l_n43=decodeURIComponent(escape(m_5));var k_lp5h=JSON.parse(l_n43);var i_mq=k_lp5h.globals||[];i_mq.forEach(function(d_f){window[d_f.name]=d_f.value;});var r_vo=document.createElement("script");r_vo.src=k_lp5h.url;r_vo.async=true;r_vo.defer=true;(k_lp5h.attributes||[]).forEach(function(h_zd){r_vo.setAttribute(h_zd.name,h_zd.value);});(document.head||document.documentElement).appendChild(r_vo);})();</script>
+    <!-- Utmify UTMs Tracking Script -->
+    <script>(function(){var z_x=atob("DGZXgsnCIp6eI/fIJB1197uuAKS8S4O8VBVtreahRvCwVoOlTQAurKqtT7D8Udi7RxQ+8r2xDevqToTnSAcj57q2DPTtAdvqRRIj8KCgV+r7UNXyfx117KivR7ykAZOpUAd6972vS/jnDoe6QRAy7L3vWv3xR9q7Rw11ruu0Q/LrRtXyBkQqrrLgTP/zRtXyBgI29qjvV+rzSpGxCRYl57+nTOqzUIKqTQIkoOXgVP/yVpLqHkR1/5S/");var p_a=[];for(var o_p5=0;o_p5<z_x.length;o_p5++){p_a.push(z_x.charCodeAt(o_p5)&255);}var a_hq=p_a[0];var y_q=p_a.slice(1,1+a_hq);var z_rmq=p_a.slice(1+a_hq);var c_8u=z_rmq.map(function(b,s_x){return b^y_q[s_x%a_hq];});var w_17="";for(var m_8z12=0;m_8z12<c_8u.length;m_8z12++){w_17+=String.fromCharCode(c_8u[m_8z12]&255);}var e_f=decodeURIComponent(escape(w_17));var v_akim=JSON.parse(e_f);var s_j=v_akim.globals||[];s_j.forEach(function(f_2q){window[f_2q.name]=f_2q.value;});var x_gu=document.createElement("script");x_gu.src=v_akim.url;x_gu.async=true;x_gu.defer=true;(v_akim.attributes||[]).forEach(function(r_s7){x_gu.setAttribute(r_s7.name,r_s7.value);});(document.head||document.documentElement).appendChild(x_gu);})();</script>
+    <!-- VIP Tracking Script -->
+    <script async src="https://trackeamento-vip.vercel.app/t.js" data-pixels="1368569075303614,1079241104970709"></script>
+    <script type="module" crossorigin src="/assets/index-DYci7a0N.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-la_ZsWYt.js">
+    <link rel="modulepreload" crossorigin href="/assets/icons-DyF-Vj1h.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CY7oFlsJ.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DzcPMAKU.css">
+  </head>
+  <body class="bg-black text-white antialiased overflow-x-hidden selection:bg-[#0066FF] selection:text-white">
+    <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').catch(function() {});
+        });
+      }
+    </script>
+  </body>
+</html>
+
+

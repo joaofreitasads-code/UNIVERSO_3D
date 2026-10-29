@@ -265,38 +265,38 @@ const BONUSES: BonusItem[] = [
 const TESTIMONIALS: TestimonialItem[] = [
   {
     id: 1,
-    image: 'https://www.universo3d.online/assets/depoimento-1-BBN2Oe74.webp',
-    fallback: 'https://i.imgur.com/6m6ZBlW.png',
+    image: '/images/depoimentos/depoimento-1.webp',
+    fallback: 'https://www.universo3d.online/assets/depoimento-1-BBN2Oe74.webp',
     alt: 'Depoimento real de aluno - Universo 3D 1',
   },
   {
     id: 2,
-    image: 'https://www.universo3d.online/assets/depoimento-3-Cn7cJzGT.webp',
-    fallback: 'https://i.imgur.com/u6Ni9cj.png',
+    image: '/images/depoimentos/depoimento-2.webp',
+    fallback: 'https://www.universo3d.online/assets/depoimento-3-Cn7cJzGT.webp',
     alt: 'Depoimento real de aluno - Universo 3D 2',
   },
   {
     id: 3,
-    image: 'https://www.universo3d.online/assets/depoimento-4-DJVEDa94.webp',
-    fallback: 'https://i.imgur.com/ClBxb0D.png',
+    image: '/images/depoimentos/depoimento-3.webp',
+    fallback: 'https://www.universo3d.online/assets/depoimento-4-DJVEDa94.webp',
     alt: 'Depoimento real de aluno - Universo 3D 3',
   },
   {
     id: 4,
-    image: 'https://www.universo3d.online/assets/depoimento-5-DG3Xdqvb.webp',
-    fallback: 'https://i.imgur.com/Mpywmfj.png',
+    image: '/images/depoimentos/depoimento-4.webp',
+    fallback: 'https://www.universo3d.online/assets/depoimento-5-DG3Xdqvb.webp',
     alt: 'Depoimento real de aluno - Universo 3D 4',
   },
   {
     id: 5,
-    image: 'https://www.universo3d.online/assets/depoimento-6-CwvLNkMG.webp',
-    fallback: 'https://i.imgur.com/jpBrWyK.png',
+    image: '/images/depoimentos/depoimento-5.webp',
+    fallback: 'https://www.universo3d.online/assets/depoimento-6-CwvLNkMG.webp',
     alt: 'Depoimento real de aluno - Universo 3D 5',
   },
   {
     id: 6,
-    image: 'https://www.universo3d.online/assets/depoimento-7-4HoiAS5R.webp',
-    fallback: 'https://i.imgur.com/Ys2ErTe.png',
+    image: '/images/depoimentos/depoimento-6.webp',
+    fallback: 'https://www.universo3d.online/assets/depoimento-7-4HoiAS5R.webp',
     alt: 'Depoimento real de aluno - Universo 3D 6',
   },
 ];
@@ -387,6 +387,8 @@ export default function App() {
       '/models-carrossel/pantera-negra.webp',
       '/models-carrossel/sonic-batman.webp',
       '/models-carrossel/logan-wolverine.webp',
+      '/images/poster-apresentacao.webp',
+      '/images/poster-notebook.webp',
       '/images/oferta-vip.webp',
       '/images/garantia-14-dias.webp',
       '/images/mercado-1.webp',
@@ -406,9 +408,9 @@ export default function App() {
 
     if (typeof window !== 'undefined') {
       if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(warmCache);
+        (window as any).requestIdleCallback(warmCache, { timeout: 2000 });
       } else {
-        setTimeout(warmCache, 200);
+        setTimeout(warmCache, 800);
       }
     }
   }, []);
@@ -508,7 +510,7 @@ export default function App() {
                   ref={heroVideoRef}
                   id="video-apresentacao"
                   src={isPlayingHeroVideo ? 'https://i.imgur.com/s6S0rd5.mp4' : undefined}
-                  poster="https://www.universo3d.online/poster-apresentacao.webp"
+                  poster="/images/poster-apresentacao.webp"
                   playsInline
                   controls={isPlayingHeroVideo}
                   preload={isPlayingHeroVideo ? 'auto' : 'none'}
@@ -533,8 +535,13 @@ export default function App() {
                       loading="eager"
                       fetchPriority="high"
                       decoding="async"
+                      onError={(e) => {
+                        if (e.currentTarget.src !== 'https://www.universo3d.online/poster-apresentacao.webp') {
+                          e.currentTarget.src = 'https://www.universo3d.online/poster-apresentacao.webp';
+                        }
+                      }}
                       className="absolute inset-0 w-full h-full object-cover select-none"
-                      src="https://www.universo3d.online/poster-apresentacao.webp"
+                      src="/images/poster-apresentacao.webp"
                     />
                     <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
@@ -619,7 +626,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
             {[...ROW_1_CARDS, ...ROW_1_CARDS].map((item, idx) => (
-              <CarouselCard key={`r1-${idx}`} item={item} priority={idx < 5} />
+              <CarouselCard key={`r1-${idx}`} item={item} priority={idx < 2} />
             ))}
           </div>
         </div>
@@ -630,7 +637,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
             {[...ROW_2_CARDS, ...ROW_2_CARDS].map((item, idx) => (
-              <CarouselCard key={`r2-${idx}`} item={item} priority={idx < 5} />
+              <CarouselCard key={`r2-${idx}`} item={item} priority={idx < 2} />
             ))}
           </div>
         </div>
@@ -641,7 +648,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
             {[...ROW_3_CARDS, ...ROW_3_CARDS].map((item, idx) => (
-              <CarouselCard key={`r3-${idx}`} item={item} priority={idx < 5} />
+              <CarouselCard key={`r3-${idx}`} item={item} priority={false} />
             ))}
           </div>
         </div>
@@ -652,7 +659,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
             {[...ROW_4_CARDS, ...ROW_4_CARDS].map((item, idx) => (
-              <CarouselCard key={`r4-${idx}`} item={item} priority={idx < 5} />
+              <CarouselCard key={`r4-${idx}`} item={item} priority={false} />
             ))}
           </div>
         </div>
@@ -914,7 +921,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards pointer-events-none select-none">
             {[...SHOWCASE_ROW_1, ...SHOWCASE_ROW_1].map((item, idx) => (
-              <CarouselCard key={`sc1-${idx}`} item={item} priority={idx < 5} />
+              <CarouselCard key={`sc1-${idx}`} item={item} priority={false} />
             ))}
           </div>
         </div>
@@ -925,7 +932,7 @@ export default function App() {
           <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
           <div className="marquee-cards-reverse pointer-events-none select-none">
             {[...SHOWCASE_ROW_2, ...SHOWCASE_ROW_2].map((item, idx) => (
-              <CarouselCard key={`sc2-${idx}`} item={item} priority={idx < 5} />
+              <CarouselCard key={`sc2-${idx}`} item={item} priority={false} />
             ))}
           </div>
         </div>
@@ -1255,11 +1262,11 @@ export default function App() {
                   <div className="flex justify-center items-start text-black mb-1 drop-shadow-sm">
                     <span className="text-xl font-black mt-1 mr-1 text-black">R$</span>
                     <span className="text-6xl sm:text-7xl font-display font-black tracking-tighter leading-none text-black">
-                      57,90
+                      47,90
                     </span>
                   </div>
                   <p className="text-zinc-800 font-extrabold text-sm sm:text-base mb-1">
-                    ou 6x de <span className="text-[#0066FF] font-black">R$ 9,65</span>
+                    ou 6x de <span className="text-[#0066FF] font-black">R$ 7,98</span>
                   </p>
                   <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">
                     Pagamento Único à Vista ou Parcelado
@@ -1305,7 +1312,7 @@ export default function App() {
                     href="https://ggcheckout.app/checkout/v5/OERYW1b0MHezp7hxz6mun8"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackInitiateCheckout(57.90, 'Plano Completo STL +150 Mil')}
+                    onClick={() => trackInitiateCheckout(47.90, 'Plano Completo STL +150 Mil')}
                     className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-base sm:text-lg py-4 rounded-xl text-center tracking-wider transition-all transform hover:scale-105 shadow-[0_0_35px_rgba(0,255,102,0.7)] hover:shadow-[0_0_50px_rgba(0,255,102,1)] border-2 border-[#80FFB2] cursor-pointer"
                   >
                     QUERO O ACERVO COMPLETO
