@@ -10,10 +10,7 @@ const STATIC_ASSETS = [
   '/images/garantia-14-dias.webp',
   '/images/mercado-1.webp',
   '/images/mercado-2.webp',
-  '/images/mercado-3.webp',
-  '/images/depoimentos/depoimento-1.webp',
-  '/images/depoimentos/depoimento-2.webp',
-  '/images/depoimentos/depoimento-3.webp'
+  '/images/mercado-3.webp'
 ];
 
 self.addEventListener('install', (event) => {

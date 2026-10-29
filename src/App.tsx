@@ -35,7 +35,7 @@ interface FaqItem {
 interface TestimonialItem {
   id: number;
   image: string;
-  fallback: string;
+  fallback?: string;
   alt: string;
 }
 
@@ -265,38 +265,32 @@ const BONUSES: BonusItem[] = [
 const TESTIMONIALS: TestimonialItem[] = [
   {
     id: 1,
-    image: '/images/depoimentos/depoimento-1.webp',
-    fallback: 'https://www.universo3d.online/assets/depoimento-1-BBN2Oe74.webp',
+    image: 'https://i.imgur.com/6m6ZBlW.png',
     alt: 'Depoimento real de aluno - Universo 3D 1',
   },
   {
     id: 2,
-    image: '/images/depoimentos/depoimento-2.webp',
-    fallback: 'https://www.universo3d.online/assets/depoimento-3-Cn7cJzGT.webp',
+    image: 'https://i.imgur.com/u6Ni9cj.png',
     alt: 'Depoimento real de aluno - Universo 3D 2',
   },
   {
     id: 3,
-    image: '/images/depoimentos/depoimento-3.webp',
-    fallback: 'https://www.universo3d.online/assets/depoimento-4-DJVEDa94.webp',
+    image: 'https://i.imgur.com/ClBxb0D.png',
     alt: 'Depoimento real de aluno - Universo 3D 3',
   },
   {
     id: 4,
-    image: '/images/depoimentos/depoimento-4.webp',
-    fallback: 'https://www.universo3d.online/assets/depoimento-5-DG3Xdqvb.webp',
+    image: 'https://i.imgur.com/Mpywmfj.png',
     alt: 'Depoimento real de aluno - Universo 3D 4',
   },
   {
     id: 5,
-    image: '/images/depoimentos/depoimento-5.webp',
-    fallback: 'https://www.universo3d.online/assets/depoimento-6-CwvLNkMG.webp',
+    image: 'https://i.imgur.com/jpBrWyK.png',
     alt: 'Depoimento real de aluno - Universo 3D 5',
   },
   {
     id: 6,
-    image: '/images/depoimentos/depoimento-6.webp',
-    fallback: 'https://www.universo3d.online/assets/depoimento-7-4HoiAS5R.webp',
+    image: 'https://i.imgur.com/Ys2ErTe.png',
     alt: 'Depoimento real de aluno - Universo 3D 6',
   },
 ];
@@ -1082,7 +1076,7 @@ export default function App() {
                         decoding="async"
                         src={item.image}
                         onError={(e) => {
-                          if (e.currentTarget.src !== item.fallback) {
+                          if (item.fallback && e.currentTarget.src !== item.fallback) {
                             e.currentTarget.src = item.fallback;
                           }
                         }}
@@ -1175,10 +1169,10 @@ export default function App() {
               </div>
 
               <div className="border-b border-white/10 pb-4 mb-5 text-center">
-                <p className="text-xs text-zinc-500 line-through mb-0.5">De R$ 47,00</p>
+                <p className="text-xs text-zinc-500 line-through mb-0.5">De R$ 37,00</p>
                 <div className="flex justify-center items-baseline gap-1 mb-1">
                   <span className="text-lg text-zinc-400 font-bold">R$</span>
-                  <span className="text-4xl sm:text-5xl font-display font-black text-white">16,90</span>
+                  <span className="text-4xl sm:text-5xl font-display font-black text-white">10,90</span>
                 </div>
                 <p className="text-zinc-400/80 text-[11px] uppercase tracking-widest font-bold">Pagamento Único</p>
               </div>
@@ -1211,7 +1205,7 @@ export default function App() {
                 onClick={() => setShowUpsellModal(true)}
                 className="block w-full text-center py-4 rounded-xl bg-transparent border-2 border-zinc-600 hover:border-zinc-400 text-zinc-300 hover:text-white hover:bg-white/5 text-sm uppercase tracking-wider transition-all mt-auto font-bold cursor-pointer"
               >
-                QUERO O BASE (R$ 16,90)
+                QUERO O BASE (R$ 10,90)
               </button>
 
               <div className="mt-4 text-center">
@@ -1309,7 +1303,7 @@ export default function App() {
 
                 <div className="text-center w-full mt-auto">
                   <a
-                    href="https://ggcheckout.app/checkout/v5/OERYW1b0MHezp7hxz6mun8"
+                    href="https://appdigitalhub.com.br/c/A17730D0"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackInitiateCheckout(47.90, 'Plano Completo STL +150 Mil')}
@@ -1534,7 +1528,7 @@ export default function App() {
               <div className="py-2 sm:py-2.5 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F] pr-8 pl-2">
                 <h3 className="font-display font-black text-xs sm:text-sm md:text-base uppercase tracking-tight px-1 whitespace-nowrap">
                   <span className="grad-text font-extrabold">ESPERE! LEVE TUDO POR </span>
-                  <span className="text-[#0066FF]">R$ 27,90</span>
+                  <span className="text-[#0066FF]">R$ 21,90</span>
                 </h3>
               </div>
 
@@ -1579,7 +1573,7 @@ export default function App() {
                   <div className="flex justify-center items-start text-[#0066FF] mb-0.5 drop-shadow-[0_0_15px_rgba(0,102,255,0.5)]">
                     <span className="text-base sm:text-lg font-black mt-0.5 mr-0.5">R$</span>
                     <span className="text-4xl sm:text-5xl font-display font-black tracking-tighter leading-none">
-                      27,90
+                      21,90
                     </span>
                   </div>
                   <p className="text-zinc-400 font-bold text-[9px] sm:text-[10px] uppercase tracking-widest">
@@ -1619,23 +1613,23 @@ export default function App() {
                 </div>
 
                 <a
-                  href="https://ggcheckout.app/checkout/v5/m0sdruVlUGFUfyeYtT2ARV"
+                  href="https://appdigitalhub.com.br/c/7006D7C4"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(27.90, 'Oferta Especial VIP STL')}
+                  onClick={() => trackInitiateCheckout(21.90, 'Oferta Especial VIP STL')}
                   className="block w-full bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black uppercase text-sm sm:text-base py-3 rounded-xl text-center tracking-wider transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(0,255,102,0.7)] border-2 border-[#80FFB2] cursor-pointer"
                 >
-                  SIM! LEVAR TUDO POR R$ 27,90
+                  SIM! LEVAR TUDO POR R$ 21,90
                 </a>
 
                 <a
-                  href="https://ggcheckout.app/checkout/v5/9jmEGPY2ADBUjIFHNcYQKy"
+                  href="https://appdigitalhub.com.br/c/DD7A590E"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackInitiateCheckout(16.90, 'Plano Base STL')}
+                  onClick={() => trackInitiateCheckout(10.90, 'Plano Base STL')}
                   className="mt-2 text-zinc-400 hover:text-zinc-200 text-[11px] font-semibold underline underline-offset-2 transition-colors text-center cursor-pointer"
                 >
-                  Não quero os bônus, continuar apenas com o Plano Base por R$ 16,90 »
+                  Não quero os bônus, continuar apenas com o Plano Base por R$ 10,90 »
                 </a>
               </div>
             </div>
