@@ -1,16 +1,21 @@
-const CACHE_NAME = 'portal3d-assets-v2';
+const CACHE_NAME = 'portal3d-assets-v4';
 
 const STATIC_ASSETS = [
   '/models-carrossel/sonic-vermelho.webp',
   '/models-carrossel/sonic-azul.webp',
   '/models-carrossel/sub-zero.webp',
   '/images/poster-apresentacao.webp',
-  '/images/poster-notebook.webp',
+  '/images/poster-notebook-v2.webp',
   '/images/oferta-vip.webp',
   '/images/garantia-14-dias.webp',
   '/images/mercado-1.webp',
   '/images/mercado-2.webp',
-  '/images/mercado-3.webp'
+  '/images/mercado-3.webp',
+  'https://i.imgur.com/Xom5bbd.png',
+  'https://i.imgur.com/RF6Ituz.png',
+  'https://i.imgur.com/gE65mZq.png',
+  'https://i.imgur.com/GmbWHg3.png',
+  'https://i.imgur.com/aUYN2Lt.png'
 ];
 
 self.addEventListener('install', (event) => {

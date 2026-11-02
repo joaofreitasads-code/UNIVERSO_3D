@@ -71,6 +71,11 @@ const BRANDS = [
 ];
 
 const ROW_1_CARDS: CarouselItem[] = [
+  { id: 'r1-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
   { id: 'r1-1', title: 'Colecionável 3D STL', image: 'https://i.imgur.com/acQb0Cn.png' },
   { id: 'r1-2', title: 'Action Figure STL', image: 'https://i.imgur.com/mUG5K9f.png' },
   { id: 'r1-3', title: 'Modelo 3D STL', image: 'https://i.imgur.com/h6mQ3La.png' },
@@ -83,6 +88,11 @@ const ROW_1_CARDS: CarouselItem[] = [
 ];
 
 const ROW_2_CARDS: CarouselItem[] = [
+  { id: 'r2-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
   { id: 'r2-1', title: 'Personagem 3D STL', image: 'https://i.imgur.com/YYaAKKc.png' },
   { id: 'r2-2', title: 'Action Figure Lendária STL', image: 'https://i.imgur.com/xijVh8N.png' },
   { id: 'r2-3', title: 'Miniatura STL', image: 'https://i.imgur.com/7ajlyz6.png' },
@@ -95,6 +105,11 @@ const ROW_2_CARDS: CarouselItem[] = [
 ];
 
 const ROW_3_CARDS: CarouselItem[] = [
+  { id: 'r3-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
   { id: 'r3-1', title: 'Figura Colecionável STL', image: 'https://i.imgur.com/GremzbV.png' },
   { id: 'r3-2', title: 'Personagem Lendário STL', image: 'https://i.imgur.com/VpxApVf.png' },
   { id: 'r3-3', title: 'Estatueta 3D STL', image: 'https://i.imgur.com/bxT1zGy.png' },
@@ -107,6 +122,11 @@ const ROW_3_CARDS: CarouselItem[] = [
 ];
 
 const ROW_4_CARDS: CarouselItem[] = [
+  { id: 'r4-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
   { id: 'r4-1', title: 'Modelo Decorativo STL', image: 'https://i.imgur.com/51TUjFl.png' },
   { id: 'r4-2', title: 'Colecionável Geek STL', image: 'https://i.imgur.com/R7Opg72.png' },
   { id: 'r4-3', title: 'Action Figure 3D STL', image: 'https://i.imgur.com/yUCi83W.png' },
@@ -119,6 +139,11 @@ const ROW_4_CARDS: CarouselItem[] = [
 ];
 
 const SHOWCASE_ROW_1: CarouselItem[] = [
+  { id: 'sc1-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png' },
+  { id: 'sc1-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png' },
+  { id: 'sc1-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png' },
+  { id: 'sc1-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png' },
+  { id: 'sc1-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png' },
   { id: 'sc1-1', title: 'Sonic Vermelho', image: '/models-carrossel/sonic-vermelho.webp', fallback: 'https://lh3.googleusercontent.com/d/1aPKlJEHTwKUyuzBqPi32OfxK6vjg9nPN=w800' },
   { id: 'sc1-2', title: 'Sonic Azul', image: '/models-carrossel/sonic-azul.webp', fallback: 'https://lh3.googleusercontent.com/d/1U2gs8uDv8s-Ue2BJ8AJa23XpLzT5ee7j=w800' },
   { id: 'sc1-3', title: 'Sub Zero', image: '/models-carrossel/sub-zero.webp', fallback: 'https://lh3.googleusercontent.com/d/1iobUId4HNPpHQKDMtVTksE-VEWGh2ZHy=w800' },
@@ -148,6 +173,11 @@ const SHOWCASE_ROW_1: CarouselItem[] = [
 ];
 
 const SHOWCASE_ROW_2: CarouselItem[] = [
+  { id: 'sc2-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png' },
+  { id: 'sc2-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png' },
+  { id: 'sc2-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png' },
+  { id: 'sc2-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png' },
+  { id: 'sc2-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png' },
   { id: 'sc2-1', title: 'Sonic Batman', image: '/models-carrossel/sonic-batman.webp', fallback: 'https://lh3.googleusercontent.com/d/1yG7BZeRbabBz89jUe5vLrYaQ6Iq1f8-b=w800' },
   { id: 'sc2-2', title: 'Logan Wolverine', image: '/models-carrossel/logan-wolverine.webp', fallback: 'https://lh3.googleusercontent.com/d/1Zxxm_UyuQTuzKPGUqrIHqCZIiRqk-yqe=w800' },
   { id: 'sc2-3', title: 'Donald Wolverine', image: '/models-carrossel/donald-wolverine.webp', fallback: 'https://lh3.googleusercontent.com/d/1YMQcLu4TDE9ocRrUkuYaSVUzKGQI4Dx7=w800' },
@@ -260,6 +290,12 @@ const BONUSES: BonusItem[] = [
     description: 'Receba uma coleção especial de canecas 3D personalizadas inspiradas em grandes times e torcidas de futebol, com designs exclusivos e excelente aceitação comercial.',
     image: 'https://i.imgur.com/gg0YzCN.png',
   },
+  {
+    id: 15,
+    title: 'CANECAS GAMER 3D',
+    description: 'Turbine seu catálogo com uma seleção exclusiva de canecas gamer 3D temáticas de jogos e consoles, com design estilizado de alto impacto e muita procura.',
+    image: 'https://i.imgur.com/Xom5bbd.png',
+  },
 ];
 
 const TESTIMONIALS: TestimonialItem[] = [
@@ -324,10 +360,10 @@ const FAQ_ITEMS: FaqItem[] = [
 
 const CarouselCard = memo(function CarouselCard({ item, priority = false }: { item: CarouselItem; priority?: boolean }) {
   return (
-    <div className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 bg-[#080808] border border-[#00A3FF] shadow-[0_0_15px_rgba(0,163,255,0.4)] md:hover:shadow-[0_0_25px_rgba(0,163,255,0.7)] group transition-all duration-300">
-      <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-[#050505] relative p-2.5 sm:p-3.5 border border-[#00A3FF]/20">
-        {/* Brilho leve azul/roxo atrás dos bonecos */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(0,163,255,0.32)_0%,_rgba(168,85,247,0.22)_45%,_transparent_72%)] pointer-events-none" />
+    <div className="rounded-2xl overflow-hidden shrink-0 w-36 sm:w-44 md:w-64 p-2 sm:p-2.5 bg-[#080808] border border-[#00FF66] shadow-[0_0_15px_rgba(0,255,102,0.4)] md:hover:shadow-[0_0_25px_rgba(0,255,102,0.7)] group transition-all duration-300 transform-gpu">
+      <div className="w-full aspect-square flex items-center justify-center overflow-hidden rounded-xl bg-[#050505] relative p-2.5 sm:p-3.5 border border-[#00FF66]/20">
+        {/* Brilho leve verde neon atrás dos bonecos */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(0,255,102,0.32)_0%,_rgba(16,185,129,0.2)_45%,_transparent_72%)] pointer-events-none" />
         <img
           alt={item.title}
           width={256}
@@ -341,7 +377,7 @@ const CarouselCard = memo(function CarouselCard({ item, priority = false }: { it
               e.currentTarget.src = item.fallback;
             }
           }}
-          className={`relative z-10 max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] ${item.className || ''}`}
+          className={`relative z-10 max-w-[84%] max-h-[84%] w-auto h-auto object-contain object-center transition-transform duration-300 md:group-hover:scale-105 select-none md:drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] ${item.className || ''}`}
           src={item.image}
         />
       </div>
@@ -382,7 +418,7 @@ export default function App() {
       '/models-carrossel/sonic-batman.webp',
       '/models-carrossel/logan-wolverine.webp',
       '/images/poster-apresentacao.webp',
-      '/images/poster-notebook.webp',
+      '/images/poster-notebook-v2.webp',
       '/images/oferta-vip.webp',
       '/images/garantia-14-dias.webp',
       '/images/mercado-1.webp',
@@ -467,13 +503,13 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white relative antialiased selection:bg-[#0066FF] selection:text-white">
+    <div className="min-h-screen bg-black text-white relative antialiased selection:bg-[#00FF66] selection:text-black">
       {/* Background Starfield */}
       <div className="fixed inset-0 z-[-1] pointer-events-none bg-stars opacity-60"></div>
 
       {/* Hero Section */}
       <section id="hero-section" className="relative pb-16 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#0066FF]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#00FF66]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
 
         <div className="w-full relative z-20 flex flex-col items-center pt-8 md:pt-14 pb-2 px-2 sm:px-4 text-center max-w-4xl mx-auto">
           {/* Main Headline */}
@@ -483,12 +519,12 @@ export default function App() {
             </span>
             <span className="block whitespace-nowrap mt-1 sm:mt-1.5">
               <span className="text-white drop-shadow-md">PARA DEIXÁ-LA PARADA. </span>
-              <span className="text-[#0066FF]">DESCUBRA NOVAS</span>
+              <span className="text-[#00FF66]">DESCUBRA NOVAS</span>
             </span>
-            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-[#0066FF]">
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-[#00FF66]">
               IDEIAS DE PRODUTOS PARA IMPRIMIR E
             </span>
-            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-center text-[#0066FF]">
+            <span className="block whitespace-nowrap mt-1 sm:mt-1.5 text-center text-[#00FF66]">
               VENDER.
             </span>
           </h1>
@@ -497,9 +533,9 @@ export default function App() {
           <div className="w-full relative z-10 flex flex-col items-center mt-6 mb-8">
             <div className="relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[400px] mx-auto">
               {/* Outer Glow */}
-              <div className="absolute -inset-2 rounded-[32px] sm:rounded-[40px] bg-gradient-to-r from-[#0066FF] via-[#38BDF8] to-[#0044CC] opacity-75 blur-xl pointer-events-none"></div>
+              <div className="absolute -inset-2 rounded-[32px] sm:rounded-[40px] bg-gradient-to-r from-[#00CC52] via-[#00FF66] to-[#00993E] opacity-75 blur-xl pointer-events-none"></div>
 
-              <div className="relative w-full aspect-[9/16] rounded-[24px] sm:rounded-[32px] overflow-hidden border-2 sm:border-[3px] border-[#0066FF] shadow-[0_0_40px_rgba(0,102,255,0.7)] bg-black flex items-center justify-center group">
+              <div className="relative w-full aspect-[9/16] rounded-[24px] sm:rounded-[32px] overflow-hidden border-2 sm:border-[3px] border-[#00FF66] shadow-[0_0_40px_rgba(0,255,102,0.7)] bg-black flex items-center justify-center group">
                 <video
                   ref={heroVideoRef}
                   id="video-apresentacao"
@@ -539,8 +575,8 @@ export default function App() {
                     />
                     <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
-                      <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-22 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#0066FF] hover:bg-[#0052CC] flex items-center justify-center shadow-[0_4px_30px_rgba(0,102,255,0.7)] group-hover:shadow-[0_6px_45px_rgba(0,102,255,0.95)] transition-all duration-300">
-                        <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                      <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-22 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#00FF66] hover:bg-[#2BFF7E] flex items-center justify-center shadow-[0_4px_30px_rgba(0,255,102,0.7)] group-hover:shadow-[0_6px_45px_rgba(0,255,102,0.95)] transition-all duration-300">
+                        <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-black fill-black ml-1 drop-shadow" />
                       </div>
                       <span className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white font-display font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
                         Assistir Vídeo
@@ -602,7 +638,7 @@ export default function App() {
       <section id="modelos-carrossel" className="section-lazy pt-0 pb-16 relative">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-6 max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#0066FF]/10 border border-[#0066FF]/30 text-[#0066FF] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(0,102,255,0.2)]">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#00FF66]/10 border border-[#00FF66]/30 text-[#00FF66] text-xs sm:text-sm font-bold uppercase tracking-wider mb-3.5 shadow-[0_0_15px_rgba(0,255,102,0.2)]">
               Ter uma impressora 3D é só o início. Saber o que imprimir muda tudo.
             </span>
             <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4 leading-tight">
@@ -671,12 +707,80 @@ export default function App() {
         </div>
       </section>
 
+      {/* Bonuses Section */}
+      <section id="bonus" className="section-lazy bg-black relative border-y border-[#00FF66]/15 overflow-hidden py-16 md:py-24">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-44 md:w-[800px] md:h-[400px] bg-[#00FF66]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
+          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-3 text-[#00FF66]">
+            BÔNUS INCLUSOS NO ACESSO PREMIUM
+          </p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-display font-black uppercase tracking-tight mb-5 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] max-w-4xl mx-auto leading-tight">
+            UMA ÚNICA IDEIA PODE VIRAR SEU PRÓXIMO PRODUTO. TODOS ESTES BÔNUS ESTÃO LIBERADOS NO ACESSO PREMIUM.
+          </h2>
+          <p className="text-zinc-300 text-sm sm:text-base md:text-lg lg:text-xl font-normal max-w-3xl mx-auto mb-12 sm:mb-14 leading-relaxed">
+            Ao garantir o seu Acesso Premium, você não leva apenas os modelos minerados — você recebe de presente todos os 15 bônus exclusivos abaixo, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 sm:gap-3.5 max-w-5xl mx-auto text-left">
+            {BONUSES.map((bonus) => (
+              <div
+                key={bonus.id}
+                id={`bonus-card-${bonus.id}`}
+                className="w-full bg-[#0E0E12] border border-white/10 hover:border-[#00FF66]/50 rounded-xl p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.8),0_0_15px_rgba(0,255,102,0.22)] group relative overflow-hidden text-left"
+              >
+                <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-gradient-to-b from-[#00FF66] via-[#00FF66]/40 to-transparent"></div>
+                <div className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 shrink-0 bg-black/70 rounded-lg border border-white/5 flex items-center justify-center p-1 sm:p-2 relative overflow-hidden group-hover:border-[#00FF66]/30 transition-colors">
+                  <div className="absolute inset-0 bg-[#00FF66]/5 blur-md rounded-full scale-75 pointer-events-none opacity-40"></div>
+                  <img
+                    alt={bonus.title}
+                    width={120}
+                    height={120}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                    className="max-h-14 xs:max-h-16 sm:max-h-20 w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none relative z-10"
+                    src={bonus.image}
+                  />
+                </div>
+                <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
+                  <div className="mb-1">
+                    <h3 className="font-display font-black text-xs sm:text-[13px] md:text-sm text-white uppercase tracking-tight flex items-center gap-1.5 leading-tight">
+                      <span className="text-xs sm:text-sm shrink-0">🎁</span>
+                      <span className="text-[#00FF66] shrink-0">
+                        BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
+                      </span>
+                      <span className="text-zinc-500 font-bold shrink-0">—</span>
+                      <span className="text-white truncate">{bonus.title}</span>
+                    </h3>
+                  </div>
+                  <p className="text-zinc-300 text-[11px] sm:text-xs leading-relaxed font-normal">
+                    {bonus.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 sm:mt-14 flex justify-center w-full px-4">
+            <a
+              href="#oferta-pro"
+              onClick={scrollToOffer}
+              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
+              <span>GARANTIR ACESSO + 15 BÔNUS GRÁTIS</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Notebook Mockup Section */}
       <section id="mockup-notebook" className="section-lazy py-16 md:py-24 relative bg-black overflow-hidden border-t border-white/10">
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-14">
             <h2 className="font-display font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight">
-              Conheça a <span className="grad-text drop-shadow-[0_0_25px_rgba(0,102,255,0.6)]">área de membros</span> por dentro
+              Conheça a <span className="grad-text drop-shadow-[0_0_25px_rgba(0,255,102,0.6)]">área de membros</span> por dentro
             </h2>
             <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3.5 font-normal leading-relaxed">
               Você não vai precisar perder tempo procurando pasta por pasta. A <strong className="text-white font-semibold">Área de Membros VIP</strong> é 100% organizada por categorias para você encontrar o modelo desejado em segundos, baixar o arquivo pronto e colocar sua impressora para trabalhar.
@@ -686,12 +790,12 @@ export default function App() {
           {/* Notebook Hardware Frame */}
           <div className="max-w-4xl md:max-w-5xl mx-auto relative px-2 sm:px-4 md:px-6">
             <div className="relative z-10">
-              <div className="relative bg-[#18181C] rounded-t-[20px] sm:rounded-t-[26px] md:rounded-t-[32px] rounded-b-[4px] p-2 sm:p-2.5 md:p-3.5 border-2 border-[#0066FF] shadow-[0_25px_70px_rgba(0,0,0,0.95)]">
+              <div className="relative bg-[#18181C] rounded-t-[20px] sm:rounded-t-[26px] md:rounded-t-[32px] rounded-b-[4px] p-2 sm:p-2.5 md:p-3.5 border-2 border-[#00FF66] shadow-[0_25px_70px_rgba(0,0,0,0.95)]">
                 {/* Camera / Bezel */}
                 <div className="flex items-center justify-center relative -mb-1 z-20">
                   <div className="w-10 sm:w-14 h-2 sm:h-2.5 bg-[#0A0A0C] rounded-b-md flex items-center justify-center gap-1.5 shadow-inner">
                     <div className="w-1 h-1 rounded-full bg-[#1A1A22] border border-white/20"></div>
-                    <div className="w-0.5 h-0.5 rounded-full bg-[#0066FF] opacity-75"></div>
+                    <div className="w-0.5 h-0.5 rounded-full bg-[#00FF66] opacity-75"></div>
                   </div>
                 </div>
 
@@ -703,8 +807,8 @@ export default function App() {
                   <video
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
-                    src={isPlayingNotebookVideo ? 'https://i.imgur.com/it19bfB.mp4' : undefined}
-                    poster="/images/poster-notebook.webp"
+                    src={isPlayingNotebookVideo ? 'https://i.imgur.com/UY3EeoQ.mp4' : undefined}
+                    poster="/images/poster-notebook-v2.webp"
                     playsInline
                     controls={isPlayingNotebookVideo}
                     preload={isPlayingNotebookVideo ? 'auto' : 'none'}
@@ -724,15 +828,15 @@ export default function App() {
                     >
                       {/* Imagem estática do frame do vídeo aparecendo logo de início */}
                       <img
-                        src="/images/poster-notebook.webp"
+                        src="/images/poster-notebook-v2.webp"
                         alt="Área de Membros VIP Universo 3D"
                         className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors pointer-events-none" />
 
                       <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-2.5 group-hover:scale-105 transition-transform duration-300">
-                        <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#0066FF] hover:bg-[#0052CC] flex items-center justify-center shadow-[0_4px_30px_rgba(0,102,255,0.7)] group-hover:shadow-[0_6px_45px_rgba(0,102,255,0.95)] transition-all duration-300">
-                          <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white fill-white ml-1 drop-shadow" />
+                        <div className="w-16 h-11 sm:w-20 sm:h-14 md:w-24 md:h-16 rounded-[14px] sm:rounded-[18px] bg-[#00FF66] hover:bg-[#2BFF7E] flex items-center justify-center shadow-[0_4px_30px_rgba(0,255,102,0.7)] group-hover:shadow-[0_6px_45px_rgba(0,255,102,0.95)] transition-all duration-300">
+                          <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 text-black fill-black ml-1 drop-shadow" />
                         </div>
                         <span className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white font-display font-black text-[11px] sm:text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
                           Assistir Vídeo
@@ -752,7 +856,7 @@ export default function App() {
 
               <div className="mt-4 text-center">
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-400">
-                  <Play className="w-3.5 h-3.5 text-[#0066FF]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
+                  <Play className="w-3.5 h-3.5 text-[#00FF66]" /> Escolha o modelo, acesse o arquivo e comece sua próxima impressão.
                 </span>
               </div>
             </div>
@@ -780,7 +884,7 @@ export default function App() {
                 'repetir o que fizer sentido para sua operação',
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3">
-                  <span className="text-[#0066FF] text-xl sm:text-2xl font-black shrink-0">✓</span>
+                  <span className="text-[#00FF66] text-xl sm:text-2xl font-black shrink-0">✓</span>
                   <p className="text-zinc-200 text-base sm:text-lg font-medium leading-snug">{item}</p>
                 </div>
               ))}
@@ -794,7 +898,7 @@ export default function App() {
               <a
                 href="#validacao-mercado"
                 onClick={scrollToMercado}
-                className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-[#0066FF] text-base sm:text-lg font-bold tracking-wide transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-[#00FF66] text-base sm:text-lg font-bold tracking-wide transition-colors cursor-pointer"
               >
                 Continuar ↓
               </a>
@@ -828,7 +932,7 @@ export default function App() {
           </div>
 
           <div className="max-w-3xl mx-auto flex flex-col items-center gap-6">
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#00FF66]/60 shadow-[0_0_35px_rgba(0,255,102,0.35)] relative w-full p-2 sm:p-4">
               <img
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (1)"
                 width={1774}
@@ -845,7 +949,7 @@ export default function App() {
                 src="/images/mercado-1.webp"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#00FF66]/60 shadow-[0_0_35px_rgba(0,255,102,0.35)] relative w-full p-2 sm:p-4">
               <img
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (2)"
                 width={1774}
@@ -862,7 +966,7 @@ export default function App() {
                 src="/images/mercado-2.webp"
               />
             </div>
-            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#0066FF]/60 shadow-[0_0_35px_rgba(0,102,255,0.35)] relative w-full p-2 sm:p-4">
+            <div className="rounded-3xl overflow-hidden bg-zinc-950 border-2 border-[#00FF66]/60 shadow-[0_0_35px_rgba(0,255,102,0.35)] relative w-full p-2 sm:p-4">
               <img
                 alt="Mercado Comprovado - Anúncios e Vendas Reais de Peças 3D (3)"
                 width={1774}
@@ -895,14 +999,14 @@ export default function App() {
       </section>
 
       {/* Novas Coleções em Alta / Carrossel Duplo */}
-      <section id="novos-modelos" className="section-lazy pt-12 pb-16 relative overflow-hidden bg-black border-y border-[#0066FF]/20">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#0066FF]/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <section id="novos-modelos" className="section-lazy pt-12 pb-16 relative overflow-hidden bg-black border-y border-[#00FF66]/20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#00FF66]/10 rounded-full blur-[120px] pointer-events-none"></div>
         <div className="container mx-auto px-4 relative z-10 max-w-6xl mb-8 sm:mb-10 text-center">
-          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-3 text-[#0066FF]">
+          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-3 text-[#00FF66]">
             COLEÇÕES EXCLUSIVAS LIBERADAS
           </p>
           <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-tight max-w-4xl mx-auto">
-            NOVOS MODELOS <span className="text-[#00A3FF] drop-shadow-[0_0_20px_rgba(0,163,255,0.6)]">CYBERPOP & GEEK</span> PRONTOS PARA IMPRIMIR
+            NOVOS MODELOS <span className="text-[#00FF66] drop-shadow-[0_0_20px_rgba(0,255,102,0.6)]">CYBERPOP & GEEK</span> PRONTOS PARA IMPRIMIR
           </h2>
           <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-3 font-normal leading-relaxed">
             Arquivos STL de altíssima definição com encaixes inteligentes e testados para máxima qualidade em qualquer impressora 3D.
@@ -943,78 +1047,9 @@ export default function App() {
           </a>
         </div>
       </section>
-
-      {/* Bonuses Section */}
-      <section id="bonus" className="section-lazy bg-black relative border-y border-[#0066FF]/15 overflow-hidden py-16 md:py-24">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-44 md:w-[800px] md:h-[400px] bg-[#0066FF]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
-
-        <div className="container mx-auto px-4 relative z-10 max-w-6xl text-center">
-          <p className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest mb-3 text-[#0066FF]">
-            BÔNUS INCLUSOS NO ACESSO PREMIUM
-          </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-display font-black uppercase tracking-tight mb-5 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] max-w-4xl mx-auto leading-tight">
-            UMA ÚNICA IDEIA PODE VIRAR SEU PRÓXIMO PRODUTO. TODOS ESTES BÔNUS ESTÃO LIBERADOS NO ACESSO PREMIUM.
-          </h2>
-          <p className="text-zinc-300 text-sm sm:text-base md:text-lg lg:text-xl font-normal max-w-3xl mx-auto mb-12 sm:mb-14 leading-relaxed">
-            Ao garantir o seu Acesso Premium, você não leva apenas os modelos minerados — você recebe de presente todos os 14 bônus exclusivos abaixo, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 sm:gap-3.5 max-w-5xl mx-auto text-left">
-            {BONUSES.map((bonus) => (
-              <div
-                key={bonus.id}
-                id={`bonus-card-${bonus.id}`}
-                className="w-full bg-[#0E0E12] border border-white/10 hover:border-[#0066FF]/50 rounded-xl p-2.5 sm:p-3.5 flex flex-row items-center gap-3 sm:gap-4 transition-all duration-300 shadow-[0_4px_16px_rgba(0,0,0,0.6)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.8),0_0_15px_rgba(0,102,255,0.18)] group relative overflow-hidden text-left"
-              >
-                <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-gradient-to-b from-[#0066FF] via-[#0066FF]/40 to-transparent"></div>
-                <div className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 shrink-0 bg-black/70 rounded-lg border border-white/5 flex items-center justify-center p-1 sm:p-2 relative overflow-hidden group-hover:border-[#0066FF]/30 transition-colors">
-                  <div className="absolute inset-0 bg-[#0066FF]/5 blur-md rounded-full scale-75 pointer-events-none opacity-40"></div>
-                  <img
-                    alt={bonus.title}
-                    width={120}
-                    height={120}
-                    loading="lazy"
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                    className="max-h-14 xs:max-h-16 sm:max-h-20 w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none relative z-10"
-                    src={bonus.image}
-                  />
-                </div>
-                <div className="flex-1 min-w-0 flex flex-col justify-center py-0.5">
-                  <div className="mb-1">
-                    <h3 className="font-display font-black text-xs sm:text-[13px] md:text-sm text-white uppercase tracking-tight flex items-center gap-1.5 leading-tight">
-                      <span className="text-xs sm:text-sm shrink-0">🎁</span>
-                      <span className="text-[#0066FF] shrink-0">
-                        BÔNUS {bonus.id < 10 ? `0${bonus.id}` : bonus.id}
-                      </span>
-                      <span className="text-zinc-500 font-bold shrink-0">—</span>
-                      <span className="text-white truncate">{bonus.title}</span>
-                    </h3>
-                  </div>
-                  <p className="text-zinc-300 text-[11px] sm:text-xs leading-relaxed font-normal">
-                    {bonus.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 sm:mt-14 flex justify-center w-full px-4">
-            <a
-              href="#oferta-pro"
-              onClick={scrollToOffer}
-              className="group inline-flex items-center justify-center gap-3 bg-[#00FF66] hover:bg-[#2BFF7E] text-black font-display font-black text-sm sm:text-base md:text-lg uppercase tracking-wide py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl text-center shadow-[0_0_35px_rgba(0,255,102,0.8),0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_50px_rgba(0,255,102,1),0_0_25px_rgba(0,255,102,0.8)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-[#80FFB2] cursor-pointer"
-            >
-              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5] text-black group-hover:scale-110 transition-transform" />
-              <span>GARANTIR ACESSO + 14 BÔNUS GRÁTIS</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials Phone Slider Section */}
       <section id="depoimento" className="section-lazy bg-black relative border-t border-white/5 py-16 md:py-24 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[650px] md:h-[650px] bg-[#0066FF]/5 rounded-full blur-2xl md:blur-[140px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[650px] md:h-[650px] bg-[#00FF66]/5 rounded-full blur-2xl md:blur-[140px] pointer-events-none"></div>
 
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
@@ -1039,7 +1074,7 @@ export default function App() {
             </button>
 
             <div id="celular-depoimento-wrapper" className="relative flex justify-center items-center select-none">
-              <div className="absolute inset-0 bg-[#0066FF]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-[#00FF66]/15 blur-[80px] rounded-full transform scale-95 pointer-events-none"></div>
 
               {/* Realistic Phone Case */}
               <div
@@ -1137,15 +1172,15 @@ export default function App() {
 
       {/* Pricing / Offers Section */}
       <section id="oferta" className="section-lazy bg-zinc-950 relative border-b border-white/5 py-20 md:py-24">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#0066FF]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[800px] md:h-[800px] bg-[#00FF66]/5 rounded-full blur-2xl md:blur-[120px] pointer-events-none"></div>
 
         <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
           <div className="text-center mb-10 md:mb-12 w-full flex flex-col items-center justify-center relative">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-24 md:w-96 md:h-40 bg-[#0066FF]/20 blur-xl md:blur-[60px] rounded-full pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-24 md:w-96 md:h-40 bg-[#00FF66]/20 blur-xl md:blur-[60px] rounded-full pointer-events-none"></div>
             <h2
               className="relative z-10 font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight mb-4 text-center leading-tight"
               style={{
-                textShadow: 'rgba(255, 255, 255, 0.6) 0px 0px 25px, rgba(0, 102, 255, 0.6) 0px 0px 50px',
+                textShadow: 'rgba(255, 255, 255, 0.6) 0px 0px 25px, rgba(0, 255, 102, 0.6) 0px 0px 50px',
               }}
             >
               ESCOLHA O PLANO IDEAL<br />
@@ -1179,23 +1214,23 @@ export default function App() {
 
               <ul className="space-y-3 mb-6 text-[13px] text-zinc-300 font-medium">
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-[#0066FF] stroke-[3]" />
+                  <Check className="w-4 h-4 text-[#00FF66] stroke-[3]" />
                   <span>150 Mil Modelos STL</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-[#0066FF] stroke-[3]" />
+                  <Check className="w-4 h-4 text-[#00FF66] stroke-[3]" />
                   <span>Acesso por 3 Meses</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-[#0066FF] stroke-[3]" />
+                  <Check className="w-4 h-4 text-[#00FF66] stroke-[3]" />
                   <span>Garantia de 14 Dias</span>
                 </li>
-                <li className="flex items-center gap-2.5 font-semibold text-[#3B82F6]">
-                  <X className="w-4 h-4 text-[#3B82F6] stroke-[3]" />
-                  <span>Sem os 14 Bônus Inclusos</span>
+                <li className="flex items-center gap-2.5 font-semibold text-zinc-400">
+                  <X className="w-4 h-4 text-zinc-500 stroke-[3]" />
+                  <span>Sem os 15 Bônus Inclusos</span>
                 </li>
-                <li className="flex items-center gap-2.5 font-semibold text-[#3B82F6]">
-                  <X className="w-4 h-4 text-[#3B82F6] stroke-[3]" />
+                <li className="flex items-center gap-2.5 font-semibold text-zinc-400">
+                  <X className="w-4 h-4 text-zinc-500 stroke-[3]" />
                   <span>Sem Atualizações Futuras</span>
                 </li>
               </ul>
@@ -1209,7 +1244,7 @@ export default function App() {
               </button>
 
               <div className="mt-4 text-center">
-                <p className="font-bold text-[13px] sm:text-[14px] leading-snug px-2 text-[#3B82F6]">
+                <p className="font-bold text-[13px] sm:text-[14px] leading-snug px-2 text-[#00FF66]">
                   💡 Recomendação: o Pacote Completo <span className="lg:hidden">logo abaixo</span><span className="hidden lg:inline">ao lado</span> é muito mais vantajoso!
                 </p>
               </div>
@@ -1218,9 +1253,9 @@ export default function App() {
             {/* Plan 2: VIP Completo (Recommended) */}
             <div
               id="oferta-pro"
-              className="w-full lg:max-w-[440px] bg-white text-black border-[2px] border-[#0066FF] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(0,102,255,0.5)] flex flex-col scroll-mt-24"
+              className="w-full lg:max-w-[440px] bg-white text-black border-[2px] border-[#00FF66] rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(0,255,102,0.5)] flex flex-col scroll-mt-24"
             >
-              <div className="bg-[#0066FF] text-white text-center py-2 px-3">
+              <div className="bg-[#00FF66] text-black font-black text-center py-2 px-3">
                 <p className="text-xs font-black uppercase tracking-wider">
                   🔥 MAIS RECOMENDADO — PACOTE COMPLETO VIP
                 </p>
@@ -1228,7 +1263,7 @@ export default function App() {
 
               <div className="p-6 sm:p-7 h-full flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-4 relative group">
-                  <div className="absolute inset-0 bg-[#0066FF]/20 blur-xl rounded-full scale-90 pointer-events-none opacity-80"></div>
+                  <div className="absolute inset-0 bg-[#00FF66]/20 blur-xl rounded-full scale-90 pointer-events-none opacity-80"></div>
                   <img
                     alt="Pacote Completo VIP Universo 3D"
                     width={360}
@@ -1260,7 +1295,7 @@ export default function App() {
                     </span>
                   </div>
                   <p className="text-zinc-800 font-extrabold text-sm sm:text-base mb-1">
-                    ou 6x de <span className="text-[#0066FF] font-black">R$ 7,98</span>
+                    ou 6x de <span className="text-[#00993E] font-black">R$ 7,98</span>
                   </p>
                   <p className="text-zinc-600 font-bold text-xs uppercase tracking-widest">
                     Pagamento Único à Vista ou Parcelado
@@ -1270,29 +1305,29 @@ export default function App() {
                 <div className="w-full bg-zinc-100 rounded-2xl p-4 sm:p-5 mb-5 border border-zinc-200">
                   <ul className="w-full space-y-2.5 text-[13px] text-black font-medium">
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#00993E] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-xs sm:text-[13px] font-black uppercase tracking-tight text-black">
                         + 150 MIL MODELOS STL
                       </strong>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#00993E] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-black font-bold">
                         Licença Comercial para Venda de Peças Físicas
                       </strong>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#00993E] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <span className="text-black font-bold">Acesso Vitalício + Todas as Atualizações</span>
                     </li>
                     <li className="flex items-start gap-2.5">
-                      <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#00993E] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                       <span className="text-black font-bold">Garantia Incondicional de 14 Dias</span>
                     </li>
 
                     {BONUSES.map((b) => (
                       <li key={b.id} className="flex items-start gap-2.5 text-black">
-                        <span className="text-[#0066FF] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
+                        <span className="text-[#00993E] text-base font-black leading-none shrink-0 mt-0.5">✓</span>
                         <span className="text-black font-bold leading-snug">
                           <strong className="text-black font-black">Bônus {b.id}:</strong> {b.title}
                         </span>
@@ -1320,15 +1355,15 @@ export default function App() {
 
       {/* Guarantee Section */}
       <section id="garantia" className="section-lazy py-16 md:py-24 relative overflow-hidden bg-black border-t border-white/10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[700px] md:h-[450px] bg-[#0066FF]/10 rounded-full blur-2xl md:blur-[130px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[700px] md:h-[450px] bg-[#00FF66]/10 rounded-full blur-2xl md:blur-[130px] pointer-events-none"></div>
 
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
-          <div className="rounded-3xl border-2 border-[#0066FF]/35 bg-gradient-to-b from-[#0a1120]/95 via-[#080d18]/95 to-[#05080f] p-6 sm:p-10 md:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_45px_rgba(0,102,255,0.18)] relative overflow-hidden">
-            <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#0066FF] to-transparent"></div>
+          <div className="rounded-3xl border-2 border-[#00FF66]/35 bg-gradient-to-b from-[#0a1a12]/95 via-[#08140e]/95 to-[#050f0a] p-6 sm:p-10 md:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_45px_rgba(0,255,102,0.22)] relative overflow-hidden">
+            <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-[#00FF66] to-transparent"></div>
 
             <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-12">
               <div className="relative shrink-0 flex items-center justify-center group">
-                <div className="absolute inset-0 bg-[#0066FF]/25 blur-3xl rounded-full scale-90 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-[#00FF66]/25 blur-3xl rounded-full scale-90 pointer-events-none"></div>
                 <img
                   alt="Selo de Garantia Incondicional de 14 Dias"
                   width={280}
@@ -1341,17 +1376,17 @@ export default function App() {
                       e.currentTarget.src = 'https://i.imgur.com/WyzcrLj.png';
                     }
                   }}
-                  className="relative z-10 w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_15px_40px_rgba(0,102,255,0.45)] select-none transition-transform duration-300 group-hover:scale-105"
+                  className="relative z-10 w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_15px_40px_rgba(0,255,102,0.45)] select-none transition-transform duration-300 group-hover:scale-105"
                   src="/images/garantia-14-dias.webp"
                 />
               </div>
 
               <div className="text-center lg:text-left flex-1">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0066FF]/10 border border-[#0066FF]/30 text-[#0066FF] text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 shadow-[0_0_15px_rgba(0,102,255,0.2)]">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00FF66]/10 border border-[#00FF66]/30 text-[#00FF66] text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 shadow-[0_0_15px_rgba(0,255,102,0.2)]">
                   <span>🛡️</span> RISCO ZERO PARA VOCÊ
                 </div>
                 <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white mb-4 leading-tight">
-                  GARANTIA INCONDICIONAL DE <span className="grad-text drop-shadow-[0_0_25px_rgba(0,102,255,0.6)]">14 DIAS</span>
+                  GARANTIA INCONDICIONAL DE <span className="grad-text drop-shadow-[0_0_25px_rgba(0,255,102,0.6)]">14 DIAS</span>
                 </h2>
                 <p className="text-zinc-200 text-sm sm:text-base md:text-lg font-normal leading-relaxed mb-3.5">
                   Você tem 14 dias completos para acessar o Universo 3D™, explorar todas as categorias, baixar os arquivos STL e testar os modelos na sua impressora.
@@ -1362,19 +1397,19 @@ export default function App() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-4 border-t border-white/10">
                   <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
-                    <span className="text-[#0066FF] text-base font-black shrink-0">✓</span>
+                    <span className="text-[#00FF66] text-base font-black shrink-0">✓</span>
                     <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
                       Teste sem riscos
                     </span>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
-                    <span className="text-[#0066FF] text-base font-black shrink-0">✓</span>
+                    <span className="text-[#00FF66] text-base font-black shrink-0">✓</span>
                     <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
                       Reembolso simplificado
                     </span>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-2.5 bg-black/50 px-3 py-2.5 rounded-xl border border-white/5 shadow-inner">
-                    <span className="text-[#0066FF] text-base font-black shrink-0">✓</span>
+                    <span className="text-[#00FF66] text-base font-black shrink-0">✓</span>
                     <span className="text-white text-xs sm:text-[13px] font-bold tracking-tight leading-snug">
                       Suporte dedicado
                     </span>
@@ -1394,7 +1429,7 @@ export default function App() {
               Tire suas dúvidas
             </span>
             <h2 className="font-display font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white">
-              Perguntas <span className="grad-text drop-shadow-[0_0_20px_rgba(0,102,255,0.5)]">Frequentes</span>
+              Perguntas <span className="grad-text drop-shadow-[0_0_20px_rgba(0,255,102,0.5)]">Frequentes</span>
             </h2>
           </div>
 
@@ -1404,7 +1439,7 @@ export default function App() {
               return (
                 <div
                   key={`faq-${idx}`}
-                  className="rounded-xl bg-zinc-950/80 border border-white/10 overflow-hidden transition-colors hover:border-[#0066FF]/30"
+                  className="rounded-xl bg-zinc-950/80 border border-white/10 overflow-hidden transition-colors hover:border-[#00FF66]/40"
                 >
                   <button
                     type="button"
@@ -1413,7 +1448,7 @@ export default function App() {
                   >
                     <span className="text-sm md:text-base text-zinc-100">{item.q}</span>
                     <ChevronDown
-                      className={`w-5 h-5 text-[#0066FF] shrink-0 transition-transform duration-200 ${
+                      className={`w-5 h-5 text-[#00FF66] shrink-0 transition-transform duration-200 ${
                         isOpen ? 'transform rotate-180' : ''
                       }`}
                     />
@@ -1454,21 +1489,21 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 border-y border-white/5 py-8 text-zinc-300">
             <div className="flex flex-col items-center justify-center gap-2">
-              <Lock className="w-6 h-6 text-[#0066FF] mb-1" />
+              <Lock className="w-6 h-6 text-[#00FF66] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Ambiente 100% Seguro
               </span>
               <span className="text-[10px] text-zinc-400">Dados criptografados de ponta a ponta</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <Mail className="w-6 h-6 text-[#0066FF] mb-1" />
+              <Mail className="w-6 h-6 text-[#00FF66] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Suporte Especializado
               </span>
               <span className="text-[10px] text-zinc-300">suporte@universo3d.com.br</span>
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <Building2 className="w-6 h-6 text-[#0066FF] mb-1" />
+              <Building2 className="w-6 h-6 text-[#00FF66] mb-1" />
               <span className="uppercase tracking-widest text-white font-bold text-[11px]">
                 Empresa Verificada
               </span>
@@ -1484,14 +1519,14 @@ export default function App() {
             <button
               type="button"
               onClick={() => setLegalModalType('termos')}
-              className="hover:text-[#0066FF] transition-colors cursor-pointer"
+              className="hover:text-[#00FF66] transition-colors cursor-pointer"
             >
               Termos de Uso
             </button>
             <button
               type="button"
               onClick={() => setLegalModalType('privacidade')}
-              className="hover:text-[#0066FF] transition-colors cursor-pointer"
+              className="hover:text-[#00FF66] transition-colors cursor-pointer"
             >
               Política de Privacidade
             </button>
@@ -1515,7 +1550,7 @@ export default function App() {
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-[350px] sm:max-w-[370px] my-auto transform transition-all duration-300"
           >
-            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#0066FF] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(0,102,255,0.5),inset_0_0_12px_rgba(0,102,255,0.25)] flex flex-col mx-auto my-1">
+            <div className="w-full bg-[#0F0F0F] border-[2px] border-[#00FF66] rounded-2xl sm:rounded-3xl overflow-hidden relative shadow-[0_0_50px_rgba(0,255,102,0.5),inset_0_0_12px_rgba(0,255,102,0.25)] flex flex-col mx-auto my-1">
               <button
                 type="button"
                 onClick={() => setShowUpsellModal(false)}
@@ -1528,24 +1563,24 @@ export default function App() {
               <div className="py-2 sm:py-2.5 text-center relative bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F] pr-8 pl-2">
                 <h3 className="font-display font-black text-xs sm:text-sm md:text-base uppercase tracking-tight px-1 whitespace-nowrap">
                   <span className="grad-text font-extrabold">ESPERE! LEVE TUDO POR </span>
-                  <span className="text-[#0066FF]">R$ 21,90</span>
+                  <span className="text-[#00FF66]">R$ 21,90</span>
                 </h3>
               </div>
 
-              <div className="bg-gradient-to-r from-[#0052CC] via-[#0066FF] to-[#003399] py-1 px-2.5 shadow-[0_0_15px_rgba(0,102,255,0.4)] border-y border-[#0066FF]/60">
-                <p className="font-black text-white text-center leading-tight">
+              <div className="bg-gradient-to-r from-[#00CC52] via-[#00FF66] to-[#00993E] py-1 px-2.5 shadow-[0_0_15px_rgba(0,255,102,0.4)] border-y border-[#00FF66]/60">
+                <p className="font-black text-black text-center leading-tight">
                   <span className="block text-[8px] sm:text-[9px] uppercase tracking-[0.15em] opacity-90">
                     O PACOTE MAIS COMPLETO E VANTAJOSO
                   </span>
                   <span className="block text-[10px] sm:text-[11px] uppercase tracking-tight">
-                    + 150 MIL MODELOS STL + 500 FUNKOS + TODOS OS 14 BÔNUS
+                    + 150 MIL MODELOS STL + 500 FUNKOS + TODOS OS 15 BÔNUS
                   </span>
                 </p>
               </div>
 
               <div className="p-3.5 sm:p-4 flex flex-col items-center">
                 <div className="w-full flex items-center justify-center mb-1.5 relative group">
-                  <div className="absolute inset-0 bg-[#0066FF]/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60"></div>
+                  <div className="absolute inset-0 bg-[#00FF66]/15 blur-lg rounded-full scale-90 pointer-events-none opacity-60"></div>
                   <img
                     src="/images/modal-funkos.webp"
                     alt="Pacote +500 Modelos Funkos STL"
@@ -1564,13 +1599,13 @@ export default function App() {
                 </div>
 
                 <div className="text-center w-full mb-2">
-                  <p className="text-[11px] sm:text-xs text-[#60A5FA] font-black mb-0.5 italic">
+                  <p className="text-[11px] sm:text-xs text-[#80FFB2] font-black mb-0.5 italic">
                     DE R$ <span className="line-through">147,00</span>
                   </p>
-                  <p className="text-[#0066FF] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
+                  <p className="text-[#00FF66] font-bold text-[11px] sm:text-xs mb-0.5 leading-none uppercase">
                     Por Apenas
                   </p>
-                  <div className="flex justify-center items-start text-[#0066FF] mb-0.5 drop-shadow-[0_0_15px_rgba(0,102,255,0.5)]">
+                  <div className="flex justify-center items-start text-[#00FF66] mb-0.5 drop-shadow-[0_0_15px_rgba(0,255,102,0.5)]">
                     <span className="text-base sm:text-lg font-black mt-0.5 mr-0.5">R$</span>
                     <span className="text-4xl sm:text-5xl font-display font-black tracking-tighter leading-none">
                       21,90
@@ -1584,28 +1619,28 @@ export default function App() {
                 <div className="w-full bg-[#1A1A1A] rounded-xl p-2.5 sm:p-3 mb-2.5 border border-white/5 max-h-36 sm:max-h-40 overflow-y-auto">
                   <ul className="w-full space-y-1.5 text-[11px] text-white/90 font-medium">
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#0066FF] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
-                      <strong className="text-[11px] font-black uppercase text-[#0066FF]">
+                      <span className="text-[#00FF66] text-xs font-black leading-none shrink-0 mt-0.5">✓</span>
+                      <strong className="text-[11px] font-black uppercase text-[#00FF66]">
                         + 150 MIL MODELOS STL
                       </strong>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#0066FF] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#00FF66] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <strong className="text-white">Licença Comercial para Venda de Peças Físicas</strong>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#0066FF] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#00FF66] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <span>Acesso Vitalício + Todas as Atualizações</span>
                     </li>
                     <li className="flex items-start gap-1.5">
-                      <span className="text-[#0066FF] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
+                      <span className="text-[#00FF66] text-xs font-bold leading-none shrink-0 mt-0.5">✓</span>
                       <span>Garantia Incondicional de 14 Dias</span>
                     </li>
                     {BONUSES.map((t) => (
                       <li key={`upsell-bonus-${t.id}`} className="flex items-start gap-1.5 text-zinc-300">
-                        <span className="text-[#0066FF] text-[11px] font-black leading-none shrink-0 mt-0.5">✓</span>
+                        <span className="text-[#00FF66] text-[11px] font-black leading-none shrink-0 mt-0.5">✓</span>
                         <span className="text-zinc-200 leading-tight text-[10px] sm:text-[11px]">
-                          <strong className="text-[#0066FF]">Bônus {t.id}:</strong> {t.title}
+                          <strong className="text-[#00FF66]">Bônus {t.id}:</strong> {t.title}
                         </span>
                       </li>
                     ))}
