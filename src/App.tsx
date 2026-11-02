@@ -25,6 +25,7 @@ interface BonusItem {
   title: string;
   description: string;
   image: string;
+  fallback?: string;
 }
 
 interface FaqItem {
@@ -71,79 +72,79 @@ const BRANDS = [
 ];
 
 const ROW_1_CARDS: CarouselItem[] = [
-  { id: 'r1-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r1-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r1-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r1-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r1-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r1-1', title: 'Colecionável 3D STL', image: 'https://i.imgur.com/acQb0Cn.png' },
-  { id: 'r1-2', title: 'Action Figure STL', image: 'https://i.imgur.com/mUG5K9f.png' },
-  { id: 'r1-3', title: 'Modelo 3D STL', image: 'https://i.imgur.com/h6mQ3La.png' },
-  { id: 'r1-4', title: 'Escultura Colecionável STL', image: 'https://i.imgur.com/ov8u5qE.png' },
-  { id: 'r1-5', title: 'Figura Articulada STL', image: 'https://i.imgur.com/YDMDIj8.png' },
-  { id: 'r1-6', title: 'Modelo Detalhado STL', image: 'https://i.imgur.com/Vti43Xr.png' },
-  { id: 'r1-7', title: 'Colecionável Geek STL', image: 'https://i.imgur.com/7gOyQxG.png' },
-  { id: 'r1-8', title: 'Porta Copos Monster 3D', image: 'https://i.imgur.com/MLWW9d1.png', className: '!max-w-[92%] !max-h-[90%]' },
-  { id: 'r1-9', title: 'Canecas de Time 3D', image: 'https://i.imgur.com/gg0YzCN.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-canecas-gamer', title: 'Canecas Gamer 3D', image: '/images/opt/Xom5bbd.webp', fallback: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-geek-rf6', title: 'Modelo Geek STL', image: '/images/opt/RF6Ituz.webp', fallback: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-colecionavel-ge6', title: 'Colecionável 3D Premium', image: '/images/opt/gE65mZq.webp', fallback: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-gamer-gmb', title: 'Personagem Gamer 3D', image: '/images/opt/GmbWHg3.webp', fallback: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-especial-auy', title: 'Coleção Especial STL', image: '/images/opt/aUYN2Lt.webp', fallback: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r1-1', title: 'Colecionável 3D STL', image: '/images/opt/acQb0Cn.webp', fallback: 'https://i.imgur.com/acQb0Cn.png' },
+  { id: 'r1-2', title: 'Action Figure STL', image: '/images/opt/mUG5K9f.webp', fallback: 'https://i.imgur.com/mUG5K9f.png' },
+  { id: 'r1-3', title: 'Modelo 3D STL', image: '/images/opt/h6mQ3La.webp', fallback: 'https://i.imgur.com/h6mQ3La.png' },
+  { id: 'r1-4', title: 'Escultura Colecionável STL', image: '/images/opt/ov8u5qE.webp', fallback: 'https://i.imgur.com/ov8u5qE.png' },
+  { id: 'r1-5', title: 'Figura Articulada STL', image: '/images/opt/YDMDIj8.webp', fallback: 'https://i.imgur.com/YDMDIj8.png' },
+  { id: 'r1-6', title: 'Modelo Detalhado STL', image: '/images/opt/Vti43Xr.webp', fallback: 'https://i.imgur.com/Vti43Xr.png' },
+  { id: 'r1-7', title: 'Colecionável Geek STL', image: '/images/opt/7gOyQxG.webp', fallback: 'https://i.imgur.com/7gOyQxG.png' },
+  { id: 'r1-8', title: 'Porta Copos Monster 3D', image: '/images/opt/MLWW9d1.webp', fallback: 'https://i.imgur.com/MLWW9d1.png', className: '!max-w-[92%] !max-h-[90%]' },
+  { id: 'r1-9', title: 'Canecas de Time 3D', image: '/images/opt/gg0YzCN.webp', fallback: 'https://i.imgur.com/gg0YzCN.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
 ];
 
 const ROW_2_CARDS: CarouselItem[] = [
-  { id: 'r2-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r2-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r2-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r2-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r2-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r2-1', title: 'Personagem 3D STL', image: 'https://i.imgur.com/YYaAKKc.png' },
-  { id: 'r2-2', title: 'Action Figure Lendária STL', image: 'https://i.imgur.com/xijVh8N.png' },
-  { id: 'r2-3', title: 'Miniatura STL', image: 'https://i.imgur.com/7ajlyz6.png' },
-  { id: 'r2-4', title: 'Colecionável Especial STL', image: 'https://i.imgur.com/UzS2KVc.png' },
-  { id: 'r2-5', title: 'Guerreiro 3D STL', image: 'https://i.imgur.com/qIYxzP7.png' },
-  { id: 'r2-6', title: 'Escultura Detalhada STL', image: 'https://i.imgur.com/1xF4sAf.png' },
-  { id: 'r2-7', title: 'Modelo 3D Premium STL', image: 'https://i.imgur.com/575M4mS.png' },
-  { id: 'r2-8', title: 'Colecionável Geek 3D', image: 'https://i.imgur.com/rERHDFp.png' },
-  { id: 'r2-9', title: 'Escultura Premium 3D', image: 'https://i.imgur.com/f5nklb0.png' },
+  { id: 'r2-especial-auy', title: 'Coleção Especial STL', image: '/images/opt/aUYN2Lt.webp', fallback: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-gamer-gmb', title: 'Personagem Gamer 3D', image: '/images/opt/GmbWHg3.webp', fallback: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-colecionavel-ge6', title: 'Colecionável 3D Premium', image: '/images/opt/gE65mZq.webp', fallback: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-geek-rf6', title: 'Modelo Geek STL', image: '/images/opt/RF6Ituz.webp', fallback: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-canecas-gamer', title: 'Canecas Gamer 3D', image: '/images/opt/Xom5bbd.webp', fallback: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r2-1', title: 'Personagem 3D STL', image: '/images/opt/YYaAKKc.webp', fallback: 'https://i.imgur.com/YYaAKKc.png' },
+  { id: 'r2-2', title: 'Action Figure Lendária STL', image: '/images/opt/xijVh8N.webp', fallback: 'https://i.imgur.com/xijVh8N.png' },
+  { id: 'r2-3', title: 'Miniatura STL', image: '/images/opt/7ajlyz6.webp', fallback: 'https://i.imgur.com/7ajlyz6.png' },
+  { id: 'r2-4', title: 'Colecionável Especial STL', image: '/images/opt/UzS2KVc.webp', fallback: 'https://i.imgur.com/UzS2KVc.png' },
+  { id: 'r2-5', title: 'Guerreiro 3D STL', image: '/images/opt/qIYxzP7.webp', fallback: 'https://i.imgur.com/qIYxzP7.png' },
+  { id: 'r2-6', title: 'Escultura Detalhada STL', image: '/images/opt/1xF4sAf.webp', fallback: 'https://i.imgur.com/1xF4sAf.png' },
+  { id: 'r2-7', title: 'Modelo 3D Premium STL', image: '/images/opt/575M4mS.webp', fallback: 'https://i.imgur.com/575M4mS.png' },
+  { id: 'r2-8', title: 'Colecionável Geek 3D', image: '/images/opt/rERHDFp.webp', fallback: 'https://i.imgur.com/rERHDFp.png' },
+  { id: 'r2-9', title: 'Escultura Premium 3D', image: '/images/opt/f5nklb0.webp', fallback: 'https://i.imgur.com/f5nklb0.png' },
 ];
 
 const ROW_3_CARDS: CarouselItem[] = [
-  { id: 'r3-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r3-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r3-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r3-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r3-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r3-1', title: 'Figura Colecionável STL', image: 'https://i.imgur.com/GremzbV.png' },
-  { id: 'r3-2', title: 'Personagem Lendário STL', image: 'https://i.imgur.com/VpxApVf.png' },
-  { id: 'r3-3', title: 'Estatueta 3D STL', image: 'https://i.imgur.com/bxT1zGy.png' },
-  { id: 'r3-4', title: 'Action Figure Especial STL', image: 'https://i.imgur.com/7ntF971.png' },
-  { id: 'r3-5', title: 'Colecionável Raro 3D STL', image: 'https://i.imgur.com/Xv6tKO4.png' },
-  { id: 'r3-6', title: 'Guerreiro Colecionável STL', image: 'https://i.imgur.com/M55lq3C.png' },
-  { id: 'r3-7', title: 'Escultura Geek 3D STL', image: 'https://i.imgur.com/5JVuJT9.png' },
-  { id: 'r3-8', title: 'Modelo Detalhado STL', image: 'https://i.imgur.com/wRYSKMh.png' },
-  { id: 'r3-9', title: 'Personagem 3D STL', image: 'https://i.imgur.com/tR2eMxN.png' },
+  { id: 'r3-canecas-gamer', title: 'Canecas Gamer 3D', image: '/images/opt/Xom5bbd.webp', fallback: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-geek-rf6', title: 'Modelo Geek STL', image: '/images/opt/RF6Ituz.webp', fallback: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-colecionavel-ge6', title: 'Colecionável 3D Premium', image: '/images/opt/gE65mZq.webp', fallback: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-gamer-gmb', title: 'Personagem Gamer 3D', image: '/images/opt/GmbWHg3.webp', fallback: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-especial-auy', title: 'Coleção Especial STL', image: '/images/opt/aUYN2Lt.webp', fallback: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r3-1', title: 'Figura Colecionável STL', image: '/images/opt/GremzbV.webp', fallback: 'https://i.imgur.com/GremzbV.png' },
+  { id: 'r3-2', title: 'Personagem Lendário STL', image: '/images/opt/VpxApVf.webp', fallback: 'https://i.imgur.com/VpxApVf.png' },
+  { id: 'r3-3', title: 'Estatueta 3D STL', image: '/images/opt/bxT1zGy.webp', fallback: 'https://i.imgur.com/bxT1zGy.png' },
+  { id: 'r3-4', title: 'Action Figure Especial STL', image: '/images/opt/7ntF971.webp', fallback: 'https://i.imgur.com/7ntF971.png' },
+  { id: 'r3-5', title: 'Colecionável Raro 3D STL', image: '/images/opt/Xv6tKO4.webp', fallback: 'https://i.imgur.com/Xv6tKO4.png' },
+  { id: 'r3-6', title: 'Guerreiro Colecionável STL', image: '/images/opt/M55lq3C.webp', fallback: 'https://i.imgur.com/M55lq3C.png' },
+  { id: 'r3-7', title: 'Escultura Geek 3D STL', image: '/images/opt/5JVuJT9.webp', fallback: 'https://i.imgur.com/5JVuJT9.png' },
+  { id: 'r3-8', title: 'Modelo Detalhado STL', image: '/images/opt/wRYSKMh.webp', fallback: 'https://i.imgur.com/wRYSKMh.png' },
+  { id: 'r3-9', title: 'Personagem 3D STL', image: '/images/opt/tR2eMxN.webp', fallback: 'https://i.imgur.com/tR2eMxN.png' },
 ];
 
 const ROW_4_CARDS: CarouselItem[] = [
-  { id: 'r4-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r4-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r4-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r4-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r4-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
-  { id: 'r4-1', title: 'Modelo Decorativo STL', image: 'https://i.imgur.com/51TUjFl.png' },
-  { id: 'r4-2', title: 'Colecionável Geek STL', image: 'https://i.imgur.com/R7Opg72.png' },
-  { id: 'r4-3', title: 'Action Figure 3D STL', image: 'https://i.imgur.com/yUCi83W.png' },
-  { id: 'r4-4', title: 'Estatueta Colecionável STL', image: 'https://i.imgur.com/mX4tEDP.png' },
-  { id: 'r4-5', title: 'Miniatura Premium STL', image: 'https://i.imgur.com/IohQ8H6.png' },
-  { id: 'r4-6', title: 'Modelo Articulado STL', image: 'https://i.imgur.com/qmOqGAQ.png' },
-  { id: 'r4-7', title: 'Personagem Especial STL', image: 'https://i.imgur.com/W8BlwCP.png' },
-  { id: 'r4-8', title: 'Estatueta Colecionável STL', image: 'https://i.imgur.com/or71jqW.png' },
-  { id: 'r4-9', title: 'Modelo Geek STL', image: 'https://i.imgur.com/DTnlqds.png', className: '!max-w-[96%] !max-h-[90%] scale-[1.12]' },
+  { id: 'r4-especial-auy', title: 'Coleção Especial STL', image: '/images/opt/aUYN2Lt.webp', fallback: 'https://i.imgur.com/aUYN2Lt.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-gamer-gmb', title: 'Personagem Gamer 3D', image: '/images/opt/GmbWHg3.webp', fallback: 'https://i.imgur.com/GmbWHg3.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-colecionavel-ge6', title: 'Colecionável 3D Premium', image: '/images/opt/gE65mZq.webp', fallback: 'https://i.imgur.com/gE65mZq.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-geek-rf6', title: 'Modelo Geek STL', image: '/images/opt/RF6Ituz.webp', fallback: 'https://i.imgur.com/RF6Ituz.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-canecas-gamer', title: 'Canecas Gamer 3D', image: '/images/opt/Xom5bbd.webp', fallback: 'https://i.imgur.com/Xom5bbd.png', className: '!max-w-[94%] !max-h-[92%] scale-[1.08]' },
+  { id: 'r4-1', title: 'Modelo Decorativo STL', image: '/images/opt/51TUjFl.webp', fallback: 'https://i.imgur.com/51TUjFl.png' },
+  { id: 'r4-2', title: 'Colecionável Geek STL', image: '/images/opt/R7Opg72.webp', fallback: 'https://i.imgur.com/R7Opg72.png' },
+  { id: 'r4-3', title: 'Action Figure 3D STL', image: '/images/opt/yUCi83W.webp', fallback: 'https://i.imgur.com/yUCi83W.png' },
+  { id: 'r4-4', title: 'Estatueta Colecionável STL', image: '/images/opt/mX4tEDP.webp', fallback: 'https://i.imgur.com/mX4tEDP.png' },
+  { id: 'r4-5', title: 'Miniatura Premium STL', image: '/images/opt/IohQ8H6.webp', fallback: 'https://i.imgur.com/IohQ8H6.png' },
+  { id: 'r4-6', title: 'Modelo Articulado STL', image: '/images/opt/qmOqGAQ.webp', fallback: 'https://i.imgur.com/qmOqGAQ.png' },
+  { id: 'r4-7', title: 'Personagem Especial STL', image: '/images/opt/W8BlwCP.webp', fallback: 'https://i.imgur.com/W8BlwCP.png' },
+  { id: 'r4-8', title: 'Estatueta Colecionável STL', image: '/images/opt/or71jqW.webp', fallback: 'https://i.imgur.com/or71jqW.png' },
+  { id: 'r4-9', title: 'Modelo Geek STL', image: '/images/opt/DTnlqds.webp', fallback: 'https://i.imgur.com/DTnlqds.png', className: '!max-w-[96%] !max-h-[90%] scale-[1.12]' },
 ];
 
 const SHOWCASE_ROW_1: CarouselItem[] = [
-  { id: 'sc1-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png' },
-  { id: 'sc1-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png' },
-  { id: 'sc1-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png' },
-  { id: 'sc1-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png' },
-  { id: 'sc1-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png' },
+  { id: 'sc1-canecas-gamer', title: 'Canecas Gamer 3D', image: '/images/opt/Xom5bbd.webp', fallback: 'https://i.imgur.com/Xom5bbd.png' },
+  { id: 'sc1-geek-rf6', title: 'Modelo Geek STL', image: '/images/opt/RF6Ituz.webp', fallback: 'https://i.imgur.com/RF6Ituz.png' },
+  { id: 'sc1-colecionavel-ge6', title: 'Colecionável 3D Premium', image: '/images/opt/gE65mZq.webp', fallback: 'https://i.imgur.com/gE65mZq.png' },
+  { id: 'sc1-gamer-gmb', title: 'Personagem Gamer 3D', image: '/images/opt/GmbWHg3.webp', fallback: 'https://i.imgur.com/GmbWHg3.png' },
+  { id: 'sc1-especial-auy', title: 'Coleção Especial STL', image: '/images/opt/aUYN2Lt.webp', fallback: 'https://i.imgur.com/aUYN2Lt.png' },
   { id: 'sc1-1', title: 'Sonic Vermelho', image: '/models-carrossel/sonic-vermelho.webp', fallback: 'https://lh3.googleusercontent.com/d/1aPKlJEHTwKUyuzBqPi32OfxK6vjg9nPN=w800' },
   { id: 'sc1-2', title: 'Sonic Azul', image: '/models-carrossel/sonic-azul.webp', fallback: 'https://lh3.googleusercontent.com/d/1U2gs8uDv8s-Ue2BJ8AJa23XpLzT5ee7j=w800' },
   { id: 'sc1-3', title: 'Sub Zero', image: '/models-carrossel/sub-zero.webp', fallback: 'https://lh3.googleusercontent.com/d/1iobUId4HNPpHQKDMtVTksE-VEWGh2ZHy=w800' },
@@ -173,11 +174,11 @@ const SHOWCASE_ROW_1: CarouselItem[] = [
 ];
 
 const SHOWCASE_ROW_2: CarouselItem[] = [
-  { id: 'sc2-especial-auy', title: 'Coleção Especial STL', image: 'https://i.imgur.com/aUYN2Lt.png' },
-  { id: 'sc2-gamer-gmb', title: 'Personagem Gamer 3D', image: 'https://i.imgur.com/GmbWHg3.png' },
-  { id: 'sc2-colecionavel-ge6', title: 'Colecionável 3D Premium', image: 'https://i.imgur.com/gE65mZq.png' },
-  { id: 'sc2-geek-rf6', title: 'Modelo Geek STL', image: 'https://i.imgur.com/RF6Ituz.png' },
-  { id: 'sc2-canecas-gamer', title: 'Canecas Gamer 3D', image: 'https://i.imgur.com/Xom5bbd.png' },
+  { id: 'sc2-especial-auy', title: 'Coleção Especial STL', image: '/images/opt/aUYN2Lt.webp', fallback: 'https://i.imgur.com/aUYN2Lt.png' },
+  { id: 'sc2-gamer-gmb', title: 'Personagem Gamer 3D', image: '/images/opt/GmbWHg3.webp', fallback: 'https://i.imgur.com/GmbWHg3.png' },
+  { id: 'sc2-colecionavel-ge6', title: 'Colecionável 3D Premium', image: '/images/opt/gE65mZq.webp', fallback: 'https://i.imgur.com/gE65mZq.png' },
+  { id: 'sc2-geek-rf6', title: 'Modelo Geek STL', image: '/images/opt/RF6Ituz.webp', fallback: 'https://i.imgur.com/RF6Ituz.png' },
+  { id: 'sc2-canecas-gamer', title: 'Canecas Gamer 3D', image: '/images/opt/Xom5bbd.webp', fallback: 'https://i.imgur.com/Xom5bbd.png' },
   { id: 'sc2-1', title: 'Sonic Batman', image: '/models-carrossel/sonic-batman.webp', fallback: 'https://lh3.googleusercontent.com/d/1yG7BZeRbabBz89jUe5vLrYaQ6Iq1f8-b=w800' },
   { id: 'sc2-2', title: 'Logan Wolverine', image: '/models-carrossel/logan-wolverine.webp', fallback: 'https://lh3.googleusercontent.com/d/1Zxxm_UyuQTuzKPGUqrIHqCZIiRqk-yqe=w800' },
   { id: 'sc2-3', title: 'Donald Wolverine', image: '/models-carrossel/donald-wolverine.webp', fallback: 'https://lh3.googleusercontent.com/d/1YMQcLu4TDE9ocRrUkuYaSVUzKGQI4Dx7=w800' },
@@ -210,123 +211,123 @@ const BONUSES: BonusItem[] = [
     id: 1,
     title: 'PACK DE VEÍCULOS 3D PROFISSIONAIS',
     description: 'Amplie seu acervo com uma coleção de veículos 3D, incluindo diferentes modelos de carros, motos, caminhões e outras opções para impressão.',
-    image: 'https://i.imgur.com/a1UwWYq.png',
+    image: '/images/opt/a1UwWYq.webp', fallback: 'https://i.imgur.com/a1UwWYq.png',
   },
   {
     id: 2,
     title: 'COLEÇÃO HERÓIS DA MARVEL',
     description: 'Uma coleção especial com modelos 3D de heróis da Marvel, perfeita para quem procura personagens conhecidos, peças de exposição e itens colecionáveis.',
-    image: 'https://i.imgur.com/Jed7yOC.png',
+    image: '/images/opt/Jed7yOC.webp', fallback: 'https://i.imgur.com/Jed7yOC.png',
   },
   {
     id: 3,
     title: 'PACK DE CHAVEIROS PERSONALIZADOS',
     description: 'Tenha também uma coleção de chaveiros personalizados em 3D, com diversos modelos e estilos para imprimir e ampliar ainda mais as possibilidades do seu acervo.',
-    image: 'https://i.imgur.com/gJDDIKs.png',
+    image: '/images/opt/gJDDIKs.webp', fallback: 'https://i.imgur.com/gJDDIKs.png',
   },
   {
     id: 4,
     title: 'MODELOS FLEXÍVEIS E ARTICULADOS',
     description: 'Você também recebe uma coleção de modelos flexíveis e articulados, com peças que ganham movimento depois de impressas e chamam atenção pelo resultado.',
-    image: 'https://i.imgur.com/BvlOrqv.png',
+    image: '/images/opt/BvlOrqv.webp', fallback: 'https://i.imgur.com/BvlOrqv.png',
   },
   {
     id: 5,
     title: 'COLEÇÃO CLÁSSICOS DOS DESENHOS',
     description: 'Uma coleção repleta de personagens clássicos dos desenhos, com modelos conhecidos para imprimir, colecionar, presentear ou utilizar na decoração.',
-    image: 'https://i.imgur.com/AxWjNOz.png',
+    image: '/images/opt/AxWjNOz.webp', fallback: 'https://i.imgur.com/AxWjNOz.png',
   },
   {
     id: 6,
     title: 'COLEÇÃO MÁSCARAS 3D',
     description: 'Tenha acesso a uma coleção de máscaras 3D, com diferentes personagens, estilos e designs para criar impressões maiores e ainda mais impressionantes.',
-    image: 'https://i.imgur.com/H5riCqx.png',
+    image: '/images/opt/H5riCqx.webp', fallback: 'https://i.imgur.com/H5riCqx.png',
   },
   {
     id: 7,
     title: 'COLEÇÃO POKÉMON 3D',
     description: 'Receba também uma coleção dedicada ao universo Pokémon, com diferentes personagens e criaturas transformados em modelos para impressão 3D.',
-    image: 'https://i.imgur.com/ElrKAys.png',
+    image: '/images/opt/ElrKAys.webp', fallback: 'https://i.imgur.com/ElrKAys.png',
   },
   {
     id: 8,
     title: 'MASCOTES DE FUTEBOL 3D',
     description: 'Uma coleção especial de mascotes de futebol em 3D, com diversos modelos inspirados no universo dos clubes e das torcidas.',
-    image: 'https://i.imgur.com/xgxElyu.png',
+    image: '/images/opt/xgxElyu.webp', fallback: 'https://i.imgur.com/xgxElyu.png',
   },
   {
     id: 9,
     title: 'HELICÓPTEROS 3D',
     description: 'Adicione ao seu acervo uma coleção de helicópteros 3D, com diferentes modelos para quem gosta de aviação, veículos e projetos diferenciados.',
-    image: 'https://i.imgur.com/QNwWpdh.png',
+    image: '/images/opt/QNwWpdh.webp', fallback: 'https://i.imgur.com/QNwWpdh.png',
   },
   {
     id: 10,
     title: 'COLEÇÃO LEGO 3D',
     description: 'Você também recebe uma coleção de modelos em estilo LEGO, com personagens e peças variadas para deixar seu acervo ainda mais completo.',
-    image: 'https://i.imgur.com/51TUjFl.png',
+    image: '/images/opt/51TUjFl.webp', fallback: 'https://i.imgur.com/51TUjFl.png',
   },
   {
     id: 11,
     title: 'COLEÇÃO MINECRAFT 3D',
     description: 'E para completar, você recebe uma coleção inspirada no universo Minecraft, com personagens, criaturas e elementos conhecidos do jogo prontos para impressão 3D.',
-    image: 'https://i.imgur.com/xijVh8N.png',
+    image: '/images/opt/xijVh8N.webp', fallback: 'https://i.imgur.com/xijVh8N.png',
   },
   {
     id: 12,
     title: 'COLEÇÃO AMIGURUMIS 3D',
     description: 'Amplie ainda mais seu acervo com uma coleção de Amigurumis 3D, com modelos inspirados no visual do crochê, trazendo personagens, animais e peças fofas para imprimir e colecionar.',
-    image: 'https://i.imgur.com/BIKsask.png',
+    image: '/images/opt/BIKsask.webp', fallback: 'https://i.imgur.com/BIKsask.png',
   },
   {
     id: 13,
     title: 'PORTA COPOS MONSTER 3D',
     description: 'Adicione ao seu catálogo uma coleção exclusiva de porta copos inspirados no tema Monster em 3D, com visual marcante, relevo detalhado e alta saída para venda.',
-    image: 'https://i.imgur.com/MLWW9d1.png',
+    image: '/images/opt/MLWW9d1.webp', fallback: 'https://i.imgur.com/MLWW9d1.png',
   },
   {
     id: 14,
     title: 'COLEÇÃO CANECAS DE TIME 3D',
     description: 'Receba uma coleção especial de canecas 3D personalizadas inspiradas em grandes times e torcidas de futebol, com designs exclusivos e excelente aceitação comercial.',
-    image: 'https://i.imgur.com/gg0YzCN.png',
+    image: '/images/opt/gg0YzCN.webp', fallback: 'https://i.imgur.com/gg0YzCN.png',
   },
   {
     id: 15,
     title: 'CANECAS GAMER 3D',
     description: 'Turbine seu catálogo com uma seleção exclusiva de canecas gamer 3D temáticas de jogos e consoles, com design estilizado de alto impacto e muita procura.',
-    image: 'https://i.imgur.com/Xom5bbd.png',
+    image: '/images/opt/Xom5bbd.webp', fallback: 'https://i.imgur.com/Xom5bbd.png',
   },
 ];
 
 const TESTIMONIALS: TestimonialItem[] = [
   {
     id: 1,
-    image: 'https://i.imgur.com/6m6ZBlW.png',
+    image: '/images/opt/6m6ZBlW.webp', fallback: 'https://i.imgur.com/6m6ZBlW.png',
     alt: 'Depoimento real de aluno - Universo 3D 1',
   },
   {
     id: 2,
-    image: 'https://i.imgur.com/u6Ni9cj.png',
+    image: '/images/opt/u6Ni9cj.webp', fallback: 'https://i.imgur.com/u6Ni9cj.png',
     alt: 'Depoimento real de aluno - Universo 3D 2',
   },
   {
     id: 3,
-    image: 'https://i.imgur.com/ClBxb0D.png',
+    image: '/images/opt/ClBxb0D.webp', fallback: 'https://i.imgur.com/ClBxb0D.png',
     alt: 'Depoimento real de aluno - Universo 3D 3',
   },
   {
     id: 4,
-    image: 'https://i.imgur.com/Mpywmfj.png',
+    image: '/images/opt/Mpywmfj.webp', fallback: 'https://i.imgur.com/Mpywmfj.png',
     alt: 'Depoimento real de aluno - Universo 3D 4',
   },
   {
     id: 5,
-    image: 'https://i.imgur.com/jpBrWyK.png',
+    image: '/images/opt/jpBrWyK.webp', fallback: 'https://i.imgur.com/jpBrWyK.png',
     alt: 'Depoimento real de aluno - Universo 3D 5',
   },
   {
     id: 6,
-    image: 'https://i.imgur.com/Ys2ErTe.png',
+    image: '/images/opt/Ys2ErTe.webp', fallback: 'https://i.imgur.com/Ys2ErTe.png',
     alt: 'Depoimento real de aluno - Universo 3D 6',
   },
 ];
@@ -539,7 +540,7 @@ export default function App() {
                 <video
                   ref={heroVideoRef}
                   id="video-apresentacao"
-                  src={isPlayingHeroVideo ? 'https://i.imgur.com/s6S0rd5.mp4' : undefined}
+                  src={isPlayingHeroVideo ? '/videos/apresentacao.mp4' : undefined}
                   poster="/images/poster-apresentacao.webp"
                   playsInline
                   controls={isPlayingHeroVideo}
@@ -739,6 +740,11 @@ export default function App() {
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      if (bonus.fallback && e.currentTarget.src !== bonus.fallback) {
+                        e.currentTarget.src = bonus.fallback;
+                      }
+                    }}
                     className="max-h-14 xs:max-h-16 sm:max-h-20 w-auto h-auto object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-300 select-none relative z-10"
                     src={bonus.image}
                   />
@@ -807,7 +813,7 @@ export default function App() {
                   <video
                     ref={notebookVideoRef}
                     id="video-catalogo-notebook"
-                    src={isPlayingNotebookVideo ? 'https://i.imgur.com/UY3EeoQ.mp4' : undefined}
+                    src={isPlayingNotebookVideo ? '/videos/catalogo-notebook.mp4' : undefined}
                     poster="/images/poster-notebook-v2.webp"
                     playsInline
                     controls={isPlayingNotebookVideo}
